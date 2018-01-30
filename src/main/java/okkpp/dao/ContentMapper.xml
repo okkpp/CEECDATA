@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="okkpp.dao.ContentMapper">
+  <resultMap id="BaseResultMap" type="okkpp.model.Content">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="GJ" jdbcType="VARCHAR" property="gj" />
+    <result column="GJDM" jdbcType="VARCHAR" property="gjdm" />
+    <result column="BT" jdbcType="VARCHAR" property="bt" />
+    <result column="LB" jdbcType="VARCHAR" property="lb" />
+    <result column="LJ" jdbcType="VARCHAR" property="lj" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, GJ, GJDM, BT, LB, LJ
+  </sql>
+  
+  <select id="getAllContent" resultMap="BaseResultMap">
+      select * from t_content
+  </select>
+  <select id="getContent" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select * from t_content where GJDM = #{GJDM}
+  </select>
+  <delete id="deleteExist" parameterType="okkpp.model.Content">
+      delete from t_content where GJDM = #{GJDM} and LB = #{LB} and LJ = #{LJ}
+  </delete>
+  <insert id="update" parameterType="okkpp.model.Content">
+      insert into t_content (GJ,GJDM,BT,LB,LJ) values(
+      (select GJ from ceeccode where GJDM = #{GJDM})
+      ,#{GJDM},#{BT},#{LB},#{LJ})
+  </insert>
+  <select id="GJDM2GJ" resultType="java.lang.String">
+      select GJ from ceeccode where GJDM = #{GJDM}
+  </select>
+  <select id="showTables" resultType="java.lang.String">
+      show tables
+  </select>
+  <select id="showColumns" resultType="java.util.HashMap">
+      show full columns from ${tab}
+  </select>
+</mapper>

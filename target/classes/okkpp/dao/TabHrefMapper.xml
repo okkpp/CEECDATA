@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="okkpp.dao.TabHrefMapper">
+  <resultMap id="BaseResultMap" type="okkpp.model.TabHref">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="tabName" jdbcType="VARCHAR" property="tabname" />
+    <result column="href" jdbcType="VARCHAR" property="href" />
+    <result column="BT" jdbcType="VARCHAR" property="bt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, tabName, href, BT
+  </sql>
+  
+  <select id="search" parameterType="okkpp.model.TabHref" resultType="java.lang.Integer" statementType="STATEMENT">
+      select count(*) from ${tabName} where GJDM = '${href}'
+  </select>
+  <select id="getCEECCODE" parameterType="okkpp.model.TabHref" resultType="java.lang.String" statementType="STATEMENT">
+      select GJDM from ceeccode
+  </select>
+  <select id="getTabHref" resultMap="BaseResultMap">
+      select * from tab_href
+  </select>
+</mapper>

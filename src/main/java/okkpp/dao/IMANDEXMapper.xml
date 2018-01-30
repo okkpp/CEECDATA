@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.IMANDEXMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.IMANDEX" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="GJ" property="gj" jdbcType="VARCHAR" />
+    <result column="GJDM" property="gjdm" jdbcType="VARCHAR" />
+    <result column="NF" property="nf" jdbcType="VARCHAR" />
+    <result column="JKL" property="jkl" jdbcType="DOUBLE" />
+    <result column="CKL" property="ckl" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, GJ, GJDM, NF, JKL, CKL
+  </sql>
+  
+  <select id="getIMANDEX" parameterType="okkpp.model.IMANDEX" resultMap="BaseResultMap">
+      select * from t_ceec_IMANDEX where GJDM = #{GJDM}
+  </select>
+  <insert id="uploadData" parameterType="java.util.List">
+      insert into t_ceec_IMANDEX (GJ,GJDM,NF,JKL,CKL)
+      values
+      <foreach collection="data" index="index" item="item" open="(" separator="),(" close=")">
+          <if test="item.GJDM != null and item.GJDM != ''">
+              (select GJ from ceeccode where GJDM = #{item.GJDM})
+              ,#{item.GJDM},#{item.NF},#{item.JKL},#{item.CKL}
+          </if>
+      </foreach>
+  </insert>
+</mapper>

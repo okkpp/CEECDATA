@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="okkpp.dao.SHHJMapper">
+  <resultMap id="BaseResultMap" type="okkpp.model.SHHJ">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="GJ" jdbcType="VARCHAR" property="gj" />
+    <result column="GJDM" jdbcType="VARCHAR" property="gjdm" />
+    <result column="NF" jdbcType="VARCHAR" property="nf" />
+    <result column="NL65ZB" jdbcType="DOUBLE" property="nl65zb" />
+    <result column="LDLRK" jdbcType="INTEGER" property="ldlrk" />
+    <result column="LDLRKZB" jdbcType="DOUBLE" property="ldlrkzb" />
+    <result column="RKMD" jdbcType="DOUBLE" property="rkmd" />
+    <result column="ZRK" jdbcType="INTEGER" property="zrk" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, GJ, GJDM, NF, NL65ZB, LDLRK, LDLRKZB, RKMD, ZRK
+  </sql>
+  
+  <select id="getSHHJ" parameterType="okkpp.model.SHHJ" resultMap="BaseResultMap">
+      select * from t_ceec_SHHJ where GJDM = #{GJDM}
+  </select>
+  <insert id="uploadData" parameterType="java.util.List">
+      insert into t_ceec_SHHJ (GJ,GJDM,NF,NL65ZB,LDLRK,LDLRKZB,RKMD,ZRK)
+      values
+      <foreach collection="data" index="index" item="item" open="(" separator="),(" close=")">
+          <if test="item.GJDM != null and item.GJDM != ''">
+              (select GJ from ceeccode where GJDM = #{item.GJDM})
+              ,#{item.GJDM},#{item.NF},#{item.NL65ZB},#{item.LDLRK},#{item.LDLRKZB},#{item.RKMD},#{item.ZRK}
+          </if>
+      </foreach>
+  </insert>
+</mapper>
