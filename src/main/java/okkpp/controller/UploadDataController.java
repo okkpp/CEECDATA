@@ -11,19 +11,18 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author DUCK  E-mail: okkpp@qq.com
- * @date 创建时间：2018年1月19日 上午9:02:37 
+ * @date 锟斤拷锟斤拷时锟戒：2018锟斤拷1锟斤拷19锟斤拷 锟斤拷锟斤拷9:02:37 
  * @version 1.0 
  */
 @Controller
 @RequestMapping("/upload")
 public class UploadDataController {
-
 	@Autowired
 	UploadDataService service;
 	
 	@RequestMapping("/page")
 	public String page(Model model){
-		model.addAttribute("msg", "等待上传文件!");
+		model.addAttribute("msg", "锟饺达拷锟较达拷锟侥硷拷!");
 		return "/upload/page";
 	}
 	
