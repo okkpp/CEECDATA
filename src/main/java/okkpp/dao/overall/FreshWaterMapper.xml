@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.overall.FreshWaterMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.overall.FreshWater" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="renewable" property="renewable" jdbcType="DOUBLE" />
+    <result column="internal" property="internal" jdbcType="DOUBLE" />
+    <result column="agriculture" property="agriculture" jdbcType="DOUBLE" />
+    <result column="industry" property="industry" jdbcType="DOUBLE" />
+    <result column="domestic" property="domestic" jdbcType="DOUBLE" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="update" property="update" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, renewable, internal, agriculture, industry, domestic, sort, update
+  </sql>
+</mapper>
