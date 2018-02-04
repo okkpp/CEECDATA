@@ -1,4 +1,4 @@
-package okkpp.economics.overall;
+package okkpp.dao.economics;
 
 import okkpp.model.economics.RateOfConsumption;
 import okkpp.model.economics.RateOfConsumptionExample;

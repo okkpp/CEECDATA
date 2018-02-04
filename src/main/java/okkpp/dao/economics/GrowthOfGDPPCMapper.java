@@ -1,4 +1,4 @@
-package okkpp.economics.overall;
+package okkpp.dao.economics;
 
 import okkpp.model.economics.GrowthOfGDPPC;
 import okkpp.model.economics.GrowthOfGDPPCExample;

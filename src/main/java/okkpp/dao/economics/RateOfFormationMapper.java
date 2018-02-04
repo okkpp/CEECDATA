@@ -1,4 +1,4 @@
-package okkpp.economics.overall;
+package okkpp.dao.economics;
 
 import okkpp.model.economics.RateOfFormation;
 import okkpp.model.economics.RateOfFormationExample;

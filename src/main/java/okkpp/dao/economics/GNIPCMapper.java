@@ -1,4 +1,4 @@
-package okkpp.economics.overall;
+package okkpp.dao.economics;
 
 import okkpp.model.economics.GNIPC;
 import okkpp.model.economics.GNIPCExample;
