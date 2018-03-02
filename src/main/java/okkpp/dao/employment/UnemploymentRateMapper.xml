@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="okkpp.dao.overall.CountryAreaMapper">
-  <resultMap id="BaseResultMap" type="okkpp.model.overall.CountryArea">
+<mapper namespace="okkpp.dao.employment.UnemploymentRateMapper">
+  <resultMap id="BaseResultMap" type="okkpp.model.employment.UnemploymentRate">
     <!--
       WARNING - @mbggenerated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="country" jdbcType="VARCHAR" property="country" />
-    <result column="surface" jdbcType="DOUBLE" property="surface" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="rate" jdbcType="DOUBLE" property="rate" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="update" jdbcType="TIMESTAMP" property="update" />
   </resultMap>
@@ -79,9 +80,9 @@
     <!--
       WARNING - @mbggenerated
     -->
-    id, country, surface, sort, update
+    id, country, year, rate, sort, update
   </sql>
-  <select id="selectByExample" parameterType="okkpp.model.overall.CountryAreaExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="okkpp.model.employment.UnemploymentRateExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated
     -->
@@ -90,7 +91,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_overall_country_area
+    from t_employment_unemployment_rate
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -98,20 +99,29 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="okkpp.model.overall.CountryAreaExample">
+  <delete id="deleteByExample" parameterType="okkpp.model.employment.UnemploymentRateExample">
     <!--
       WARNING - @mbggenerated
     -->
-    delete from t_overall_country_area
+    delete from t_employment_unemployment_rate
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  <select id="countByExample" parameterType="okkpp.model.employment.UnemploymentRateExample" resultType="java.lang.Integer">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    select count(*) from t_employment_unemployment_rate
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     <!--
       WARNING - @mbggenerated
     -->
-    update t_overall_country_area
+    update t_employment_unemployment_rate
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -119,8 +129,11 @@
       <if test="record.country != null">
         country = #{record.country,jdbcType=VARCHAR},
       </if>
-      <if test="record.surface != null">
-        surface = #{record.surface,jdbcType=DOUBLE},
+      <if test="record.year != null">
+        year = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rate != null">
+        rate = #{record.rate,jdbcType=DOUBLE},
       </if>
       <if test="record.sort != null">
         sort = #{record.sort,jdbcType=INTEGER},
@@ -137,10 +150,11 @@
     <!--
       WARNING - @mbggenerated
     -->
-    update t_overall_country_area
+    update t_employment_unemployment_rate
     set id = #{record.id,jdbcType=INTEGER},
       country = #{record.country,jdbcType=VARCHAR},
-      surface = #{record.surface,jdbcType=DOUBLE},
+      year = #{record.year,jdbcType=VARCHAR},
+      rate = #{record.rate,jdbcType=DOUBLE},
       sort = #{record.sort,jdbcType=INTEGER},
       update = #{record.update,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
