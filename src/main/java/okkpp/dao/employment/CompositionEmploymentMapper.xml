@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="okkpp.dao.overall.CountryAreaMapper">
-  <resultMap id="BaseResultMap" type="okkpp.model.overall.CountryArea">
+<mapper namespace="okkpp.dao.employment.CompositionEmploymentMapper">
+  <resultMap id="BaseResultMap" type="okkpp.model.employment.CompositionEmployment">
     <!--
       WARNING - @mbggenerated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="country" jdbcType="VARCHAR" property="country" />
-    <result column="surface" jdbcType="DOUBLE" property="surface" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="primary" jdbcType="DOUBLE" property="primary" />
+    <result column="secondary" jdbcType="DOUBLE" property="secondary" />
+    <result column="tertiary" jdbcType="DOUBLE" property="tertiary" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="update" jdbcType="TIMESTAMP" property="update" />
   </resultMap>
@@ -79,9 +82,9 @@
     <!--
       WARNING - @mbggenerated
     -->
-    id, country, surface, sort, update
+    id, country, year, primary, secondary, tertiary, sort, update
   </sql>
-  <select id="selectByExample" parameterType="okkpp.model.overall.CountryAreaExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="okkpp.model.employment.CompositionEmploymentExample" resultMap="BaseResultMap">
     <!--
       WARNING - @mbggenerated
     -->
@@ -90,7 +93,7 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from t_overall_country_area
+    from t_employment_composition_employment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -98,20 +101,29 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="okkpp.model.overall.CountryAreaExample">
+  <delete id="deleteByExample" parameterType="okkpp.model.employment.CompositionEmploymentExample">
     <!--
       WARNING - @mbggenerated
     -->
-    delete from t_overall_country_area
+    delete from t_employment_composition_employment
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
+  <select id="countByExample" parameterType="okkpp.model.employment.CompositionEmploymentExample" resultType="java.lang.Integer">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    select count(*) from t_employment_composition_employment
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
   <update id="updateByExampleSelective" parameterType="map">
     <!--
       WARNING - @mbggenerated
     -->
-    update t_overall_country_area
+    update t_employment_composition_employment
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -119,8 +131,17 @@
       <if test="record.country != null">
         country = #{record.country,jdbcType=VARCHAR},
       </if>
-      <if test="record.surface != null">
-        surface = #{record.surface,jdbcType=DOUBLE},
+      <if test="record.year != null">
+        year = #{record.year,jdbcType=VARCHAR},
+      </if>
+      <if test="record.primary != null">
+        primary = #{record.primary,jdbcType=DOUBLE},
+      </if>
+      <if test="record.secondary != null">
+        secondary = #{record.secondary,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tertiary != null">
+        tertiary = #{record.tertiary,jdbcType=DOUBLE},
       </if>
       <if test="record.sort != null">
         sort = #{record.sort,jdbcType=INTEGER},
@@ -137,10 +158,13 @@
     <!--
       WARNING - @mbggenerated
     -->
-    update t_overall_country_area
+    update t_employment_composition_employment
     set id = #{record.id,jdbcType=INTEGER},
       country = #{record.country,jdbcType=VARCHAR},
-      surface = #{record.surface,jdbcType=DOUBLE},
+      year = #{record.year,jdbcType=VARCHAR},
+      primary = #{record.primary,jdbcType=DOUBLE},
+      secondary = #{record.secondary,jdbcType=DOUBLE},
+      tertiary = #{record.tertiary,jdbcType=DOUBLE},
       sort = #{record.sort,jdbcType=INTEGER},
       update = #{record.update,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
