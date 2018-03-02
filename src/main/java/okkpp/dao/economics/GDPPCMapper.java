@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface GDPPCMapper {
-    int countByExample(GDPPCExample example);
-
     int deleteByExample(GDPPCExample example);
 
     int deleteByPrimaryKey(Integer id);

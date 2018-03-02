@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ShareOfFormationMapper {
-    int countByExample(ShareOfFormationExample example);
-
     int deleteByExample(ShareOfFormationExample example);
 
     int deleteByPrimaryKey(Integer id);

@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RateOfFormationMapper {
-    int countByExample(RateOfFormationExample example);
-
     int deleteByExample(RateOfFormationExample example);
 
     int deleteByPrimaryKey(Integer id);

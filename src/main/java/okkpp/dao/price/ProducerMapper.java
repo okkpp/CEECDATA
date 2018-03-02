@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ProducerMapper {
-    int countByExample(ProducerExample example);
-
     int deleteByExample(ProducerExample example);
 
     int deleteByPrimaryKey(Integer id);

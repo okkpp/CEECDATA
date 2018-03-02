@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface PercentageOfAgricultureMapper {
-    int countByExample(PercentageOfAgricultureExample example);
-
     int deleteByExample(PercentageOfAgricultureExample example);
 
     int deleteByPrimaryKey(Integer id);

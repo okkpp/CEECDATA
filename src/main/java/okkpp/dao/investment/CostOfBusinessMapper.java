@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface CostOfBusinessMapper {
-    int countByExample(CostOfBusinessExample example);
-
     int deleteByExample(CostOfBusinessExample example);
 
     int deleteByPrimaryKey(Integer id);

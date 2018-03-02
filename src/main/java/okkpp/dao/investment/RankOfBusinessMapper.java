@@ -6,9 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RankOfBusinessMapper {
-    int countByExample(RankOfBusinessExample example);
-
-    int deleteByExample(RankOfBusinessExample example);
+	int deleteByExample(RankOfBusinessExample example);
 
     int deleteByPrimaryKey(Integer id);
 

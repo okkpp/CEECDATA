@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RegisteredOfBusinessMapper {
-    int countByExample(RegisteredOfBusinessExample example);
-
     int deleteByExample(RegisteredOfBusinessExample example);
 
     int deleteByPrimaryKey(Integer id);

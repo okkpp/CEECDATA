@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ConsumerMapper {
-    int countByExample(ConsumerExample example);
-
     int deleteByExample(ConsumerExample example);
 
     int deleteByPrimaryKey(Integer id);

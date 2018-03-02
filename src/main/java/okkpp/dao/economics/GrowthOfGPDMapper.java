@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface GrowthOfGPDMapper {
-    int countByExample(GrowthOfGPDExample example);
-
     int deleteByExample(GrowthOfGPDExample example);
 
     int deleteByPrimaryKey(Integer id);

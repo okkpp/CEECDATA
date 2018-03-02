@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface PercentageOfServiceMapper {
-    int countByExample(PercentageOfServiceExample example);
-
     int deleteByExample(PercentageOfServiceExample example);
 
     int deleteByPrimaryKey(Integer id);

@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface IndicatorsOfNAMapper {
-    int countByExample(IndicatorsOfNAExample example);
-
     int deleteByExample(IndicatorsOfNAExample example);
 
     int deleteByPrimaryKey(Integer id);

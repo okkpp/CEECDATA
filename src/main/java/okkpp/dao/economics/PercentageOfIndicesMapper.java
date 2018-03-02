@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface PercentageOfIndicesMapper {
-    int countByExample(PercentageOfIndicesExample example);
-
     int deleteByExample(PercentageOfIndicesExample example);
 
     int deleteByPrimaryKey(Integer id);

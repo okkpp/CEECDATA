@@ -6,8 +6,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RateOfConsumptionMapper {
-    int countByExample(RateOfConsumptionExample example);
-
     int deleteByExample(RateOfConsumptionExample example);
 
     int deleteByPrimaryKey(Integer id);
