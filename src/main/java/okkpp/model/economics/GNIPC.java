@@ -8,7 +8,7 @@ GNI per Capita（USD）
  * 
  * @author wcyong
  * 
- * @date 2018-02-03
+ * @date 2018-03-02
  */
 public class GNIPC {
     private Integer id;
@@ -21,7 +21,7 @@ public class GNIPC {
     /**
      * 年份
      */
-    private Integer year;
+    private String year;
 
     /**
      * 人均国民总收入(美元)
@@ -29,14 +29,14 @@ public class GNIPC {
     private Integer gni;
 
     /**
-     * 更新日期
-     */
-    private Date update;
-
-    /**
      * 排序
      */
     private Integer sort;
+
+    /**
+     * 更新日期
+     */
+    private Date update;
 
     public Integer getId() {
         return id;
@@ -54,12 +54,12 @@ public class GNIPC {
         this.country = country == null ? null : country.trim();
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setYear(String year) {
+        this.year = year == null ? null : year.trim();
     }
 
     public Integer getGni() {
@@ -70,19 +70,19 @@ public class GNIPC {
         this.gni = gni;
     }
 
-    public Date getUpdate() {
-        return update;
-    }
-
-    public void setUpdate(Date update) {
-        this.update = update;
-    }
-
     public Integer getSort() {
         return sort;
     }
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public Date getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Date update) {
+        this.update = update;
     }
 }

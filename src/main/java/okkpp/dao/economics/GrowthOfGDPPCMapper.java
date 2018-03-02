@@ -1,8 +1,8 @@
 package okkpp.dao.economics;
 
+import java.util.List;
 import okkpp.model.economics.GrowthOfGDPPC;
 import okkpp.model.economics.GrowthOfGDPPCExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface GrowthOfGDPPCMapper {

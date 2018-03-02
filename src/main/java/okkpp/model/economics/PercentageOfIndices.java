@@ -8,7 +8,7 @@ Indices as Percentage of GDP（%）
  * 
  * @author wcyong
  * 
- * @date 2018-02-03
+ * @date 2018-03-02
  */
 public class PercentageOfIndices {
     private Integer id;
@@ -21,7 +21,7 @@ public class PercentageOfIndices {
     /**
      * 年份
      */
-    private Integer year;
+    private String year;
 
     /**
      * 工业占GDP比重(%)
@@ -29,14 +29,14 @@ public class PercentageOfIndices {
     private Double percentage;
 
     /**
-     * 更新时间
-     */
-    private Date update;
-
-    /**
      * 排序
      */
     private Integer sort;
+
+    /**
+     * 更新时间
+     */
+    private Date update;
 
     public Integer getId() {
         return id;
@@ -54,12 +54,12 @@ public class PercentageOfIndices {
         this.country = country == null ? null : country.trim();
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setYear(String year) {
+        this.year = year == null ? null : year.trim();
     }
 
     public Double getPercentage() {
@@ -70,19 +70,19 @@ public class PercentageOfIndices {
         this.percentage = percentage;
     }
 
-    public Date getUpdate() {
-        return update;
-    }
-
-    public void setUpdate(Date update) {
-        this.update = update;
-    }
-
     public Integer getSort() {
         return sort;
     }
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public Date getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Date update) {
+        this.update = update;
     }
 }

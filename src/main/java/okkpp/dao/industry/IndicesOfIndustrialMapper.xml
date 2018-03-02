@@ -75,7 +75,7 @@
         id, country, year, indices, sort, update
     </sql>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moqianyi.bean.IndicesOfIndustrialExample" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="okkpp.model.industry.IndicesOfIndustrialExample" >
         select
         <if test="distinct" >
             distinct
@@ -102,14 +102,14 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.moqianyi.bean.IndicesOfIndustrialExample" >
+    <delete id="deleteByExample" parameterType="okkpp.model.industry.IndicesOfIndustrialExample" >
         delete from t_industry_indices_of_industrial
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.moqianyi.bean.IndicesOfIndustrial" >
+    <insert id="insert" parameterType="okkpp.model.industry.IndicesOfIndustrial" >
         insert into t_industry_indices_of_industrial (id, country, year, 
             indices, sort, update
             )
@@ -118,7 +118,7 @@
             )
     </insert>
 
-    <insert id="insertSelective" parameterType="com.moqianyi.bean.IndicesOfIndustrial" >
+    <insert id="insertSelective" parameterType="okkpp.model.industry.IndicesOfIndustrial" >
         insert into t_industry_indices_of_industrial
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -202,7 +202,7 @@
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.moqianyi.bean.IndicesOfIndustrial" >
+    <update id="updateByPrimaryKeySelective" parameterType="okkpp.model.industry.IndicesOfIndustrial" >
         update t_industry_indices_of_industrial
         <set >
             <if test="country != null" >
@@ -224,7 +224,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.moqianyi.bean.IndicesOfIndustrial" >
+    <update id="updateByPrimaryKey" parameterType="okkpp.model.industry.IndicesOfIndustrial" >
         update t_industry_indices_of_industrial
         set country = #{country,jdbcType=VARCHAR},
             year = #{year,jdbcType=VARCHAR},

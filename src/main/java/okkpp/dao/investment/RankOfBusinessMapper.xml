@@ -5,7 +5,7 @@
     <resultMap id="BaseResultMap" type="okkpp.model.investment.RankOfBusiness" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="country" property="country" jdbcType="VARCHAR" />
-        <result column="year" property="year" jdbcType="INTEGER" />
+        <result column="year" property="year" jdbcType="VARCHAR" />
         <result column="business_rank" property="businessRank" jdbcType="INTEGER" />
         <result column="start_rank" property="startRank" jdbcType="INTEGER" />
         <result column="construction_rank" property="constructionRank" jdbcType="INTEGER" />
@@ -24,8 +24,8 @@
         <result column="insolvency_rank" property="insolvencyRank" jdbcType="INTEGER" />
         <result column="insolcenvy_days" property="insolcenvyDays" jdbcType="DOUBLE" />
         <result column="insolvency_rate" property="insolvencyRate" jdbcType="DOUBLE" />
-        <result column="update" property="update" jdbcType="TIMESTAMP" />
         <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="update" property="update" jdbcType="TIMESTAMP" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -92,10 +92,10 @@
         id, country, year, business_rank, start_rank, construction_rank, construction_number, 
         construction_days, property_rank, property_number, property_days, credit_rank, taxes_rank, 
         investors_rank, investors_index, trading_rank, contracts_rank, contracts_days, insolvency_rank, 
-        insolcenvy_days, insolvency_rate, update, sort
+        insolcenvy_days, insolvency_rate, sort, update
     </sql>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moqianyi.bean.RankOfBusinessExample" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="okkpp.model.investment.RankOfBusinessExample" >
         select
         <if test="distinct" >
             distinct
@@ -122,14 +122,14 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.moqianyi.bean.RankOfBusinessExample" >
+    <delete id="deleteByExample" parameterType="okkpp.model.investment.RankOfBusinessExample" >
         delete from t_investment_rank_of_business
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.moqianyi.bean.RankOfBusiness" >
+    <insert id="insert" parameterType="okkpp.model.investment.RankOfBusiness" >
         insert into t_investment_rank_of_business (id, country, year, 
             business_rank, start_rank, construction_rank, 
             construction_number, construction_days, 
@@ -137,20 +137,20 @@
             credit_rank, taxes_rank, investors_rank, 
             investors_index, trading_rank, contracts_rank, 
             contracts_days, insolvency_rank, insolcenvy_days, 
-            insolvency_rate, update, sort
+            insolvency_rate, sort, update
             )
-        values (#{id,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, 
+        values (#{id,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
             #{businessRank,jdbcType=INTEGER}, #{startRank,jdbcType=INTEGER}, #{constructionRank,jdbcType=INTEGER}, 
             #{constructionNumber,jdbcType=INTEGER}, #{constructionDays,jdbcType=DOUBLE}, 
             #{propertyRank,jdbcType=INTEGER}, #{propertyNumber,jdbcType=INTEGER}, #{propertyDays,jdbcType=DOUBLE}, 
             #{creditRank,jdbcType=INTEGER}, #{taxesRank,jdbcType=INTEGER}, #{investorsRank,jdbcType=INTEGER}, 
             #{investorsIndex,jdbcType=DOUBLE}, #{tradingRank,jdbcType=INTEGER}, #{contractsRank,jdbcType=INTEGER}, 
             #{contractsDays,jdbcType=DOUBLE}, #{insolvencyRank,jdbcType=INTEGER}, #{insolcenvyDays,jdbcType=DOUBLE}, 
-            #{insolvencyRate,jdbcType=DOUBLE}, #{update,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}
+            #{insolvencyRate,jdbcType=DOUBLE}, #{sort,jdbcType=INTEGER}, #{update,jdbcType=TIMESTAMP}
             )
     </insert>
 
-    <insert id="insertSelective" parameterType="com.moqianyi.bean.RankOfBusiness" >
+    <insert id="insertSelective" parameterType="okkpp.model.investment.RankOfBusiness" >
         insert into t_investment_rank_of_business
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -216,11 +216,11 @@
             <if test="insolvencyRate != null" >
                 insolvency_rate,
             </if>
-            <if test="update != null" >
-                update,
-            </if>
             <if test="sort != null" >
                 sort,
+            </if>
+            <if test="update != null" >
+                update,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -231,7 +231,7 @@
                 #{country,jdbcType=VARCHAR},
             </if>
             <if test="year != null" >
-                #{year,jdbcType=INTEGER},
+                #{year,jdbcType=VARCHAR},
             </if>
             <if test="businessRank != null" >
                 #{businessRank,jdbcType=INTEGER},
@@ -287,21 +287,14 @@
             <if test="insolvencyRate != null" >
                 #{insolvencyRate,jdbcType=DOUBLE},
             </if>
-            <if test="update != null" >
-                #{update,jdbcType=TIMESTAMP},
-            </if>
             <if test="sort != null" >
                 #{sort,jdbcType=INTEGER},
             </if>
+            <if test="update != null" >
+                #{update,jdbcType=TIMESTAMP},
+            </if>
         </trim>
     </insert>
-
-    <select id="countByExample" parameterType="com.moqianyi.bean.RankOfBusinessExample" resultType="java.lang.Integer" >
-        select count(*) from t_investment_rank_of_business
-        <if test="_parameter != null" >
-            <include refid="Example_Where_Clause" />
-        </if>
-    </select>
 
     <update id="updateByExampleSelective" parameterType="map" >
         update t_investment_rank_of_business
@@ -313,7 +306,7 @@
                 country = #{record.country,jdbcType=VARCHAR},
             </if>
             <if test="record.year != null" >
-                year = #{record.year,jdbcType=INTEGER},
+                year = #{record.year,jdbcType=VARCHAR},
             </if>
             <if test="record.businessRank != null" >
                 business_rank = #{record.businessRank,jdbcType=INTEGER},
@@ -369,11 +362,11 @@
             <if test="record.insolvencyRate != null" >
                 insolvency_rate = #{record.insolvencyRate,jdbcType=DOUBLE},
             </if>
-            <if test="record.update != null" >
-                update = #{record.update,jdbcType=TIMESTAMP},
-            </if>
             <if test="record.sort != null" >
                 sort = #{record.sort,jdbcType=INTEGER},
+            </if>
+            <if test="record.update != null" >
+                update = #{record.update,jdbcType=TIMESTAMP},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -385,7 +378,7 @@
         update t_investment_rank_of_business
         set id = #{record.id,jdbcType=INTEGER},
             country = #{record.country,jdbcType=VARCHAR},
-            year = #{record.year,jdbcType=INTEGER},
+            year = #{record.year,jdbcType=VARCHAR},
             business_rank = #{record.businessRank,jdbcType=INTEGER},
             start_rank = #{record.startRank,jdbcType=INTEGER},
             construction_rank = #{record.constructionRank,jdbcType=INTEGER},
@@ -404,21 +397,21 @@
             insolvency_rank = #{record.insolvencyRank,jdbcType=INTEGER},
             insolcenvy_days = #{record.insolcenvyDays,jdbcType=DOUBLE},
             insolvency_rate = #{record.insolvencyRate,jdbcType=DOUBLE},
-            update = #{record.update,jdbcType=TIMESTAMP},
-            sort = #{record.sort,jdbcType=INTEGER}
+            sort = #{record.sort,jdbcType=INTEGER},
+            update = #{record.update,jdbcType=TIMESTAMP}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.moqianyi.bean.RankOfBusiness" >
+    <update id="updateByPrimaryKeySelective" parameterType="okkpp.model.investment.RankOfBusiness" >
         update t_investment_rank_of_business
         <set >
             <if test="country != null" >
                 country = #{country,jdbcType=VARCHAR},
             </if>
             <if test="year != null" >
-                year = #{year,jdbcType=INTEGER},
+                year = #{year,jdbcType=VARCHAR},
             </if>
             <if test="businessRank != null" >
                 business_rank = #{businessRank,jdbcType=INTEGER},
@@ -474,20 +467,20 @@
             <if test="insolvencyRate != null" >
                 insolvency_rate = #{insolvencyRate,jdbcType=DOUBLE},
             </if>
-            <if test="update != null" >
-                update = #{update,jdbcType=TIMESTAMP},
-            </if>
             <if test="sort != null" >
                 sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="update != null" >
+                update = #{update,jdbcType=TIMESTAMP},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.moqianyi.bean.RankOfBusiness" >
+    <update id="updateByPrimaryKey" parameterType="okkpp.model.investment.RankOfBusiness" >
         update t_investment_rank_of_business
         set country = #{country,jdbcType=VARCHAR},
-            year = #{year,jdbcType=INTEGER},
+            year = #{year,jdbcType=VARCHAR},
             business_rank = #{businessRank,jdbcType=INTEGER},
             start_rank = #{startRank,jdbcType=INTEGER},
             construction_rank = #{constructionRank,jdbcType=INTEGER},
@@ -506,8 +499,8 @@
             insolvency_rank = #{insolvencyRank,jdbcType=INTEGER},
             insolcenvy_days = #{insolcenvyDays,jdbcType=DOUBLE},
             insolvency_rate = #{insolvencyRate,jdbcType=DOUBLE},
-            update = #{update,jdbcType=TIMESTAMP},
-            sort = #{sort,jdbcType=INTEGER}
+            sort = #{sort,jdbcType=INTEGER},
+            update = #{update,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

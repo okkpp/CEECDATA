@@ -8,7 +8,7 @@ Capital Formation Rate
  * 
  * @author wcyong
  * 
- * @date 2018-02-03
+ * @date 2018-03-02
  */
 public class RateOfFormation {
     private Integer id;
@@ -21,7 +21,7 @@ public class RateOfFormation {
     /**
      * 年份
      */
-    private Integer year;
+    private String year;
 
     /**
      * 资本形成率(%)
@@ -29,14 +29,14 @@ public class RateOfFormation {
     private Double rate;
 
     /**
-     * 更新时间
-     */
-    private Date update;
-
-    /**
      * 排序
      */
     private Integer sort;
+
+    /**
+     * 更新时间
+     */
+    private Date update;
 
     public Integer getId() {
         return id;
@@ -54,12 +54,12 @@ public class RateOfFormation {
         this.country = country == null ? null : country.trim();
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setYear(String year) {
+        this.year = year == null ? null : year.trim();
     }
 
     public Double getRate() {
@@ -70,19 +70,19 @@ public class RateOfFormation {
         this.rate = rate;
     }
 
-    public Date getUpdate() {
-        return update;
-    }
-
-    public void setUpdate(Date update) {
-        this.update = update;
-    }
-
     public Integer getSort() {
         return sort;
     }
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public Date getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Date update) {
+        this.update = update;
     }
 }

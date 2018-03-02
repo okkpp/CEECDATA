@@ -1,8 +1,8 @@
 package okkpp.dao.price;
 
+import java.util.List;
 import okkpp.model.price.Consumer;
 import okkpp.model.price.ConsumerExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ConsumerMapper {

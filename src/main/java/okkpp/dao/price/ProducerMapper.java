@@ -1,8 +1,8 @@
 package okkpp.dao.price;
 
+import java.util.List;
 import okkpp.model.price.Producer;
 import okkpp.model.price.ProducerExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ProducerMapper {

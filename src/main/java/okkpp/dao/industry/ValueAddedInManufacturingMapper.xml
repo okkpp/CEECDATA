@@ -78,7 +78,7 @@
         update
     </sql>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moqianyi.bean.ValueAddedInManufacturingExample" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="okkpp.model.industry.ValueAddedInManufacturingExample" >
         select
         <if test="distinct" >
             distinct
@@ -105,14 +105,14 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.moqianyi.bean.ValueAddedInManufacturingExample" >
+    <delete id="deleteByExample" parameterType="okkpp.model.industry.ValueAddedInManufacturingExample" >
         delete from t_industry_value_added_in_manufacturing
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.moqianyi.bean.ValueAddedInManufacturing" >
+    <insert id="insert" parameterType="okkpp.model.industry.ValueAddedInManufacturing" >
         insert into t_industry_value_added_in_manufacturing (id, country, year, 
             added_value, food_beverages_tobacco, textiles_clothing, 
             sort, update)
@@ -121,7 +121,7 @@
             #{sort,jdbcType=INTEGER}, #{update,jdbcType=TIMESTAMP})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.moqianyi.bean.ValueAddedInManufacturing" >
+    <insert id="insertSelective" parameterType="okkpp.model.industry.ValueAddedInManufacturing" >
         insert into t_industry_value_added_in_manufacturing
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -225,7 +225,7 @@
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.moqianyi.bean.ValueAddedInManufacturing" >
+    <update id="updateByPrimaryKeySelective" parameterType="okkpp.model.industry.ValueAddedInManufacturing" >
         update t_industry_value_added_in_manufacturing
         <set >
             <if test="country != null" >
@@ -253,7 +253,7 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.moqianyi.bean.ValueAddedInManufacturing" >
+    <update id="updateByPrimaryKey" parameterType="okkpp.model.industry.ValueAddedInManufacturing" >
         update t_industry_value_added_in_manufacturing
         set country = #{country,jdbcType=VARCHAR},
             year = #{year,jdbcType=VARCHAR},

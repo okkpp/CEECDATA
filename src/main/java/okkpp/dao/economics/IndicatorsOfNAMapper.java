@@ -1,8 +1,8 @@
 package okkpp.dao.economics;
 
+import java.util.List;
 import okkpp.model.economics.IndicatorsOfNA;
 import okkpp.model.economics.IndicatorsOfNAExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface IndicatorsOfNAMapper {

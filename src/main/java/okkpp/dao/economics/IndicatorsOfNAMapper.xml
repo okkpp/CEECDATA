@@ -5,13 +5,13 @@
     <resultMap id="BaseResultMap" type="okkpp.model.economics.IndicatorsOfNA" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="country" property="country" jdbcType="VARCHAR" />
-        <result column="year" property="year" jdbcType="INTEGER" />
+        <result column="year" property="year" jdbcType="VARCHAR" />
         <result column="gdp" property="gdp" jdbcType="INTEGER" />
         <result column="gdppc" property="gdppc" jdbcType="INTEGER" />
         <result column="gni" property="gni" jdbcType="INTEGER" />
         <result column="gnipc" property="gnipc" jdbcType="INTEGER" />
-        <result column="update" property="update" jdbcType="TIMESTAMP" />
         <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="update" property="update" jdbcType="TIMESTAMP" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -75,10 +75,10 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        id, country, year, gdp, gdppc, gni, gnipc, update, sort
+        id, country, year, gdp, gdppc, gni, gnipc, sort, update
     </sql>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moqianyi.bean.IndicatorsOfNAExample" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="okkpp.model.economics.IndicatorsOfNAExample" >
         select
         <if test="distinct" >
             distinct
@@ -105,25 +105,25 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.moqianyi.bean.IndicatorsOfNAExample" >
+    <delete id="deleteByExample" parameterType="okkpp.model.economics.IndicatorsOfNAExample" >
         delete from t_economics_indicators_of_na
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.moqianyi.bean.IndicatorsOfNA" >
+    <insert id="insert" parameterType="okkpp.model.economics.IndicatorsOfNA" >
         insert into t_economics_indicators_of_na (id, country, year, 
             gdp, gdppc, gni, 
-            gnipc, update, sort
+            gnipc, sort, update
             )
-        values (#{id,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, 
+        values (#{id,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
             #{gdp,jdbcType=INTEGER}, #{gdppc,jdbcType=INTEGER}, #{gni,jdbcType=INTEGER}, 
-            #{gnipc,jdbcType=INTEGER}, #{update,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}
+            #{gnipc,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{update,jdbcType=TIMESTAMP}
             )
     </insert>
 
-    <insert id="insertSelective" parameterType="com.moqianyi.bean.IndicatorsOfNA" >
+    <insert id="insertSelective" parameterType="okkpp.model.economics.IndicatorsOfNA" >
         insert into t_economics_indicators_of_na
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -147,11 +147,11 @@
             <if test="gnipc != null" >
                 gnipc,
             </if>
-            <if test="update != null" >
-                update,
-            </if>
             <if test="sort != null" >
                 sort,
+            </if>
+            <if test="update != null" >
+                update,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -162,7 +162,7 @@
                 #{country,jdbcType=VARCHAR},
             </if>
             <if test="year != null" >
-                #{year,jdbcType=INTEGER},
+                #{year,jdbcType=VARCHAR},
             </if>
             <if test="gdp != null" >
                 #{gdp,jdbcType=INTEGER},
@@ -176,21 +176,14 @@
             <if test="gnipc != null" >
                 #{gnipc,jdbcType=INTEGER},
             </if>
-            <if test="update != null" >
-                #{update,jdbcType=TIMESTAMP},
-            </if>
             <if test="sort != null" >
                 #{sort,jdbcType=INTEGER},
             </if>
+            <if test="update != null" >
+                #{update,jdbcType=TIMESTAMP},
+            </if>
         </trim>
     </insert>
-
-    <select id="countByExample" parameterType="com.moqianyi.bean.IndicatorsOfNAExample" resultType="java.lang.Integer" >
-        select count(*) from t_economics_indicators_of_na
-        <if test="_parameter != null" >
-            <include refid="Example_Where_Clause" />
-        </if>
-    </select>
 
     <update id="updateByExampleSelective" parameterType="map" >
         update t_economics_indicators_of_na
@@ -202,7 +195,7 @@
                 country = #{record.country,jdbcType=VARCHAR},
             </if>
             <if test="record.year != null" >
-                year = #{record.year,jdbcType=INTEGER},
+                year = #{record.year,jdbcType=VARCHAR},
             </if>
             <if test="record.gdp != null" >
                 gdp = #{record.gdp,jdbcType=INTEGER},
@@ -216,11 +209,11 @@
             <if test="record.gnipc != null" >
                 gnipc = #{record.gnipc,jdbcType=INTEGER},
             </if>
-            <if test="record.update != null" >
-                update = #{record.update,jdbcType=TIMESTAMP},
-            </if>
             <if test="record.sort != null" >
                 sort = #{record.sort,jdbcType=INTEGER},
+            </if>
+            <if test="record.update != null" >
+                update = #{record.update,jdbcType=TIMESTAMP},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -232,26 +225,26 @@
         update t_economics_indicators_of_na
         set id = #{record.id,jdbcType=INTEGER},
             country = #{record.country,jdbcType=VARCHAR},
-            year = #{record.year,jdbcType=INTEGER},
+            year = #{record.year,jdbcType=VARCHAR},
             gdp = #{record.gdp,jdbcType=INTEGER},
             gdppc = #{record.gdppc,jdbcType=INTEGER},
             gni = #{record.gni,jdbcType=INTEGER},
             gnipc = #{record.gnipc,jdbcType=INTEGER},
-            update = #{record.update,jdbcType=TIMESTAMP},
-            sort = #{record.sort,jdbcType=INTEGER}
+            sort = #{record.sort,jdbcType=INTEGER},
+            update = #{record.update,jdbcType=TIMESTAMP}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.moqianyi.bean.IndicatorsOfNA" >
+    <update id="updateByPrimaryKeySelective" parameterType="okkpp.model.economics.IndicatorsOfNA" >
         update t_economics_indicators_of_na
         <set >
             <if test="country != null" >
                 country = #{country,jdbcType=VARCHAR},
             </if>
             <if test="year != null" >
-                year = #{year,jdbcType=INTEGER},
+                year = #{year,jdbcType=VARCHAR},
             </if>
             <if test="gdp != null" >
                 gdp = #{gdp,jdbcType=INTEGER},
@@ -265,26 +258,26 @@
             <if test="gnipc != null" >
                 gnipc = #{gnipc,jdbcType=INTEGER},
             </if>
-            <if test="update != null" >
-                update = #{update,jdbcType=TIMESTAMP},
-            </if>
             <if test="sort != null" >
                 sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="update != null" >
+                update = #{update,jdbcType=TIMESTAMP},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.moqianyi.bean.IndicatorsOfNA" >
+    <update id="updateByPrimaryKey" parameterType="okkpp.model.economics.IndicatorsOfNA" >
         update t_economics_indicators_of_na
         set country = #{country,jdbcType=VARCHAR},
-            year = #{year,jdbcType=INTEGER},
+            year = #{year,jdbcType=VARCHAR},
             gdp = #{gdp,jdbcType=INTEGER},
             gdppc = #{gdppc,jdbcType=INTEGER},
             gni = #{gni,jdbcType=INTEGER},
             gnipc = #{gnipc,jdbcType=INTEGER},
-            update = #{update,jdbcType=TIMESTAMP},
-            sort = #{sort,jdbcType=INTEGER}
+            sort = #{sort,jdbcType=INTEGER},
+            update = #{update,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

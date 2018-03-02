@@ -1,8 +1,8 @@
 package okkpp.dao.industry;
 
+import java.util.List;
 import okkpp.model.industry.ValueAddedInManufacturing;
 import okkpp.model.industry.ValueAddedInManufacturingExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ValueAddedInManufacturingMapper {

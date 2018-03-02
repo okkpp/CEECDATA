@@ -8,7 +8,7 @@ Consumer Price Indices
  * 
  * @author wcyong
  * 
- * @date 2018-02-14
+ * @date 2018-03-02
  */
 public class Consumer {
     private Integer id;
@@ -21,7 +21,7 @@ public class Consumer {
     /**
      * 年份
      */
-    private Integer year;
+    private String year;
 
     /**
      * 消费者价格指数
@@ -29,14 +29,14 @@ public class Consumer {
     private Double indices;
 
     /**
-     * 更新时间
-     */
-    private Date update;
-
-    /**
      * 排序
      */
     private Integer sort;
+
+    /**
+     * 更新时间
+     */
+    private Date update;
 
     public Integer getId() {
         return id;
@@ -54,12 +54,12 @@ public class Consumer {
         this.country = country == null ? null : country.trim();
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setYear(String year) {
+        this.year = year == null ? null : year.trim();
     }
 
     public Double getIndices() {
@@ -70,19 +70,19 @@ public class Consumer {
         this.indices = indices;
     }
 
-    public Date getUpdate() {
-        return update;
-    }
-
-    public void setUpdate(Date update) {
-        this.update = update;
-    }
-
     public Integer getSort() {
         return sort;
     }
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public Date getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Date update) {
+        this.update = update;
     }
 }

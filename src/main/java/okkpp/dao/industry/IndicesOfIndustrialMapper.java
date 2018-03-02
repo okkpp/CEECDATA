@@ -1,8 +1,8 @@
 package okkpp.dao.industry;
 
+import java.util.List;
 import okkpp.model.industry.IndicesOfIndustrial;
 import okkpp.model.industry.IndicesOfIndustrialExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface IndicesOfIndustrialMapper {

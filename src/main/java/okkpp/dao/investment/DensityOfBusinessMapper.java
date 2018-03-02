@@ -1,8 +1,8 @@
 package okkpp.dao.investment;
 
+import java.util.List;
 import okkpp.model.investment.DensityOfBusiness;
 import okkpp.model.investment.DensityOfBusinessExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface DensityOfBusinessMapper {

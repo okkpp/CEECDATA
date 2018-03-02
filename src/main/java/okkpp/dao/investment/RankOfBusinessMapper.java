@@ -1,12 +1,12 @@
 package okkpp.dao.investment;
 
+import java.util.List;
 import okkpp.model.investment.RankOfBusiness;
 import okkpp.model.investment.RankOfBusinessExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RankOfBusinessMapper {
-	int deleteByExample(RankOfBusinessExample example);
+    int deleteByExample(RankOfBusinessExample example);
 
     int deleteByPrimaryKey(Integer id);
 

@@ -1,8 +1,8 @@
 package okkpp.dao.economics;
 
+import java.util.List;
 import okkpp.model.economics.PercentageOfService;
 import okkpp.model.economics.PercentageOfServiceExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface PercentageOfServiceMapper {

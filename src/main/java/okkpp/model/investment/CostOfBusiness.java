@@ -8,7 +8,7 @@ Cost of Business Start-up
  * 
  * @author wcyong
  * 
- * @date 2018-02-09
+ * @date 2018-03-02
  */
 public class CostOfBusiness {
     private Integer id;
@@ -21,7 +21,7 @@ public class CostOfBusiness {
     /**
      * 年份
      */
-    private Integer year;
+    private String year;
 
     /**
      * 开办企业所需手续数(个)
@@ -39,14 +39,14 @@ public class CostOfBusiness {
     private Double percentage;
 
     /**
-     * 更新日期
-     */
-    private Date update;
-
-    /**
      * 排序
      */
     private Integer sort;
+
+    /**
+     * 更新日期
+     */
+    private Date update;
 
     public Integer getId() {
         return id;
@@ -64,12 +64,12 @@ public class CostOfBusiness {
         this.country = country == null ? null : country.trim();
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setYear(String year) {
+        this.year = year == null ? null : year.trim();
     }
 
     public Integer getNumber() {
@@ -96,19 +96,19 @@ public class CostOfBusiness {
         this.percentage = percentage;
     }
 
-    public Date getUpdate() {
-        return update;
-    }
-
-    public void setUpdate(Date update) {
-        this.update = update;
-    }
-
     public Integer getSort() {
         return sort;
     }
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public Date getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Date update) {
+        this.update = update;
     }
 }

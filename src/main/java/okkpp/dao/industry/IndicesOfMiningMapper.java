@@ -1,8 +1,8 @@
 package okkpp.dao.industry;
 
+import java.util.List;
 import okkpp.model.industry.IndicesOfMining;
 import okkpp.model.industry.IndicesOfMiningExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface IndicesOfMiningMapper {

@@ -1,13 +1,11 @@
 package okkpp.dao.economics;
 
+import java.util.List;
 import okkpp.model.economics.FinalConsumption;
 import okkpp.model.economics.FinalConsumptionExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface FinalConsumptionMapper {
-    int countByExample(FinalConsumptionExample example);
-
     int deleteByExample(FinalConsumptionExample example);
 
     int deleteByPrimaryKey(Integer id);

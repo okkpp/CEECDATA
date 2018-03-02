@@ -5,12 +5,12 @@
     <resultMap id="BaseResultMap" type="okkpp.model.investment.CostOfBusiness" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="country" property="country" jdbcType="VARCHAR" />
-        <result column="year" property="year" jdbcType="INTEGER" />
+        <result column="year" property="year" jdbcType="VARCHAR" />
         <result column="number" property="number" jdbcType="INTEGER" />
         <result column="days" property="days" jdbcType="DOUBLE" />
         <result column="percentage" property="percentage" jdbcType="DOUBLE" />
-        <result column="update" property="update" jdbcType="TIMESTAMP" />
         <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="update" property="update" jdbcType="TIMESTAMP" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -74,10 +74,10 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        id, country, year, number, days, percentage, update, sort
+        id, country, year, number, days, percentage, sort, update
     </sql>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moqianyi.bean.CostOfBusinessExample" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="okkpp.model.investment.CostOfBusinessExample" >
         select
         <if test="distinct" >
             distinct
@@ -104,23 +104,23 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.moqianyi.bean.CostOfBusinessExample" >
+    <delete id="deleteByExample" parameterType="okkpp.model.investment.CostOfBusinessExample" >
         delete from t_investment_cost_of_business
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.moqianyi.bean.CostOfBusiness" >
+    <insert id="insert" parameterType="okkpp.model.investment.CostOfBusiness" >
         insert into t_investment_cost_of_business (id, country, year, 
             number, days, percentage, 
-            update, sort)
-        values (#{id,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, 
+            sort, update)
+        values (#{id,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
             #{number,jdbcType=INTEGER}, #{days,jdbcType=DOUBLE}, #{percentage,jdbcType=DOUBLE}, 
-            #{update,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER})
+            #{sort,jdbcType=INTEGER}, #{update,jdbcType=TIMESTAMP})
     </insert>
 
-    <insert id="insertSelective" parameterType="com.moqianyi.bean.CostOfBusiness" >
+    <insert id="insertSelective" parameterType="okkpp.model.investment.CostOfBusiness" >
         insert into t_investment_cost_of_business
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -141,11 +141,11 @@
             <if test="percentage != null" >
                 percentage,
             </if>
-            <if test="update != null" >
-                update,
-            </if>
             <if test="sort != null" >
                 sort,
+            </if>
+            <if test="update != null" >
+                update,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -156,7 +156,7 @@
                 #{country,jdbcType=VARCHAR},
             </if>
             <if test="year != null" >
-                #{year,jdbcType=INTEGER},
+                #{year,jdbcType=VARCHAR},
             </if>
             <if test="number != null" >
                 #{number,jdbcType=INTEGER},
@@ -167,21 +167,14 @@
             <if test="percentage != null" >
                 #{percentage,jdbcType=DOUBLE},
             </if>
-            <if test="update != null" >
-                #{update,jdbcType=TIMESTAMP},
-            </if>
             <if test="sort != null" >
                 #{sort,jdbcType=INTEGER},
             </if>
+            <if test="update != null" >
+                #{update,jdbcType=TIMESTAMP},
+            </if>
         </trim>
     </insert>
-
-    <select id="countByExample" parameterType="com.moqianyi.bean.CostOfBusinessExample" resultType="java.lang.Integer" >
-        select count(*) from t_investment_cost_of_business
-        <if test="_parameter != null" >
-            <include refid="Example_Where_Clause" />
-        </if>
-    </select>
 
     <update id="updateByExampleSelective" parameterType="map" >
         update t_investment_cost_of_business
@@ -193,7 +186,7 @@
                 country = #{record.country,jdbcType=VARCHAR},
             </if>
             <if test="record.year != null" >
-                year = #{record.year,jdbcType=INTEGER},
+                year = #{record.year,jdbcType=VARCHAR},
             </if>
             <if test="record.number != null" >
                 number = #{record.number,jdbcType=INTEGER},
@@ -204,11 +197,11 @@
             <if test="record.percentage != null" >
                 percentage = #{record.percentage,jdbcType=DOUBLE},
             </if>
-            <if test="record.update != null" >
-                update = #{record.update,jdbcType=TIMESTAMP},
-            </if>
             <if test="record.sort != null" >
                 sort = #{record.sort,jdbcType=INTEGER},
+            </if>
+            <if test="record.update != null" >
+                update = #{record.update,jdbcType=TIMESTAMP},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -220,25 +213,25 @@
         update t_investment_cost_of_business
         set id = #{record.id,jdbcType=INTEGER},
             country = #{record.country,jdbcType=VARCHAR},
-            year = #{record.year,jdbcType=INTEGER},
+            year = #{record.year,jdbcType=VARCHAR},
             number = #{record.number,jdbcType=INTEGER},
             days = #{record.days,jdbcType=DOUBLE},
             percentage = #{record.percentage,jdbcType=DOUBLE},
-            update = #{record.update,jdbcType=TIMESTAMP},
-            sort = #{record.sort,jdbcType=INTEGER}
+            sort = #{record.sort,jdbcType=INTEGER},
+            update = #{record.update,jdbcType=TIMESTAMP}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.moqianyi.bean.CostOfBusiness" >
+    <update id="updateByPrimaryKeySelective" parameterType="okkpp.model.investment.CostOfBusiness" >
         update t_investment_cost_of_business
         <set >
             <if test="country != null" >
                 country = #{country,jdbcType=VARCHAR},
             </if>
             <if test="year != null" >
-                year = #{year,jdbcType=INTEGER},
+                year = #{year,jdbcType=VARCHAR},
             </if>
             <if test="number != null" >
                 number = #{number,jdbcType=INTEGER},
@@ -249,25 +242,25 @@
             <if test="percentage != null" >
                 percentage = #{percentage,jdbcType=DOUBLE},
             </if>
-            <if test="update != null" >
-                update = #{update,jdbcType=TIMESTAMP},
-            </if>
             <if test="sort != null" >
                 sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="update != null" >
+                update = #{update,jdbcType=TIMESTAMP},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.moqianyi.bean.CostOfBusiness" >
+    <update id="updateByPrimaryKey" parameterType="okkpp.model.investment.CostOfBusiness" >
         update t_investment_cost_of_business
         set country = #{country,jdbcType=VARCHAR},
-            year = #{year,jdbcType=INTEGER},
+            year = #{year,jdbcType=VARCHAR},
             number = #{number,jdbcType=INTEGER},
             days = #{days,jdbcType=DOUBLE},
             percentage = #{percentage,jdbcType=DOUBLE},
-            update = #{update,jdbcType=TIMESTAMP},
-            sort = #{sort,jdbcType=INTEGER}
+            sort = #{sort,jdbcType=INTEGER},
+            update = #{update,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

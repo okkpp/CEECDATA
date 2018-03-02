@@ -70,7 +70,7 @@ East of Doing Business Rank£¨2017£©
      * 
      * @author wcyong
      * 
-     * @date 2018-02-09
+     * @date 2018-03-02
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -253,52 +253,62 @@ East of Doing Business Rank£¨2017£©
             return (Criteria) this;
         }
 
-        public Criteria andYearEqualTo(Integer value) {
+        public Criteria andYearEqualTo(String value) {
             addCriterion("year =", value, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearNotEqualTo(Integer value) {
+        public Criteria andYearNotEqualTo(String value) {
             addCriterion("year <>", value, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearGreaterThan(Integer value) {
+        public Criteria andYearGreaterThan(String value) {
             addCriterion("year >", value, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearGreaterThanOrEqualTo(Integer value) {
+        public Criteria andYearGreaterThanOrEqualTo(String value) {
             addCriterion("year >=", value, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearLessThan(Integer value) {
+        public Criteria andYearLessThan(String value) {
             addCriterion("year <", value, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearLessThanOrEqualTo(Integer value) {
+        public Criteria andYearLessThanOrEqualTo(String value) {
             addCriterion("year <=", value, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearIn(List<Integer> values) {
+        public Criteria andYearLike(String value) {
+            addCriterion("year like", value, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearNotLike(String value) {
+            addCriterion("year not like", value, "year");
+            return (Criteria) this;
+        }
+
+        public Criteria andYearIn(List<String> values) {
             addCriterion("year in", values, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearNotIn(List<Integer> values) {
+        public Criteria andYearNotIn(List<String> values) {
             addCriterion("year not in", values, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearBetween(Integer value1, Integer value2) {
+        public Criteria andYearBetween(String value1, String value2) {
             addCriterion("year between", value1, value2, "year");
             return (Criteria) this;
         }
 
-        public Criteria andYearNotBetween(Integer value1, Integer value2) {
+        public Criteria andYearNotBetween(String value1, String value2) {
             addCriterion("year not between", value1, value2, "year");
             return (Criteria) this;
         }
@@ -1383,66 +1393,6 @@ East of Doing Business Rank£¨2017£©
             return (Criteria) this;
         }
 
-        public Criteria andUpdateIsNull() {
-            addCriterion("update is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateIsNotNull() {
-            addCriterion("update is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateEqualTo(Date value) {
-            addCriterion("update =", value, "update");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateNotEqualTo(Date value) {
-            addCriterion("update <>", value, "update");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateGreaterThan(Date value) {
-            addCriterion("update >", value, "update");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateGreaterThanOrEqualTo(Date value) {
-            addCriterion("update >=", value, "update");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateLessThan(Date value) {
-            addCriterion("update <", value, "update");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateLessThanOrEqualTo(Date value) {
-            addCriterion("update <=", value, "update");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateIn(List<Date> values) {
-            addCriterion("update in", values, "update");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateNotIn(List<Date> values) {
-            addCriterion("update not in", values, "update");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateBetween(Date value1, Date value2) {
-            addCriterion("update between", value1, value2, "update");
-            return (Criteria) this;
-        }
-
-        public Criteria andUpdateNotBetween(Date value1, Date value2) {
-            addCriterion("update not between", value1, value2, "update");
-            return (Criteria) this;
-        }
-
         public Criteria andSortIsNull() {
             addCriterion("sort is null");
             return (Criteria) this;
@@ -1502,6 +1452,66 @@ East of Doing Business Rank£¨2017£©
             addCriterion("sort not between", value1, value2, "sort");
             return (Criteria) this;
         }
+
+        public Criteria andUpdateIsNull() {
+            addCriterion("update is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateIsNotNull() {
+            addCriterion("update is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateEqualTo(Date value) {
+            addCriterion("update =", value, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateNotEqualTo(Date value) {
+            addCriterion("update <>", value, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateGreaterThan(Date value) {
+            addCriterion("update >", value, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateGreaterThanOrEqualTo(Date value) {
+            addCriterion("update >=", value, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateLessThan(Date value) {
+            addCriterion("update <", value, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateLessThanOrEqualTo(Date value) {
+            addCriterion("update <=", value, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateIn(List<Date> values) {
+            addCriterion("update in", values, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateNotIn(List<Date> values) {
+            addCriterion("update not in", values, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateBetween(Date value1, Date value2) {
+            addCriterion("update between", value1, value2, "update");
+            return (Criteria) this;
+        }
+
+        public Criteria andUpdateNotBetween(Date value1, Date value2) {
+            addCriterion("update not between", value1, value2, "update");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
@@ -1517,7 +1527,7 @@ East of Doing Business Rank£¨2017£©
      * 
      * @author wcyong
      * 
-     * @date 2018-02-09
+     * @date 2018-03-02
      */
     public static class Criterion {
         private String condition;

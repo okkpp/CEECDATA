@@ -1,8 +1,8 @@
 package okkpp.dao.investment;
 
+import java.util.List;
 import okkpp.model.investment.RegisteredOfBusiness;
 import okkpp.model.investment.RegisteredOfBusinessExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RegisteredOfBusinessMapper {

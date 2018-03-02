@@ -5,10 +5,10 @@
     <resultMap id="BaseResultMap" type="okkpp.model.price.Consumer" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="country" property="country" jdbcType="VARCHAR" />
-        <result column="year" property="year" jdbcType="INTEGER" />
+        <result column="year" property="year" jdbcType="VARCHAR" />
         <result column="indices" property="indices" jdbcType="DOUBLE" />
-        <result column="update" property="update" jdbcType="TIMESTAMP" />
         <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="update" property="update" jdbcType="TIMESTAMP" />
     </resultMap>
 
     <sql id="Example_Where_Clause" >
@@ -72,10 +72,10 @@
     </sql>
 
     <sql id="Base_Column_List" >
-        id, country, year, indices, update, sort
+        id, country, year, indices, sort, update
     </sql>
 
-    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.moqianyi.bean.ConsumerExample" >
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="okkpp.model.price.ConsumerExample" >
         select
         <if test="distinct" >
             distinct
@@ -102,23 +102,23 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
 
-    <delete id="deleteByExample" parameterType="com.moqianyi.bean.ConsumerExample" >
+    <delete id="deleteByExample" parameterType="okkpp.model.price.ConsumerExample" >
         delete from t_price_consumer
         <if test="_parameter != null" >
             <include refid="Example_Where_Clause" />
         </if>
     </delete>
 
-    <insert id="insert" parameterType="com.moqianyi.bean.Consumer" >
+    <insert id="insert" parameterType="okkpp.model.price.Consumer" >
         insert into t_price_consumer (id, country, year, 
-            indices, update, sort
+            indices, sort, update
             )
-        values (#{id,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{year,jdbcType=INTEGER}, 
-            #{indices,jdbcType=DOUBLE}, #{update,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER}
+        values (#{id,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+            #{indices,jdbcType=DOUBLE}, #{sort,jdbcType=INTEGER}, #{update,jdbcType=TIMESTAMP}
             )
     </insert>
 
-    <insert id="insertSelective" parameterType="com.moqianyi.bean.Consumer" >
+    <insert id="insertSelective" parameterType="okkpp.model.price.Consumer" >
         insert into t_price_consumer
         <trim prefix="(" suffix=")" suffixOverrides="," >
             <if test="id != null" >
@@ -133,11 +133,11 @@
             <if test="indices != null" >
                 indices,
             </if>
-            <if test="update != null" >
-                update,
-            </if>
             <if test="sort != null" >
                 sort,
+            </if>
+            <if test="update != null" >
+                update,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -148,26 +148,19 @@
                 #{country,jdbcType=VARCHAR},
             </if>
             <if test="year != null" >
-                #{year,jdbcType=INTEGER},
+                #{year,jdbcType=VARCHAR},
             </if>
             <if test="indices != null" >
                 #{indices,jdbcType=DOUBLE},
             </if>
-            <if test="update != null" >
-                #{update,jdbcType=TIMESTAMP},
-            </if>
             <if test="sort != null" >
                 #{sort,jdbcType=INTEGER},
             </if>
+            <if test="update != null" >
+                #{update,jdbcType=TIMESTAMP},
+            </if>
         </trim>
     </insert>
-
-    <select id="countByExample" parameterType="com.moqianyi.bean.ConsumerExample" resultType="java.lang.Integer" >
-        select count(*) from t_price_consumer
-        <if test="_parameter != null" >
-            <include refid="Example_Where_Clause" />
-        </if>
-    </select>
 
     <update id="updateByExampleSelective" parameterType="map" >
         update t_price_consumer
@@ -179,16 +172,16 @@
                 country = #{record.country,jdbcType=VARCHAR},
             </if>
             <if test="record.year != null" >
-                year = #{record.year,jdbcType=INTEGER},
+                year = #{record.year,jdbcType=VARCHAR},
             </if>
             <if test="record.indices != null" >
                 indices = #{record.indices,jdbcType=DOUBLE},
             </if>
-            <if test="record.update != null" >
-                update = #{record.update,jdbcType=TIMESTAMP},
-            </if>
             <if test="record.sort != null" >
                 sort = #{record.sort,jdbcType=INTEGER},
+            </if>
+            <if test="record.update != null" >
+                update = #{record.update,jdbcType=TIMESTAMP},
             </if>
         </set>
         <if test="_parameter != null" >
@@ -200,44 +193,44 @@
         update t_price_consumer
         set id = #{record.id,jdbcType=INTEGER},
             country = #{record.country,jdbcType=VARCHAR},
-            year = #{record.year,jdbcType=INTEGER},
+            year = #{record.year,jdbcType=VARCHAR},
             indices = #{record.indices,jdbcType=DOUBLE},
-            update = #{record.update,jdbcType=TIMESTAMP},
-            sort = #{record.sort,jdbcType=INTEGER}
+            sort = #{record.sort,jdbcType=INTEGER},
+            update = #{record.update,jdbcType=TIMESTAMP}
         <if test="_parameter != null" >
             <include refid="Update_By_Example_Where_Clause" />
         </if>
     </update>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.moqianyi.bean.Consumer" >
+    <update id="updateByPrimaryKeySelective" parameterType="okkpp.model.price.Consumer" >
         update t_price_consumer
         <set >
             <if test="country != null" >
                 country = #{country,jdbcType=VARCHAR},
             </if>
             <if test="year != null" >
-                year = #{year,jdbcType=INTEGER},
+                year = #{year,jdbcType=VARCHAR},
             </if>
             <if test="indices != null" >
                 indices = #{indices,jdbcType=DOUBLE},
             </if>
-            <if test="update != null" >
-                update = #{update,jdbcType=TIMESTAMP},
-            </if>
             <if test="sort != null" >
                 sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="update != null" >
+                update = #{update,jdbcType=TIMESTAMP},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
 
-    <update id="updateByPrimaryKey" parameterType="com.moqianyi.bean.Consumer" >
+    <update id="updateByPrimaryKey" parameterType="okkpp.model.price.Consumer" >
         update t_price_consumer
         set country = #{country,jdbcType=VARCHAR},
-            year = #{year,jdbcType=INTEGER},
+            year = #{year,jdbcType=VARCHAR},
             indices = #{indices,jdbcType=DOUBLE},
-            update = #{update,jdbcType=TIMESTAMP},
-            sort = #{sort,jdbcType=INTEGER}
+            sort = #{sort,jdbcType=INTEGER},
+            update = #{update,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

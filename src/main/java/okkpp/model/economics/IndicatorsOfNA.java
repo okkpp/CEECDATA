@@ -8,7 +8,7 @@ import java.util.Date;
  * 
  * @author wcyong
  * 
- * @date 2018-02-03
+ * @date 2018-03-02
  */
 public class IndicatorsOfNA {
     private Integer id;
@@ -21,7 +21,7 @@ public class IndicatorsOfNA {
     /**
      * 年份
      */
-    private Integer year;
+    private String year;
 
     /**
      * 国内生产总值（现价亿国际元）
@@ -44,14 +44,14 @@ public class IndicatorsOfNA {
     private Integer gnipc;
 
     /**
-     * 更新日期
-     */
-    private Date update;
-
-    /**
      * 排序
      */
     private Integer sort;
+
+    /**
+     * 更新日期
+     */
+    private Date update;
 
     public Integer getId() {
         return id;
@@ -69,12 +69,12 @@ public class IndicatorsOfNA {
         this.country = country == null ? null : country.trim();
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setYear(String year) {
+        this.year = year == null ? null : year.trim();
     }
 
     public Integer getGdp() {
@@ -109,19 +109,19 @@ public class IndicatorsOfNA {
         this.gnipc = gnipc;
     }
 
-    public Date getUpdate() {
-        return update;
-    }
-
-    public void setUpdate(Date update) {
-        this.update = update;
-    }
-
     public Integer getSort() {
         return sort;
     }
 
     public void setSort(Integer sort) {
         this.sort = sort;
+    }
+
+    public Date getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Date update) {
+        this.update = update;
     }
 }
