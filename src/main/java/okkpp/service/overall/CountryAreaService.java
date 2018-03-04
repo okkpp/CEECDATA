@@ -22,7 +22,9 @@ public class CountryAreaService {
 
 	@Autowired
 	CountryAreaMapper mapper;
-	
+	public List<CountryArea> selectAll(){
+		return mapper.selectAll();
+	}
 	public List<CountryArea> selectByExample(String country){
 		Example example = new Example(CountryArea.class);
 		Criteria criteria = example.createCriteria();

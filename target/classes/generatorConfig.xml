@@ -24,8 +24,8 @@
 			targetProject="src/main/java" />
 		<javaClientGenerator targetPackage="okkpp.dao"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table schema="${jdbc.username}" tableName="tab_href"
-			domainObjectName="TabHref" enableCountByExample="false"
+		<table schema="${jdbc.username}" tableName="s_content"
+			domainObjectName="Content" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" />
 	</context>

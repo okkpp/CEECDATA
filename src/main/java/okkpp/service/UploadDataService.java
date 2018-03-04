@@ -1,26 +1,7 @@
 package okkpp.service;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.Map;
-
-import okkpp.dao.GTMJMapper;
-import okkpp.dao.HGJJMapper;
-import okkpp.dao.IMANDEXMapper;
-import okkpp.dao.JJZYDZSMapper;
-import okkpp.dao.MYQKMapper;
-import okkpp.dao.SHHJMapper;
-import okkpp.dao.WLJXZSMapper;
-import okkpp.dao.YSHJMapper;
-import okkpp.utils.ExcelUtil;
-
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author DUCK  E-mail: okkpp@qq.com
@@ -30,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @Transactional
 public class UploadDataService {
-
+/*
 	@Autowired
 	private GTMJMapper GTMJMapper;
 	@Autowired
@@ -94,5 +75,5 @@ public class UploadDataService {
 		return "上传成功！更新了"+size+"条数据。";
 	}
 	
-
+*/
 }

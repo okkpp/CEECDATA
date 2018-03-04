@@ -30,7 +30,7 @@ public class UploadDataController {
 	public String importFile(@RequestParam(value="uploadFile")MultipartFile file,Model model){
 		
 		
-		model.addAttribute("msg", service.importFile(file));
+		//model.addAttribute("msg", service.importFile(file));
 		return "/upload/page";
 	}
 }

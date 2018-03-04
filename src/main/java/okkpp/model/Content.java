@@ -3,40 +3,25 @@ package okkpp.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-@Table(name = "t_content")
+@Table(name = "s_content")
 public class Content implements Serializable {
     @Id
     private Integer id;
 
     /**
-     * 国家
+     * 上级目录
      */
-    @Column(name = "GJ")
-    private String gj;
+    private String parent;
 
     /**
-     * 国家代码
+     * 目录名
      */
-    @Column(name = "GJDM")
-    private String gjdm;
-
-    /**
-     * 标题
-     */
-    @Column(name = "BT")
-    private String bt;
-
-    /**
-     * 类别
-     */
-    @Column(name = "LB")
-    private String lb;
+    private String content;
 
     /**
      * 链接
      */
-    @Column(name = "LJ")
-    private String lj;
+    private String href;
 
     private static final long serialVersionUID = 1L;
 
@@ -55,92 +40,56 @@ public class Content implements Serializable {
     }
 
     /**
-     * 获取国家
+     * 获取上级目录
      *
-     * @return GJ - 国家
+     * @return parent - 上级目录
      */
-    public String getGJ() {
-        return gj;
+    public String getParent() {
+        return parent;
     }
 
     /**
-     * 设置国家
+     * 设置上级目录
      *
-     * @param gj 国家
+     * @param parent 上级目录
      */
-    public void setGJ(String gj) {
-        this.gj = gj;
+    public void setParent(String parent) {
+        this.parent = parent;
     }
 
     /**
-     * 获取国家代码
+     * 获取目录名
      *
-     * @return GJDM - 国家代码
+     * @return content - 目录名
      */
-    public String getGJDM() {
-        return gjdm;
+    public String getContent() {
+        return content;
     }
 
     /**
-     * 设置国家代码
+     * 设置目录名
      *
-     * @param gjdm 国家代码
+     * @param content 目录名
      */
-    public void setGJDM(String gjdm) {
-        this.gjdm = gjdm;
-    }
-
-    /**
-     * 获取标题
-     *
-     * @return BT - 标题
-     */
-    public String getBT() {
-        return bt;
-    }
-
-    /**
-     * 设置标题
-     *
-     * @param bt 标题
-     */
-    public void setBT(String bt) {
-        this.bt = bt;
-    }
-
-    /**
-     * 获取类别
-     *
-     * @return LB - 类别
-     */
-    public String getLB() {
-        return lb;
-    }
-
-    /**
-     * 设置类别
-     *
-     * @param lb 类别
-     */
-    public void setLB(String lb) {
-        this.lb = lb;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     /**
      * 获取链接
      *
-     * @return LJ - 链接
+     * @return href - 链接
      */
-    public String getLJ() {
-        return lj;
+    public String getHref() {
+        return href;
     }
 
     /**
      * 设置链接
      *
-     * @param lj 链接
+     * @param href 链接
      */
-    public void setLJ(String lj) {
-        this.lj = lj;
+    public void setHref(String href) {
+        this.href = href;
     }
 }

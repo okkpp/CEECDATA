@@ -6,17 +6,15 @@
       WARNING - @mbggenerated
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="GJ" jdbcType="VARCHAR" property="gj" />
-    <result column="GJDM" jdbcType="VARCHAR" property="gjdm" />
-    <result column="BT" jdbcType="VARCHAR" property="bt" />
-    <result column="LB" jdbcType="VARCHAR" property="lb" />
-    <result column="LJ" jdbcType="VARCHAR" property="lj" />
+    <result column="parent" jdbcType="VARCHAR" property="parent" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="href" jdbcType="VARCHAR" property="href" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbggenerated
     -->
-    id, GJ, GJDM, BT, LB, LJ
+    id, parent, content, href
   </sql>
   
   <select id="getAllContent" resultMap="BaseResultMap">
