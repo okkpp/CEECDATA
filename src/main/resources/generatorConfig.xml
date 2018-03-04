@@ -18,22 +18,14 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.model.overall"
+		<javaModelGenerator targetPackage="okkpp.model.employment"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.dao.overall"
+		<sqlMapGenerator targetPackage="okkpp.dao.employment"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.dao.overall"
+		<javaClientGenerator targetPackage="okkpp.dao.employment"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table schema="${jdbc.username}" tableName="t_overall_country_area"
-			domainObjectName="CountryArea" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" />
-		<table schema="${jdbc.username}" tableName="t_overall_freshwater"
-			domainObjectName="FreshWater" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" />
-		<table schema="${jdbc.username}" tableName="t_overall_land_utilization"
-			domainObjectName="LandUtilization" enableCountByExample="false"
+		<table schema="${jdbc.username}" tableName="t_employment_labor_force_participation_rate"
+			domainObjectName="LaborForceParticipationRate" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" />
 	</context>

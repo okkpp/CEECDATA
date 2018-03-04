@@ -4,6 +4,7 @@ import java.util.List;
 
 import okkpp.model.overall.CountryArea;
 import okkpp.service.overall.CountryAreaService;
+import okkpp.service.overall.FreshWaterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,5 +28,12 @@ public class OverallController {
 		System.out.println(list.size());
 		model.addAttribute("data", list);
 		return "404";
+	}
+	@Autowired
+	FreshWaterService freshwaterservice;
+	@RequestMapping("/FreshWater")
+	public String FreshWater(Model model){
+		model.addAttribute("data", freshwaterservice.selectAll());
+		return "overall/FreshWater";
 	}
 }

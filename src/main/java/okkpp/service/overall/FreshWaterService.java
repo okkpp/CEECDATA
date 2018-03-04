@@ -23,4 +23,7 @@ public class FreshWaterService {
 	public List<FreshWater> selectByExample(String country){
 		return null;
 	}
+	public List<FreshWater> selectAll(){
+		return mapper.selectAll();
+	}
 }

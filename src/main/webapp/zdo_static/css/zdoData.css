@@ -1,0 +1,143 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+html{
+  font-size: 100%;
+}
+body{
+    font-size: 1em;
+    overflow-x: hidden;
+}
+img{
+    width: 100%;
+}
+h3{
+    font-weight: normal;
+}
+input{
+    font-family: 'Microsoft Yahei',"Lucida Grande", "Tahoma","Arial", "Helvetica", "sans-serif";
+    font-size: 14px;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+/*表格规范，文字居中，数字右对齐*/
+.fontCen{
+    text-align: center;
+}
+.numRight{
+    text-align: right;
+}
+.numCenter{
+  text-align: center;
+}
+
+/* 默认开始页 */
+#wel{
+  display: block;
+  text-align: center;
+  font-size: 3em;
+  font-weight: bold;
+  color: rgb(24, 147, 200);
+  margin-top: 4em;
+}
+
+/* 普通图表A */
+/*图表部分*/
+#zdodata{
+    width: 100%;
+    height: 34em;
+    min-height: 34em;
+    height: !important;
+    overflow: hidden;
+    position: relative;
+}
+/*切换部分*/
+.zdoTab{
+    height: 40px;
+    background-color: #E4E9F1;
+    position: relative;
+    z-index: 998;
+}
+.zdoTab > input,.zdoTab > a{
+    width: 36px;
+    display: inline-block;
+    height: 32px;
+    position: absolute;
+}
+.zdoTab > input{
+    opacity: 0;
+    z-index: 1000;
+}
+.zdoTab a{
+    display: inline-block;
+    height: 32px;
+    margin-top: 4px;
+    z-index: 999;
+}
+#radio-form, #radio-form + a{
+    left: 20px;
+    cursor: pointer;
+}
+#radio-form + a{
+    background: url(../img/form1.png) no-repeat center center;
+    background-size: auto;
+}
+#radio-form:checked + a{
+    background: url(../img/form2.png) no-repeat center center;
+}
+#radio-form:hover + a{
+    background: url(../img/form2.png) no-repeat center center;
+}
+#radio-anal, #radio-anal + a{
+    left: 66px;
+    cursor: pointer;
+}
+#radio-anal + a{
+    background: url(../img/analysis1.png) center center;
+    background-size: auto;
+}
+#radio-anal:checked + a{
+    background: url(../img/analysis2.png) no-repeat center center;
+}
+#radio-anal:hover + a{
+    background: url(../img/analysis2.png) no-repeat center center;
+}
+
+
+
+/*图表部分*/
+#zdoForm, #zdoAnalysis{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 10;
+}
+#zdoTable{
+    width: 50%;
+    min-width: 20em;
+    margin: 0 auto;
+    margin-top: 4em;
+    text-align: center;
+}
+
+/*数据图部分*/
+#analysis{
+    margin: 0 auto;
+    margin-top: 60px;
+    width: 400px;
+    height: 400px;
+}
+
+/*点击切换*/
+#radio-form:checked ~ #zdoForm,
+#radio-anal:checked ~ #zdoAnalysis{
+    opacity: 1;
+}

@@ -7,6 +7,7 @@
     -->
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
     <result column="total_labor_force" jdbcType="INTEGER" property="totalLaborForce" />
     <result column="participation_rate" jdbcType="DOUBLE" property="participationRate" />
     <result column="female_participation_rate" jdbcType="DOUBLE" property="femaleParticipationRate" />
@@ -17,7 +18,7 @@
     <!--
       WARNING - @mbggenerated
     -->
-    id, country, total_labor_force, participation_rate, female_participation_rate, sort, 
-    updated
+    id, country, year, total_labor_force, participation_rate, female_participation_rate, 
+    sort, updated
   </sql>
 </mapper>

@@ -15,6 +15,11 @@ public class LaborForceParticipationRate implements Serializable {
     private String country;
 
     /**
+     * 年份
+     */
+    private String year;
+
+    /**
      * 劳动力人口
      */
     @Column(name = "total_labor_force")
@@ -74,6 +79,24 @@ public class LaborForceParticipationRate implements Serializable {
      */
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    /**
+     * 获取年份
+     *
+     * @return year - 年份
+     */
+    public String getYear() {
+        return year;
+    }
+
+    /**
+     * 设置年份
+     *
+     * @param year 年份
+     */
+    public void setYear(String year) {
+        this.year = year;
     }
 
     /**
