@@ -4,7 +4,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>${GJ}12-16年的进出口量</title>
-    <script src="../js/echarts.js"></script>
+    <script src="../static-1/js/echarts.js"></script>
 </head>
 <body>
 <!-- 为ECharts准备一个具备大小（宽高）的Dom -->

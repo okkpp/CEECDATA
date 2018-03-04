@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<title>${GJ}_宁波中东欧国家合作研究院</title>
 		
-		<link rel="stylesheet" href="css/contentmain.css" />
+		<link rel="stylesheet" href="static-1/css/contentmain.css" />
 
 	</head>
 	<body>
@@ -169,7 +169,7 @@
 </div>
 
 		</div>
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/contentmain.js"></script>
+<script src="static-1/js/jquery-3.2.1.min.js"></script>
+<script src="static-1/js/contentmain.js"></script>
 	</body>
 </html>

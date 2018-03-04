@@ -24,7 +24,8 @@ public class OverallController {
 	@RequestMapping("/CountryArea")
 	public String CountryArea(Model model,String country){
 		List<CountryArea> list = countryareaservice.selectByExample(country);
+		System.out.println(list.size());
 		model.addAttribute("data", list);
-		return "";
+		return "404";
 	}
 }

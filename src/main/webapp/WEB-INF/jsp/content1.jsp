@@ -7,7 +7,7 @@
 		<meta charset="UTF-8">
 		<title>${GJ}_宁波中东欧国家合作研究院</title>
 		
-		<link rel="stylesheet" href="css/main.css" />
+		<link rel="stylesheet" href="static-1/css/main.css" />
 
 	</head>
 	<body>
@@ -25,7 +25,7 @@
 <a href="导入模板/社会环境-导入模板.xlsx">社会环境-导入模板.xlsx</a>||
 <a href="导入模板/物流绩效指数-导入模板.xlsx">物流绩效指数-导入模板.xlsx</a>||
 <a href="导入模板/营商环境-导入模板.xlsx">营商环境-导入模板.xlsx</a><br>
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="js/main.js"></script>
+<script src="static-1/js/jquery-3.2.1.min.js"></script>
+<script src="static-1/js/main.js"></script>
 	</body>
 </html>

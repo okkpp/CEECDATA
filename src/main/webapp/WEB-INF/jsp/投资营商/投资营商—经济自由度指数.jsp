@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<head>
 		<meta charset="utf-8" />
-		<script src="../js/echarts.js"></script>
+		<script src="../static-1/js/echarts.js"></script>
 		<title>${GJ}经济自由度指数</title>
 	<body>
 		<div id="main" style="width:100%;height:800px;display:inline-block;"></div>

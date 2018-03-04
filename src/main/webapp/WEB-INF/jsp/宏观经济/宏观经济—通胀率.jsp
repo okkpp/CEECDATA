@@ -5,7 +5,7 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>${GJ}通胀率</title>
-    <script src="../js/echarts.js"></script>
+    <script src="../static-1/js/echarts.js"></script>
 </head>
 
 <body>

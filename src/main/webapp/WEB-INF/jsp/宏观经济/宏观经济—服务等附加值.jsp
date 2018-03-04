@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <title>服务等附加值</title>
-    <script src="../js/echarts.js" type="text/javascript"></script>
-    <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="../static-1/js/echarts.js" type="text/javascript"></script>
+    <script src="../static-1/js/jquery-3.2.1.min.js" type="text/javascript"></script>
     <script>
 
     var GJ = '${GJ}';
