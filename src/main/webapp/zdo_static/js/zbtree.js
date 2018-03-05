@@ -11,16 +11,16 @@
   $(this).next("ul").slideDown("slow");//slideDown方法，通过使用滑动效果，显示隐藏的被选元素
   if($(this).parent("li").siblings("li").children("ul").is(":visible")){ //siblings()是遍历方法，除被选元素的其他ul元素隐藏
   $(this).parent("li").siblings("li").find("ul").slideUp("1000");//slideUp()方法，隐藏被选元素，若该元素是显示状态时
-  $(this).parent("li").siblings("li:has(ul)").children("a").css({background:"url(img/arrow2.png) no-repeat left center",backgroundSize:"auto"})
-   .end().find("li:has(ul)").children("a").css({background:"url(img/arrow2.png) no-repeat left center",backgroundSize:"auto"});}
-   $(this).css({background:"url(img/arrow2.png) no-repeat left center",backgroundSize:"auto"});
+  $(this).parent("li").siblings("li:has(ul)").children("a").css({background:"url(zdo_static/img/arrow2.png) no-repeat left center",backgroundSize:"auto"})
+   .end().find("li:has(ul)").children("a").css({background:"url(zdo_static/img/arrow2.png) no-repeat left center",backgroundSize:"auto"});}
+   $(this).css({background:"url(zdo_static/img/arrow2.png) no-repeat left center",backgroundSize:"auto"});
   return false;
  }else{
   $(this).next("ul").slideUp("normal");
   //不用toggle()的原因是为了在收缩菜单的时候同时也将该菜单的下级菜单以后的所有元素都隐藏
-  $(this).css({background:"url(img/arrow1.png) no-repeat left center",backgroundSize:"auto"});
+  $(this).css({background:"url(zdo_static/img/arrow1.png) no-repeat left center",backgroundSize:"auto"});
   $(this).next("ul").children("li").find("ul").fadeOut("normal");
-  $(this).next("ul").find("li:has(ul)").children("a").css({background:"url(img/arrow1.png) no-repeat left center",backgroundSize:"auto"});
+  $(this).next("ul").find("li:has(ul)").children("a").css({background:"url(zdo_static/img/arrow1.png) no-repeat left center",backgroundSize:"auto"});
   return false;
   }
   });

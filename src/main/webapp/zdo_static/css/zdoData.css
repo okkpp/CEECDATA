@@ -32,7 +32,7 @@ input{
 .numRight{
     text-align: right;
 }
-.numCenter{
+.numCen{
   text-align: center;
 }
 
@@ -53,7 +53,6 @@ input{
     height: 34em;
     min-height: 34em;
     height: !important;
-    overflow: hidden;
     position: relative;
 }
 /*切换部分*/
@@ -118,17 +117,38 @@ input{
     top: 0;
     left: 0;
     opacity: 0;
+}
+#zdoForm{
     z-index: 10;
 }
-#zdoTable{
+#zdoForm form{
     width: 50%;
     min-width: 20em;
     margin: 0 auto;
     margin-top: 4em;
+}
+#zdoTable{
+    width: 100%;
     text-align: center;
+    position: relative;
+}
+
+#selectBtn{
+    margin-top: 4em;
+}
+#selectBtn input{
+    margin-left: 2em;
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.2em;
+    vertical-align: text-bottom;
+    margin-top: 2em;
 }
 
 /*数据图部分*/
+#zdoAnalysis {
+    z-index: 5;
+}
 #analysis{
     margin: 0 auto;
     margin-top: 60px;
