@@ -1,4 +1,4 @@
-package okkpp.controller.overall;
+package okkpp.controller;
 
 import java.util.List;
 

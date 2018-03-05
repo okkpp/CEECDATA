@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.poverty.InternationalPovertyRatioMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.poverty.InternationalPovertyRatio" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="radio1_9" property="radio19" jdbcType="DOUBLE" />
+    <result column="radio3_1" property="radio31" jdbcType="DOUBLE" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, year, radio1_9, radio3_1, sort, updated
+  </sql>
+</mapper>

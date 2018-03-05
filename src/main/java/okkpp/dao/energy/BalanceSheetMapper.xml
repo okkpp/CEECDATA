@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.energy.BalanceSheetMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.energy.BalanceSheet" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="coal" property="coal" jdbcType="INTEGER" />
+    <result column="natural_gas" property="naturalGas" jdbcType="INTEGER" />
+    <result column="imports" property="imports" jdbcType="INTEGER" />
+    <result column="imports_coal" property="importsCoal" jdbcType="INTEGER" />
+    <result column="imports_natural_gas" property="importsNaturalGas" jdbcType="INTEGER" />
+    <result column="total" property="total" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, year, coal, natural_gas, imports, imports_coal, imports_natural_gas, 
+    total, sort, updated
+  </sql>
+</mapper>

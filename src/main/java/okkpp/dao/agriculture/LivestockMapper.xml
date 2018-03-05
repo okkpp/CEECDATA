@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.agriculture.LivestockMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.agriculture.Livestock" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="cattle" property="cattle" jdbcType="INTEGER" />
+    <result column="horse" property="horse" jdbcType="INTEGER" />
+    <result column="goats" property="goats" jdbcType="INTEGER" />
+    <result column="sheep" property="sheep" jdbcType="INTEGER" />
+    <result column="pigs" property="pigs" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, cattle, horse, goats, sheep, pigs, sort, updated
+  </sql>
+</mapper>
