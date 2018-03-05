@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="okkpp.dao.price.ConsumerMapper">
+  <resultMap id="BaseResultMap" type="okkpp.model.price.Consumer">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="indices" jdbcType="DOUBLE" property="indices" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, year, indices, sort, updated
+  </sql>
+
+    <resultMap id="BaseResultMap" type="okkpp.model.price.Consumer">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="country" jdbcType="VARCHAR" property="country" />
+        <result column="year" jdbcType="VARCHAR" property="year" />
+        <result column="indices" jdbcType="DOUBLE" property="indices" />
+        <result column="sort" jdbcType="INTEGER" property="sort" />
+        <result column="update" jdbcType="TIMESTAMP" property="update" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List">
+        id, country, year, indices, sort, update
+    </sql>
+
+    <select id="selectByExample" parameterType="okkpp.model.price.ConsumerExample" resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_price_consumer
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List" />
+        from t_price_consumer
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from t_price_consumer
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="okkpp.model.price.ConsumerExample">
+        delete from t_price_consumer
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="okkpp.model.price.Consumer">
+        insert into t_price_consumer (id, country, year, 
+            indices, sort, update
+            )
+        values (#{id,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+            #{indices,jdbcType=DOUBLE}, #{sort,jdbcType=INTEGER}, #{update,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="okkpp.model.price.Consumer">
+        insert into t_price_consumer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="country != null">
+                country,
+            </if>
+            <if test="year != null">
+                year,
+            </if>
+            <if test="indices != null">
+                indices,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="update != null">
+                update,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="country != null">
+                #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="year != null">
+                #{year,jdbcType=VARCHAR},
+            </if>
+            <if test="indices != null">
+                #{indices,jdbcType=DOUBLE},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="update != null">
+                #{update,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByExampleSelective" parameterType="map">
+        update t_price_consumer
+        <set>
+            <if test="record.id != null">
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.country != null">
+                country = #{record.country,jdbcType=VARCHAR},
+            </if>
+            <if test="record.year != null">
+                year = #{record.year,jdbcType=VARCHAR},
+            </if>
+            <if test="record.indices != null">
+                indices = #{record.indices,jdbcType=DOUBLE},
+            </if>
+            <if test="record.sort != null">
+                sort = #{record.sort,jdbcType=INTEGER},
+            </if>
+            <if test="record.update != null">
+                update = #{record.update,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map">
+        update t_price_consumer
+        set id = #{record.id,jdbcType=INTEGER},
+            country = #{record.country,jdbcType=VARCHAR},
+            year = #{record.year,jdbcType=VARCHAR},
+            indices = #{record.indices,jdbcType=DOUBLE},
+            sort = #{record.sort,jdbcType=INTEGER},
+            update = #{record.update,jdbcType=TIMESTAMP}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="okkpp.model.price.Consumer">
+        update t_price_consumer
+        <set>
+            <if test="country != null">
+                country = #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="year != null">
+                year = #{year,jdbcType=VARCHAR},
+            </if>
+            <if test="indices != null">
+                indices = #{indices,jdbcType=DOUBLE},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="update != null">
+                update = #{update,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="okkpp.model.price.Consumer">
+        update t_price_consumer
+        set country = #{country,jdbcType=VARCHAR},
+            year = #{year,jdbcType=VARCHAR},
+            indices = #{indices,jdbcType=DOUBLE},
+            sort = #{sort,jdbcType=INTEGER},
+            update = #{update,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
