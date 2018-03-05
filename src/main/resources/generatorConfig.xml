@@ -18,17 +18,49 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.model.traffic"
+		<javaModelGenerator targetPackage="okkpp.model.culture"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.dao.traffic"
+		<sqlMapGenerator targetPackage="okkpp.dao.culture"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.dao.traffic"
+		<javaClientGenerator targetPackage="okkpp.dao.culture"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table tableName="t_traffic_phone" domainObjectName="Phone"
+		<table tableName="t_culture_adult_literacy_rate" domainObjectName="AdultLiteracyRate"
 			enableCountByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" enableUpdateByExample="false" 
 			schema="${jdbc.username}"/>
-		<table tableName="t_traffic_rail_lines" domainObjectName="RailLines"
+		<table tableName="t_culture_expenditure_student_gdp_rate" domainObjectName="ExpenditureStudentGDPRate"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="t_culture_health_total_rate" domainObjectName="HealthTotalRate"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="t_culture_hightechnology_rate" domainObjectName="HightechnologyRate"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="t_culture_hospital" domainObjectName="Hospital"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="t_culture_patent_applications" domainObjectName="PatentApplications"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="t_culture_researchers_and_technicians" domainObjectName="ResearchersAndTechnicians"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="t_culture_reserch_spending_rate" domainObjectName="ReserchSpendingRate"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="t_culture_school_enrollment_ratio" domainObjectName="SchoolEnrollmentRatio"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="t_culture_water_people_rate" domainObjectName="WaterPeopleRate"
 			enableCountByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" enableUpdateByExample="false" 
 			schema="${jdbc.username}"/>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.culture.ExpenditureStudentGDPRateMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.culture.ExpenditureStudentGDPRate" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="tertiary_school_student" property="tertiarySchoolStudent" jdbcType="DOUBLE" />
+    <result column="secondary_school_student" property="secondarySchoolStudent" jdbcType="DOUBLE" />
+    <result column="primary_school_student" property="primarySchoolStudent" jdbcType="DOUBLE" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, year, tertiary_school_student, secondary_school_student, primary_school_student, 
+    sort, updated
+  </sql>
+</mapper>
