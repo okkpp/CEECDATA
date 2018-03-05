@@ -1,28 +1,7 @@
 package okkpp.dao.price;
 
-import java.util.List;
 import okkpp.model.price.Producer;
-import okkpp.model.price.ProducerExample;
-import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface ProducerMapper {
-    int deleteByExample(ProducerExample example);
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(Producer record);
-
-    int insertSelective(Producer record);
-
-    List<Producer> selectByExample(ProducerExample example);
-
-    Producer selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") Producer record, @Param("example") ProducerExample example);
-
-    int updateByExample(@Param("record") Producer record, @Param("example") ProducerExample example);
-
-    int updateByPrimaryKeySelective(Producer record);
-
-    int updateByPrimaryKey(Producer record);
+public interface ProducerMapper extends Mapper<Producer> {
 }

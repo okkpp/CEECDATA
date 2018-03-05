@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.payment.ExternalMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.payment.External" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="total_debt" property="totalDebt" jdbcType="DOUBLE" />
+    <result column="long_debt" property="longDebt" jdbcType="DOUBLE" />
+    <result column="private_debt" property="privateDebt" jdbcType="DOUBLE" />
+    <result column="public_debt" property="publicDebt" jdbcType="DOUBLE" />
+    <result column="imf_credit" property="imfCredit" jdbcType="DOUBLE" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, year, total_debt, long_debt, private_debt, public_debt, imf_credit, 
+    sort, updated
+  </sql>
+</mapper>

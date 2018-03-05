@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD 
+
+ MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd 
+
+" >
 <generatorConfiguration>
 	<properties resource="application.properties" />
 	<context id="mysql">
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
 		<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
 			<property name="mappers" value="tk.mybatis.mapper.common.Mapper" />
-			<!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
-			<property name="caseSensitive" value="true" />
+			<!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为false -->
+			<property name="caseSensitive" value="false" />
 		</plugin>
 
 		<jdbcConnection driverClass="${jdbc.driver}"
@@ -18,15 +22,21 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.model"
+		<javaModelGenerator targetPackage="okkpp.model.price"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.dao"
+		<sqlMapGenerator targetPackage="okkpp.dao.price"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.dao"
+		<javaClientGenerator targetPackage="okkpp.dao.price"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table schema="${jdbc.username}" tableName="s_content"
-			domainObjectName="Content" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" />
+		<table tableName="t_price_consumer" domainObjectName="Consumer"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>			
+		
+		<table tableName="t_price_producer" domainObjectName="Producer"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>	
+
 	</context>
 </generatorConfiguration>

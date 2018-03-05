@@ -1,28 +1,7 @@
 package okkpp.dao.economics;
 
-import java.util.List;
 import okkpp.model.economics.GDP;
-import okkpp.model.economics.GDPExample;
-import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface GDPMapper {
-    int deleteByExample(GDPExample example);
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(GDP record);
-
-    int insertSelective(GDP record);
-
-    List<GDP> selectByExample(GDPExample example);
-
-    GDP selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") GDP record, @Param("example") GDPExample example);
-
-    int updateByExample(@Param("record") GDP record, @Param("example") GDPExample example);
-
-    int updateByPrimaryKeySelective(GDP record);
-
-    int updateByPrimaryKey(GDP record);
+public interface GDPMapper extends Mapper<GDP> {
 }
