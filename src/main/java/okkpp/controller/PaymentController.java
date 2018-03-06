@@ -7,16 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import okkpp.service.payment.ExchangeService;
-import okkpp.service.payment.ExternalService;
-import okkpp.service.payment.ForeignService;
-import okkpp.service.payment.PaymentService;
-import okkpp.service.payment.ReservesService;
-import okkpp.model.payment.Exchange;
-import okkpp.model.payment.External;
-import okkpp.model.payment.Foreign;
-import okkpp.model.payment.Payment;
-import okkpp.model.payment.Reserves;
+import okkpp.service.payment.*;
+import okkpp.model.payment.*;
 
 @Controller
 @RequestMapping("/payment")

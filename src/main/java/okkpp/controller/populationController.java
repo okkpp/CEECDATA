@@ -6,15 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import okkpp.service.population.BirthAndDeathRateService;
-import okkpp.service.population.CompositionDependencyRatioService;
-import okkpp.service.population.DensityService;
-import okkpp.service.population.FemalePercentService;
-import okkpp.service.population.InfantMortalityRateService;
-import okkpp.service.population.LifeExpectancyAtBirthService;
-import okkpp.service.population.MidYearPoplationService;
-import okkpp.service.population.ReproductiveHealthService;
-import okkpp.service.population.RuralAndUrbanRateService;
+import okkpp.service.population.*;
 import okkpp.model.population.*;
 
 @Controller

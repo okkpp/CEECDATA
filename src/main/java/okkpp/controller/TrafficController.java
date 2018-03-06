@@ -7,14 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import okkpp.service.traffic.AirFreightService;
-import okkpp.service.traffic.BroadbandService;
-import okkpp.service.traffic.ContainerService;
-import okkpp.service.traffic.FreightService;
-import okkpp.service.traffic.InternetServersService;
-import okkpp.service.traffic.InternetUsersService;
-import okkpp.service.traffic.PhoneService;
-import okkpp.service.traffic.RailLinesService;
+import okkpp.service.traffic.*;
 import okkpp.model.traffic.*;
 
 @Controller
