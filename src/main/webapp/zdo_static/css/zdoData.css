@@ -152,8 +152,8 @@ input{
 #analysis{
     margin: 0 auto;
     margin-top: 60px;
-    width: 400px;
-    height: 400px;
+    width: 60em;
+    height: 40em;
 }
 
 /*点击切换*/
