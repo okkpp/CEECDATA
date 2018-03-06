@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,9 +10,7 @@
   <link rel="stylesheet" href="../zdo_static/css/normalize.css">
   <link rel="stylesheet" href="../zdo_static/css/bootstrap.min.css">
   <link rel="stylesheet" href="../zdo_static/css/zdoData.css">
-  <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
-  <script src="../zdo_static/js/showORhidden.js"></script>
 </head>
 <body>
   <div id="zdodata">
@@ -27,27 +25,39 @@
       <section id="zdoForm">
           <form action="" method="">
             <table id="zdoTable" class="table table-striped table-bordered table-hover table-condensed">
-                <thead>
-                    <th>国家</th>
-                    <th id="rjkzs">人均可再生淡水资源</th>
-
-                </thead>
-                <tbody>
-					<c:forEach items="${data}" var="v">
-						<tr>
-            				<td>${v.country}</td>
-            				<td class="numCenter">${v.renewable}</td>
-        				</tr>
-					</c:forEach>
-                </tbody>
-            </table>
-            <div id="selectBtn">
-                <!-- 行的显示|隐藏 -->
-                <input type="checkbox" checked="checked" name="checkCol" title="aebny">阿尔巴尼亚
-                <br>
-                <!-- 列的显示|隐藏 -->
-                <input type="checkbox" checked="checked" name="checkRow" title="rjkzs">人均可再生资源
-            </div>
+    <thead>
+        <th>国家</th>
+        <th>人均可再生淡水资源</th>
+    </thead>
+    <tbody>
+    	<c:forEach items="${data}" var="v">
+			<tr>
+            	<td>${v.country}</td>
+            	<td class="numCenter">${v.renewable}</td>
+        	</tr>
+		</c:forEach> 
+        <tr>
+            <td>阿尔巴尼亚</td>
+            <td class="numCenter">999999</td>
+        </tr>
+        <tr>
+            <td>爱沙尼亚</td>
+            <td class="numCenter">888888</td>
+        </tr>
+        <tr>
+            <td>罗马尼亚</td>
+            <td class="numCenter">777777</td>
+        </tr>
+        <tr>
+            <td>哥伦比亚</td>
+            <td class="numCenter">666666</td>
+        </tr>
+        <tr>
+            <td>泰坦尼亚</td>
+            <td class="numCenter">555555</td>
+        </tr>
+    </tbody>
+</table>
           </form>
       </section>
   <!--            数据图-->
@@ -56,17 +66,16 @@
               <div id="analysis">
                   <script type="text/javascript">
                       var myChart = echarts.init(document.getElementById('analysis'));
-
                       var option = {
                               xAxis: {
                                   type: 'category',
-                                  data: [<c:forEach items="${data}" var="v">"${v.country}",</c:forEach>]
+                                  data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
                               },
                               yAxis: {
                                   type: 'value'
                               },
                               series: [{
-                                  data: [<c:forEach items="${data}" var="v">${v.renewable},</c:forEach>],
+                                  data: [120, 200, 150, 80, 70, 110, 130],
                                   type: 'bar'
                               }]
                           };
@@ -77,6 +86,5 @@
       </section>
       </div>
   </div>
-
 </body>
 </html>

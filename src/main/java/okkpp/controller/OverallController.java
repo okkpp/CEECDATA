@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.Gson;
+
 /**
  * @author DUCK  E-mail: okkpp@qq.com
  * @date 创建时间：2018年3月2日 上午10:43:58 
@@ -33,6 +35,7 @@ public class OverallController {
 	@RequestMapping("/FreshWater")
 	public String FreshWater(Model model){
 		model.addAttribute("data", freshwaterservice.selectAll());
+		model.addAttribute("jsdata", new Gson().toJson(freshwaterservice.selectAll()));
 		return "overall/FreshWater";
 	}
 }

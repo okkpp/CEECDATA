@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "t_finance_goods_and_services")
-public class GoodsAndServices implements Serializable {
+@Table(name = "t_finance_tax_as_percentage_of_evenue")
+public class TaxAsPercentageOfEvenue implements Serializable {
     @Id
     private Integer id;
 
