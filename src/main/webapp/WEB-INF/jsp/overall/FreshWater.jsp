@@ -60,7 +60,7 @@
                       var option = {
                               xAxis: {
                                   type: 'category',
-                                  data: [<c:forEach items="${data}" var="v">"${v.country}",</c:forEach>]
+                                  data: [<c:forEach items="${data}" var="v">'${v.country}',</c:forEach>]
                               },
                               yAxis: {
                                   type: 'value'
