@@ -1,4 +1,8 @@
 package okkpp.utils;
+
+import java.lang.reflect.Field;
+import java.util.List;
+
 /**
 * @author duck
 * @date 创建时间：2018年3月6日 下午2:48:52
@@ -26,5 +30,28 @@ public enum CountryCode {
 	private CountryCode(String cn,String en) {
 		this.cn=cn;
 		this.en=en;
+	}
+	public static <E> List<E> replaceCountry(List<E> list) {
+		try {
+			if(!list.isEmpty()) {
+				Class<?> c = list.get(0).getClass();
+				//获取country属性 并设置为可修改
+				Field field = c.getDeclaredField("country");
+				field.setAccessible(true);
+				//遍历数组 替换国别信息
+				for(E ele : list) {
+					field.set(ele, CountryCode.valueOf(field.get(ele).toString()).cn);
+				}
+			}
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return list;
 	}
 }
