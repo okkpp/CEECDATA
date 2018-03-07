@@ -61,14 +61,18 @@
                       option = {
                           title : {
                               text: '土地利用',
-                              subtext: '公顷'
+                              subtext: '',
+                              textStyle:{
+                                fontSize: 20
+                              }
                           },
                           tooltip : {
                               trigger: 'item'
                           },
                           legend: {
                               show:'true',
-                              data:['蒸发量','降水量','降雪量']
+                              data:['蒸发量','降水量','降雪量'],
+
                           },
 
                           calculable : true,
@@ -80,7 +84,8 @@
                           ],
                           yAxis : [
                               {
-                                  type : 'value'
+                                  type : 'value',
+                                  name: '公顷'
                               }
                           ],
                           series : [

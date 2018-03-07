@@ -157,7 +157,8 @@ input{
 #analysis{
     margin: 0 auto;
     margin-top: 6.5em;
-    width: 50em;
+    width: 50%;
+    min-width: 50em;
     height: 35em;
 }
 
@@ -165,4 +166,5 @@ input{
 #radio-form:checked ~ #zdoForm,
 #radio-anal:checked ~ #zdoAnalysis{
     opacity: 1;
+    z-index: 15;
 }
