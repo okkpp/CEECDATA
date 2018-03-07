@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.employment.WagesMapper;
 import okkpp.model.employment.Wages;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class WagesService {
 	@Autowired
 	WagesMapper mapper;
 	public List<Wages> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.culture.SchoolEnrollmentRatioMapper;
 import okkpp.model.culture.SchoolEnrollmentRatio;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class SchoolEnrollmentRatioService {
 	@Autowired
 	SchoolEnrollmentRatioMapper mapper;
 	public List<SchoolEnrollmentRatio> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

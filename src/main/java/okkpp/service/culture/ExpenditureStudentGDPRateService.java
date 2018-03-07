@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.culture.ExpenditureStudentGDPRateMapper;
 import okkpp.model.culture.ExpenditureStudentGDPRate;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class ExpenditureStudentGDPRateService {
 	@Autowired
 	ExpenditureStudentGDPRateMapper mapper;
 	public List<ExpenditureStudentGDPRate> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

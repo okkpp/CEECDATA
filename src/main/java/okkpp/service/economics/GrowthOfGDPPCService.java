@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.economics.GrowthOfGDPPCMapper;
 import okkpp.model.economics.GrowthOfGDPPC;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class GrowthOfGDPPCService {
 	@Autowired
 	GrowthOfGDPPCMapper mapper;
 	public List<GrowthOfGDPPC> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

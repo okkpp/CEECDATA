@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.culture.PatentApplicationsMapper;
 import okkpp.model.culture.PatentApplications;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class PatentApplicationsService {
 	@Autowired
 	PatentApplicationsMapper mapper;
 	public List<PatentApplications> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

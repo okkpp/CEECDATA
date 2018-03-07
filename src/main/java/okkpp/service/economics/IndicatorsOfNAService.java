@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.economics.IndicatorsOfNAMapper;
 import okkpp.model.economics.IndicatorsOfNA;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class IndicatorsOfNAService {
 	@Autowired
 	IndicatorsOfNAMapper mapper;
 	public List<IndicatorsOfNA> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

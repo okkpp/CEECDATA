@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.economics.ShareOfFormationMapper;
 import okkpp.model.economics.ShareOfFormation;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class ShareOfFormationService {
 	@Autowired
 	ShareOfFormationMapper mapper;
 	public List<ShareOfFormation> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

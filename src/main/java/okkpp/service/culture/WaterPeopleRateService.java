@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.culture.WaterPeopleRateMapper;
 import okkpp.model.culture.WaterPeopleRate;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class WaterPeopleRateService {
 	@Autowired
 	WaterPeopleRateMapper mapper;
 	public List<WaterPeopleRate> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.employment.CompositionEmploymentMapper;
 import okkpp.model.employment.CompositionEmployment;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class CompositionEmploymentService {
 	@Autowired
 	CompositionEmploymentMapper mapper;
 	public List<CompositionEmployment> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

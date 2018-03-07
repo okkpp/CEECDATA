@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.employment.EducationalUnemploymentMapper;
 import okkpp.model.employment.EducationalUnemployment;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class EducationalUnemploymentService {
 	@Autowired
 	EducationalUnemploymentMapper mapper;
 	public List<EducationalUnemployment> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

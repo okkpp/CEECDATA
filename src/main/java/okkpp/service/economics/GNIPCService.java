@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.economics.GNIPCMapper;
 import okkpp.model.economics.GNIPC;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class GNIPCService {
 	@Autowired
 	GNIPCMapper mapper;
 	public List<GNIPC> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.culture.ReserchSpendingRateMapper;
 import okkpp.model.culture.ReserchSpendingRate;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class ReserchSpendingRateService {
 	@Autowired
 	ReserchSpendingRateMapper mapper;
 	public List<ReserchSpendingRate> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

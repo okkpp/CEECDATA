@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.culture.ResearchersAndTechniciansMapper;
 import okkpp.model.culture.ResearchersAndTechnicians;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class ResearchersAndTechniciansService {
 	@Autowired
 	ResearchersAndTechniciansMapper mapper;
 	public List<ResearchersAndTechnicians> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.agriculture.ProductionOfFarmCropsMapper;
 import okkpp.model.agriculture.ProductionOfFarmCrops;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class ProductionOfFarmCropsService {
 	@Autowired
 	ProductionOfFarmCropsMapper mapper;
 	public List<ProductionOfFarmCrops> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

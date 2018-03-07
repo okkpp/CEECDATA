@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.agriculture.OutputOfForestProductsMapper;
 import okkpp.model.agriculture.OutputOfForestProducts;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class OutputOfForestProductsServiece {
 	@Autowired
 	OutputOfForestProductsMapper mapper;
 	public List<OutputOfForestProducts> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

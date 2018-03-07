@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.agriculture.LivestockMapper;
 import okkpp.model.agriculture.Livestock;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class LivestockService {
 	@Autowired
 	LivestockMapper mapper;
 	public List<Livestock> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

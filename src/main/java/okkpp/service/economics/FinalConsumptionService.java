@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.economics.FinalConsumptionMapper;
 import okkpp.model.economics.FinalConsumption;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class FinalConsumptionService {
 	@Autowired
 	FinalConsumptionMapper mapper;
 	public List<FinalConsumption> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

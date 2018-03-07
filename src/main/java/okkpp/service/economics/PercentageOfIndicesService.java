@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.economics.PercentageOfIndicesMapper;
 import okkpp.model.economics.PercentageOfIndices;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class PercentageOfIndicesService {
 	@Autowired
 	PercentageOfIndicesMapper mapper;
 	public List<PercentageOfIndices> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

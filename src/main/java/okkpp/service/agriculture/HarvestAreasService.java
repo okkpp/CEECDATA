@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.agriculture.HarvestAreasMapper;
 import okkpp.model.agriculture.HarvestAreas;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class HarvestAreasService {
 	@Autowired
 	HarvestAreasMapper mapper;
 	public List<HarvestAreas> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

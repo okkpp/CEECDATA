@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.employment.EmploymentGDPMapper;
 import okkpp.model.employment.EmploymentGDP;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class EmploymentGDPService {
 	@Autowired
 	EmploymentGDPMapper mapper;
 	public List<EmploymentGDP> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

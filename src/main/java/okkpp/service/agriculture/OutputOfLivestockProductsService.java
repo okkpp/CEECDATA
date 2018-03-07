@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.agriculture.OutputOfLivestockProductsMapper;
 import okkpp.model.agriculture.OutputOfLivestockProducts;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -20,6 +21,6 @@ public class OutputOfLivestockProductsService {
 	@Autowired
 	OutputOfLivestockProductsMapper mapper;
 	public List<OutputOfLivestockProducts> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

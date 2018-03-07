@@ -4,6 +4,7 @@ import java.util.List;
 
 import okkpp.dao.overall.CountryAreaMapper;
 import okkpp.model.overall.CountryArea;
+import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.entity.Example.Criteria;
 
@@ -23,7 +24,7 @@ public class CountryAreaService {
 	@Autowired
 	CountryAreaMapper mapper;
 	public List<CountryArea> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	public List<CountryArea> selectByExample(String country){
 		Example example = new Example(CountryArea.class);

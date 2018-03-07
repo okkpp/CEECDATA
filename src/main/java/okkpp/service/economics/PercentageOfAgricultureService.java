@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.economics.PercentageOfAgricultureMapper;
 import okkpp.model.economics.PercentageOfAgriculture;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class PercentageOfAgricultureService {
 	@Autowired
 	PercentageOfAgricultureMapper mapper;
 	public List<PercentageOfAgriculture> selectAll() {
-		return  mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

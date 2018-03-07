@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.employment.LaborForceParticipationRateMapper;
 import okkpp.model.employment.LaborForceParticipationRate;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class LaborForceParticipationRateService {
 	@Autowired
 	LaborForceParticipationRateMapper mapper;
 	public List<LaborForceParticipationRate> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.culture.AdultLiteracyRateMapper;
 import okkpp.model.culture.AdultLiteracyRate;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class AdultLiteracyRateService {
 	@Autowired
 	AdultLiteracyRateMapper mapper;
 	public List<AdultLiteracyRate> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

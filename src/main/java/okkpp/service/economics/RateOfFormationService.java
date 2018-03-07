@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.economics.RateOfFormationMapper;
 import okkpp.model.economics.RateOfFormation;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class RateOfFormationService {
 	@Autowired
 	RateOfFormationMapper mapper;
 	public List<RateOfFormation> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

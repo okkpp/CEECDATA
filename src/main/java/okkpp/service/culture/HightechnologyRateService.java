@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.culture.HightechnologyRateMapper;
 import okkpp.model.culture.HightechnologyRate;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class HightechnologyRateService {
 	@Autowired
 	HightechnologyRateMapper mapper;
 	public List<HightechnologyRate> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

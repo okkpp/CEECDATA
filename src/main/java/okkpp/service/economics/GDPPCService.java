@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.economics.GDPPCMapper;
 import okkpp.model.economics.GDPPC;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class GDPPCService {
 	@Autowired
 	GDPPCMapper mapper;
 	public List<GDPPC> selectAll() {
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }
