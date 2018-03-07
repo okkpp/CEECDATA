@@ -20,9 +20,9 @@ public class GDP implements Serializable {
     private String year;
 
     /**
-     * 国内生产总值(美元)
+     * 国内生产总值
      */
-    private Integer gdp;
+    private Double gdp;
 
     /**
      * 排序
@@ -87,20 +87,20 @@ public class GDP implements Serializable {
     }
 
     /**
-     * 获取国内生产总值(美元)
+     * 获取国内生产总值
      *
-     * @return gdp - 国内生产总值(美元)
+     * @return gdp - 国内生产总值
      */
-    public Integer getGdp() {
+    public Double getGdp() {
         return gdp;
     }
 
     /**
-     * 设置国内生产总值(美元)
+     * 设置国内生产总值
      *
-     * @param gdp 国内生产总值(美元)
+     * @param gdp 国内生产总值
      */
-    public void setGdp(Integer gdp) {
+    public void setGdp(Double gdp) {
         this.gdp = gdp;
     }
 

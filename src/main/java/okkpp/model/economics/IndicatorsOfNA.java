@@ -22,22 +22,22 @@ public class IndicatorsOfNA implements Serializable {
     /**
      * 国内生产总值（现价亿国际元）
      */
-    private Integer gdp;
+    private Double gdp;
 
     /**
      * 人均国民生产总值(现价国际元)
      */
-    private Integer gdppc;
+    private Double gdppc;
 
     /**
      * 国民总收入（现价亿国际元）
      */
-    private Integer gni;
+    private Double gni;
 
     /**
      * 人均国民总收入(现价国际元)
      */
-    private Integer gnipc;
+    private Double gnipc;
 
     /**
      * 排序
@@ -106,7 +106,7 @@ public class IndicatorsOfNA implements Serializable {
      *
      * @return gdp - 国内生产总值（现价亿国际元）
      */
-    public Integer getGdp() {
+    public Double getGdp() {
         return gdp;
     }
 
@@ -115,7 +115,7 @@ public class IndicatorsOfNA implements Serializable {
      *
      * @param gdp 国内生产总值（现价亿国际元）
      */
-    public void setGdp(Integer gdp) {
+    public void setGdp(Double gdp) {
         this.gdp = gdp;
     }
 
@@ -124,7 +124,7 @@ public class IndicatorsOfNA implements Serializable {
      *
      * @return gdppc - 人均国民生产总值(现价国际元)
      */
-    public Integer getGdppc() {
+    public Double getGdppc() {
         return gdppc;
     }
 
@@ -133,7 +133,7 @@ public class IndicatorsOfNA implements Serializable {
      *
      * @param gdppc 人均国民生产总值(现价国际元)
      */
-    public void setGdppc(Integer gdppc) {
+    public void setGdppc(Double gdppc) {
         this.gdppc = gdppc;
     }
 
@@ -142,7 +142,7 @@ public class IndicatorsOfNA implements Serializable {
      *
      * @return gni - 国民总收入（现价亿国际元）
      */
-    public Integer getGni() {
+    public Double getGni() {
         return gni;
     }
 
@@ -151,7 +151,7 @@ public class IndicatorsOfNA implements Serializable {
      *
      * @param gni 国民总收入（现价亿国际元）
      */
-    public void setGni(Integer gni) {
+    public void setGni(Double gni) {
         this.gni = gni;
     }
 
@@ -160,7 +160,7 @@ public class IndicatorsOfNA implements Serializable {
      *
      * @return gnipc - 人均国民总收入(现价国际元)
      */
-    public Integer getGnipc() {
+    public Double getGnipc() {
         return gnipc;
     }
 
@@ -169,7 +169,7 @@ public class IndicatorsOfNA implements Serializable {
      *
      * @param gnipc 人均国民总收入(现价国际元)
      */
-    public void setGnipc(Integer gnipc) {
+    public void setGnipc(Double gnipc) {
         this.gnipc = gnipc;
     }
 

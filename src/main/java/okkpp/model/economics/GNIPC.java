@@ -22,7 +22,7 @@ public class GNIPC implements Serializable {
     /**
      * 人均国民总收入(美元)
      */
-    private Integer gni;
+    private Double gni;
 
     /**
      * 排序
@@ -91,7 +91,7 @@ public class GNIPC implements Serializable {
      *
      * @return gni - 人均国民总收入(美元)
      */
-    public Integer getGni() {
+    public Double getGni() {
         return gni;
     }
 
@@ -100,7 +100,7 @@ public class GNIPC implements Serializable {
      *
      * @param gni 人均国民总收入(美元)
      */
-    public void setGni(Integer gni) {
+    public void setGni(Double gni) {
         this.gni = gni;
     }
 

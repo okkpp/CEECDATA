@@ -33,7 +33,6 @@ public class OverallController {
 	@RequestMapping("/FreshWater")
 	public String FreshWater(Model model){
 		model.addAttribute("data", freshwaterservice.selectAll());
-		model.addAttribute("jsdata", new Gson().toJson(freshwaterservice.selectAll()));
 		return "overall/FreshWater";
 	}
 	@Autowired
