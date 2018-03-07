@@ -2,20 +2,13 @@ package okkpp.controller;
 
 import java.util.List;
 
-import okkpp.model.Msg;
 import okkpp.model.overall.*;
 import okkpp.service.overall.*;
 
-import org.apache.ibatis.type.IntegerTypeHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
 
 /**
@@ -52,16 +45,5 @@ public class OverallController {
 		model.addAttribute("jsdata", new Gson().toJson(list));
 		return "overall/LandUtilization";
 	}
-	
-	//≤‚ ‘Ajax
-	@RequestMapping("/lands")
-	@ResponseBody
-	public Msg testAjax(@RequestParam(value = "pn",defaultValue = "1")Integer pn) {
-		
-		PageHelper.startPage(pn,5);
-		List<LandUtilization> list = landUtilizationService.selectAll();
-		PageInfo pageInfo = new PageInfo(list,5);
-		
-		return Msg.success().add("pageInfo", pageInfo);
-	}
+
 }
