@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import okkpp.service.MerchandiseImportsService;
+import okkpp.service.trade.MerchandiseImportsService;
 import okkpp.service.trade.CommercialServiceExportService;
 import okkpp.service.trade.CommercialServiceImportService;
 import okkpp.service.trade.ExportsByCommodityGroupsService;
