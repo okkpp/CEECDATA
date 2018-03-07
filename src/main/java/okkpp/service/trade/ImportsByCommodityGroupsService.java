@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.trade.ImportsByCommodityGroupsMapper;
 import okkpp.model.trade.ImportsByCommodityGroups;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class ImportsByCommodityGroupsService {
 	ImportsByCommodityGroupsMapper mapper;
 	
 	public List<ImportsByCommodityGroups> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<ImportsByCommodityGroups> selectByExample(String country){

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import okkpp.dao.population.MidYearPoplationMapper;
 import okkpp.model.population.MidYearPoplation;
+import okkpp.utils.CountryCode;
+
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -16,7 +18,7 @@ public class MidYearPoplationService {
 	MidYearPoplationMapper mapper;
 	
 	public List<MidYearPoplation> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<MidYearPoplation> selectByExample(String country){

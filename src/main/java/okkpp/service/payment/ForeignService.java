@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.payment.ForeignMapper;
 import okkpp.model.payment.Foreign;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class ForeignService {
 	ForeignMapper mapper;
 	
 	public List<Foreign> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<Foreign> selectByExample(String country){

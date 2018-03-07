@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.payment.ExternalMapper;
 import okkpp.model.payment.External;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class ExternalService {
 	ExternalMapper mapper;
 	
 	public List<External> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<External> selectByExample(String country){

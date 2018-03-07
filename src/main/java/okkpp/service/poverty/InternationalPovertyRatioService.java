@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import okkpp.dao.poverty.InternationalPovertyRatioMapper;
 import okkpp.model.poverty.InternationalPovertyRatio;
+import okkpp.utils.CountryCode;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,7 @@ public class InternationalPovertyRatioService {
 	InternationalPovertyRatioMapper mapper;
 	
 	public List<InternationalPovertyRatio> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<InternationalPovertyRatio> selectByExample(String country){

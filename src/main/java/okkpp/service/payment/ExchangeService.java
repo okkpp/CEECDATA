@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.payment.ExchangeMapper;
 import okkpp.model.payment.Exchange;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -18,7 +19,7 @@ public class ExchangeService {
 	ExchangeMapper mapper;
 	
 	public List<Exchange> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<Exchange> selectByExample(String country){

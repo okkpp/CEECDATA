@@ -18,15 +18,16 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.model"
+		<javaModelGenerator targetPackage="okkpp.model.finance"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.dao"
+		<sqlMapGenerator targetPackage="okkpp.dao.finance"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.dao"
+		<javaClientGenerator targetPackage="okkpp.dao.finance"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table schema="${jdbc.username}" tableName="s_content"
-			domainObjectName="Content" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" />
+		<table tableName="t_finance_tax_as_percentage_of_evenue" domainObjectName="TaxAsPercentageOfEvenue"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+
 	</context>
 </generatorConfiguration>

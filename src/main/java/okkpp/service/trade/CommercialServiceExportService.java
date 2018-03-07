@@ -4,6 +4,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.trade.CommercialServiceExportMapper;
 import okkpp.model.trade.CommercialServiceExport;
+import okkpp.utils.CountryCode;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class CommercialServiceExportService {
 	CommercialServiceExportMapper mapper;
 	
 	public List<CommercialServiceExport> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<CommercialServiceExport> selectByExample(String country){
