@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import okkpp.dao.population.BirthAndDeathRateMapper;
 import okkpp.model.population.BirthAndDeathRate;
+import okkpp.utils.CountryCode;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,7 @@ public class BirthAndDeathRateService {
 	BirthAndDeathRateMapper mapper;
 	
 	public List<BirthAndDeathRate> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<BirthAndDeathRate> selectByExample(String country){

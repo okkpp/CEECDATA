@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.traffic.PhoneMapper;
 import okkpp.model.traffic.Phone;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class PhoneService {
 	PhoneMapper mapper;
 	
 	public List<Phone> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<Phone> selectByExample(String country){

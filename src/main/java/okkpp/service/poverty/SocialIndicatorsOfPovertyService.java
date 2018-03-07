@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.poverty.SocialIndicatorsOfPovertyMapper;
 import okkpp.model.poverty.SocialIndicatorsOfPoverty;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class SocialIndicatorsOfPovertyService {
 	SocialIndicatorsOfPovertyMapper mapper;
 	
 	public List<SocialIndicatorsOfPoverty> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<SocialIndicatorsOfPoverty> selectByExample(String country){

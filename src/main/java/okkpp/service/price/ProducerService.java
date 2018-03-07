@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.price.ProducerMapper;
 import okkpp.model.price.Producer;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class ProducerService {
 	ProducerMapper mapper;
 	
 	public List<Producer> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<Producer> selectByExample(String country){

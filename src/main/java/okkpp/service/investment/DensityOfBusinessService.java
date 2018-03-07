@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import okkpp.dao.investment.DensityOfBusinessMapper;
 import okkpp.model.investment.DensityOfBusiness;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -16,7 +17,7 @@ public class DensityOfBusinessService {
 	DensityOfBusinessMapper mapper;
 	
 	public List<DensityOfBusiness> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<DensityOfBusiness> selectByExample(String country){

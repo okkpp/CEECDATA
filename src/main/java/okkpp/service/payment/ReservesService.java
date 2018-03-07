@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.payment.ReservesMapper;
 import okkpp.model.payment.Reserves;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class ReservesService {
 	ReservesMapper mapper;
 	
 	public List<Reserves> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<Reserves> selectByExample(String country){

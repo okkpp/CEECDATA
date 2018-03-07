@@ -54,7 +54,89 @@
           <form action="" method="">
               <div id="analysis">
                   <script type="text/javascript">
+                  var dom = document.getElementById("analysis");
+                  var myChart = echarts.init(dom);
+                  var app = {};
+                  var yMax = 100;
+                  option = null;
+                  option = {
+                          title : {
+                              text: '淡水资源',
+                              subtext: '',
 
+                              textStyle:{
+                                fontSize: 20
+                              }
+                          },
+                          tooltip : {
+                              trigger: 'item'
+                          },
+                          legend: {
+                              data:['农业用水','工业用水','生活用水','其他用水']
+                          },
+
+                          calculable : true,
+                          xAxis : [
+                              {
+                                  type : 'category',
+                                  data : ['阿尔巴尼亚','爱沙尼亚','等等'],
+
+                              }
+                          ],
+                          yAxis : [
+                              {
+                                  type : 'value',
+                                  name : '%'
+                              }
+                          ],
+                          series : [
+
+                              {
+                                  name:'农业用水',
+                                  type:'bar',
+                                  data:[2.0, 4.9, 7.0],
+                              },
+                              {
+                                  name:'工业用水',
+                                  type:'bar',
+                                  data:[2.6, 5.9, 9.0],
+                              },
+                              {
+                                  name:'生活用水',
+                                  type:'bar',
+                                  data:[2.6, 5.9, 9.0],
+                              },
+                              {
+                                  name:'其他用水',
+                                  type:'bar',
+                                  data:[2.6, 5.9, 9.0],
+                              },
+                              {
+                                  name:'人均可再生淡水资源占水资源的比重',
+                                  type:'pie',
+                                  center: ['24%', '35%'],
+                                  radius: '20%',
+                                  z: 100,
+                                  data:[
+                                      {
+                                          name: '阿尔巴尼亚',
+                                          value: 30
+                                      },
+                                      {
+                                          name: '爱沙尼亚',
+                                          value: 40
+                                      },
+                                      {
+                                          name: '等等',
+                                          value: 40
+                                      }
+                                  ]
+                              }
+                          ],
+                  };;
+                  if (option && typeof option === "object") {
+                      myChart.setOption(option, true);
+                  }
                   </script>
               </div>
           </form>

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.traffic.ContainerMapper;
 import okkpp.model.traffic.Container;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class ContainerService {
 	ContainerMapper mapper;
 	
 	public List<Container> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<Container> selectByExample(String country){

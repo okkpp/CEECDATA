@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.poverty.HouseholdConsumptionExpenditureMapper;
 import okkpp.model.poverty.HouseholdConsumptionExpenditure;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class HouseholdConsumptionExpenditureService {
 	HouseholdConsumptionExpenditureMapper mapper;
 	
 	public List<HouseholdConsumptionExpenditure> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<HouseholdConsumptionExpenditure> selectByExample(String country){

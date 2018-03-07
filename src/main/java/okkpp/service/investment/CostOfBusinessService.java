@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.investment.CostOfBusinessMapper;
 import okkpp.model.investment.CostOfBusiness;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class CostOfBusinessService {
 	CostOfBusinessMapper mapper;
 	
 	public List<CostOfBusiness> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<CostOfBusiness> selectByExample(String country){

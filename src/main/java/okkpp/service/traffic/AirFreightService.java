@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.traffic.AirFreightMapper;
 import okkpp.model.traffic.AirFreight;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class AirFreightService {
 	AirFreightMapper mapper;
 	
 	public List<AirFreight> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<AirFreight> selectByExample(String country){

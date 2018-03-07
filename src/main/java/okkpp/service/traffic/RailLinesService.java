@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.traffic.RailLinesMapper;
 import okkpp.model.traffic.RailLines;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class RailLinesService {
 	RailLinesMapper mapper;
 	
 	public List<RailLines> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<RailLines> selectByExample(String country){

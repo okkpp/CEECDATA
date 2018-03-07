@@ -66,7 +66,11 @@
                     option = {
                     title: {
                         text: '国土面积',
-                        subtext: '平方公里（km²）'
+                        subtext: 'Country Area',
+                        left:'center',
+                        textStyle:{
+                          fontSize: 20
+                        }
                     },
                     xAxis: {
                         data: dataAxis,
@@ -85,6 +89,7 @@
                         z: 10
                     },
                     yAxis: {
+                        name: 'km²',
                         axisLine: {
                             show: false
                         },

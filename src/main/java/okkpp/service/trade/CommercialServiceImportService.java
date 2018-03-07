@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.trade.CommercialServiceImportMapper;
 import okkpp.model.trade.CommercialServiceImport;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class CommercialServiceImportService {
 	CommercialServiceImportMapper mapper;
 	
 	public List<CommercialServiceImport> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<CommercialServiceImport> selectByExample(String country){
