@@ -7,10 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import okkpp.model.price.Consumer;
-import okkpp.model.price.Producer;
-import okkpp.service.price.ConsumerService;
-import okkpp.service.price.ProducerService;
+import okkpp.model.price.*;
+import okkpp.service.price.*;
 
 @Controller
 @RequestMapping("/price")

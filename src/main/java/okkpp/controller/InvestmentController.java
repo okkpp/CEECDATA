@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import okkpp.service.investment.CostOfBusinessService;
-import okkpp.service.investment.DensityOfBusinessService;
-import okkpp.service.investment.RankOfBusinessService;
-import okkpp.service.investment.RegisteredOfBusinessService;
+import okkpp.service.investment.*;
 import okkpp.model.investment.*;
 
 @Controller

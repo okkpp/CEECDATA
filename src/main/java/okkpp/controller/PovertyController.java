@@ -7,11 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import okkpp.service.poverty.HouseholdConsumptionExpenditureService;
-import okkpp.service.poverty.InternationalPovertyRatioService;
-import okkpp.service.poverty.PersonalIncomeService;
-import okkpp.service.poverty.PovertyRateService;
-import okkpp.service.poverty.SocialIndicatorsOfPovertyService;
+import okkpp.service.poverty.*;
 import okkpp.model.poverty.*;
 
 @Controller
