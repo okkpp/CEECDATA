@@ -230,7 +230,6 @@ header{
 #DataPage{
   float: right;
   width: 68%;
-  overflow-x: hidden;
   position: relative;
 }
 
