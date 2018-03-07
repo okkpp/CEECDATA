@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.traffic.FreightMapper;
 import okkpp.model.traffic.Freight;
+import okkpp.utils.CountryCode;
 
 @Service
 @Transactional
@@ -17,7 +18,7 @@ public class FreightService {
 	FreightMapper mapper;
 	
 	public List<Freight> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<Freight> selectByExample(String country){

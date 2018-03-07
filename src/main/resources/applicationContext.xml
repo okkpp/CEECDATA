@@ -10,86 +10,80 @@
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-		
-    <mvc:annotation-driven />
-	<context:component-scan base-package="okkpp"/>
+
+	<mvc:annotation-driven />
+	<context:component-scan base-package="okkpp" />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
+
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-	
-<context:property-placeholder location="classpath*:application.properties" ignore-resource-not-found="true"/>
-	
-<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-<property name="url" value="jdbc:mysql://112.74.72.205:3306/CEECDATA?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull" />
-<property name="username" value="okkpp" />
-<property name="password" value="123456" />
 
-<property name="initialSize" value="1" />
-<property name="maxActive" value="20" />
-<property name="maxWait" value="60000"/>
-<property name="maxIdle" value="30" />
-<property name="minIdle" value="1" />
+	<context:property-placeholder location="classpath*:application.properties"
+		ignore-resource-not-found="true" />
 
-<property name="timeBetweenEvictionRunsMillis" value="60000"/>
-<property name="minEvictableIdleTimeMillis" value="300000"/>
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://112.74.72.205:3306/CEECDATA?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull" />
+		<property name="username" value="okkpp" />
+		<property name="password" value="123456" />
 
-<property name="validationQuery" value="SELECT 'x'"/>
-<property name="testWhileIdle" value="true"/>
-<property name="testOnBorrow" value="false"/>
-<property name="testOnReturn" value="false"/>
-</bean>
+		<property name="initialSize" value="1" />
+		<property name="maxActive" value="20" />
+		<property name="maxWait" value="60000" />
+		<property name="maxIdle" value="30" />
+		<property name="minIdle" value="1" />
+
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+
+		<property name="validationQuery" value="SELECT 'x'" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<!-- <property name="configLocation" value="classpath*:mybatis.xml" /> -->
 	</bean>
-	
-	<!-- mybatis自动扫描加载Sql映射文件/接口 : MapperScannerConfigurer sqlSessionFactory  
-	  	basePackage:指定sql映射文件/接口所在的包（自动扫描）  
-    -->  
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
-        <property name="basePackage" value="okkpp"></property>  
-        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>  
-    </bean>
+
+	<!-- mybatis自动扫描加载Sql映射文件/接口 : MapperScannerConfigurer sqlSessionFactory 
+		basePackage:指定sql映射文件/接口所在的包（自动扫描） -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="okkpp"></property>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean>
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="okkpp" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-		<property name="markerInterface" value="tk.mybatis.mapper.common.Mapper"/>
-		<!-- 
-		<property name="properties">
-			<value>
-				mappers=tk.mybatis.mapper.common.Mapper
-			</value>
-		</property>
-		 -->
+		<property name="markerInterface" value="tk.mybatis.mapper.common.Mapper" />
+		<!-- <property name="properties"> <value> mappers=tk.mybatis.mapper.common.Mapper 
+			</value> </property> -->
 	</bean>
-  
-    <!-- 
-        DataSourceTransactionManager dataSource:引用上面定义的数据源 
-    -->  
-    <bean id="txManager"  
-        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">  
-        <property name="dataSource" ref="dataSource"></property>  
-    </bean>  
-  
-    <!-- 使用声明式事务  
-         transaction-manager：引用上面定义的事务管理器  
-     -->  
-    <tx:annotation-driven transaction-manager="txManager" />
-    
-    <!-- 定义文件上传解析器 -->
+
+	<!-- DataSourceTransactionManager dataSource:引用上面定义的数据源 -->
+	<bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+	<!-- 使用声明式事务 transaction-manager：引用上面定义的事务管理器 -->
+	<tx:annotation-driven transaction-manager="txManager" />
+
+	<!-- 定义文件上传解析器 -->
 	<bean id="multipartResolver"
-	class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-	<!-- 设定默认编码 -->
-	<property name="defaultEncoding" value="UTF-8"></property>
-	<!-- 设定文件上传的最大值5MB，50*1024*1024 -->
-	<property name="maxUploadSize" value="5242880"></property>
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 设定默认编码 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 设定文件上传的最大值5MB，50*1024*1024 -->
+		<property name="maxUploadSize" value="5242880"></property>
 	</bean>
+
 </beans>

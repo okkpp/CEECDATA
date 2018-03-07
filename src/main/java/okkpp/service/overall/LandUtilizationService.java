@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.overall.LandUtilizationMapper;
 import okkpp.model.overall.LandUtilization;
+import okkpp.utils.CountryCode;
 
 /**
 * @author duck
@@ -20,6 +21,6 @@ public class LandUtilizationService {
 	@Autowired
 	LandUtilizationMapper mapper;
 	public List<LandUtilization> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }
