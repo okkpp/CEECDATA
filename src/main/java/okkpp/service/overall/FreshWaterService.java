@@ -4,6 +4,7 @@ import java.util.List;
 
 import okkpp.dao.overall.FreshWaterMapper;
 import okkpp.model.overall.FreshWater;
+import okkpp.utils.CountryCode;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,6 @@ public class FreshWaterService {
 		return null;
 	}
 	public List<FreshWater> selectAll(){
-		return mapper.selectAll();
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }
