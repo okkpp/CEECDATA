@@ -80,7 +80,7 @@
                           xAxis : [
                               {
                                   type : 'category',
-                                  data : [<c:forEach items="${data}" var="v">'${v.country}',</c:forEach>],
+                                  data : [<c:forEach items="${data}" var="v" varStatus="status">'<c:if test="${status.index%2==1}">\n\n\n</c:if>${v.country}',</c:forEach>],
 
                               }
                           ],
