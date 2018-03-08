@@ -18,13 +18,25 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.model.finance"
+		<javaModelGenerator targetPackage="okkpp.model.economics"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.dao.finance"
+		<sqlMapGenerator targetPackage="okkpp.dao.economics"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.dao.finance"
+		<javaClientGenerator targetPackage="okkpp.dao.economics"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table tableName="t_finance_tax_as_percentage_of_evenue" domainObjectName="TaxAsPercentageOfEvenue"
+		<table tableName="t_economics_gdp" domainObjectName="GDP"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="t_economics_gdppc" domainObjectName="GDPPC"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="t_economics_gnipc" domainObjectName="GNIPC"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="t_economics_indicators_of_na" domainObjectName="IndicatorsOfNA"
 			enableCountByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" enableUpdateByExample="false" 
 			schema="${jdbc.username}"/>
