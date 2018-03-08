@@ -55,22 +55,71 @@
           <form action="" method="">
               <div id="analysis">
                   <script type="text/javascript">
-                      var myChart = echarts.init(document.getElementById('analysis'));
+                  var dom = document.getElementById("analysis");
+                  var myChart = echarts.init(dom);
+                  var app = {};
+                  var yMax = 100;
+                  option = null;
+                  option = {
+                          title : {
+                              text: '淡水资源',
+                              subtext: '',
 
-                      var option = {
-                              xAxis: {
-                                  type: 'category',
-                                  data: [<c:forEach items="${data}" var="v">'${v.country}',</c:forEach>]
+                              textStyle:{
+                                fontSize: 20
+                              }
+                          },
+                          tooltip : {
+                              trigger: 'item'
+                          },
+                          legend: {
+                              data:['农业用水','工业用水','生活用水']
+                          },
+
+                          calculable : true,
+                          xAxis : [
+                              {
+                                  type : 'category',
+                                  data : [<c:forEach items="${data}" var="v">'${v.country}',</c:forEach>],
+
+                              }
+                          ],
+                          yAxis : [
+                              {
+                                  type : 'value',
+                                  name : '%'
+                              }
+                          ],
+                          series : [
+
+                              {
+                                  name:'农业用水',
+                                  type:'bar',
+                                  data:[<c:forEach items="${data}" var="v">${v.agriculture},</c:forEach>],
                               },
-                              yAxis: {
-                                  type: 'value'
+                              {
+                                  name:'工业用水',
+                                  type:'bar',
+                                  data:[<c:forEach items="${data}" var="v">${v.industry},</c:forEach>],
                               },
-                              series: [{
-                                  data: [<c:forEach items="${data}" var="v">${v.renewable},</c:forEach>],
-                                  type: 'bar'
-                              }]
-                          };
-                      myChart.setOption(option);
+                              {
+                                  name:'生活用水',
+                                  type:'bar',
+                                  data:[<c:forEach items="${data}" var="v">${v.domestic},</c:forEach>],
+                              },
+                              {
+                                  name:'人均可再生淡水资源占水资源的比重',
+                                  type:'pie',
+                                  center: ['24%', '35%'],
+                                  radius: '20%',
+                                  z: 100,
+                                  data:[<c:forEach items="${data}" var="v">{name:'${v.country}',value:${v.renewable}},</c:forEach>]
+                              }
+                          ],
+                  };;
+                  if (option && typeof option === "object") {
+                      myChart.setOption(option, true);
+                  }
                   </script>
               </div>
           </form>

@@ -94,17 +94,17 @@
                               {
                                   name:'农业用水',
                                   type:'bar',
-                                  data:[2.0, 4.9, 7.0],
+                                  data:[<c:forEach items="${data}" var="v">${v.agriculture},</c:forEach>],
                               },
                               {
                                   name:'工业用水',
                                   type:'bar',
-                                  data:[2.6, 5.9, 9.0],
+                                  data:[<c:forEach items="${data}" var="v">${v.industry},</c:forEach>],
                               },
                               {
                                   name:'生活用水',
                                   type:'bar',
-                                  data:[2.6, 5.9, 9.0],
+                                  data:[<c:forEach items="${data}" var="v">${v.domestic},</c:forEach>],
                               },
                               {
                                   name:'其他用水',
