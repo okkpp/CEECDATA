@@ -116,7 +116,7 @@
                                   data:[<c:forEach items="${data}" var="v">{name:'${v.country}',value:${v.renewable}},</c:forEach>]
                               }
                           ],
-                  };;
+                  };
                   if (option && typeof option === "object") {
                       myChart.setOption(option, true);
                   }

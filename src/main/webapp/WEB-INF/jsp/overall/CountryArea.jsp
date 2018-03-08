@@ -64,14 +64,13 @@
 							var option = {
 								xAxis : {
 									type : 'category',
-									data : [ 'Mon', 'Tue', 'Wed', 'Thu', 'Fri',
-											'Sat', 'Sun' ]
+									data : [<c:forEach items="${data}" var="v">${v.country}",</c:forEach>]
 								},
 								yAxis : {
 									type : 'value'
 								},
 								series : [ {
-									data : [ 120, 200, 150, 80, 70, 110, 130 ],
+									data : [120, 200, 150, 80, 70, 110, 130],
 									type : 'bar'
 								} ]
 							};
@@ -84,16 +83,11 @@
 	</div>
 	<script>
 		$(function(){
-			alert("123");
 			$.ajax({
-				url : "overall/lands",
-				type : "GET",
-				success : function(result){
-					alert(result);
-				}
+				
 			});
 
-		})
+		});
 	</script>
 </body>
 </html>
