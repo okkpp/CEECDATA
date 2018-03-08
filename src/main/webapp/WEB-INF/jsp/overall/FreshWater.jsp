@@ -33,6 +33,7 @@
 							<th>国家</th>
 							<th id="rjkzs">人均可再生淡水资源</th>
 
+<<<<<<< HEAD
 						</thead>
 						<tbody>
 							<c:forEach items="${data}" var="v">
@@ -72,16 +73,106 @@
                                   </c:if>
                                   </c:forEach>*/ 
                                   '阿尔巴尼亚','\n爱沙尼亚','保加利亚','\n波兰','阿尔巴尼亚','\n爱沙尼亚','保加利亚','\n波兰','阿尔巴尼亚','\n爱沙尼亚','保加利亚','\n波兰','阿尔巴尼亚','\n爱沙尼亚','保加利亚','\n波兰']
+=======
+                </thead>
+                <tbody>
+					<c:forEach items="${data}" var="v">
+						<tr>
+            				<td>${v.country}</td>
+            				<td class="numCenter">${v.renewable}</td>
+        				</tr>
+					</c:forEach>
+                </tbody>
+            </table>
+            <div id="selectBtn">
+                <!-- 行的显示|隐藏 -->
+                <input type="checkbox" checked="checked" name="checkCol" title="aebny">阿尔巴尼亚
+                <br>
+                <!-- 列的显示|隐藏 -->
+                <input type="checkbox" checked="checked" name="checkRow" title="rjkzs">人均可再生资源
+            </div>
+          </form>
+      </section>
+  <!--            数据图-->
+      <section id="zdoAnalysis">
+          <form action="" method="">
+              <div id="analysis">
+                  <script type="text/javascript">
+                  var dom = document.getElementById("analysis");
+                  var myChart = echarts.init(dom);
+                  var app = {};
+                  var yMax = 100;
+                  option = null;
+                  option = {
+                          title : {
+                              text: '淡水资源',
+                              subtext: '',
+
+                              textStyle:{
+                                fontSize: 20
+                              }
+                          },
+                          tooltip : {
+                              trigger: 'item'
+                          },
+                          legend: {
+                              data:['农业用水','工业用水','生活用水']
+                          },
+
+                          calculable : true,
+                          xAxis : [
+                              {
+                                  type : 'category',
+                                  data : [<c:forEach items="${data}" var="v">'${v.country}',</c:forEach>],
+
+                              }
+                          ],
+                          yAxis : [
+                              {
+                                  type : 'value',
+                                  name : '%'
+                              }
+                          ],
+                          series : [
+
+                              {
+                                  name:'农业用水',
+                                  type:'bar',
+                                  data:[<c:forEach items="${data}" var="v">${v.agriculture},</c:forEach>],
                               },
-                              yAxis: {
-                                  type: 'value'
+                              {
+                                  name:'工业用水',
+                                  type:'bar',
+                                  data:[<c:forEach items="${data}" var="v">${v.industry},</c:forEach>],
+>>>>>>> a863268a267ceaa7d56851fac9cece2702c5d291
                               },
+                              {
+                                  name:'生活用水',
+                                  type:'bar',
+                                  data:[<c:forEach items="${data}" var="v">${v.domestic},</c:forEach>],
+                              },
+<<<<<<< HEAD
                               series: [{
                                   data: [/* <c:forEach items="${data}" var="v">${v.renewable},</c:forEach> */1,2,3,4,1,2,3,4,1,2,3,4,1,2,3,4],
                                   type: 'bar'
                               }]
                           };
                       myChart.setOption(option);
+=======
+                              {
+                                  name:'人均可再生淡水资源占水资源的比重',
+                                  type:'pie',
+                                  center: ['24%', '35%'],
+                                  radius: '20%',
+                                  z: 100,
+                                  data:[<c:forEach items="${data}" var="v">{name:'${v.country}',value:${v.renewable}},</c:forEach>]
+                              }
+                          ],
+                  };;
+                  if (option && typeof option === "object") {
+                      myChart.setOption(option, true);
+                  }
+>>>>>>> a863268a267ceaa7d56851fac9cece2702c5d291
                   </script>
 					</div>
 				</form>
