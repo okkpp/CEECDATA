@@ -18,7 +18,7 @@ public class ContentController {
 	@Autowired
 	private ContentService service;
 	
-	@RequestMapping("/index")
+	@RequestMapping("/indexcontent")
 	public String map(Model model){
 		model.addAttribute("data", service.Content());
 		return "/zdoDB";
