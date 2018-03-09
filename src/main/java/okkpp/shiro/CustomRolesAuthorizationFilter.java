@@ -5,6 +5,8 @@ import javax.servlet.ServletResponse;
 
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
+import org.apache.shiro.web.util.WebUtils;
+import org.springframework.util.StringUtils;
 
 /**
 * @author duck
@@ -13,20 +15,15 @@ import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 public class CustomRolesAuthorizationFilter extends AuthorizationFilter{
 
 	@Override
-	protected boolean isAccessAllowed(ServletRequest req, ServletResponse resp, Object mappedValue) throws Exception {
-        Subject subject = getSubject(req, resp);    
-        String[] rolesArray = (String[]) mappedValue;    
-    
-        if (rolesArray == null || rolesArray.length == 0) { //没有角色限制，有权限访问    
-            return true;    
-        }    
-        for (int i = 0; i < rolesArray.length; i++) {    
-            if (subject.hasRole(rolesArray[i])) { //若当前用户是rolesArray中的任何一个，则有权限访问    
-                return true;    
-            }    
-        }    
-    
-        return false; 
+	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
+		
+		String uri = WebUtils.getPathWithinApplication(WebUtils.toHttp(request)).substring(1);
+		if(StringUtils.isEmpty(uri)) {
+			return true;
+		}else {
+			Subject subject = getSubject(request, response);
+			return subject.isPermitted(uri);
+		}
 	}
 
 }

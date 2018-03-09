@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -6,10 +8,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
 <title></title>
-<link rel="stylesheet" href="css/pintuer.css">
-<link rel="stylesheet" href="css/admin.css">
-<script src="js/jquery.js"></script>
-<script src="js/pintuer.js"></script>
+<link rel="stylesheet" href="../MUI/css/pintuer.css">
+<link rel="stylesheet" href="../MUI/css/admin.css">
+<script src="../MUI/js/jquery.js"></script>
+<script src="../MUI/js/jquery.js"></script>
 </head>
 <body>
 <div class="panel admin-panel">
@@ -29,7 +31,7 @@
    
     <tr>
       <td>1</td>     
-      <td><img src="images/11.jpg" alt="" width="120" height="50" /></td>     
+      <td><img src="../MUI/images/11.jpg" alt="" width="120" height="50" /></td>     
       <td>首页焦点图</td>
       <td>描述文字....</td>
       <td>1</td>
@@ -40,7 +42,7 @@
     </tr>
     <tr>
       <td>2</td>     
-      <td><img src="images/11.jpg" alt="" width="120" height="50" /></td>     
+      <td><img src="../MUI/images/11.jpg" alt="" width="120" height="50" /></td>     
       <td>首页焦点图</td>
       <td>描述文字....</td>
       <td>1</td>
@@ -51,7 +53,7 @@
     </tr>
     <tr>
       <td>3</td>     
-      <td><img src="images/11.jpg" alt="" width="120" height="50" /></td>     
+      <td><img src="../MUI/images/11.jpg" alt="" width="120" height="50" /></td>     
       <td>首页焦点图</td>
       <td>描述文字....</td>
       <td>1</td>

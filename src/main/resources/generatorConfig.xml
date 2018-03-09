@@ -22,28 +22,31 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.model.economics"
+		<javaModelGenerator targetPackage="okkpp.system.model"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.dao.economics"
+		<sqlMapGenerator targetPackage="okkpp.system.dao"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.dao.economics"
+		<javaClientGenerator targetPackage="okkpp.system.dao"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table tableName="t_economics_gdp" domainObjectName="GDP"
+		<table tableName="s_resource" domainObjectName="Resource"
 			enableCountByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" enableUpdateByExample="false" 
 			schema="${jdbc.username}"/>
-		<table tableName="t_economics_gdppc" domainObjectName="GDPPC"
+		<table tableName="s_resource_role" domainObjectName="ResourceRole"
 			enableCountByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" enableUpdateByExample="false" 
 			schema="${jdbc.username}"/>
-		<table tableName="t_economics_gnipc" domainObjectName="GNIPC"
+		<table tableName="s_role" domainObjectName="Role"
 			enableCountByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" enableUpdateByExample="false" 
 			schema="${jdbc.username}"/>
-		<table tableName="t_economics_indicators_of_na" domainObjectName="IndicatorsOfNA"
+		<table tableName="s_user" domainObjectName="User"
 			enableCountByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" enableUpdateByExample="false" 
 			schema="${jdbc.username}"/>
-
+		<table tableName="s_user_role" domainObjectName="UserRole"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
 	</context>
 </generatorConfiguration>
