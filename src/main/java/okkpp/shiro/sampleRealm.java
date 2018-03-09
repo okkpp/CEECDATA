@@ -16,6 +16,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import okkpp.system.dao.ResourceMapper;
 import okkpp.system.dao.RoleMapper;
 import okkpp.system.dao.UserMapper;
+import okkpp.system.model.Resource;
 import okkpp.system.model.Role;
 import okkpp.system.model.User;
 
@@ -39,11 +40,11 @@ public class sampleRealm extends AuthorizingRealm {
 			// 基于Role的权限信息
 			info.addRole(role.getRoid());
 			// 基于Permission的权限信息
-			// List<Resource> resources = resourceMapper.getResourcesByRoleId(role.getId());
-			// for (Resource resource : resources) {
-			// if (resource.getValue() != null && !resource.getValue().equals(""))
-			// info.addStringPermission(resource.getValue());
-			// }
+			List<Resource> resources = resourceMapper.getResourcesByRoleId(role.getId());
+			for (Resource resource : resources) {
+				if (resource.getValue() != null && !resource.getValue().equals(""))
+					info.addStringPermission(resource.getValue());
+			}
 		}
 
 		System.out.println("这是授权方法");

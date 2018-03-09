@@ -16,7 +16,6 @@ public class CustomRolesAuthorizationFilter extends AuthorizationFilter{
 
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
-		
 		String uri = WebUtils.getPathWithinApplication(WebUtils.toHttp(request)).substring(1);
 		if(StringUtils.isEmpty(uri)) {
 			return true;
