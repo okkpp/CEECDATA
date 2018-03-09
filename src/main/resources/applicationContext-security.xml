@@ -24,15 +24,15 @@
 			</map>
 		</property> 
         <property name="filterChainDefinitions">
-            <value>
-            	/MUI/** = anon
-            	
+            <value>            	
                 /index = anon
                 /login* = anon
                 /404* = anon
                 
-                /** = authc,roles["user,admin"]
+                /MUI/** = anon
+            	/overall/* authc
                 
+                /** = authc,roles["user,admin"]                
             </value>  
         </property>  
     </bean>
