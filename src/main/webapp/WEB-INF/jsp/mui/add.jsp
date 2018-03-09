@@ -18,39 +18,15 @@
 <div class="panel admin-panel">
   <div class="panel-head" id="add"><strong><span class="icon-pencil-square-o"></span>增加内容</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="">  
-      <div class="form-group">
-        <div class="label">
-          <label>标题：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" value="" name="title" data-validate="required:请输入标题" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>图片：</label>
-        </div>
-        <div class="field">
-          <input type="text" id="url1" name="img" class="input tips" style="width:25%; float:left;"  value=""  data-toggle="hover" data-place="right" data-image="" />
-          <input type="button" class="button bg-blue margin-left" id="image1" value="+ 浏览上传"  style="float:left;">
-          <div class="tipss">图片尺寸：500*500</div>
-        </div>
-      </div>     
-      
+    <form method="post" class="form-x" action="">          
       <if condition="$iscid eq 1">
         <div class="form-group">
           <div class="label">
-            <label>分类标题：</label>
+            <label>选择数据表：</label>
           </div>
           <div class="field">
-            <select name="cid" class="input w50">
-              <option value="">请选择分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
-              <option value="">产品分类</option>
+            <select id="table_choose" name="cid" class="input w50">
+            	<option onclick="alert('123')">123</option>
             </select>
             <div class="tips"></div>
           </div>
@@ -63,7 +39,6 @@
             首页 <input id="ishome"  type="checkbox" />
             推荐 <input id="isvouch"  type="checkbox" />
             置顶 <input id="istop"  type="checkbox" /> 
-         
           </div>
         </div>
       </if>
@@ -76,78 +51,7 @@
           <div class="tips"></div>
         </div>
       </div>
-      <div class="form-group">
-        <div class="label">
-          <label>内容：</label>
-        </div>
-        <div class="field">
-          <textarea name="content" class="input" style="height:450px; border:1px solid #ddd;"></textarea>
-          <div class="tips"></div>
-        </div>
-      </div>
-     
-      <div class="clear"></div>
-      <div class="form-group">
-        <div class="label">
-          <label>关键字标题：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_title" value="" />
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>内容关键字：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input" name="s_keywords" value=""/>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>关键字描述：</label>
-        </div>
-        <div class="field">
-          <textarea type="text" class="input" name="s_desc" style="height:80px;"></textarea>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>排序：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="sort" value="0"  data-validate="number:排序必须为数字" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>发布时间：</label>
-        </div>
-        <div class="field"> 
-          <script src="js/laydate/laydate.js"></script>
-          <input type="text" class="laydate-icon input w50" name="datetime" onclick="laydate({istime: true, format: 'YYYY-MM-DD hh:mm:ss'})" value=""  data-validate="required:日期不能为空" style="padding:10px!important; height:auto!important;border:1px solid #ddd!important;" />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>作者：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="authour" value=""  />
-          <div class="tips"></div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="label">
-          <label>点击次数：</label>
-        </div>
-        <div class="field">
-          <input type="text" class="input w50" name="views" value="" data-validate="member:只能为数字"  />
-          <div class="tips"></div>
-        </div>
-      </div>
+            
       <div class="form-group">
         <div class="label">
           <label></label>
@@ -159,5 +63,31 @@
     </form>
   </div>
 </div>
+<script>
+$(function(){
+	for(var i = 1;i<11;i++){
+		var tableOption = $("<option></option>").append("测试数据"+i).attr("onclick","alert('123')");
+		tableOption.appendTo("#table_choose");
+	}
+	
+	/* $.ajax({ 
+		url : "/showTables",
+		type : "GET",
+		success : function(result) {
+			//现实数据库的表
+			showTables(result);
+		}
+	}); */
+})
 
-</body></html>
+function showTables(result){
+	var options = result.data;
+	$.each(options,function(index,item){
+		var tableOption = $("<option></option>").append(item.value);
+		tableOption.appendTo("#table_choose");
+	});	
+}
+
+</script>
+</body>
+</html>
