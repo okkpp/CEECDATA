@@ -38,4 +38,9 @@ public class LoginController {
 	public String index() {
 		return "/mui/index";
 	}
+	@RequestMapping("/sys_mui")
+	public String info(String str) {
+		str = "/mui/"+str;
+		return str;
+	}
 }

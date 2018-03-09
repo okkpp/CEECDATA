@@ -31,9 +31,11 @@
                 /index = anon
                 /login* = anon
                 /404* = anon
-                
+
                 /** = authc
-                
+
+            	/overall/* authc
+             
             </value>  
         </property>  
     </bean>
