@@ -27,7 +27,7 @@
 				class="icon-home"></span> 前台首页</a> &nbsp;&nbsp;<a href="##"
 				class="button button-little bg-blue"><span class="icon-wrench"></span>
 				清除缓存</a> &nbsp;&nbsp;<a class="button button-little bg-red"
-				href="login.html"><span class="icon-power-off"></span> 退出登录</a>
+				href="logout.do"><span class="icon-power-off"></span> 退出登录</a>
 		</div>
 	</div>
 	<div class="leftnav">

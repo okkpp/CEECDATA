@@ -25,17 +25,16 @@
 		</property> 
         <property name="filterChainDefinitions">
             <value>
-            	/zdo-static/** = aono
-            	/MUI/** = anon
-            	
-                /index = anon
+                /index = authc
                 /login* = anon
                 /404* = anon
-
-                /** = authc
+                /404* = authc
+            	/zdo-static/** = anon
+            	/MUI/** = anon
 
             	/overall/* authc
-             
+            	
+             	/** = authc
             </value>  
         </property>  
     </bean>
