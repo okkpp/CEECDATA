@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -11,10 +10,10 @@
 <meta name="renderer" content="webkit">
 <title>网站信息</title>
 
-<link rel="stylesheet" href="MUI/css/pintuer.css">
-<link rel="stylesheet" href="MUI/css/admin.css">
-<script src="MUI/js/jquery.js"></script>
-<script src="MUI/js/jquery.js"></script>
+<link rel="stylesheet" href="../MUI/css/pintuer.css">
+<link rel="stylesheet" href="../MUI/css/admin.css">
+<script src="../MUI/js/jquery.js"></script>
+<script src="../MUI/js/jquery.js"></script>
 </head>
 <body>
 	<div class="panel admin-panel">

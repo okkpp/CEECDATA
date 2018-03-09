@@ -13,9 +13,9 @@
 	<!-- Shiro -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">  
         <property name="securityManager" ref="securityManager" />  
-        <property name="loginUrl" value="/login.do" />  
-        <property name="successUrl" value="/index.do" />  
-        <property name="unauthorizedUrl" value="/login.do" /> 
+        <property name="loginUrl" value="/system/login.do" />  
+        <property name="successUrl" value="/system/index.do" />  
+        <property name="unauthorizedUrl" value="/system/login.do" /> 
         <property name="filters">
 			<map>
 				<entry key="urlPerms">  
@@ -25,17 +25,14 @@
 		</property> 
         <property name="filterChainDefinitions">
             <value>
-                /index = authc
-                /login* = anon
+            	/system/login* = anon
+                /system/** = authc
+                
                 /404* = anon
-                /404* = authc
             	/zdo-static/** = anon
             	/MUI/** = anon
 
-            	/overall/* authc
-            	
-             	/** = authc
-            </value>  
+            </value>
         </property>  
     </bean>
     
