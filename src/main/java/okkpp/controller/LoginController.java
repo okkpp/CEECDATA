@@ -28,7 +28,7 @@ public class LoginController {
 			try {
 				currentUser.login(token);
 			} catch (AuthenticationException e) {
-				System.out.println("faild");
+				System.out.println("µÇÂ¼Ê§°Ü");
 			}
 			
 		}

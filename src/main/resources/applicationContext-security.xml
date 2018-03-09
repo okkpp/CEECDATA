@@ -15,23 +15,24 @@
         <property name="securityManager" ref="securityManager" />  
         <property name="loginUrl" value="/login.do" />  
         <property name="successUrl" value="/index.do" />  
-        <property name="unauthorizedUrl" value="/404.do" /> 
+        <property name="unauthorizedUrl" value="/login.do" /> 
         <property name="filters">
-			<map>			
-				<entry key="roles">  
+			<map>
+				<entry key="urlPerms">  
                     <bean class="okkpp.shiro.CustomRolesAuthorizationFilter" />  
                 </entry>
 			</map>
 		</property> 
         <property name="filterChainDefinitions">
             <value>
+            	/zdo-static/** = aono
             	/MUI/** = anon
             	
                 /index = anon
                 /login* = anon
                 /404* = anon
                 
-                /** = authc,roles["user,admin"]
+                /** = authc
                 
             </value>  
         </property>  
@@ -44,7 +45,11 @@
 	</bean>
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager" />
 	
-	<bean id="sampleRealm" class="okkpp.shiro.sampleRealm"></bean>
+	<bean id="sampleRealm" class="okkpp.shiro.sampleRealm">
+		<property name="userMapper" ref="userMapper" />
+		<property name="roleMapper" ref="roleMapper" />
+		<property name="resourceMapper" ref="resourceMapper" />
+	</bean>
 	
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
 	
