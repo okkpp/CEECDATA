@@ -81,6 +81,7 @@ input{
     margin-top: 4px;
     z-index: 999;
 }
+/* 数据表 */
 #radio-form, #radio-form + a{
     left: 20px;
     cursor: pointer;
@@ -95,12 +96,13 @@ input{
 #radio-form:hover + a{
     background: url(../img/form2.png) no-repeat center center;
 }
+/* 数据柱状、折线图 */
 #radio-anal, #radio-anal + a{
     left: 66px;
     cursor: pointer;
 }
 #radio-anal + a{
-    background: url(../img/analysis1.png) center center;
+    background: url(../img/analysis1.png) no-repeat center center;
     background-size: auto;
 }
 #radio-anal:checked + a{
@@ -109,11 +111,26 @@ input{
 #radio-anal:hover + a{
     background: url(../img/analysis2.png) no-repeat center center;
 }
+/* 数据饼状图 */
+#radio-pie, #radio-pie + a{
+    left: 112px;
+    cursor: pointer;
+}
+#radio-pie + a{
+    background: url(../img/pie1.png) no-repeat center center;
+    background-size: auto;
+}
+#radio-pie:checked + a{
+    background: url(../img/pie2.png) no-repeat center center;
+}
+#radio-pie:hover + a{
+    background: url(../img/pie2.png) no-repeat center center;
+}
 
 
 
 /*图表部分*/
-#zdoForm, #zdoAnalysis{
+#zdoForm, #zdoAnalysis, #zdoPie{
     width: 100%;
     height: 100%;
     position: absolute;
@@ -140,6 +157,27 @@ input{
     font-weight: bold;
     margin-bottom: 1em;
 }
+#formDown{
+    margin-top: 4em;
+}
+#formDown>span{
+  display: inline-block;
+  font-size: 0.875em;
+  color: #ccc;
+  line-height: 2em;
+}
+#formDown .datadown{
+    width: 1.5em;
+    height: 1.5em;
+    margin-left: 0.5em;
+    background: url(../img/download1.png) no-repeat center center;
+    background-size: 100%;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+#formDown .datadown:hover{
+    background: url(../img/download2.png) no-repeat center center;
+}
 
 #selectBtn{
     margin-top: 4em;
@@ -153,9 +191,9 @@ input{
     margin-top: 2em;
 }
 
-/*数据图部分*/
+/*数据柱状、折线图部分*/
 #zdoAnalysis {
-    z-index: 5;
+    z-index: 8;
 }
 #analysis{
     margin: 0 auto;
@@ -165,9 +203,21 @@ input{
     height: 35em;
 }
 
+/* 数据饼状图部分 */
+#zdoPie{
+  z-index: 6;
+}
+#DataPie{
+  margin: 0 auto;
+  margin-top: 6.5em;
+  width: 50%;
+  min-width: 50em;
+  height: 35em;
+}
 /*点击切换*/
 #radio-form:checked ~ #zdoForm,
-#radio-anal:checked ~ #zdoAnalysis{
+#radio-anal:checked ~ #zdoAnalysis,
+#radio-pie:checked ~ #zdoPie{
     opacity: 1;
     z-index: 15;
 }
