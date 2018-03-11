@@ -1,155 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="okkpp.dao.finance.GrowthRateOfMoneyMapper" >
-  <resultMap id="BaseResultMap" type="okkpp.model.finance.GrowthRateOfMoney" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="okkpp.dao.finance.GrowthRateOfMoneyMapper">
+  <resultMap id="BaseResultMap" type="okkpp.model.finance.GrowthRateOfMoney">
     <!--
       WARNING - @mbggenerated
     -->
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="country" property="country" jdbcType="VARCHAR" />
-    <result column="year" property="year" jdbcType="VARCHAR" />
-    <result column="rate" property="rate" jdbcType="DOUBLE" />
-    <result column="sort" property="sort" jdbcType="INTEGER" />
-    <result column="update" property="update" jdbcType="TIMESTAMP" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="rate" jdbcType="DOUBLE" property="rate" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
+  <sql id="Base_Column_List">
     <!--
       WARNING - @mbggenerated
     -->
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
+    id, country, year, rate, sort, updated
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <!--
-      WARNING - @mbggenerated
-    -->
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    <!--
-      WARNING - @mbggenerated
-    -->
-    id, country, year, rate, sort, update
-  </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="okkpp.model.finance.GrowthRateOfMoneyExample" >
-    <!--
-      WARNING - @mbggenerated
-    -->
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from t_finance_growth_rate_of_money
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
-  <delete id="deleteByExample" parameterType="okkpp.model.finance.GrowthRateOfMoneyExample" >
-    <!--
-      WARNING - @mbggenerated
-    -->
-    delete from t_finance_growth_rate_of_money
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <update id="updateByExampleSelective" parameterType="map" >
-    <!--
-      WARNING - @mbggenerated
-    -->
-    update t_finance_growth_rate_of_money
-    <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=INTEGER},
-      </if>
-      <if test="record.country != null" >
-        country = #{record.country,jdbcType=VARCHAR},
-      </if>
-      <if test="record.year != null" >
-        year = #{record.year,jdbcType=VARCHAR},
-      </if>
-      <if test="record.rate != null" >
-        rate = #{record.rate,jdbcType=DOUBLE},
-      </if>
-      <if test="record.sort != null" >
-        sort = #{record.sort,jdbcType=INTEGER},
-      </if>
-      <if test="record.update != null" >
-        update = #{record.update,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    <!--
-      WARNING - @mbggenerated
-    -->
-    update t_finance_growth_rate_of_money
-    set id = #{record.id,jdbcType=INTEGER},
-      country = #{record.country,jdbcType=VARCHAR},
-      year = #{record.year,jdbcType=VARCHAR},
-      rate = #{record.rate,jdbcType=DOUBLE},
-      sort = #{record.sort,jdbcType=INTEGER},
-      update = #{record.update,jdbcType=TIMESTAMP}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
 </mapper>

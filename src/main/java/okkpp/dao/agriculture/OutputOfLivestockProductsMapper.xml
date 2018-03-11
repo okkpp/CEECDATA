@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.agriculture.OutputOfLivestockProductsMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.agriculture.OutputOfLivestockProducts" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="meat_total" property="meatTotal" jdbcType="INTEGER" />
+    <result column="beef" property="beef" jdbcType="INTEGER" />
+    <result column="sheep" property="sheep" jdbcType="INTEGER" />
+    <result column="pig" property="pig" jdbcType="INTEGER" />
+    <result column="poultry" property="poultry" jdbcType="INTEGER" />
+    <result column="eggs_total" property="eggsTotal" jdbcType="INTEGER" />
+    <result column="hen_eggs" property="henEggs" jdbcType="INTEGER" />
+    <result column="milk_total" property="milkTotal" jdbcType="INTEGER" />
+    <result column="cow_milk" property="cowMilk" jdbcType="INTEGER" />
+    <result column="wool" property="wool" jdbcType="INTEGER" />
+    <result column="honey" property="honey" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, year, meat_total, beef, sheep, pig, poultry, eggs_total, hen_eggs, milk_total, 
+    cow_milk, wool, honey, sort, updated
+  </sql>
+</mapper>

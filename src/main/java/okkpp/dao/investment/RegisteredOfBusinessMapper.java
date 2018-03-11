@@ -1,28 +1,7 @@
 package okkpp.dao.investment;
 
-import java.util.List;
 import okkpp.model.investment.RegisteredOfBusiness;
-import okkpp.model.investment.RegisteredOfBusinessExample;
-import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface RegisteredOfBusinessMapper {
-    int deleteByExample(RegisteredOfBusinessExample example);
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(RegisteredOfBusiness record);
-
-    int insertSelective(RegisteredOfBusiness record);
-
-    List<RegisteredOfBusiness> selectByExample(RegisteredOfBusinessExample example);
-
-    RegisteredOfBusiness selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") RegisteredOfBusiness record, @Param("example") RegisteredOfBusinessExample example);
-
-    int updateByExample(@Param("record") RegisteredOfBusiness record, @Param("example") RegisteredOfBusinessExample example);
-
-    int updateByPrimaryKeySelective(RegisteredOfBusiness record);
-
-    int updateByPrimaryKey(RegisteredOfBusiness record);
+public interface RegisteredOfBusinessMapper extends Mapper<RegisteredOfBusiness> {
 }

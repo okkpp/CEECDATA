@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.population.CompositionDependencyRatioMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.population.CompositionDependencyRatio" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="dependency_ratio" property="dependencyRatio" jdbcType="DOUBLE" />
+    <result column="ages_14_rate" property="ages14Rate" jdbcType="DOUBLE" />
+    <result column="ages_15_to64" property="ages15To64" jdbcType="DOUBLE" />
+    <result column="ages_65_and_above" property="ages65AndAbove" jdbcType="DOUBLE" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, year, dependency_ratio, ages_14_rate, ages_15_to64, ages_65_and_above, 
+    sort, updated
+  </sql>
+</mapper>

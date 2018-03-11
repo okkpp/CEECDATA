@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.population.ReproductiveHealthMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.population.ReproductiveHealth" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="total_rate" property="totalRate" jdbcType="DOUBLE" />
+    <result column="rate15_19" property="rate1519" jdbcType="DOUBLE" />
+    <result column="rate15_49" property="rate1549" jdbcType="DOUBLE" />
+    <result column="ratio" property="ratio" jdbcType="DOUBLE" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, year, total_rate, rate15_19, rate15_49, ratio, sort, updated
+  </sql>
+</mapper>

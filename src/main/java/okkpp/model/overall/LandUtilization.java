@@ -33,7 +33,7 @@ public class LandUtilization implements Serializable {
     /**
      * 更新日期
      */
-    private Date update;
+    private Date updated;
 
     private static final long serialVersionUID = 1L;
 
@@ -126,18 +126,18 @@ public class LandUtilization implements Serializable {
     /**
      * 获取更新日期
      *
-     * @return update - 更新日期
+     * @return updated - 更新日期
      */
-    public Date getUpdate() {
-        return update;
+    public Date getUpdated() {
+        return updated;
     }
 
     /**
      * 设置更新日期
      *
-     * @param update 更新日期
+     * @param updated 更新日期
      */
-    public void setUpdate(Date update) {
-        this.update = update;
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 }

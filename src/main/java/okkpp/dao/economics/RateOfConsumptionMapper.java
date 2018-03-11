@@ -1,28 +1,7 @@
 package okkpp.dao.economics;
 
-import java.util.List;
 import okkpp.model.economics.RateOfConsumption;
-import okkpp.model.economics.RateOfConsumptionExample;
-import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface RateOfConsumptionMapper {
-    int deleteByExample(RateOfConsumptionExample example);
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(RateOfConsumption record);
-
-    int insertSelective(RateOfConsumption record);
-
-    List<RateOfConsumption> selectByExample(RateOfConsumptionExample example);
-
-    RateOfConsumption selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") RateOfConsumption record, @Param("example") RateOfConsumptionExample example);
-
-    int updateByExample(@Param("record") RateOfConsumption record, @Param("example") RateOfConsumptionExample example);
-
-    int updateByPrimaryKeySelective(RateOfConsumption record);
-
-    int updateByPrimaryKey(RateOfConsumption record);
+public interface RateOfConsumptionMapper extends Mapper<RateOfConsumption> {
 }

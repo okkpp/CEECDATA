@@ -4,7 +4,9 @@ import java.util.List;
 
 import okkpp.dao.overall.CountryAreaMapper;
 import okkpp.model.overall.CountryArea;
-import okkpp.model.overall.CountryAreaExample;
+import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.entity.Example.Criteria;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,11 +23,14 @@ public class CountryAreaService {
 
 	@Autowired
 	CountryAreaMapper mapper;
-	
+	public List<CountryArea> selectAll(){
+		return CountryCode.replaceCountry(mapper.selectAll());
+	}
 	public List<CountryArea> selectByExample(String country){
-		CountryAreaExample example = new CountryAreaExample();
-		okkpp.model.overall.CountryAreaExample.Criteria criteria = example.createCriteria();
-		criteria.andCountryEqualTo(country);
+		Example example = new Example(CountryArea.class);
+		Criteria criteria = example.createCriteria();
+		criteria.andEqualTo("country", country);
 		return mapper.selectByExample(example);
 	}
+	
 }

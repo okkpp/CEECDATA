@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.payment.PaymentMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.payment.Payment" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="current_account" property="currentAccount" jdbcType="DOUBLE" />
+    <result column="goods_credit" property="goodsCredit" jdbcType="DOUBLE" />
+    <result column="goods_debit" property="goodsDebit" jdbcType="DOUBLE" />
+    <result column="services_credit" property="servicesCredit" jdbcType="DOUBLE" />
+    <result column="services_debit" property="servicesDebit" jdbcType="DOUBLE" />
+    <result column="income_credit" property="incomeCredit" jdbcType="DOUBLE" />
+    <result column="income_debit" property="incomeDebit" jdbcType="DOUBLE" />
+    <result column="capital_account" property="capitalAccount" jdbcType="DOUBLE" />
+    <result column="credit" property="credit" jdbcType="DOUBLE" />
+    <result column="financial_account" property="financialAccount" jdbcType="DOUBLE" />
+    <result column="direct_assets" property="directAssets" jdbcType="DOUBLE" />
+    <result column="direct_liabilities" property="directLiabilities" jdbcType="DOUBLE" />
+    <result column="portfolio_assets" property="portfolioAssets" jdbcType="DOUBLE" />
+    <result column="portfolio_liabilities" property="portfolioLiabilities" jdbcType="DOUBLE" />
+    <result column="financial_assets" property="financialAssets" jdbcType="DOUBLE" />
+    <result column="financial_liabilities" property="financialLiabilities" jdbcType="DOUBLE" />
+    <result column="other_liabilities" property="otherLiabilities" jdbcType="DOUBLE" />
+    <result column="reserves_assets" property="reservesAssets" jdbcType="DOUBLE" />
+    <result column="errors_omissions" property="errorsOmissions" jdbcType="DOUBLE" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, year, current_account, goods_credit, goods_debit, services_credit, services_debit, 
+    income_credit, income_debit, capital_account, credit, financial_account, direct_assets, 
+    direct_liabilities, portfolio_assets, portfolio_liabilities, financial_assets, financial_liabilities, 
+    other_liabilities, reserves_assets, errors_omissions, sort, updated
+  </sql>
+</mapper>

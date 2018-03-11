@@ -5,13 +5,13 @@
 <meta charset="UTF-8">
 <title>中东欧16国_宁波中东欧国家合作研究院</title>
 
-<link rel="stylesheet" href="css/contentmain.css" />
+<link rel="stylesheet" href="static-1/css/contentmain.css" />
 
-<link href="css/jquery-accordion-menu.css" rel="stylesheet"
+<link href="static-1/css/jquery-accordion-menu.css" rel="stylesheet"
 	type="text/css" />
-<link href="css/font-awesome.css" rel="stylesheet" type="text/css" />
+<link href="static-1/css/font-awesome.css" rel="stylesheet" type="text/css" />
 
-<script src="js/echarts.js"></script>
+<script src="static-1/js/echarts.js"></script>
 <style type="text/css">
 * {
 	box-sizing: border-box;
@@ -47,8 +47,8 @@ body {
 }
 </style>
 
-<script src="js/jquery-1.11.2.min.js" type="text/javascript"></script>
-<script src="js/jquery-accordion-menu.js" type="text/javascript"></script>
+<script src="static-1/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+<script src="static-1/js/jquery-accordion-menu.js" type="text/javascript"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function() {
 		jQuery("#jquery-accordion-menu").jqueryAccordionMenu();
@@ -165,7 +165,7 @@ body {
 
 	</div>
 
-	<script src="js/contentmain.js"></script>
-	<script src="js/index.js"></script>
+	<script src="static-1/js/contentmain.js"></script>
+	<script src="static-1/js/index.js"></script>
 </body>
 </html>

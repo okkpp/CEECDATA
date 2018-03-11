@@ -1,16 +1,12 @@
 package okkpp.model.price;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
 
-/**
- * 生产者价格指数
-Producer Price Indices
- * 
- * @author wcyong
- * 
- * @date 2018-03-02
- */
-public class Producer {
+@Table(name = "t_price_producer")
+public class Producer implements Serializable {
+    @Id
     private Integer id;
 
     /**
@@ -36,53 +32,111 @@ public class Producer {
     /**
      * 更新时间
      */
-    private Date update;
+    private Date updated;
 
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * @return id
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * 获取国家代码
+     *
+     * @return country - 国家代码
+     */
     public String getCountry() {
         return country;
     }
 
+    /**
+     * 设置国家代码
+     *
+     * @param country 国家代码
+     */
     public void setCountry(String country) {
-        this.country = country == null ? null : country.trim();
+        this.country = country;
     }
 
+    /**
+     * 获取年份
+     *
+     * @return year - 年份
+     */
     public String getYear() {
         return year;
     }
 
+    /**
+     * 设置年份
+     *
+     * @param year 年份
+     */
     public void setYear(String year) {
-        this.year = year == null ? null : year.trim();
+        this.year = year;
     }
 
+    /**
+     * 获取生产者价格指数
+     *
+     * @return indices - 生产者价格指数
+     */
     public Double getIndices() {
         return indices;
     }
 
+    /**
+     * 设置生产者价格指数
+     *
+     * @param indices 生产者价格指数
+     */
     public void setIndices(Double indices) {
         this.indices = indices;
     }
 
+    /**
+     * 获取排序
+     *
+     * @return sort - 排序
+     */
     public Integer getSort() {
         return sort;
     }
 
+    /**
+     * 设置排序
+     *
+     * @param sort 排序
+     */
     public void setSort(Integer sort) {
         this.sort = sort;
     }
 
-    public Date getUpdate() {
-        return update;
+    /**
+     * 获取更新时间
+     *
+     * @return updated - 更新时间
+     */
+    public Date getUpdated() {
+        return updated;
     }
 
-    public void setUpdate(Date update) {
-        this.update = update;
+    /**
+     * 设置更新时间
+     *
+     * @param updated 更新时间
+     */
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 }

@@ -1,15 +1,15 @@
 package okkpp.controller;
 
-import java.util.List;
-import java.util.Map;
-
-import okkpp.model.Content;
 import okkpp.service.ContentService;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.google.gson.Gson;
 
 /**
  * @author DUCK  E-mail: okkpp@qq.com
@@ -22,25 +22,34 @@ public class ContentController {
 	@Autowired
 	private ContentService service;
 	
-	@RequestMapping("/index")
-	public String map(){
-		return "/map";
+	@RequestMapping("/indexcontent")
+	public String map(Model model){
+		model.addAttribute("data", service.Content());
+		return "/zdoDB";
 	}
 	@RequestMapping("/content")
 	public String content(Model model,String GJDM){
-		Map<String,List<Content>> map = service.getContent(GJDM);
-		model.addAttribute("HGJJ", map.get("HGJJ"));
-		model.addAttribute("SHHJ", map.get("SHHJ"));
-		model.addAttribute("MYHZ", map.get("MYHZ"));
-		model.addAttribute("TZYS", map.get("TZYS"));
-		model.addAttribute("GJ", service.GJDM2GJ(GJDM));
 		return "/content";
 	}
 	@RequestMapping("/updateContent")
 	public String updateContent(Model model){
-		int count = service.update();
-		model.addAttribute("count", "一共更新了"+count+"条数据。");
-		model.addAttribute("content", service.getAllContent());
 		return "/content1";
 	}
+	
+	@RequestMapping("/showTables")
+	public String showTables(Model model) {
+		model.addAttribute("data",new Gson().toJson(service.showTables()));
+		System.out.println(new Gson().toJson(service.showTables()));
+		return "404";
+	}
+	
+
+	@RequestMapping("/showColumns")
+	public String showColumns(Model model,@RequestParam("tab")String tab) {
+		model.addAttribute("data",new Gson().toJson(service.showColumns(tab)));
+		System.out.println(new Gson().toJson(service.showColumns(tab)));
+		return "404";
+	}
+	
+	
 }

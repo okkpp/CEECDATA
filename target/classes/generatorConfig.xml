@@ -24,6 +24,7 @@
 			targetProject="src/main/java" />
 		<javaClientGenerator targetPackage="okkpp.dao.finance"
 			targetProject="src/main/java" type="XMLMAPPER" />
+<<<<<<< HEAD
 		<table schema="${jdbc.username}" tableName="t_finance_bank_capital"
 			domainObjectName="BankCapital" enableCountByExample="false"
 			enableDeleteByExample="true" enableSelectByExample="true"
@@ -84,5 +85,12 @@
 			domainObjectName="Surplus" enableCountByExample="false"
 			enableDeleteByExample="true" enableSelectByExample="true"
 			enableUpdateByExample="true" />
+=======
+		<table tableName="t_finance_tax_as_percentage_of_evenue" domainObjectName="TaxAsPercentageOfEvenue"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+
+>>>>>>> 20d81517a95a7a168fb6bf867211e107f29df167
 	</context>
 </generatorConfiguration>

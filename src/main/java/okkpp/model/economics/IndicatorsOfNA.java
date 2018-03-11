@@ -1,16 +1,12 @@
 package okkpp.model.economics;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
 
-/**
- * 按购买力平价法计算的国民经济核算主要指标
- Main Economic Indicators of National Accounts Based on PPP
- * 
- * @author wcyong
- * 
- * @date 2018-03-02
- */
-public class IndicatorsOfNA {
+@Table(name = "t_economics_indicators_of_na")
+public class IndicatorsOfNA implements Serializable {
+    @Id
     private Integer id;
 
     /**
@@ -26,22 +22,22 @@ public class IndicatorsOfNA {
     /**
      * 国内生产总值（现价亿国际元）
      */
-    private Integer gdp;
+    private Double gdp;
 
     /**
      * 人均国民生产总值(现价国际元)
      */
-    private Integer gdppc;
+    private Double gdppc;
 
     /**
      * 国民总收入（现价亿国际元）
      */
-    private Integer gni;
+    private Double gni;
 
     /**
      * 人均国民总收入(现价国际元)
      */
-    private Integer gnipc;
+    private Double gnipc;
 
     /**
      * 排序
@@ -51,77 +47,165 @@ public class IndicatorsOfNA {
     /**
      * 更新日期
      */
-    private Date update;
+    private Date updated;
 
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * @return id
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     public void setId(Integer id) {
         this.id = id;
     }
 
+    /**
+     * 获取国家代码
+     *
+     * @return country - 国家代码
+     */
     public String getCountry() {
         return country;
     }
 
+    /**
+     * 设置国家代码
+     *
+     * @param country 国家代码
+     */
     public void setCountry(String country) {
-        this.country = country == null ? null : country.trim();
+        this.country = country;
     }
 
+    /**
+     * 获取年份
+     *
+     * @return year - 年份
+     */
     public String getYear() {
         return year;
     }
 
+    /**
+     * 设置年份
+     *
+     * @param year 年份
+     */
     public void setYear(String year) {
-        this.year = year == null ? null : year.trim();
+        this.year = year;
     }
 
-    public Integer getGdp() {
+    /**
+     * 获取国内生产总值（现价亿国际元）
+     *
+     * @return gdp - 国内生产总值（现价亿国际元）
+     */
+    public Double getGdp() {
         return gdp;
     }
 
-    public void setGdp(Integer gdp) {
+    /**
+     * 设置国内生产总值（现价亿国际元）
+     *
+     * @param gdp 国内生产总值（现价亿国际元）
+     */
+    public void setGdp(Double gdp) {
         this.gdp = gdp;
     }
 
-    public Integer getGdppc() {
+    /**
+     * 获取人均国民生产总值(现价国际元)
+     *
+     * @return gdppc - 人均国民生产总值(现价国际元)
+     */
+    public Double getGdppc() {
         return gdppc;
     }
 
-    public void setGdppc(Integer gdppc) {
+    /**
+     * 设置人均国民生产总值(现价国际元)
+     *
+     * @param gdppc 人均国民生产总值(现价国际元)
+     */
+    public void setGdppc(Double gdppc) {
         this.gdppc = gdppc;
     }
 
-    public Integer getGni() {
+    /**
+     * 获取国民总收入（现价亿国际元）
+     *
+     * @return gni - 国民总收入（现价亿国际元）
+     */
+    public Double getGni() {
         return gni;
     }
 
-    public void setGni(Integer gni) {
+    /**
+     * 设置国民总收入（现价亿国际元）
+     *
+     * @param gni 国民总收入（现价亿国际元）
+     */
+    public void setGni(Double gni) {
         this.gni = gni;
     }
 
-    public Integer getGnipc() {
+    /**
+     * 获取人均国民总收入(现价国际元)
+     *
+     * @return gnipc - 人均国民总收入(现价国际元)
+     */
+    public Double getGnipc() {
         return gnipc;
     }
 
-    public void setGnipc(Integer gnipc) {
+    /**
+     * 设置人均国民总收入(现价国际元)
+     *
+     * @param gnipc 人均国民总收入(现价国际元)
+     */
+    public void setGnipc(Double gnipc) {
         this.gnipc = gnipc;
     }
 
+    /**
+     * 获取排序
+     *
+     * @return sort - 排序
+     */
     public Integer getSort() {
         return sort;
     }
 
+    /**
+     * 设置排序
+     *
+     * @param sort 排序
+     */
     public void setSort(Integer sort) {
         this.sort = sort;
     }
 
-    public Date getUpdate() {
-        return update;
+    /**
+     * 获取更新日期
+     *
+     * @return updated - 更新日期
+     */
+    public Date getUpdated() {
+        return updated;
     }
 
-    public void setUpdate(Date update) {
-        this.update = update;
+    /**
+     * 设置更新日期
+     *
+     * @param updated 更新日期
+     */
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 }

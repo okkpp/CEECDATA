@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="okkpp.dao.trade.ExportsByCommodityGroupsMapper">
+  <resultMap id="BaseResultMap" type="okkpp.model.trade.ExportsByCommodityGroups">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="agricultural" jdbcType="DOUBLE" property="agricultural" />
+    <result column="food" jdbcType="DOUBLE" property="food" />
+    <result column="fuel" jdbcType="DOUBLE" property="fuel" />
+    <result column="ores_and_metals" jdbcType="DOUBLE" property="oresAndMetals" />
+    <result column="manufactures" jdbcType="DOUBLE" property="manufactures" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, year, agricultural, food, fuel, ores_and_metals, manufactures, sort, 
+    updated
+  </sql>
+</mapper>

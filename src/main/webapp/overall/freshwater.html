@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>淡水资源——中东欧统计数据库</title>
+  <link rel="stylesheet" href="../zdo_static/css/normalize.css">
+  <link rel="stylesheet" href="../zdo_static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../zdo_static/css/zdoData.css">
+  <link rel="stylesheet" href="../zdo_static/css/specialData.css">
+  <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
+  <script src="../zdo_static/js/ShowHide1.js"></script>
+</head>
+<body>
+  <div id="zdodata">
+  <!--           表格与数据图切换栏-->
+      <div class="zdoTab">
+          <input type="radio" name="radio-set" checked="checked" id="radio-form">
+          <a href="#zdoForm"></a>
+          <input type="radio" name="radio-set" id="radio-anal">
+          <a href="#zdoAnalysis"></a>
+
+  <!--            基础数据图表-->
+      <section id="zdoForm">
+          <form action="" method="">
+            <table id="zdoTable" class="table table-striped table-bordered table-hover table-condensed">
+                <caption>淡水资源</caption>
+                <thead>
+                    <th>国家</th>
+                    <th id="rjkzs">人均可再生淡水资源</th>
+
+                </thead>
+                <tbody>
+                    <tr id="aebny">
+                        <td>阿尔巴尼亚</td>
+                        <td class="numCen">999999</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+            <!-- <div id="selectBtn"> -->
+                <!-- 行的显示|隐藏 -->
+                <!-- <input type="checkbox" checked="checked" name="checkCol" title="aebny">阿尔巴尼亚
+                <br> -->
+                <!-- 列的显示|隐藏 -->
+                <!-- <input type="checkbox" checked="checked" name="checkRow" title="rjkzs">人均可再生资源
+            </div> -->
+          </form>
+      </section>
+  <!--            数据图-->
+      <section id="zdoAnalysis">
+          <form action="" method="">
+              <div id="analysis">
+                  <script type="text/javascript">
+                  var dom = document.getElementById("analysis");
+                  var myChart = echarts.init(dom);
+                  var app = {};
+                  var yMax = 100;
+                  option = null;
+                  var dataMap = {};
+                  function dataFormatter(obj) {
+                      var pList = ['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南','西藏','陕西','甘肃','青海','宁夏','新疆'];
+                      var temp;
+                      for (var j = 0,i = 0; i < pList; i++) {
+                          obj[j][i] = {
+                              name : pList[i],
+                              value : temp[i]
+                          }
+                      }
+                      return obj;
+                  }
+
+                  dataMap.dataNY = dataFormatter({
+                      //max : 60000,
+                      2017:[4315,2150.76,6018.28,2324.8,1940.94,5458.22,2348.54,3637.2,5741.03,10606.85,8003.67,3519.72,4467.55,2450.48,10275.5,6035.48,4212.82,4151.54,13502.42,2523.73,642.73,2232.86,4725.01,1243.43,2312.82,162.04,2253.39,1232.03,340.65,377.16,1612.6]
+                  });
+
+                  dataMap.dataGY = dataFormatter({
+                      //max : 4000,
+                      2017:[82.44,84.21,956.84,197.8,374.69,590.2,446.17,474.2,79.68,1110.44,685.2,783.66,664.78,535.98,1390,1288.36,707,847.25,1015.08,601.99,222.89,317.87,1047.95,281.1,463.44,39.75,282.21,215.51,47.31,52.95,305]
+                  });
+
+                  dataMap.dataLife = dataFormatter({
+                      //max : 26600,
+                      2017:[1249.99,1069.08,2911.69,1134.31,754.78,2609.85,943.49,1843.6,2622.45,5604.49,4090.48,1337.04,2036.97,941.77,5184.98,2768.75,1709.89,1523.5,6143.4,846.89,148.88,958.87,1733.38,481.96,934.88,32.72,1007.56,501.69,144.51,153.06,603.15]
+                  });
+
+                  dataMap.dataAnother = dataFormatter({
+                      //max : 25000,
+                      2017:[2982.57,997.47,2149.75,992.69,811.47,2258.17,958.88,1319.4,3038.9,3891.92,3227.99,1399.02,1765.8,972.73,3700.52,1978.37,1795.93,1780.79,6343.94,1074.85,270.96,956.12,1943.68,480.37,914.5,89.56,963.62,514.83,148.83,171.14,704.5]
+                  });
+
+                  option = {
+                      baseOption: {
+                          timeline: {
+                              show: false
+                          },
+                          title: {
+                              subtext: 'danshuiziyuan'
+                          },
+                          tooltip: {
+                          },
+                          legend: {
+                              x: 'right',
+                              data: ['农业用水', '工业用水', '生活用水', '其他用水'],
+                              selected: {
+                                  '其他用水': false
+                              }
+                          },
+                          calculable : true,
+                          grid: {
+                              top: 80,
+                              bottom: 100,
+                              tooltip: {
+                                  trigger: 'axis',
+                                  axisPointer: {
+                                      type: 'shadow',
+                                      label: {
+                                          show: true,
+                                          formatter: function (params) {
+                                              return params.value.replace('\n', '');
+                                          }
+                                      }
+                                  }
+                              }
+                          },
+                          xAxis: [
+                              {
+                                  'type':'category',
+                                  'axisLabel':{'interval':0},
+                                  'data':[
+                                      '北京','\n天津','河北','\n山西','内蒙古','\n辽宁','吉林','\n黑龙江',
+                                      '上海','\n江苏','浙江','\n安徽','福建','\n江西','山东','\n河南',
+                                      '湖北','\n湖南','广东','\n广西','海南','\n重庆','四川','\n贵州',
+                                      '云南','\n西藏','陕西','\n甘肃','青海','\n宁夏','新疆'
+                                  ],
+                                  splitLine: {show: false}
+                              }
+                          ],
+                          yAxis: [
+                              {
+                                  type: 'value',
+                                  name: '%'
+                              }
+                          ],
+                          series: [
+                              {name: '农业用水', type: 'bar'},
+                              {name: '工业用水', type: 'bar'},
+                              {name: '生活用水', type: 'bar'},
+                              {name: '其他用水', type: 'bar'},
+                              {
+                                  name: '人均可再生淡水资源占水资源的比重',
+                                  type: 'pie',
+                                  center: ['75%', '35%'],
+                                  radius: '28%',
+                                  z: 100,
+                                  data:[
+                                    {
+                                        name: '阿尔巴尼亚',
+                                        value: 30  //人均可再生淡水资源数值
+                                    },
+                                    {
+                                        name: '爱沙尼亚',
+                                        value: 40
+                                    },
+                                    {
+                                        name: '保加利亚',
+                                        value: 40
+                                    },
+                                    {
+                                        name: '等等',
+                                        value: 40
+                                    },
+
+                                  ]
+                              }
+                          ]
+                      },
+                      options: [
+                          {
+                              title: {text: '淡水资源'},
+                              series: [
+                                  {data: dataMap.dataNY['2017']},
+                                  {data: dataMap.dataGY['2017']},
+                                  {data: dataMap.dataLife['2017']},
+                                  {data: dataMap.dataAnother['2017']},
+                              ]
+                          },
+                      ]
+                  };;
+                  if (option && typeof option === "object") {
+                      myChart.setOption(option, true);
+                  }
+                  </script>
+              </div>
+          </form>
+      </section>
+      </div>
+  </div>
+
+</body>
+</html>

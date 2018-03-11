@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd 
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<!-- Shiro -->
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">  
+        <property name="securityManager" ref="securityManager" />  
+        <property name="loginUrl" value="/system/login.do" />  
+        <property name="successUrl" value="/system/index.do" />  
+        <property name="unauthorizedUrl" value="/system/login.do" /> 
+        <property name="filters">
+			<map>
+				<entry key="urlPerms">  
+                    <bean class="okkpp.shiro.CustomRolesAuthorizationFilter" />  
+                </entry>
+			</map>
+		</property> 
+        <property name="filterChainDefinitions">
+            <value>
+            	/system/login* = anon
+            	/system/index* = authc
+                /system/** = authc,urlPerms
+                
+                /404* = anon
+            	/zdo-static/** = anon
+            	/MUI/** = anon
+
+            </value>
+        </property>  
+    </bean>
+    
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
+	<!-- 单realm应用。如果有多个realm，使用‘realms’属性代替 -->  
+	<property name="realm" ref="sampleRealm" />  
+	<property name="cacheManager" ref="cacheManager" />  
+	</bean>
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager" />
+	
+	<bean id="sampleRealm" class="okkpp.shiro.sampleRealm">
+		<property name="userMapper" ref="userMapper" />
+		<property name="roleMapper" ref="roleMapper" />
+		<property name="resourceMapper" ref="resourceMapper" />
+	</bean>
+	
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+	
+	<!-- 开启Shiro注解的Spring配置方式的beans。在lifecycleBeanPostProcessor之后运行 -->  
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"  
+        depends-on="lifecycleBeanPostProcessor" />  
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">  
+        <property name="securityManager" ref="securityManager" />  
+    </bean>
+    <bean  
+    class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+    <property name="exceptionMappings">  
+        <props>  
+            <prop key="org.apache.shiro.authz.UnauthorizedException">  
+                /unauthorized  
+            </prop>  
+            <prop key="org.apache.shiro.authz.UnauthenticatedException">  
+                /unauthenticated  
+            </prop>  
+        </props>  
+    </property>  
+	</bean> 
+	
+</beans>

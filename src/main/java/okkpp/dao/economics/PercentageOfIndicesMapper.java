@@ -1,28 +1,7 @@
 package okkpp.dao.economics;
 
-import java.util.List;
 import okkpp.model.economics.PercentageOfIndices;
-import okkpp.model.economics.PercentageOfIndicesExample;
-import org.apache.ibatis.annotations.Param;
+import tk.mybatis.mapper.common.Mapper;
 
-public interface PercentageOfIndicesMapper {
-    int deleteByExample(PercentageOfIndicesExample example);
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(PercentageOfIndices record);
-
-    int insertSelective(PercentageOfIndices record);
-
-    List<PercentageOfIndices> selectByExample(PercentageOfIndicesExample example);
-
-    PercentageOfIndices selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") PercentageOfIndices record, @Param("example") PercentageOfIndicesExample example);
-
-    int updateByExample(@Param("record") PercentageOfIndices record, @Param("example") PercentageOfIndicesExample example);
-
-    int updateByPrimaryKeySelective(PercentageOfIndices record);
-
-    int updateByPrimaryKey(PercentageOfIndices record);
+public interface PercentageOfIndicesMapper extends Mapper<PercentageOfIndices> {
 }

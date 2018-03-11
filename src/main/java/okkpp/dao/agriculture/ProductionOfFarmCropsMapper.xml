@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.agriculture.ProductionOfFarmCropsMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.agriculture.ProductionOfFarmCrops" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="cereals" property="cereals" jdbcType="INTEGER" />
+    <result column="rice" property="rice" jdbcType="INTEGER" />
+    <result column="wheat" property="wheat" jdbcType="INTEGER" />
+    <result column="maize" property="maize" jdbcType="INTEGER" />
+    <result column="soybeans" property="soybeans" jdbcType="INTEGER" />
+    <result column="roots" property="roots" jdbcType="INTEGER" />
+    <result column="groundnuts" property="groundnuts" jdbcType="INTEGER" />
+    <result column="rapeseed" property="rapeseed" jdbcType="INTEGER" />
+    <result column="seedcotton" property="seedcotton" jdbcType="INTEGER" />
+    <result column="sugerbeets" property="sugerbeets" jdbcType="INTEGER" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, year, cereals, rice, wheat, maize, soybeans, roots, groundnuts, rapeseed, 
+    seedcotton, sugerbeets, sort, updated
+  </sql>
+</mapper>

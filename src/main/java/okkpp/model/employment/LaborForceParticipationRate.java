@@ -15,6 +15,11 @@ public class LaborForceParticipationRate implements Serializable {
     private String country;
 
     /**
+     * 年份
+     */
+    private String year;
+
+    /**
      * 劳动力人口
      */
     @Column(name = "total_labor_force")
@@ -40,7 +45,7 @@ public class LaborForceParticipationRate implements Serializable {
     /**
      * 更新日期
      */
-    private Date update;
+    private Date updated;
 
     private static final long serialVersionUID = 1L;
 
@@ -74,6 +79,24 @@ public class LaborForceParticipationRate implements Serializable {
      */
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    /**
+     * 获取年份
+     *
+     * @return year - 年份
+     */
+    public String getYear() {
+        return year;
+    }
+
+    /**
+     * 设置年份
+     *
+     * @param year 年份
+     */
+    public void setYear(String year) {
+        this.year = year;
     }
 
     /**
@@ -151,18 +174,18 @@ public class LaborForceParticipationRate implements Serializable {
     /**
      * 获取更新日期
      *
-     * @return update - 更新日期
+     * @return updated - 更新日期
      */
-    public Date getUpdate() {
-        return update;
+    public Date getUpdated() {
+        return updated;
     }
 
     /**
      * 设置更新日期
      *
-     * @param update 更新日期
+     * @param updated 更新日期
      */
-    public void setUpdate(Date update) {
-        this.update = update;
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 }

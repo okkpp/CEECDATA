@@ -4,7 +4,7 @@ import java.util.List;
 
 import okkpp.dao.overall.FreshWaterMapper;
 import okkpp.model.overall.FreshWater;
-import okkpp.model.overall.FreshWaterExample;
+import okkpp.utils.CountryCode;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +22,9 @@ public class FreshWaterService {
 	@Autowired
 	FreshWaterMapper mapper;
 	public List<FreshWater> selectByExample(String country){
-		FreshWaterExample example = new FreshWaterExample();
-		okkpp.model.overall.FreshWaterExample.Criteria criteria = example.createCriteria();
-		criteria.andCountryEqualTo(country);
-		return mapper.selectByExample(example);
+		return null;
+	}
+	public List<FreshWater> selectAll(){
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 }

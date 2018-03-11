@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.culture.SchoolEnrollmentRatioMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.culture.SchoolEnrollmentRatio" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="school_enrollment_tertiary" property="schoolEnrollmentTertiary" jdbcType="DOUBLE" />
+    <result column="school_enrollment_secondary" property="schoolEnrollmentSecondary" jdbcType="DOUBLE" />
+    <result column="school_enrollment_primary" property="schoolEnrollmentPrimary" jdbcType="DOUBLE" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, country, year, school_enrollment_tertiary, school_enrollment_secondary, school_enrollment_primary, 
+    sort, updated
+  </sql>
+</mapper>
