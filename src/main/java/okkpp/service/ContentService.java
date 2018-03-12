@@ -3,6 +3,8 @@ package okkpp.service;
 import okkpp.model.Content;
 import okkpp.dao.ContentMapper;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,8 +47,26 @@ public class ContentService {
 	public List<HashMap<String, String>> showColumns(String tab) {
 		return mapper.showColumns(tab);
 	}
-	
-	public List<String> showTables(){
-		return mapper.showTables();
+
+	/*
+	 * public List<String> showTables(){ return mapper.showTables(); }
+	 */
+
+	public Map<String, List<String>> showTables() {
+		List<String> list = mapper.showTables();
+		Map<String, List<String>> result = new HashMap<>();
+		for (String str : list) {
+			if (str.contains("t_")) {
+				String c = str.split("_")[1];
+				if (result.containsKey(c)) {
+					result.get(c).add(str.substring(str.indexOf("_", 2) + 1));
+				} else {
+					List<String> sheet = new ArrayList<String>();
+					sheet.add(str.substring(str.indexOf("_", 2) + 1));
+					result.put(c, sheet);
+				}
+			}
+		}
+		return result;
 	}
 }
