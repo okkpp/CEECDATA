@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>按购买力平价法计算的国民经济核算主要指标——中东欧统计数据库</title>
+  <link rel="stylesheet" href="../zdo_static/css/normalize.css">
+  <link rel="stylesheet" href="../zdo_static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../zdo_static/css/zdoData.css">
+  <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
+  <script src="../zdo_static/js/ShowHide1.js"></script>
+</head>
+<body>
+  <div id="zdodata">
+  <!--           表格与数据图切换栏-->
+      <div class="zdoTab">
+          <input type="radio" name="radio-set" checked="checked" id="radio-form">
+          <a href="#zdoForm"></a>
+          <input type="radio" name="radio-set" id="radio-anal">
+          <a href="#zdoAnalysis"></a>
+
+  <!--            基础数据图表-->
+      <section id="zdoForm">
+          <form action="" method="">
+            <table id="zdoTable" class="table table-striped table-bordered table-hover table-condensed">
+                <caption>按购买力平价法计算的国民经济核算主要指标</caption>
+                <thead>
+                    <th>国家</th>
+                    <th>国内生产总值（现价亿国际元）</th>
+                    <th>人均国民生产总值(现价国际元)</th>
+                    <th>等等</th>
+                </thead>
+                <tbody>
+                    <tr id="aebny">
+                        <td>阿尔巴尼亚</td>
+                        <td class="numCen">999999</td>
+                        <td class="numCen">999999</td>
+                        <td class="numCen">999999</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+            <!-- <div id="selectBtn">                 -->
+                <!-- 行的显示|隐藏 -->
+                <!-- <input type="checkbox" checked="checked" name="checkCol" title="aebny">阿尔巴尼亚
+                <br> -->
+                <!-- 列的显示|隐藏 -->
+                <!-- <input type="checkbox" checked="checked" name="checkRow" title="rjkzs">人均可再生资源
+            </div> -->
+          </form>
+      </section>
+  <!--            数据图-->
+      <section id="zdoAnalysis">
+          <form action="" method="">
+              <div id="analysis">
+                  <script type="text/javascript">
+                  var dom = document.getElementById("analysis");
+                      var myChart = echarts.init(dom);
+                      var app = {};
+                      option = null;
+                      option = {
+                          title : {
+                              text: '土地利用',
+                              subtext: '',
+                              textStyle:{
+                                fontSize: 20
+                              }
+                          },
+                          tooltip : {
+                              trigger: 'item'
+                          },
+                          legend: {
+                              show:'true',
+                              data:['蒸发量','降水量','降雪量'],
+
+                          },
+
+                          calculable : true,
+                          xAxis : [
+                              {
+                                  type : 'category',
+                                  data : ['阿尔巴尼亚','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                              }
+                          ],
+                          yAxis : [
+                              {
+                                  type : 'value',
+                                  name: '公顷'
+                              }
+                          ],
+                          series : [
+                              {
+                                  name:'蒸发量',
+                                  type:'bar',
+                                  data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+
+
+                              },
+                              {
+                                  name:'降水量',
+                                  type:'bar',
+                                  data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+
+
+                              },
+                              {
+                                  name:'降雪量',
+                                  type:'bar',
+                                  data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+
+
+                              }
+                          ]
+                      };
+                      ;
+                      if (option && typeof option === "object") {
+                          myChart.setOption(option, true);
+                      }
+                  </script>
+              </div>
+          </form>
+      </section>
+      </div>
+  </div>
+
+</body>
+</html>

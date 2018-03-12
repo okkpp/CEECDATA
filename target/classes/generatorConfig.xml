@@ -28,6 +28,10 @@
 			targetProject="src/main/java" />
 		<javaClientGenerator targetPackage="okkpp.system.dao"
 			targetProject="src/main/java" type="XMLMAPPER" />
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 21495ef56806087efa953303ad54043c45090c9d
 		<table tableName="s_resource" domainObjectName="Resource"
 			enableCountByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" enableUpdateByExample="false" 
@@ -45,8 +49,84 @@
 			enableSelectByExample="false" enableUpdateByExample="false" 
 			schema="${jdbc.username}"/>
 		<table tableName="s_user_role" domainObjectName="UserRole"
+<<<<<<< HEAD
 			enableCountByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" enableUpdateByExample="false" 
 			schema="${jdbc.username}"/>
+=======
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+=======
+<<<<<<< HEAD
+		<table schema="${jdbc.username}" tableName="t_finance_bank_capital"
+			domainObjectName="BankCapital" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_bank_non_performing_loans"
+			domainObjectName="BankNonPerformingLoans" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_central_government_revenue"
+			domainObjectName="CentralGovernmentRevenue" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_debt"
+			domainObjectName="Debt" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_deposit_rate_and_lending_rate"
+			domainObjectName="DepositRateAndLendingRate" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_domestic_credit"
+			domainObjectName="DomesticCredit" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_global_equity_indices"
+			domainObjectName="GlobalEquityIndices" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_goods_and_services"
+			domainObjectName="GoodsAndServices" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_growth_rate_of_money"
+			domainObjectName="GrowthRateOfMoney" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_listed_domestic_companies"
+			domainObjectName="ListedDomesticCompanies" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_money_supply"
+			domainObjectName="MoneySupply" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_quasi_money"
+			domainObjectName="QuasiMoney" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_social_contributions"
+			domainObjectName="SocialContributions" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_stocks_traded_value"
+			domainObjectName="StocksTradedValue" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+		<table schema="${jdbc.username}" tableName="t_finance_surplus"
+			domainObjectName="Surplus" enableCountByExample="false"
+			enableDeleteByExample="true" enableSelectByExample="true"
+			enableUpdateByExample="true" />
+=======
+		<table tableName="t_finance_tax_as_percentage_of_evenue" domainObjectName="TaxAsPercentageOfEvenue"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+
+>>>>>>> 20d81517a95a7a168fb6bf867211e107f29df167
+>>>>>>> cd12121f5749fc2856230a28f99537798c975741
+>>>>>>> 21495ef56806087efa953303ad54043c45090c9d
 	</context>
 </generatorConfiguration>

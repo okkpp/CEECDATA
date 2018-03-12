@@ -26,7 +26,8 @@
         <property name="filterChainDefinitions">
             <value>
             	/system/login* = anon
-                /system/** = authc
+            	/system/index* = authc
+                /system/** = authc,urlPerms
                 
                 /404* = anon
             	/zdo-static/** = anon
