@@ -44,6 +44,22 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+<<<<<<< HEAD
+=======
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+<<<<<<< HEAD
+	
+<context:property-placeholder location="classpath*:application.properties" ignore-resource-not-found="true"/>
+	
+<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+<property name="url" value="jdbc:mysql://112.74.72.205:3306/CEECDATA?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull" />
+<property name="username" value="okkpp" />
+<property name="password" value="123456" />
+=======
+>>>>>>> 20d81517a95a7a168fb6bf867211e107f29df167
+>>>>>>> cd12121f5749fc2856230a28f99537798c975741
 
 	<context:property-placeholder location="classpath*:application.properties"
 		ignore-resource-not-found="true" />
