@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>易燃的可在生能源及废弃物消费占能源总消费比重——中东欧统计数据库</title>
+  <link rel="stylesheet" href="../zdo_static/css/normalize.css">
+  <link rel="stylesheet" href="../zdo_static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../zdo_static/css/zdoData.css">
+  <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
+  <script src="../zdo_static/js/ShowHide2.js"></script>
+</head>
+<body>
+  <div id="zdodata">
+  <!--           表格与数据图切换栏-->
+      <div class="zdoTab">
+          <input type="radio" name="radio-set" checked="checked" id="radio-form">
+          <a href="#zdoForm"></a>
+          <input type="radio" name="radio-set" id="radio-anal">
+          <a href="#zdoAnalysis"></a>
+          <!-- <input type="radio" name="radio-set" id="radio-pie">
+          <a href="#zdoPie"></a> -->
+
+  <!--            基础数据图表-->
+      <section id="zdoForm">
+          <form action="" method="">
+            <table id="zdoTable" class="table table-striped table-bordered table-hover table-condensed">
+              <caption>易燃的可在生能源及废弃物消费占能源总消费比重（%）</caption>
+              <thead>
+                  <th>国家</th>
+                  <th>2018年</th>
+                  <th>2017年</th>
+                  <th>等等</th>
+              </thead>
+              <tbody>
+                  <tr id="aebny">
+                      <td>阿尔巴尼亚</td>
+                      <td class="numCen">999999</td>
+                      <td class="numCen">999999</td>
+                      <td class="numCen">999999</td>
+                  </tr>
+
+
+              </tbody>
+            </table>
+            <div id="formDown">
+              <span>此处数据只展示最近五年，若需全部数据请点击</span>
+              <a href="#" class="datadown" title="下载" onclick="noDown()"></a>
+                <script type="text/javascript">
+                    function noDown(){
+                      alert("开发正在努力中，请等候");
+                    }
+                </script>
+
+            </div>
+            <!-- <div id="selectBtn"> -->
+                <!-- 行的显示|隐藏 -->
+                <!-- <input type="checkbox" checked="checked" name="checkCol" title="aebny">阿尔巴尼亚
+                <br> -->
+                <!-- 列的显示|隐藏 -->
+                <!-- <input type="checkbox" checked="checked" name="checkRow" title="zb">指标
+            </div> -->
+          </form>
+      </section>
+  <!--            数据图-->
+      <section id="zdoAnalysis">
+          <form action="" method="">
+              <div id="analysis">
+                  <script type="text/javascript">
+                  var dom = document.getElementById("analysis");
+                  var myChart = echarts.init(dom);
+                  var app = {};
+                  option = null;
+                  var dataMap = {};
+                  function dataFormatter(obj) {
+                      var pList = ['阿尔巴尼亚','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南'];
+                      var temp;
+                      for (var year = 2014; year <= 2018; year++) {
+                          var max = 0;
+                          var sum = 0;
+                          temp = obj[year];
+                          for (var i = 0, l = temp.length; i < l; i++) {
+                              max = Math.max(max, temp[i]);
+                              sum += temp[i];
+                              obj[year][i] = {
+                                  name : pList[i],
+                                  value : temp[i]
+                              }
+                          }
+                          obj[year + 'max'] = Math.floor(max / 100) * 100;
+                          obj[year + 'sum'] = sum;
+                      }
+                      return obj;
+                  }
+
+                  dataMap.dataFinalC = dataFormatter({
+                      //max : 60000,
+                      2018:[88,78,68,58,48,38,28,18,98,108,88,78,68,58,48,38],
+                      2017:[108,88,78,68,58,48,38,78,68,58,48,38,28,18,98,108],
+                      2016:[88,78,68,58,48,38,38,78,68,58,48,38,28,18,98,108],
+                      2015:[108,88,78,68,58,48,38,78,68,58,48,38,28,18,98,108],
+                      2014:[88,78,68,58,48,38,28,18,98,108,88,78,68,58,48,38]
+                  });
+                  option = {
+                      baseOption: {
+                          timeline: {
+                              // y: 0,
+                              axisType: 'category',
+                              // realtime: false,
+                              // loop: false,
+                              autoPlay: true,
+                              // currentIndex: 2,
+                              playInterval: 1000,
+                              // controlStyle: {
+                              //     position: 'left'
+                              // },
+                              data: [
+                                  '2014-01-01','2015-01-01','2016-01-01','2017-01-01','2018-01-01'
+                              ],
+                              label: {
+                                  formatter : function(s) {
+                                      return (new Date(s)).getFullYear();
+                                  }
+                              }
+                          },
+                          title: {
+                              subtext: 'final_consumption'
+                          },
+                          tooltip: {
+                          },
+                          // legend: {
+                          //     x: 'right',
+                          //     data: ['第一产业', '第二产业', '第三产业', 'GDP', '金融', '房地产'],
+                          //     selected: {
+                          //         'GDP': false, '金融': false, '房地产': false
+                          //     }
+                          // },
+                          toolbox: {
+                              show : true,
+                              feature : {
+                                  magicType : {show: true, type: ['line', 'bar']},
+                                  restore : {show: true},
+                              },
+                              top:'2%'
+                          },
+                          calculable : true,
+                          grid: {
+                              top: 80,
+                              bottom: 100,
+                              tooltip: {
+                                  trigger: 'axis',
+                                  axisPointer: {
+                                      type: 'shadow',
+                                      label: {
+                                          show: true,
+                                          formatter: function (params) {
+                                              return params.value.replace('\n', '');
+                                          }
+                                      }
+                                  }
+                              }
+                          },
+                          xAxis: [
+                              {
+                                  'type':'category',
+                                  'axisLabel':{'interval':0},
+                                  'data':[
+                                      '北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江',
+                                      '上海','江苏','浙江','安徽','福建','江西','山东','河南'
+                                  ],
+                                  splitLine: {show: false}
+                              }
+                          ],
+                          yAxis: [
+                              {
+                                  type: 'value',
+                                  name: '%'
+                              }
+                          ],
+                          series: [{
+                              name: '最终消费支出', type: 'bar',
+                              itemStyle:{
+                                normal: {      //一般样式
+                                  color: 'rgb(81, 181, 145)'
+                              },
+                                emphasis: {     //类似于鼠标的hover样式
+                                    color:'rgb(115, 217, 168)'
+                                }
+                              },
+
+                          }],
+                      },
+                      options: [
+                          {
+                              title: {text: '2014年各国最终消费支出'},
+                              series: [
+                                  {data: dataMap.dataFinalC['2014']},
+                              ]
+                          },
+                          {
+                              title: {text: '2015年各国最终消费支出'},
+                              series: [
+                                  {data: dataMap.dataFinalC['2015']},
+                              ]
+                          },
+                          {
+                              title: {text: '2016年各国最终消费支出'},
+                              series: [
+                                  {data: dataMap.dataFinalC['2016']},
+                              ]
+                          },
+                          {
+                              title: {text: '2017年各国最终消费支出'},
+                              series: [
+                                  {data: dataMap.dataFinalC['2017']},
+                              ]
+                          },
+                          {
+                              title: {text: '2018年各国最终消费支出'},
+                              series: [
+                                  {data: dataMap.dataFinalC['2018']},
+                              ]
+                          }
+                      ]
+                  };;
+                  if (option && typeof option === "object") {
+                      myChart.setOption(option, true);
+                  }
+                  </script>
+              </div>
+          </form>
+      </section>
+      <!-- <section id="zdoPie">
+        <form action="" method="">
+          <div id="DataPie">
+            <script type="text/javascript">
+            var pList = ['阿尔巴尼亚','爱沙尼亚','保加利亚'];
+            var dom = document.getElementById("DataPie");
+            var myChart = echarts.init(dom);
+            var app = {};
+            option = null;
+            var dataMap = {};
+            function dataFormatter(obj) {
+                var temp;
+                for (var year = 2014; year <= 2018; year++) {
+                    var max = 0;
+                    var sum = 0;
+                    temp = obj[year];
+                    for (var i = 0, l = temp.length; i < l; i++) {
+                        max = Math.max(max, temp[i]);
+                        sum += temp[i];
+                        obj[year][i] = {
+                            name : pList[i],
+                            value : temp[i]
+                        }
+                    }
+                    obj[year + 'max'] = Math.floor(max / 100) * 100;
+                    obj[year + 'sum'] = sum;
+                }
+                return obj;
+            }
+
+            dataMap.dataAebny = dataFormatter({
+                //max : 4000,
+                2018:[50],
+                2017:[60],
+                2016:[30],
+                2015:[20],
+                2014:[50]
+
+            });
+
+            dataMap.dataSI = dataFormatter({
+                //max : 26600,
+                2018:[50],
+                2017:[40],
+                2016:[30],
+                2015:[20],
+                2014:[60]
+
+            });
+
+            dataMap.dataTI = dataFormatter({
+                //max : 25000,
+                2018:[50],
+                2017:[60],
+                2016:[30],
+                2015:[40],
+                2014:[56]
+
+            });
+            option = {
+                baseOption: {
+                    timeline: {
+                        // y: 0,
+                        axisType: 'category',
+                        // realtime: false,
+                        // loop: false,
+                        autoPlay: true,
+                        // currentIndex: 2,
+                        playInterval: 1000,
+                        // controlStyle: {
+                        //     position: 'left'
+                        // },
+                        data: [
+                            '2014-01-01','2015-01-01','2016-01-010','2017-01-01','2018-01-01'
+
+                        ],
+                        label: {
+                            formatter : function(s) {
+                                return (new Date(s)).getFullYear();
+                            }
+                        }
+                    },
+                    title: {
+                        subtext: '数据来自国家统计局'
+                    },
+                    tooltip: {
+                    },
+                    legend: {
+                        x: 'right',
+                        data: ['阿尔巴尼亚', '爱沙尼亚', '保加利亚'],
+
+                    },
+                    calculable : true,
+                    grid: {
+                        top: 80,
+                        bottom: 100,
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow',
+                                label: {
+                                    show: true,
+                                    formatter: function (params) {
+                                        return params.value.replace('\n', '');
+                                    }
+                                }
+                            }
+                        }
+                    },
+
+                    series: [
+
+                        {
+                            name: '国内生产总值增长率（%）',
+                            type: 'pie',
+                            center: ['50%', '50%'],
+                            radius: '50%',
+                            z: 100
+                        }
+                    ]
+                },
+                options: [
+                    {
+                        title : {text: '2014各国国内生产总值增长率'},
+                        series : [
+
+                            {data: [
+                                {name: pList[0], value: dataMap.dataAebny['2014sum']},
+                                {name: pList[1], value: dataMap.dataSI['2014sum']},
+                                {name: pList[2], value: dataMap.dataTI['2014sum']}
+                            ]}
+                        ]
+                    },
+                    {
+                        title : {text: '2015各国国内生产总值增长率'},
+                        series : [
+
+                            {data: [
+                                {name: pList[0], value: dataMap.dataAebny['2015sum']},
+                                {name: pList[1], value: dataMap.dataSI['2015sum']},
+                                {name: pList[2], value: dataMap.dataTI['2015sum']}
+                            ]}
+                        ]
+                    },
+                    {
+                        title : {text: '2016各国国内生产总值增长率'},
+                        series : [
+
+                            {data: [
+                                {name: '阿尔巴尼亚', value: dataMap.dataAebny['2016sum']},
+                                {name: '爱沙尼亚', value: dataMap.dataSI['2016sum']},
+                                {name: '保加利亚', value: dataMap.dataTI['2016sum']}
+                            ]}
+                        ]
+                    },
+                    {
+                        title : {text: '2017各国国内生产总值增长率'},
+                        series : [
+
+                            {data: [
+                                {name: '阿尔巴尼亚', value: dataMap.dataAebny['2017sum']},
+                                {name: '爱沙尼亚', value: dataMap.dataSI['2017sum']},
+                                {name: '保加利亚', value: dataMap.dataTI['2017sum']}
+                            ]}
+                        ]
+                    },
+                    {
+                        title : {text: '2018各国国内生产总值增长率'},
+                        series : [
+
+                            {data: [
+                                {name: '阿尔巴尼亚', value: dataMap.dataAebny['2018sum']},
+                                {name: '爱沙尼亚', value: dataMap.dataSI['2018sum']},
+                                {name: '保加利亚', value: dataMap.dataTI['2018sum']}
+                            ]}
+                        ]
+                    }
+                ]
+            };;
+            if (option && typeof option === "object") {
+                myChart.setOption(option, true);
+            }
+            </script>
+          </div>
+        </form>
+      </section> -->
+      </div>
+  </div>
+
+</body>
+</html>
