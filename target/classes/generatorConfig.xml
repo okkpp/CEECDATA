@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD 
+
+ MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd 
+
+" >
 <generatorConfiguration>
 	<properties resource="application.properties" />
 	<context id="mysql">
@@ -18,16 +22,31 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.model.finance"
+		<javaModelGenerator targetPackage="okkpp.system.model"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.dao.finance"
+		<sqlMapGenerator targetPackage="okkpp.system.dao"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.dao.finance"
+		<javaClientGenerator targetPackage="okkpp.system.dao"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table tableName="t_finance_tax_as_percentage_of_evenue" domainObjectName="TaxAsPercentageOfEvenue"
+		<table tableName="s_resource" domainObjectName="Resource"
 			enableCountByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" enableUpdateByExample="false" 
 			schema="${jdbc.username}"/>
-
+		<table tableName="s_resource_role" domainObjectName="ResourceRole"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="s_role" domainObjectName="Role"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="s_user" domainObjectName="User"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
+		<table tableName="s_user_role" domainObjectName="UserRole"
+			enableCountByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" enableUpdateByExample="false" 
+			schema="${jdbc.username}"/>
 	</context>
 </generatorConfiguration>
