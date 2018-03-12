@@ -24,7 +24,7 @@
 			<div class="padding border-bottom">
 				<ul class="search" style="padding-left: 10px;">
 					<li><a class="button border-main icon-plus-square-o"
-						href="sys_mui.do?str=add"> 添加内容</a></li>
+						href="mui.do?str=add"> 添加内容</a></li>
 					<li>搜索：</li>
 					<li>首页 <select name="s_ishome" class="input"
 						onchange="changesearch()"

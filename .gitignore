@@ -1,5 +1,8 @@
 /target/
+<<<<<<< HEAD
+=======
 .classpath
 .settings/org.eclipse.wst.common.component
 target/classes/generatorConfig.xml
 target/m2e-wtp/web-resources/META-INF/maven/okkpp/CEECDATA/pom.properties
+>>>>>>> 937f2ed34dc59332607a262ad28ffd742a3e56ef
