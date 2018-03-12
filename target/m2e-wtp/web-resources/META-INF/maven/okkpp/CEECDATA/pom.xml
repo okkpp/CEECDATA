@@ -1,100 +1,3 @@
-<<<<<<< HEAD
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>okkpp</groupId>
-  <artifactId>CEECDATA</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <dependencies>
-    <dependency>
-  		<groupId>org.springframework</groupId>
-  		<artifactId>spring-webmvc</artifactId>
-  		<version>4.2.2.RELEASE</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.springframework</groupId>
-  		<artifactId>spring-jdbc</artifactId>
-  		<version>4.2.2.RELEASE</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.mybatis</groupId>
-  		<artifactId>mybatis-spring</artifactId>
-  		<version>1.2.3</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.mybatis</groupId>
-  		<artifactId>mybatis</artifactId>
-  		<version>3.3.0</version>
-  	</dependency>
-  	<dependency>
-		<groupId>tk.mybatis</groupId>
-		<artifactId>mapper</artifactId>
-		<version>3.3.0</version>
-	</dependency>
-  	<dependency>
-  		<groupId>com.mysql</groupId>
-  		<artifactId>mysql-connector-java</artifactId>
-  		<version>5.1.37-bin</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.alibaba</groupId>
-  		<artifactId>druid</artifactId>
-  		<version>1.0.16</version>
-  	</dependency>
-  	
-  	
-  	<dependency>
-    	<groupId>com.google.code.gson</groupId>
-    	<artifactId>gson</artifactId>
-    	<version>2.3.1</version>
-	</dependency>
-	<dependency>
-		<groupId>org.jsoup</groupId>
-		<artifactId>jsoup</artifactId>
-		<version>1.10.2</version>
-	</dependency>
-	
-	<!-- excel : xls/xlsx -->
-	<dependency>
-		<groupId>org.apache.poi</groupId>
-		<artifactId>poi</artifactId>
-		<version>3.9</version>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.poi</groupId>
-		<artifactId>poi-ooxml</artifactId>
-		<version>3.9</version>
-	</dependency>
-	<!-- file upload -->
-	<dependency>
-		<groupId>commons-io</groupId>
-		<artifactId>commons-io</artifactId>
-		<version>2.5</version>
-	</dependency>
-	<dependency>
-		<groupId>commons-fileupload</groupId>
-		<artifactId>commons-fileupload</artifactId>
-		<version>1.3.2</version>
-	</dependency>
-	<!-- JSTL -->
-	<dependency>
-		<groupId>net.sf.jxls</groupId>
-		<artifactId>jxls-core</artifactId>
-		<version>1.0.6</version>
-	</dependency>
-	<dependency>
-		<groupId>javax.servlet.jsp.jstl</groupId>
-		<artifactId>jstl-api</artifactId>
-		<version>1.2</version>
-	</dependency>
-	<dependency>
-		<groupId>org.glassfish.web</groupId>
-		<artifactId>jstl-impl</artifactId>
-		<version>1.2</version>
-	</dependency>
-  </dependencies>
-  
-=======
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -137,6 +40,19 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
 			<version>1.0.16</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-all -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-all</artifactId>
+			<version>1.4.0</version>
+			<type>pom</type>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.46</version>
 		</dependency>
 
 
@@ -188,7 +104,7 @@
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jstl-impl</artifactId>
 			<version>1.2</version>
-		</dependency>		
+		</dependency>
 		<!--引入pageHelper分页插件 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
@@ -197,6 +113,11 @@
 		</dependency>
 		<!-- 返回json字符串的支持 -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.8.8</version>
+		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
@@ -225,7 +146,6 @@
 		</dependency>
 	</dependencies>
 
->>>>>>> d7de2ed6af32f38ef207574979f616e36416a70a
 	<build>
 		<plugins>
 			<plugin>

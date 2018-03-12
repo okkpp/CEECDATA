@@ -1,14 +1,15 @@
 package okkpp.controller;
 
 import okkpp.service.ContentService;
-
-import org.apache.commons.collections.map.HashedMap;
+import java.util.HashMap;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.google.gson.Gson;
 
 /**
@@ -37,18 +38,18 @@ public class ContentController {
 	}
 	
 	@RequestMapping("/showTables")
-	public String showTables(Model model) {
-		model.addAttribute("data",new Gson().toJson(service.showTables()));
-		System.out.println(new Gson().toJson(service.showTables()));
-		return "404";
+	@ResponseBody
+	public List<String> showTables(Model model) {
+		return service.showTables();
 	}
 	
 
 	@RequestMapping("/showColumns")
-	public String showColumns(Model model,@RequestParam("tab")String tab) {
+	@ResponseBody
+	public List<HashMap<String, String>> showColumns(Model model,@RequestParam("tab")String tab) {
 		model.addAttribute("data",new Gson().toJson(service.showColumns(tab)));
 		System.out.println(new Gson().toJson(service.showColumns(tab)));
-		return "404";
+		return service.showColumns(tab);
 	}
 	
 	
