@@ -67,9 +67,5 @@ public class ContentService {
 		}
 		return result;
 	}
-	
-	public List<Consumer> consumers(){
-		System.out.println(mapper.consumers());
-		return mapper.consumers();
-	}
+
 }

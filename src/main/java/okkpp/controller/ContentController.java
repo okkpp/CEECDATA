@@ -54,7 +54,6 @@ public class ContentController {
 	@ResponseBody
 	public List<HashMap<String, String>> showColumns(Model model,@RequestParam("tab")String tab) {
 		model.addAttribute("data",new Gson().toJson(service.showColumns(tab)));
-		//System.out.println(new Gson().toJson(service.showColumns(tab)));
 		return service.showColumns(tab);
 	}
 		
