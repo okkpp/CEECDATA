@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -25,37 +26,21 @@
 				<ul class="search" style="padding-left: 10px;">
 					<li><a class="button border-main icon-plus-square-o"
 						href="mui.do?str=add"> 添加内容</a></li>
-					<li>搜索：</li>
-					<li>首页 <select name="s_ishome" class="input"
+					<li>搜索</li>
+					<li>章节:<select id="chapter_choose" class="input"
 						onchange="changesearch()"
-						style="width: 60px; line-height: 17px; display: inline-block">
-							<option value="">选择</option>
-							<option value="1">是</option>
-							<option value="0">否</option>
-					</select> &nbsp;&nbsp; 推荐 <select name="s_isvouch" class="input"
+						style="width: 120px; line-height: 17px; display: inline-block">
+							<option></option>
+					</select> &nbsp;&nbsp; 数据表 <select id="sheet_choose" class="input"
 						onchange="changesearch()"
-						style="width: 60px; line-height: 17px; display: inline-block">
-							<option value="">选择</option>
-							<option value="1">是</option>
-							<option value="0">否</option>
-					</select> &nbsp;&nbsp; 置顶 <select name="s_istop" class="input"
+						style="width: 120px; line-height: 17px; display: inline-block">
+							<option></option>
+					</select> &nbsp;&nbsp; 搜索类别: <select id="column_choose" class="input"
 						onchange="changesearch()"
-						style="width: 60px; line-height: 17px; display: inline-block">
-							<option value="">选择</option>
-							<option value="1">是</option>
-							<option value="0">否</option>
+						style="width: 120px; line-height: 17px; display: inline-block">
+							<option></option>
 					</select>
 					</li>
-					<if condition="$iscid eq 1">
-					<li><select name="cid" class="input"
-						style="width: 200px; line-height: 17px;" onchange="changesearch()">
-							<option value="">请选择分类</option>
-							<option value="">产品分类</option>
-							<option value="">产品分类</option>
-							<option value="">产品分类</option>
-							<option value="">产品分类</option>
-					</select></li>
-					</if>
 					<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
 						class="input"
 						style="width: 250px; line-height: 17px; display: inline-block" />
@@ -64,8 +49,10 @@
 							搜索</a></li>
 				</ul>
 			</div>
-			<table class="table table-hover text-center">
-				<tr>
+			<table id="search_result" class="table table-hover text-center">
+			<thead>
+			<tr></tr>		
+				<!-- <tr>
 					<th width="100" style="text-align: left; padding-left: 20px;">ID</th>
 					<th width="10%">排序</th>
 					<th>图片</th>
@@ -74,9 +61,9 @@
 					<th>分类名称</th>
 					<th width="10%">更新时间</th>
 					<th width="310">操作</th>
-				</tr>
-				<volist name="list" id="vo">
-				<tr>
+				</tr> -->
+			</thead>
+				<!-- <tr>
 					<td style="text-align: left; padding-left: 20px;"><input
 						type="checkbox" name="id[]" value="" /> 1</td>
 					<td><input type="text" name="sort[1]" value="1"
@@ -93,97 +80,7 @@
 								href="javascript:void(0)" onclick="return del(1,1,1)"><span
 								class="icon-trash-o"></span> 删除</a>
 						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align: left; padding-left: 20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td><input type="text" name="sort[1]" value="1"
-						style="width: 50px; text-align: center; border: 1px solid #ddd; padding: 7px 0;" /></td>
-					<td width="10%"><img src="images/11.jpg" alt="" width="70"
-						height="50" /></td>
-					<td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-					<td><font color="#00CC99">首页</font></td>
-					<td>产品分类</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align: left; padding-left: 20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td><input type="text" name="sort[1]" value="1"
-						style="width: 50px; text-align: center; border: 1px solid #ddd; padding: 7px 0;" /></td>
-					<td width="10%"><img src="images/11.jpg" alt="" width="70"
-						height="50" /></td>
-					<td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-					<td><font color="#00CC99">首页</font></td>
-					<td>产品分类</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align: left; padding-left: 20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td><input type="text" name="sort[1]" value="1"
-						style="width: 50px; text-align: center; border: 1px solid #ddd; padding: 7px 0;" /></td>
-					<td width="10%"><img src="images/11.jpg" alt="" width="70"
-						height="50" /></td>
-					<td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-					<td><font color="#00CC99">首页</font></td>
-					<td>产品分类</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align: left; padding-left: 20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td><input type="text" name="sort[1]" value="1"
-						style="width: 50px; text-align: center; border: 1px solid #ddd; padding: 7px 0;" /></td>
-					<td width="10%"><img src="images/11.jpg" alt="" width="70"
-						height="50" /></td>
-					<td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-					<td><font color="#00CC99">首页</font></td>
-					<td>产品分类</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align: left; padding-left: 20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td><input type="text" name="sort[1]" value="1"
-						style="width: 50px; text-align: center; border: 1px solid #ddd; padding: 7px 0;" /></td>
-					<td width="10%"><img src="images/11.jpg" alt="" width="70"
-						height="50" /></td>
-					<td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-					<td><font color="#00CC99">首页</font></td>
-					<td>产品分类</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
+				</tr> -->
 				<tr>
 					<td style="text-align: left; padding: 19px 0; padding-left: 20px;"><input
 						type="checkbox" id="checkall" /> 全选</td>
@@ -238,6 +135,71 @@
 			</table>
 		</div>
 	</form>
+	<script type="text/javascript">
+		$.ajax({
+			url : "../showTables.do",
+			type : "GET",
+			success : function(result) {
+				//alert(result);
+				//现实数据库的表
+				result = eval('(' + result + ')');
+
+				for ( var item in result) {
+					$("<option></option>").append(item).appendTo(
+							"#chapter_choose");
+				}
+				$("#chapter_choose").change(
+						function() {
+							var opt = result[$("#chapter_choose").val()];
+							$("#sheet_choose").empty();
+							$("#auto_create").empty();
+							$("<option></option>").appendTo("#sheet_choose");
+							for ( var i in opt) {
+								$("<option></option>").append(opt[i]).appendTo(
+										"#sheet_choose");
+							}
+						});
+				$("#sheet_choose").change(
+						function() {
+							var tab = "t_" + $("#chapter_choose").val() + "_"
+									+ $("#sheet_choose").val();
+							$.ajax({
+								url : "../showColumns.do",
+								data : "tab=" + tab,
+								type : "GET",
+								success : function(result) {
+									result = eval('(' + result + ')');
+									$("#column_choose").empty();
+									$("#search_result thead tr").empty();
+									$.each(result, function(index, item) {
+										$("<option></option>").append(
+												item.Comment).appendTo(
+												"#column_choose");
+										//$("<td></td>").append("test").appendTo("#search_result thead tr");
+										if(item.Comment == ""){
+											item.Comment = "id";
+										}
+										$("<th></th>").append(item.Comment).appendTo("#search_result thead tr");
+										//alert($("#chapter_choose").val() + $("#sheet_choose").val());
+										
+										 $.ajax({
+											url:"../price/Consumer",
+											type:"GET",
+											success:function(result){
+												console.log(result);
+											}
+										})
+										/* var input = $("<input></input>").css */
+										/* <td style="text-align: left; padding-left: 20px;"><input
+										type="checkbox" name="id[]" value="" /> 1</td> */
+									});
+								}
+							})
+						});
+			}
+		});
+	</script>
+
 	<script type="text/javascript">
 		//搜索
 		function changesearch() {

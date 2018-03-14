@@ -1,10 +1,8 @@
 package okkpp.service;
 
 import okkpp.model.Content;
+import okkpp.model.price.Consumer;
 import okkpp.dao.ContentMapper;
-
-import static org.junit.Assert.assertNotNull;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -68,5 +66,10 @@ public class ContentService {
 			}
 		}
 		return result;
+	}
+	
+	public List<Consumer> consumers(){
+		System.out.println(mapper.consumers());
+		return mapper.consumers();
 	}
 }
