@@ -40,7 +40,4 @@
   <select id="showColumns" resultType="java.util.HashMap">
       show full columns from ${tab}
   </select>
-  <select id="consumers" resultType="okkpp.model.price.Consumer">
-  	  select * from t_price_consumer
-  </select>
 </mapper>

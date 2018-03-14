@@ -183,7 +183,7 @@
 										//alert($("#chapter_choose").val() + $("#sheet_choose").val());
 										
 										 $.ajax({
-											url:"../price/Consumer",
+											url:"../showTables.do",
 											type:"GET",
 											success:function(result){
 												console.log(result);
