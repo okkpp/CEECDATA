@@ -1,7 +1,6 @@
 package okkpp.service;
 
 import okkpp.model.Content;
-import okkpp.model.price.Consumer;
 import okkpp.dao.ContentMapper;
 import java.util.ArrayList;
 import java.util.HashMap;

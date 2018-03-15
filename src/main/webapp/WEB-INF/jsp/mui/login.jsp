@@ -33,7 +33,7 @@
 						</div>
 						<div class="panel-body"
 							style="padding: 30px; padding-bottom: 10px; padding-top: 10px;">
-							<p style="color: red">*${msg}</p>
+							<c:if test="${msg!=null}"><p style="color: red">*${msg}</p></c:if>
 							<div class="form-group">
 								<div class="field field-icon-right">
 									<input type="text" class="input input-big" name="username"

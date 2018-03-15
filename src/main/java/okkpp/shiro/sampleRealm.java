@@ -2,6 +2,7 @@ package okkpp.shiro;
 
 import java.util.List;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -63,6 +64,7 @@ public class sampleRealm extends AuthorizingRealm {
 			throw new LockedAccountException();
 		}
 		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUid(), user.getPassword(), getName());
+		SecurityUtils.getSubject().getSession().setAttribute("user", user);
 		System.out.println("这是认证方法");
 		// throw new UnknownAccountException();
 		return info;
