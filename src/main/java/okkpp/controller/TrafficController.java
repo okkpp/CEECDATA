@@ -1,13 +1,17 @@
 package okkpp.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.service.traffic.*;
+import okkpp.model.Msg;
 import okkpp.model.traffic.*;
 
 @Controller
@@ -21,6 +25,15 @@ public class TrafficController {
 		List<AirFreight> list = airFreightService.selectAll();
 		model.addAttribute("data",list);
 		return "404";
+	}	
+	@RequestMapping(value = "/air_freight",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg airFreight(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<AirFreight> list = airFreightService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
 	@Autowired
@@ -31,6 +44,15 @@ public class TrafficController {
 		model.addAttribute("data",list);
 		return "404";
 	}
+	@RequestMapping(value = "/broadband",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg broadband(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<Broadband> list = broadbandService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
+	}
 	
 	@Autowired
 	ContainerService containerService;
@@ -40,6 +62,15 @@ public class TrafficController {
 		model.addAttribute("data",list);
 		return "404";
 	}
+	@RequestMapping(value = "/container",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg container(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<Container> list = containerService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
+	}
 	
 	@Autowired
 	FreightService freightService;
@@ -47,9 +78,18 @@ public class TrafficController {
 	public String Freight(Model model) {
 		List<Freight> list = freightService.selectAll();
 		model.addAttribute("data",list);
-		return "404";
+		return "404";	
 	}
-
+	@RequestMapping(value = "/freight",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg freight(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<Freight> list = freightService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
+	}
+	
 	@Autowired
 	InternetServersService internetServersService;
 	@RequestMapping("/InternetServers")
@@ -57,6 +97,15 @@ public class TrafficController {
 		List<InternetServers> list = internetServersService.selectAll();
 		model.addAttribute("data",list);
 		return "404";
+	}
+	@RequestMapping(value = "/internet_servers",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg internetServers(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<InternetServers> list = internetServersService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
 	@Autowired
@@ -67,7 +116,16 @@ public class TrafficController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	
+	@RequestMapping(value = "/internet_users",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg internetUsers(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<InternetUsers> list = internetUsersService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
+	}
+
 	@Autowired
 	PhoneService phoneService;
 	@RequestMapping("/Phone")
@@ -76,7 +134,16 @@ public class TrafficController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	
+	@RequestMapping(value = "/phone",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg phone(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<Phone> list = phoneService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
+	}
+
 	@Autowired
 	RailLinesService railLinesService;
 	@RequestMapping("/RailLines")
@@ -84,6 +151,15 @@ public class TrafficController {
 		List<RailLines> list = railLinesService.selectAll();
 		model.addAttribute("data",list);
 		return "404";
+	}
+	@RequestMapping(value = "/rail_lines",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg railLines(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<RailLines> list = railLinesService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
 }

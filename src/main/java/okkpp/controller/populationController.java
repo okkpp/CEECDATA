@@ -6,8 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import okkpp.service.population.*;
+import okkpp.service.traffic.AirFreightService;
+import okkpp.model.Msg;
 import okkpp.model.population.*;
+import okkpp.model.traffic.AirFreight;
 
 @Controller
 @RequestMapping("/population")
@@ -21,7 +31,16 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	
+	@RequestMapping(value = "/birth_rate_death_rate",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg birthAndDeathRate(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<BirthAndDeathRate> list = birthAndDeathRateService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
+	}
+
 	@Autowired
 	CompositionDependencyRatioService compositionDependencyRatioService;
 	@RequestMapping("/CompositionDependencyRatio")
@@ -29,6 +48,15 @@ public class populationController {
 		List<CompositionDependencyRatio> list = compositionDependencyRatioService.selectAll();
 		model.addAttribute("data",list);
 		return "404";
+	}
+	@RequestMapping(value = "/composition_dependency_ratio",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg compositionDependencyRatio(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<CompositionDependencyRatio> list = compositionDependencyRatioService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
 	@Autowired
@@ -39,6 +67,15 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
+	@RequestMapping(value = "/density",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg density(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<Density> list = densityService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
+	}
 	
 	@Autowired
 	FemalePercentService femalePercentService;
@@ -48,14 +85,32 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
+	@RequestMapping(value = "/female_percent",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg femalePercent(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<FemalePercent> list = femalePercentService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
+	}
 	
 	@Autowired
 	InfantMortalityRateService infantMortalityRateService;
-	@RequestMapping("/InfantMortalityRate")
+	@RequestMapping(value = "/InfantMortalityRate",method = RequestMethod.POST)
 	public String InfantMortalityRate(Model model) {
 		List<InfantMortalityRate> list = infantMortalityRateService.selectAll();
 		model.addAttribute("data",list);
 		return "404";
+	}
+	@RequestMapping("/infant_mortality_rate")
+	@ResponseBody
+	public Msg infantMortalityRate(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<InfantMortalityRate> list = infantMortalityRateService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
 	@Autowired
@@ -66,6 +121,15 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
+	@RequestMapping(value = "/life_expectancy_at_birth",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg lifeExpectancyAtBirth(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<LifeExpectancyAtBirth> list = lifeExpectancyAtBirthService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
+	}
 	
 	@Autowired
 	MidYearPoplationService midYearPoplationService;
@@ -74,6 +138,15 @@ public class populationController {
 		List<MidYearPoplation> list = midYearPoplationService.selectAll();
 		model.addAttribute("data",list);
 		return "404";
+	}
+	@RequestMapping(value = "/mid_year_poplation",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg midYearPoplation(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<MidYearPoplation> list = midYearPoplationService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
 	@Autowired
@@ -84,6 +157,15 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
+	@RequestMapping(value = "/reproductive_health",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg reproductiveHealth(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<ReproductiveHealth> list = reproductiveHealthService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
+	}
 	
 	@Autowired
 	RuralAndUrbanRateService ruralAndUrbanRateService;
@@ -92,6 +174,15 @@ public class populationController {
 		List<RuralAndUrbanRate> list = ruralAndUrbanRateService.selectAll();
 		model.addAttribute("data",list);
 		return "404";
+	}
+	@RequestMapping(value = "/rural_and_urban_rate",method = RequestMethod.POST)
+	@ResponseBody
+	public Msg ruralAndUrbanRate(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<RuralAndUrbanRate> list = ruralAndUrbanRateService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
 }

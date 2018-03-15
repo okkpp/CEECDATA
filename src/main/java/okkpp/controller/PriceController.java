@@ -5,12 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-
 import okkpp.model.Msg;
 import okkpp.model.price.*;
 import okkpp.service.price.*;
@@ -21,6 +20,12 @@ public class PriceController {
 
 	@Autowired
 	ConsumerService consumerService;
+	@RequestMapping(value = "/Consumer",method = RequestMethod.POST)
+	public String Consumer(Model model) {
+		List<Consumer> list = consumerService.selectAll();
+		model.addAttribute("data",list);
+		return "404";
+	}
 	@RequestMapping("/consumer")
 	@ResponseBody
 	public Msg Consumer(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
@@ -33,6 +38,12 @@ public class PriceController {
 	
 	@Autowired
 	ProducerService producerService;
+	@RequestMapping(value = "/Producer",method = RequestMethod.POST)
+	public String Producer(Model model) {
+		List<Producer> list = producerService.selectAll();
+		model.addAttribute("data",list);
+		return "404";
+	}
 	@RequestMapping("/producer")
 	@ResponseBody
 	public Msg Producer(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {

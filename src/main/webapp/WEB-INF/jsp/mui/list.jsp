@@ -32,28 +32,25 @@
 							<option></option>
 						</select>
 						&nbsp;&nbsp; 数据表
-						<select id="sheet_choose" class="input"	style="width: 120px; line-height: 17px; display: inline-block">
-							<option></option>
+						<select id="sheet_choose" class="input" style="width: 120px; line-height: 17px; display: inline-block">
 						</select>
 						&nbsp;&nbsp; 搜索类别:
 						<select id="column_choose" class="input" style="width: 120px; line-height: 17px; display: inline-block">
-							<option></option>
 						</select>
 					</li>
 					<li>
 						<input type="text" placeholder="请输入搜索关键字" id="condition" class="input" style="width: 250px; line-height: 17px; display: inline-block" />
-						<input type="button" class="button border-main icon-search" onclick="search()" value = "搜索"> 
+						<input type="button" class="button border-main icon-search" onclick="search()" value="搜索">
 					</li>
 				</ul>
 			</div>
 			<table id="search_result" class="table table-hover text-center">
 				<thead>
-				<tr></tr>
+					<tr></tr>
 				</thead>
 				<tbody>
 				</tbody>
-			</table>
-			<!-- <tr>
+				<!-- <tr>
 				<td style="text-align: left; padding: 19px 0; padding-left: 20px;">
 					<input type="checkbox" id="checkall" />
 					全选
@@ -94,21 +91,15 @@
 					</select>
 				</td>
 			</tr>-->
-			<!-- <tr>
-				<td colspan="8">
-					<div class="pagelist">
-						<a href="">上一页</a>
-						<span class="current">1</span>
-						<a href="">2</a>
-						<a href="">3</a>
-						<a href="">下一页</a>
-						<a href="">尾页</a>
-					</div>
-				</td>
-			</tr> -->
+			</table>
+			<div class="col-xs-12">
+				<div class="pagelist" id="page_nav_area">
+				</div>
+			</div>
 		</div>
 	</form>
 	<script type="text/javascript">	
+		//显示数据库数据章节
 		$.ajax({
 			url : "../showTables.do",
 			type : "GET",
@@ -119,15 +110,18 @@
 				for ( var item in result) {
 					$("<option></option>").append(item).appendTo("#chapter_choose");
 				}
+				//选择章节填充数据
 				$("#chapter_choose").change(function() {
 					var opt = result[$("#chapter_choose").val()];
 					$("#sheet_choose").empty();
 					$("#auto_create").empty();
+					//为章节添加空白选项
 					$("<option></option>").appendTo("#sheet_choose");
 					for ( var i in opt) {
 						$("<option></option>").append(opt[i]).appendTo("#sheet_choose");
 						}
 				});
+				//选择数据表填充数据
 				$("#sheet_choose").change(function() {
 					var tab = "t_"+ $("#chapter_choose").val() + "_"+ $("#sheet_choose").val();
 					$.ajax({
@@ -138,31 +132,16 @@
 							result = eval('('+ result+ ')');
 							$("#column_choose").empty();
 							$("#search_result thead tr").empty();
+							//为搜索类别添加空白选项
+							$("<option></option>").appendTo("#column_choose");
 							$.each(result,function(index,item) {
 								$("<option></option>").append(item.Field).appendTo("#column_choose");
-									if (item.Field == "") {item.Comment = "id";}
+									if (item.Comment == "") {item.Comment = "id";}
 									$("<th></th>").append(item.Comment).appendTo("#search_result thead tr");
 							});
 							$("<th></th>").append("操作").appendTo("#search_result thead tr");
-							var str ="../"+$("#chapter_choose").val()+"/"+$("#sheet_choose").val()+".do";
-							$.ajax({
-								url : str,
-								type : "GET",
-								success : function(result){
-									result = eval('('+ result+ ')');
-									$("#search_result tbody").empty();
-									$.each(result.extend.pageInfo.list,function(index,item){
-										var tr = $("<tr></tr>");
-										for(var i in item){
-											tr.append($("<td></td>").append(item[i]));
-										}
-										tr.append($("<td><td>").append("编辑"));
-										//.append($("<a></a>").append("删除"));
-										tr.appendTo("#search_result tbody");
-
-									});
-								}
-							})							
+							to_page(1);
+													
 							/* <td><div class="button-group">
 							<a class="button border-main" href="add.html"><span
 								class="icon-edit"></span> 修改</a> <a class="button border-red"
@@ -174,25 +153,105 @@
 				});
 			}
 		});
-	</script>
+		
+		//构建导航条元素
+		function builde_page_nav(result){			
+			$("#page_nav_area").empty();
+			var firstPageSpan = $("<span></span>").append("首页").attr("href","#");
+			var prePageSpan = $("<span></span>").append("上一页").attr("href","#");
+			if (result.extend.pageInfo.hasPreviousPage == false) {
+				firstPageSpan.addClass("disabled");
+				prePageSpan.addClass("disabled");
+			} else {
+				//为元素添加点击翻页的事件
+				firstPageSpan.click(function() {
+					to_page(1);
+				});
+				prePageSpan.click(function() {
+					to_page(result.extend.pageInfo.pageNum - 1);
+				});
+			}
+			//添加到导航条
+			firstPageSpan.appendTo("#page_nav_area");
+			prePageSpan.appendTo("#page_nav_area");
+			
+			$.each(result.extend.pageInfo.navigatepageNums, function(index,
+					item) {
+				var numSpan = $("<span></span>").append(item);
+				if (result.extend.pageInfo.pageNum == item) {
+					numSpan.addClass("current");
+				}
+				numSpan.click(function() {
+					to_page(item);
+				});
+				numSpan.appendTo("#page_nav_area");
+			});
+			
+			var nextPageSpan = $("<span></span>").append("下一页").attr("href","#");
+			var lastPageSpan= $("<span></span>").append("末页").attr("href","#");
+			if (result.extend.pageInfo.hasNextPage == false) {
+				nextPageSpan.addClass("disabled");
+				lastPageSpan.addClass("disabled");
+			} else {
+				nextPageSpan.click(function() {
+					to_page(result.extend.pageInfo.pageNum + 1);
+				});
+				lastPageSpan.click(function() {
+					to_page(result.extend.pageInfo.pages);
+				});
+			}
+			//添加到导航条
+			nextPageSpan.appendTo("#page_nav_area");
+			lastPageSpan.appendTo("#page_nav_area"); 
+			
+		}
+		
+		//跳转页数
+		function to_page(pn){
+			var str ="../"+$("#chapter_choose").val()+"/"+$("#sheet_choose").val()+".do";
+			$.ajax({
+				url : str,
+				data : "pn=" + pn,
+				type : "POST",
+				success : function(result) {
+					//console.log(result);
+					result = eval('('+ result+ ')');
+					create_result(result);
+					//解析显示分页条数据
+					builde_page_nav(result);
+				}
+			});
+		}
+		
+		//创建搜索结果
+		function create_result(result){
+			$("#search_result tbody").empty();
+			$.each(result.extend.pageInfo.list,function(index,item){
+				var tr = $("<tr></tr>");
+				for(var i in item){
+					tr.append($("<td></td>").append(item[i]));
+				}
+				tr.append($("<td><td>").append("编辑"));
+				tr.appendTo("#search_result tbody");
 
-	<script type="text/javascript">
+			});
+		}
+		
 		//搜索
 		function search() {
-			var a = $("#chapter_choose").val();
-			var b = $("#sheet_choose").val();
-			var c = $("#column_choose").val();
-			var d = $("#condition").val();
-			var str = "../"+a+"/"+b+"/searchByCondition.do?&column="+c+"&condition="+d;
-			console.log(str);
-			/* $.ajax({
+			var chapter = $("#chapter_choose").val();
+			var sheet = $("#sheet_choose").val();
+			var column = $("#column_choose").val();
+			var condition = $("#condition").val();
+			var str = "../"+chapter+"/"+sheet+"/searchByCondition.do?&column="+column+"&condition="+condition;
+			//console.log(str);
+			$.ajax({
 				url : str,
 				type : "GET",
 				success : function(result){
-					alert(result);
+					create_result(result);
 				}
-			}) */
-			//alert(a +":"+ b + ":" +c);
+			});
 		}
 
 		//单个删除
