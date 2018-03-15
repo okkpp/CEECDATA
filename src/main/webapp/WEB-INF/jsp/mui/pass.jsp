@@ -17,14 +17,14 @@
 <div class="panel admin-panel">
   <div class="panel-head"><strong><span class="icon-key"></span> 修改会员密码</strong></div>
   <div class="body-content">
-    <form method="post" class="form-x" action="">
+    <form method="post" class="form-x" action="renewpsw.do">
       <div class="form-group">
         <div class="label">
           <label for="sitename">管理员帐号：</label>
         </div>
         <div class="field">
           <label style="line-height:33px;">
-           admin
+           ${user.username}
           </label>
         </div>
       </div>      
@@ -41,7 +41,7 @@
           <label for="sitename">新密码：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" name="newpass" size="50" placeholder="请输入新密码" data-validate="required:请输入新密码,length#>=5:新密码不能小于5位" />         
+          <input type="password" class="input w50" id="newpass" name="newpass" size="50" placeholder="请输入新密码" data-validate="required:请输入新密码,length#>=5:新密码不能小于5位" />         
         </div>
       </div>
       <div class="form-group">
@@ -49,7 +49,8 @@
           <label for="sitename">确认新密码：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" name="renewpass" size="50" placeholder="请再次输入新密码" data-validate="required:请再次输入新密码,repeat#newpass:两次输入的密码不一致" />          
+          <input type="password" class="input w50" id="renewpass" name="renewpass" size="50" placeholder="请再次输入新密码" onchange="checkPass()" data-validate="required:请再次输入新密码,repeat#newpass:两次输入的密码不一致" />
+          <p id="checkmsg"></p>        
         </div>
       </div>
       
@@ -64,4 +65,16 @@
     </form>
   </div>
 </div>
-</body></html>
+</body>
+<script type="text/javascript">
+
+function checkPass(){
+	//alert($("#newpass").val());
+	/* console.log(); */
+	if($("#newpass").val()!=$("#renewpass").val()){
+		$("#checkmsg").html = "两次密码不一致。";
+	}
+}
+
+</script>
+</html>

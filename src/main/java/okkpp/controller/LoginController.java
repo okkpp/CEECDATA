@@ -4,10 +4,14 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import okkpp.system.dao.UserMapper;
+import okkpp.system.model.User;
 
 /**
  * @author duck
@@ -33,9 +37,9 @@ public class LoginController {
 			} catch (AuthenticationException e) {
 				System.out.println("µ«¬º ß∞‹:" + e.getMessage());
 				if(e.getMessage()==null||e.getMessage()=="")
-					model.addAttribute("msg", "√‹¬Î¥ÌŒÛ°£");
-				else
 					model.addAttribute("msg", "«Î»∑»œ’À∫≈√‹¬Î°£");
+				else
+					model.addAttribute("msg", "√‹¬Î¥ÌŒÛ°£");
 				return "/mui/login";
 			}
 
@@ -45,9 +49,10 @@ public class LoginController {
 	}
 
 	@RequestMapping("logout")
-	public String logout() {
+	public String logout(Model model) {
 		Subject currentUser = SecurityUtils.getSubject();
 		currentUser.logout();
+		model.addAttribute("msg", "ÕÀ≥ˆµ«¬º£°");
 		return "/mui/login";
 	}
 
@@ -56,6 +61,15 @@ public class LoginController {
 		return "/mui/index";
 	}
 
+	@Autowired
+	UserMapper usermapper;
+	@RequestMapping("renewpsw")
+	public String renewPass(Model model,String mpass,String newpass,String renewpass) {
+		User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
+		user.setPassword(newpass);
+		usermapper.updateByPrimaryKey(user);
+		return "/mui/pass";
+	}
 	@RequestMapping("/mui")
 	public String info(String str) {
 		str = "/mui/" + str;
