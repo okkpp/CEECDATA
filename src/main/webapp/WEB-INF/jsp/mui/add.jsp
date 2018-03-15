@@ -94,6 +94,7 @@
 						function() {
 							var opt = result[$("#chapter_choose").val()];
 							$("#sheet_choose").empty();
+							$("#auto_create").empty();
 							$("<option></option>").appendTo("#sheet_choose");
 							for ( var i in opt) {
 								$("<option></option>").append(opt[i]).appendTo(

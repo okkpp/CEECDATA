@@ -21,7 +21,7 @@ public class ConsumerService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<Consumer> selectByExample(String country){
+	public List<Consumer> selectByExample(String column,String condition){
 		return null;
 	}
 	

@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.economics.ShareOfFormationMapper" >
+
+    <resultMap id="BaseResultMap" type="okkpp.model.economics.ShareOfFormation" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="country" property="country" jdbcType="VARCHAR" />
+        <result column="year" property="year" jdbcType="VARCHAR" />
+        <result column="share" property="share" jdbcType="DOUBLE" />
+        <result column="unit" property="unit" jdbcType="VARCHAR" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="update" property="update" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, country, year, share, unit, sort, update
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="okkpp.model.economics.ShareOfFormationExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_economics_share_of_formation
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_economics_share_of_formation
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from t_economics_share_of_formation
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="okkpp.model.economics.ShareOfFormationExample" >
+        delete from t_economics_share_of_formation
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="okkpp.model.economics.ShareOfFormation" >
+        insert into t_economics_share_of_formation (id, country, year, 
+            share, unit, sort, 
+            update)
+        values (#{id,jdbcType=INTEGER}, #{country,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
+            #{share,jdbcType=DOUBLE}, #{unit,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+            #{update,jdbcType=TIMESTAMP})
+    </insert>
+
+    <insert id="insertSelective" parameterType="okkpp.model.economics.ShareOfFormation" >
+        insert into t_economics_share_of_formation
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="country != null" >
+                country,
+            </if>
+            <if test="year != null" >
+                year,
+            </if>
+            <if test="share != null" >
+                share,
+            </if>
+            <if test="unit != null" >
+                unit,
+            </if>
+            <if test="sort != null" >
+                sort,
+            </if>
+            <if test="update != null" >
+                update,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="country != null" >
+                #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="year != null" >
+                #{year,jdbcType=VARCHAR},
+            </if>
+            <if test="share != null" >
+                #{share,jdbcType=DOUBLE},
+            </if>
+            <if test="unit != null" >
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="update != null" >
+                #{update,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update t_economics_share_of_formation
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=INTEGER},
+            </if>
+            <if test="record.country != null" >
+                country = #{record.country,jdbcType=VARCHAR},
+            </if>
+            <if test="record.year != null" >
+                year = #{record.year,jdbcType=VARCHAR},
+            </if>
+            <if test="record.share != null" >
+                share = #{record.share,jdbcType=DOUBLE},
+            </if>
+            <if test="record.unit != null" >
+                unit = #{record.unit,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sort != null" >
+                sort = #{record.sort,jdbcType=INTEGER},
+            </if>
+            <if test="record.update != null" >
+                update = #{record.update,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update t_economics_share_of_formation
+        set id = #{record.id,jdbcType=INTEGER},
+            country = #{record.country,jdbcType=VARCHAR},
+            year = #{record.year,jdbcType=VARCHAR},
+            share = #{record.share,jdbcType=DOUBLE},
+            unit = #{record.unit,jdbcType=VARCHAR},
+            sort = #{record.sort,jdbcType=INTEGER},
+            update = #{record.update,jdbcType=TIMESTAMP}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="okkpp.model.economics.ShareOfFormation" >
+        update t_economics_share_of_formation
+        <set >
+            <if test="country != null" >
+                country = #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="year != null" >
+                year = #{year,jdbcType=VARCHAR},
+            </if>
+            <if test="share != null" >
+                share = #{share,jdbcType=DOUBLE},
+            </if>
+            <if test="unit != null" >
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="update != null" >
+                update = #{update,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="okkpp.model.economics.ShareOfFormation" >
+        update t_economics_share_of_formation
+        set country = #{country,jdbcType=VARCHAR},
+            year = #{year,jdbcType=VARCHAR},
+            share = #{share,jdbcType=DOUBLE},
+            unit = #{unit,jdbcType=VARCHAR},
+            sort = #{sort,jdbcType=INTEGER},
+            update = #{update,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

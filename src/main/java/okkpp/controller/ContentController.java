@@ -1,10 +1,13 @@
 package okkpp.controller;
 
 import okkpp.service.ContentService;
+import okkpp.service.price.ConsumerService;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.validator.PublicClassValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import okkpp.model.price.Consumer;
 
 import com.google.gson.Gson;
 
@@ -45,15 +49,12 @@ public class ContentController {
 	public Map<String, List<String>> showTables(Model model) {	
 		return service.showTables();
 	}
-	
 
 	@RequestMapping(value = "/showColumns",method = RequestMethod.GET)
 	@ResponseBody
 	public List<HashMap<String, String>> showColumns(Model model,@RequestParam("tab")String tab) {
 		model.addAttribute("data",new Gson().toJson(service.showColumns(tab)));
-		//System.out.println(new Gson().toJson(service.showColumns(tab)));
 		return service.showColumns(tab);
 	}
-	
-	
+		
 }

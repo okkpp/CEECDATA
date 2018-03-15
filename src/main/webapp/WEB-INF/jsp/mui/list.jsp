@@ -5,8 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
 <title></title>
 <link rel="stylesheet" href="../MUI/css/pintuer.css">
@@ -18,230 +17,241 @@
 	<form method="post" action="" id="listform">
 		<div class="panel admin-panel">
 			<div class="panel-head">
-				<strong class="icon-reorder"> 内容列表</strong> <a href=""
-					style="float: right; display: none;">添加字段</a>
+				<strong class="icon-reorder"> 内容列表</strong>
+				<a href="" style="float: right; display: none;">添加字段</a>
 			</div>
 			<div class="padding border-bottom">
 				<ul class="search" style="padding-left: 10px;">
-					<li><a class="button border-main icon-plus-square-o"
-						href="mui.do?str=add"> 添加内容</a></li>
-					<li>搜索：</li>
-					<li>首页 <select name="s_ishome" class="input"
-						onchange="changesearch()"
-						style="width: 60px; line-height: 17px; display: inline-block">
-							<option value="">选择</option>
-							<option value="1">是</option>
-							<option value="0">否</option>
-					</select> &nbsp;&nbsp; 推荐 <select name="s_isvouch" class="input"
-						onchange="changesearch()"
-						style="width: 60px; line-height: 17px; display: inline-block">
-							<option value="">选择</option>
-							<option value="1">是</option>
-							<option value="0">否</option>
-					</select> &nbsp;&nbsp; 置顶 <select name="s_istop" class="input"
-						onchange="changesearch()"
-						style="width: 60px; line-height: 17px; display: inline-block">
-							<option value="">选择</option>
-							<option value="1">是</option>
-							<option value="0">否</option>
-					</select>
+					<li>
+						<a class="button border-main icon-plus-square-o" href="mui.do?str=add"> 添加内容</a>
 					</li>
-					<if condition="$iscid eq 1">
-					<li><select name="cid" class="input"
-						style="width: 200px; line-height: 17px;" onchange="changesearch()">
-							<option value="">请选择分类</option>
-							<option value="">产品分类</option>
-							<option value="">产品分类</option>
-							<option value="">产品分类</option>
-							<option value="">产品分类</option>
-					</select></li>
-					</if>
-					<li><input type="text" placeholder="请输入搜索关键字" name="keywords"
-						class="input"
-						style="width: 250px; line-height: 17px; display: inline-block" />
-						<a href="javascript:void(0)"
-						class="button border-main icon-search" onclick="changesearch()">
-							搜索</a></li>
+					<li>搜索</li>
+					<li>
+						章节:
+						<select id="chapter_choose" class="input" style="width: 120px; line-height: 17px; display: inline-block">
+							<option></option>
+						</select>
+						&nbsp;&nbsp; 数据表
+						<select id="sheet_choose" class="input" style="width: 120px; line-height: 17px; display: inline-block">
+						</select>
+						&nbsp;&nbsp; 搜索类别:
+						<select id="column_choose" class="input" style="width: 120px; line-height: 17px; display: inline-block">
+						</select>
+					</li>
+					<li>
+						<input type="text" placeholder="请输入搜索关键字" id="condition" class="input" style="width: 250px; line-height: 17px; display: inline-block" />
+						<input type="button" class="button border-main icon-search" onclick="search()" value="搜索">
+					</li>
 				</ul>
 			</div>
-			<table class="table table-hover text-center">
-				<tr>
-					<th width="100" style="text-align: left; padding-left: 20px;">ID</th>
-					<th width="10%">排序</th>
-					<th>图片</th>
-					<th>名称</th>
-					<th>属性</th>
-					<th>分类名称</th>
-					<th width="10%">更新时间</th>
-					<th width="310">操作</th>
-				</tr>
-				<volist name="list" id="vo">
-				<tr>
-					<td style="text-align: left; padding-left: 20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td><input type="text" name="sort[1]" value="1"
-						style="width: 50px; text-align: center; border: 1px solid #ddd; padding: 7px 0;" /></td>
-					<td width="10%"><img src="images/11.jpg" alt="" width="70"
-						height="50" /></td>
-					<td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-					<td><font color="#00CC99">首页</font></td>
-					<td>产品分类</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align: left; padding-left: 20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td><input type="text" name="sort[1]" value="1"
-						style="width: 50px; text-align: center; border: 1px solid #ddd; padding: 7px 0;" /></td>
-					<td width="10%"><img src="images/11.jpg" alt="" width="70"
-						height="50" /></td>
-					<td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-					<td><font color="#00CC99">首页</font></td>
-					<td>产品分类</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align: left; padding-left: 20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td><input type="text" name="sort[1]" value="1"
-						style="width: 50px; text-align: center; border: 1px solid #ddd; padding: 7px 0;" /></td>
-					<td width="10%"><img src="images/11.jpg" alt="" width="70"
-						height="50" /></td>
-					<td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-					<td><font color="#00CC99">首页</font></td>
-					<td>产品分类</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align: left; padding-left: 20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td><input type="text" name="sort[1]" value="1"
-						style="width: 50px; text-align: center; border: 1px solid #ddd; padding: 7px 0;" /></td>
-					<td width="10%"><img src="images/11.jpg" alt="" width="70"
-						height="50" /></td>
-					<td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-					<td><font color="#00CC99">首页</font></td>
-					<td>产品分类</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align: left; padding-left: 20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td><input type="text" name="sort[1]" value="1"
-						style="width: 50px; text-align: center; border: 1px solid #ddd; padding: 7px 0;" /></td>
-					<td width="10%"><img src="images/11.jpg" alt="" width="70"
-						height="50" /></td>
-					<td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-					<td><font color="#00CC99">首页</font></td>
-					<td>产品分类</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align: left; padding-left: 20px;"><input
-						type="checkbox" name="id[]" value="" /> 1</td>
-					<td><input type="text" name="sort[1]" value="1"
-						style="width: 50px; text-align: center; border: 1px solid #ddd; padding: 7px 0;" /></td>
-					<td width="10%"><img src="images/11.jpg" alt="" width="70"
-						height="50" /></td>
-					<td>这是一套MUI后台精美管理系统，感谢您的支持</td>
-					<td><font color="#00CC99">首页</font></td>
-					<td>产品分类</td>
-					<td>2016-07-01</td>
-					<td><div class="button-group">
-							<a class="button border-main" href="add.html"><span
-								class="icon-edit"></span> 修改</a> <a class="button border-red"
-								href="javascript:void(0)" onclick="return del(1,1,1)"><span
-								class="icon-trash-o"></span> 删除</a>
-						</div></td>
-				</tr>
-				<tr>
-					<td style="text-align: left; padding: 19px 0; padding-left: 20px;"><input
-						type="checkbox" id="checkall" /> 全选</td>
-					<td colspan="7" style="text-align: left; padding-left: 20px;"><a
-						href="javascript:void(0)" class="button border-red icon-trash-o"
-						style="padding: 5px 15px;" onclick="DelSelect()"> 删除</a> <a
-						href="javascript:void(0)"
-						style="padding: 5px 15px; margin: 0 10px;"
-						class="button border-blue icon-edit" onclick="sorts()"> 排序</a> 操作：
-						<select name="ishome"
-						style="padding: 5px 15px; border: 1px solid #ddd;"
-						onchange="changeishome(this)">
-							<option value="">首页</option>
-							<option value="1">是</option>
-							<option value="0">否</option>
-					</select> <select name="isvouch"
-						style="padding: 5px 15px; border: 1px solid #ddd;"
-						onchange="changeisvouch(this)">
-							<option value="">推荐</option>
-							<option value="1">是</option>
-							<option value="0">否</option>
-					</select> <select name="istop"
-						style="padding: 5px 15px; border: 1px solid #ddd;"
-						onchange="changeistop(this)">
-							<option value="">置顶</option>
-							<option value="1">是</option>
-							<option value="0">否</option>
-					</select> &nbsp;&nbsp;&nbsp; 移动到： <select name="movecid"
-						style="padding: 5px 15px; border: 1px solid #ddd;"
-						onchange="changecate(this)">
-							<option value="">请选择分类</option>
-							<option value="">产品分类</option>
-							<option value="">产品分类</option>
-							<option value="">产品分类</option>
-							<option value="">产品分类</option>
-					</select> <select name="copynum"
-						style="padding: 5px 15px; border: 1px solid #ddd;"
-						onchange="changecopy(this)">
-							<option value="">请选择复制</option>
-							<option value="5">复制5条</option>
-							<option value="10">复制10条</option>
-							<option value="15">复制15条</option>
-							<option value="20">复制20条</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td colspan="8"><div class="pagelist">
-							<a href="">上一页</a> <span class="current">1</span><a href="">2</a><a
-								href="">3</a><a href="">下一页</a><a href="">尾页</a>
-						</div></td>
-				</tr>
+			<table id="search_result" class="table table-hover text-center">
+				<thead>
+					<tr></tr>
+				</thead>
+				<tbody>
+				</tbody>
+				<!-- <tr>
+				<td style="text-align: left; padding: 19px 0; padding-left: 20px;">
+					<input type="checkbox" id="checkall" />
+					全选
+				</td>
+				<td colspan="7" style="text-align: left; padding-left: 20px;">
+					<a href="javascript:void(0)" class="button border-red icon-trash-o" style="padding: 5px 15px;" onclick="DelSelect()"> 删除</a>
+					<a href="javascript:void(0)" style="padding: 5px 15px; margin: 0 10px;" class="button border-blue icon-edit" onclick="sorts()"> 排序</a>
+					操作：
+					<select name="ishome" style="padding: 5px 15px; border: 1px solid #ddd;" onchange="changeishome(this)">
+						<option value="">首页</option>
+						<option value="1">是</option>
+						<option value="0">否</option>
+					</select>
+					<select name="isvouch" style="padding: 5px 15px; border: 1px solid #ddd;" onchange="changeisvouch(this)">
+						<option value="">推荐</option>
+						<option value="1">是</option>
+						<option value="0">否</option>
+					</select>
+					<select name="istop" style="padding: 5px 15px; border: 1px solid #ddd;" onchange="changeistop(this)">
+						<option value="">置顶</option>
+						<option value="1">是</option>
+						<option value="0">否</option>
+					</select>
+					&nbsp;&nbsp;&nbsp; 移动到：
+					<select name="movecid" style="padding: 5px 15px; border: 1px solid #ddd;" onchange="changecate(this)">
+						<option value="">请选择分类</option>
+						<option value="">产品分类</option>
+						<option value="">产品分类</option>
+						<option value="">产品分类</option>
+						<option value="">产品分类</option>
+					</select>
+					<select name="copynum" style="padding: 5px 15px; border: 1px solid #ddd;" onchange="changecopy(this)">
+						<option value="">请选择复制</option>
+						<option value="5">复制5条</option>
+						<option value="10">复制10条</option>
+						<option value="15">复制15条</option>
+						<option value="20">复制20条</option>
+					</select>
+				</td>
+			</tr>-->
 			</table>
+			<div class="col-xs-12">
+				<div class="pagelist" id="page_nav_area">
+				</div>
+			</div>
 		</div>
 	</form>
-	<script type="text/javascript">
-		//搜索
-		function changesearch() {
+	<script type="text/javascript">	
+		//显示数据库数据章节
+		$.ajax({
+			url : "../showTables.do",
+			type : "GET",
+			success : function(result) {
+				//alert(result);
+				//现实数据库的表
+				result = eval('(' + result + ')');
+				for ( var item in result) {
+					$("<option></option>").append(item).appendTo("#chapter_choose");
+				}
+				//选择章节填充数据
+				$("#chapter_choose").change(function() {
+					var opt = result[$("#chapter_choose").val()];
+					$("#sheet_choose").empty();
+					$("#auto_create").empty();
+					//为章节添加空白选项
+					$("<option></option>").appendTo("#sheet_choose");
+					for ( var i in opt) {
+						$("<option></option>").append(opt[i]).appendTo("#sheet_choose");
+						}
+				});
+				//选择数据表填充数据
+				$("#sheet_choose").change(function() {
+					var tab = "t_"+ $("#chapter_choose").val() + "_"+ $("#sheet_choose").val();
+					$.ajax({
+						url : "../showColumns.do",
+						data : "tab=" + tab,
+						type : "GET",
+						success : function(result) {
+							result = eval('('+ result+ ')');
+							$("#column_choose").empty();
+							$("#search_result thead tr").empty();
+							//为搜索类别添加空白选项
+							$("<option></option>").appendTo("#column_choose");
+							$.each(result,function(index,item) {
+								$("<option></option>").append(item.Field).appendTo("#column_choose");
+									if (item.Comment == "") {item.Comment = "id";}
+									$("<th></th>").append(item.Comment).appendTo("#search_result thead tr");
+							});
+							$("<th></th>").append("操作").appendTo("#search_result thead tr");
+							to_page(1);
+													
+							/* <td><div class="button-group">
+							<a class="button border-main" href="add.html"><span
+								class="icon-edit"></span> 修改</a> <a class="button border-red"
+								href="javascript:void(0)" onclick="return del(1,1,1)"><span
+								class="icon-trash-o"></span> 删除</a>
+						</div></td> */
+						}
+					})
+				});
+			}
+		});
+		
+		//构建导航条元素
+		function builde_page_nav(result){			
+			$("#page_nav_area").empty();
+			var firstPageSpan = $("<span></span>").append("首页").attr("href","#");
+			var prePageSpan = $("<span></span>").append("上一页").attr("href","#");
+			if (result.extend.pageInfo.hasPreviousPage == false) {
+				firstPageSpan.addClass("disabled");
+				prePageSpan.addClass("disabled");
+			} else {
+				//为元素添加点击翻页的事件
+				firstPageSpan.click(function() {
+					to_page(1);
+				});
+				prePageSpan.click(function() {
+					to_page(result.extend.pageInfo.pageNum - 1);
+				});
+			}
+			//添加到导航条
+			firstPageSpan.appendTo("#page_nav_area");
+			prePageSpan.appendTo("#page_nav_area");
+			
+			$.each(result.extend.pageInfo.navigatepageNums, function(index,
+					item) {
+				var numSpan = $("<span></span>").append(item);
+				if (result.extend.pageInfo.pageNum == item) {
+					numSpan.addClass("current");
+				}
+				numSpan.click(function() {
+					to_page(item);
+				});
+				numSpan.appendTo("#page_nav_area");
+			});
+			
+			var nextPageSpan = $("<span></span>").append("下一页").attr("href","#");
+			var lastPageSpan= $("<span></span>").append("末页").attr("href","#");
+			if (result.extend.pageInfo.hasNextPage == false) {
+				nextPageSpan.addClass("disabled");
+				lastPageSpan.addClass("disabled");
+			} else {
+				nextPageSpan.click(function() {
+					to_page(result.extend.pageInfo.pageNum + 1);
+				});
+				lastPageSpan.click(function() {
+					to_page(result.extend.pageInfo.pages);
+				});
+			}
+			//添加到导航条
+			nextPageSpan.appendTo("#page_nav_area");
+			lastPageSpan.appendTo("#page_nav_area"); 
+			
+		}
+		
+		//跳转页数
+		function to_page(pn){
+			var str ="../"+$("#chapter_choose").val()+"/"+$("#sheet_choose").val()+".do";
+			$.ajax({
+				url : str,
+				data : "pn=" + pn,
+				type : "POST",
+				success : function(result) {
+					//console.log(result);
+					result = eval('('+ result+ ')');
+					create_result(result);
+					//解析显示分页条数据
+					builde_page_nav(result);
+				}
+			});
+		}
+		
+		//创建搜索结果
+		function create_result(result){
+			$("#search_result tbody").empty();
+			$.each(result.extend.pageInfo.list,function(index,item){
+				var tr = $("<tr></tr>");
+				for(var i in item){
+					tr.append($("<td></td>").append(item[i]));
+				}
+				tr.append($("<td><td>").append("编辑"));
+				tr.appendTo("#search_result tbody");
 
+			});
+		}
+		
+		//搜索
+		function search() {
+			var chapter = $("#chapter_choose").val();
+			var sheet = $("#sheet_choose").val();
+			var column = $("#column_choose").val();
+			var condition = $("#condition").val();
+			var str = "../"+chapter+"/"+sheet+"/searchByCondition.do?&column="+column+"&condition="+condition;
+			//console.log(str);
+			$.ajax({
+				url : str,
+				type : "GET",
+				success : function(result){
+					create_result(result);
+				}
+			});
 		}
 
 		//单个删除
