@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import okkpp.dao.payment.ExchangeMapper;
 import okkpp.model.payment.Exchange;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 @Service
 @Transactional
@@ -21,7 +22,10 @@ public class ExchangeService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<Exchange> selectByExample(String country){
-		return null;
+	public List<Exchange> selectByExample(String column,String condition){
+		Example example = new Example(Exchange.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
 }

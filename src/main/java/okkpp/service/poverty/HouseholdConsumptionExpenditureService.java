@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import okkpp.dao.poverty.HouseholdConsumptionExpenditureMapper;
 import okkpp.model.poverty.HouseholdConsumptionExpenditure;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 @Service
 @Transactional
@@ -21,7 +22,10 @@ public class HouseholdConsumptionExpenditureService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<HouseholdConsumptionExpenditure> selectByExample(String country){
-		return null;
+	public List<HouseholdConsumptionExpenditure> selectByExample(String column,String condition){
+		Example example = new Example(HouseholdConsumptionExpenditure.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
 }

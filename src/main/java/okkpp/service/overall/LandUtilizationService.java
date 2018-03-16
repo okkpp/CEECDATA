@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import okkpp.dao.overall.LandUtilizationMapper;
 import okkpp.model.overall.LandUtilization;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 /**
 * @author duck
@@ -22,5 +23,12 @@ public class LandUtilizationService {
 	LandUtilizationMapper mapper;
 	public List<LandUtilization> selectAll(){
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	public List<LandUtilization> selectByExample(String column,String condition){
+		Example example = new Example(LandUtilization.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
 }

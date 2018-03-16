@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import okkpp.dao.trade.CommercialServiceExportMapper;
 import okkpp.model.trade.CommercialServiceExport;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -22,7 +23,10 @@ public class CommercialServiceExportService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<CommercialServiceExport> selectByExample(String country){
-		return null;
+	public List<CommercialServiceExport> selectByExample(String column,String condition){
+		Example example = new Example(CommercialServiceExport.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
 }

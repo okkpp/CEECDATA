@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import okkpp.dao.trade.ImportsByCommodityGroupsMapper;
 import okkpp.model.trade.ImportsByCommodityGroups;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 @Service
 @Transactional
@@ -21,7 +22,10 @@ public class ImportsByCommodityGroupsService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<ImportsByCommodityGroups> selectByExample(String country){
-		return null;
+	public List<ImportsByCommodityGroups> selectByExample(String column,String condition){
+		Example example = new Example(ImportsByCommodityGroups.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
 }

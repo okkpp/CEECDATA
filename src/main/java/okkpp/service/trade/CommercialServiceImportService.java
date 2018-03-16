@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import okkpp.dao.trade.CommercialServiceImportMapper;
 import okkpp.model.trade.CommercialServiceImport;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 @Service
 @Transactional
@@ -21,8 +22,11 @@ public class CommercialServiceImportService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<CommercialServiceImport> selectByExample(String country){
-		return null;
+	public List<CommercialServiceImport> selectByExample(String column,String condition){
+		Example example = new Example(CommercialServiceImport.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
 	
 }

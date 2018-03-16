@@ -28,5 +28,4 @@ public class BirthRateDeathRateService {
 		return CountryCode.replaceCountry(mapper.selectByExample(example));
 
 	}
-	
 }
