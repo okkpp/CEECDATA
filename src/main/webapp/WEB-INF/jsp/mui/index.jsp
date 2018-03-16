@@ -18,7 +18,7 @@
 		<div class="logo margin-big-left fadein-top">
 			<h1>
 				<img src="../MUI/images/y.jpg" class="radius-circle rotate-hover"
-					height="50" alt="" />后台管理中心
+					height="50" alt="" />后台管理中心	
 			</h1>
 		</div>
 		<div class="head-l">
