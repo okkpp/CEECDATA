@@ -10,10 +10,48 @@
 <title></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/pintuer.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/admin.css">
+<link href="${pageContext.request.contextPath}/MUI/css/bootstrap.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/MUI/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/MUI/js/pintuer.js"></script>
+<script src="${pageContext.request.contextPath}/MUI/js/bootstrap.min.js"></script>
+
+
 </head>
 <body>
+	<!-- 修改模态框 -->
+	<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">修改</h4>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="updateForm">
+						<div class="form-group">
+							<label for="empName_add_input" class="col-sm-2 control-label">empName</label>
+							<div class="col-sm-10">
+								<p class="form-control-static" id="empName_update_static"></p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">empEmail</label>
+							<div class="col-sm-10">
+								<input type="text" name="empEmail" class="form-control"
+									id="email_add_input" placeholder="email@163.com"> <span
+									class="help-block"></span> <span class="help-block"></span>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" id="update_btn">更新</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<form method="post" action="" id="listform">
 		<div class="panel admin-panel">
 			<div class="panel-head">
@@ -46,7 +84,7 @@
 			</div>
 			<table id="search_result" class="table table-hover text-center">
 				<thead>
-					
+
 				</thead>
 				<tbody>
 				</tbody>
@@ -93,13 +131,13 @@
 			</tr>-->
 			</table>
 			<div class="col-xs-12">
-				<div class="pagelist" id="page_nav_area">
-				</div>
+				<div class="pagelist" id="page_nav_area"></div>
 			</div>
 		</div>
 	</form>
 	<script type="text/javascript">	
 	var json = new Array();
+	var items;
 	//显示数据库数据章节
 	$.ajax({
 		url : "../showTables.do",
@@ -212,6 +250,7 @@
 		var str;
 		if(type == "normal"){
 			str = "../"+$("#chapter_choose").val()+"/"+tranformStr("_"+$("#sheet_choose").val())+".do";
+			console.log(str);
 		}else if(type == "search"){
 			var chapter = $("#chapter_choose").val();
 			var sheet = $("#sheet_choose").val();
@@ -236,7 +275,9 @@
 	//解析显示数据结果
 	function create_result(result){
 		$("#search_result tbody").empty();
+		items = result.extend.pageInfo.list;
 		$.each(result.extend.pageInfo.list,function(index,item){		
+			//按照<th>顺序显示结果
 			var tr = $("<tr></tr>");
 			for(var i = 0;i<json.length;i++){	
 				json[i] = tranformStr(json[i]);
@@ -255,13 +296,14 @@
 				}
 			};
 			//tr.append($("<td><td>").append("编辑"));
+			//修改--删除按钮
 			tr.append($("<td></td>").append($("<div></div>").addClass("button-group")
-					.append($("<a></a>").addClass("button border-main").append($("<span></span>").addClass("icon-edit").append("修改")))
-					.append($("<a></a>").addClass("button border-red").append($("<span></span>").addClass("icon-trash-o").append("删除")))));
+					.append($("<a></a>").addClass("button border-main update_btn").append($("<span></span>").addClass("icon-edit").append("修改")).attr("edit-id",item.id))
+					.append($("<a></a>").addClass("button border-red delete_btn").append($("<span></span>").addClass("icon-trash-o").append("删除")).attr("del-id",item.id))));
 			tr.appendTo("#search_result tbody");
 		});
 	}	
-	//转成驼峰命名法
+	//按驼峰命名法转成驼峰
 	function tranformStr(str){	
 		var strArr=str.split('_');
 		for(var i=1;i<strArr.length;i++){
@@ -270,11 +312,33 @@
 		return strArr.join('');
 	}	
 	
-	//单个删除
-	function del(id, mid, iscid) {
-		if (confirm("您确定要删除吗?")) {
-		}
-	}
+	//为所有修改按钮绑定事件
+	$(document).on("click", ".update_btn", function() {
+		var id = $(this).attr("edit-id");
+		//alert(id);
+		$("#updateForm").empty();
+		$.each(items,function(index,item){		
+			if(item.id == id){
+				for(var i in item){
+					$("<div></div>").append(i).appendTo("#updateForm");
+				}
+			}
+		});
+		$("#updateModal").modal({
+			backdrop : "static"
+		});
+	});
+	
+	$("update_btn").click(function(){
+		
+	});
+	
+	//为所有删除按钮绑定事件(单个删除)
+	$(document).on("click",".delete_btn",function(){
+		if(confirm("您确定要删除吗?")){
+			alert($(this).attr("del-id"));	
+		}		
+	});
 
 	//全选
 	$("#checkall").click(function() {
@@ -286,7 +350,7 @@
 			}
 		});
 	})
-
+	
 	//批量删除
 	function DelSelect() {
 		var Checkbox = false;

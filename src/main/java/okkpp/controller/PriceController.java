@@ -22,7 +22,7 @@ public class PriceController {
 	@Autowired
 	ConsumerService consumerService;
 
-	@RequestMapping(value = "/Consumer", method = RequestMethod.POST)
+	@RequestMapping("/Consumer")
 	public String Consumer(Model model) {
 		List<Consumer> list = consumerService.selectAll();
 		model.addAttribute("data", list);
@@ -30,7 +30,7 @@ public class PriceController {
 	}
 
 	// 查找所有
-	@RequestMapping("/Consumer")
+	@RequestMapping(value = "/Consumer",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg Consumer(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);
@@ -55,7 +55,7 @@ public class PriceController {
 	@Autowired
 	ProducerService producerService;
 
-	@RequestMapping(value = "/Producer", method = RequestMethod.POST)
+	@RequestMapping("/Producer")
 	public String Producer(Model model) {
 		List<Producer> list = producerService.selectAll();
 		model.addAttribute("data", list);
@@ -63,7 +63,7 @@ public class PriceController {
 	}
 
 	// 查找所有Produce
-	@RequestMapping("/Producer")
+	@RequestMapping(value = "/Producer",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg Producer(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);

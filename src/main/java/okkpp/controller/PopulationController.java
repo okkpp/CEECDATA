@@ -19,13 +19,13 @@ import okkpp.model.population.*;
 
 @Controller
 @RequestMapping("/population")
-public class populationController {
+public class PopulationController {
 
 	@Autowired
-	BirthRateDeathRateService bRateDeathRateService;
+	BirthRateDeathRateService birthRateDeathRateService;
 	@RequestMapping("/BirthRateDeathRate")
 	public String BirthAndDeathRate(Model model) {
-		List<BirthRateDeathRate> list = bRateDeathRateService.selectAll();
+		List<BirthRateDeathRate> list = birthRateDeathRateService.selectAll();
 		model.addAttribute("data",list);
 		return "404";
 	}
@@ -33,7 +33,7 @@ public class populationController {
 	@ResponseBody
 	public Msg birthAndDeathRate(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
-		List<BirthRateDeathRate> list = bRateDeathRateService.selectAll();
+		List<BirthRateDeathRate> list = birthRateDeathRateService.selectAll();
 		PageInfo pageInfo = new PageInfo(list,10);
 		model.addAttribute("pageInfo",pageInfo);
 		return Msg.success().add("pageInfo",pageInfo);
