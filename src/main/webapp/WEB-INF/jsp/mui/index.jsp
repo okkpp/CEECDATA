@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="zh-cn">
@@ -9,24 +10,28 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
 <title>后台管理中心</title>
-<link rel="stylesheet" href="../MUI/css/pintuer.css">
-<link rel="stylesheet" href="../MUI/css/admin.css">
-<script src="../MUI/js/jquery.js"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/MUI/css/pintuer.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/MUI/css/admin.css">
+<script src="${pageContext.request.contextPath}/MUI/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/MUI/js/pintuer.js"></script>
 </head>
 <body style="background-color: #f2f9fd;">
 	<div class="header bg-main">
 		<div class="logo margin-big-left fadein-top">
 			<h1>
 				<img src="../MUI/images/y.jpg" class="radius-circle rotate-hover"
-					height="50" alt="" />后台管理中心	
+					height="50" alt="" />后台管理中心
 			</h1>
 		</div>
 		<div class="head-l">
-			<a class="button button-little bg-green" href="" target="_blank"><span
-				class="icon-home"></span> 前台首页</a> &nbsp;&nbsp;<a href="##"
-				class="button button-little bg-blue"><span class="icon-wrench"></span>
-				清除缓存</a> &nbsp;&nbsp;<a class="button button-little bg-red"
-				href="logout.do"><span class="icon-power-off"></span> 退出登录</a>
+			<a class="button button-little bg-green" href="" target="_blank">
+				<span class="icon-home"></span> 前台首页
+			</a> &nbsp;&nbsp; <a href="##" class="button button-little bg-blue">
+				<span class="icon-wrench"></span> 清除缓存
+			</a> &nbsp;&nbsp;<a class="button button-little bg-red" href="logout.do"><span
+				class="icon-power-off"></span> 退出登录</a>
 		</div>
 	</div>
 	<div class="leftnav">
@@ -84,8 +89,8 @@
 			href="##">英文</a></li>
 	</ul>
 	<div class="admin">
-		<iframe scrolling="auto" rameborder="0" src="mui.do?str=info" name="right"
-			width="100%" height="100%"></iframe>
+		<iframe scrolling="auto" rameborder="0" src="mui.do?str=info"
+			name="right" width="100%" height="100%"></iframe>
 	</div>
 </body>
 </html>

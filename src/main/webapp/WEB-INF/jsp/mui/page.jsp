@@ -9,10 +9,10 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
 <title></title>
-<link rel="stylesheet" href="../MUI/css/pintuer.css">
-<link rel="stylesheet" href="../MUI/css/admin.css">
-<script src="../MUI/js/jquery.js"></script>
-<script src="../MUI/js/jquery.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/pintuer.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/admin.css">
+<script src="${pageContext.request.contextPath}/MUI/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/MUI/js/pintuer.js"></script>
 </head>
 <body>
 	<div class="panel admin-panel">
