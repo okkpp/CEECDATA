@@ -22,8 +22,8 @@ public class FreshWaterService {
 
 	@Autowired
 	FreshWaterMapper mapper;
-	public List<FreshWater> selectByExample(String country){
-		return null;
+	public List<FreshWater> selectAll(){
+		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
 	public List<FreshWater> selectByExample(String column,String condition){
