@@ -144,13 +144,6 @@
 						});
 						$("<th></th>").append("操作").appendTo("#search_result thead");
 						to_page(1,"normal");
-												
-						/* <td><div class="button-group">
-						<a class="button border-main" href="add.html"><span
-							class="icon-edit"></span> 修改</a> <a class="button border-red"
-							href="javascript:void(0)" onclick="return del(1,1,1)"><span
-							class="icon-trash-o"></span> 删除</a>
-					</div></td> */
 					}
 				})
 			});
@@ -212,26 +205,13 @@
 	//按条件搜索
 	function search() {
 		to_page(1,"search");
-		/* var chapter = $("#chapter_choose").val();
-		var sheet = $("#sheet_choose").val();
-		var column = $("#column_choose").val();
-		var condition = $("#condition").val();
-		//var str = "../"+chapter+"/"+sheet+"/selectConsumerByExample.do?&column="+column+"&condition="+condition;
-		var str = "../price/selectConsumerByExample.do?&column="+column+"&condition="+condition;
-		$.ajax({
-			url : str,
-			type : "GET",
-			success : function(result){
-				result = eval('('+ result+ ')');
-				to_page(result,"search");
-			}
-		}); */
 	}
+	
 	//跳转页数
 	function to_page(pn,type){
 		var str;
 		if(type == "normal"){
-			str = "../"+$("#chapter_choose").val()+"/"+$("#sheet_choose").val()+".do";				
+			str = "../"+$("#chapter_choose").val()+"/"+tranformStr("_"+$("#sheet_choose").val())+".do";
 		}else if(type == "search"){
 			var chapter = $("#chapter_choose").val();
 			var sheet = $("#sheet_choose").val();
@@ -258,7 +238,7 @@
 		$("#search_result tbody").empty();
 		$.each(result.extend.pageInfo.list,function(index,item){		
 			var tr = $("<tr></tr>");
-			for(var i = 0;i<json.length;i++){		
+			for(var i = 0;i<json.length;i++){	
 				json[i] = tranformStr(json[i]);
 				if(item[json[i]] == null){
 					tr.append($("<td></td>").append("/"));
@@ -274,7 +254,10 @@
 					}
 				}
 			};
-			tr.append($("<td><td>").append("编辑"));
+			//tr.append($("<td><td>").append("编辑"));
+			tr.append($("<td></td>").append($("<div></div>").addClass("button-group")
+					.append($("<a></a>").addClass("button border-main").append($("<span></span>").addClass("icon-edit").append("修改")))
+					.append($("<a></a>").addClass("button border-red").append($("<span></span>").addClass("icon-trash-o").append("删除")))));
 			tr.appendTo("#search_result tbody");
 		});
 	}	

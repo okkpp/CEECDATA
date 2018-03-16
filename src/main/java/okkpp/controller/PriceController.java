@@ -30,7 +30,7 @@ public class PriceController {
 	}
 
 	// 查找所有
-	@RequestMapping("/consumer")
+	@RequestMapping("/Consumer")
 	@ResponseBody
 	public Msg Consumer(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);
@@ -63,7 +63,7 @@ public class PriceController {
 	}
 
 	// 查找所有Produce
-	@RequestMapping("/producer")
+	@RequestMapping("/Producer")
 	@ResponseBody
 	public Msg Producer(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);

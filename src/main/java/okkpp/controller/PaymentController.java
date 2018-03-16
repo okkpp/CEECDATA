@@ -26,7 +26,7 @@ public class PaymentController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping("/exchange")
+	@RequestMapping("/Exchange")
 	@ResponseBody
 	public Msg exchange(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -44,7 +44,7 @@ public class PaymentController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/external",method = RequestMethod.POST)
+	@RequestMapping(value = "/External",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg external(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -62,7 +62,7 @@ public class PaymentController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/foreign",method = RequestMethod.POST)
+	@RequestMapping(value = "/Foreign",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg foreign(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -80,7 +80,7 @@ public class PaymentController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/payment",method = RequestMethod.POST)
+	@RequestMapping(value = "/Payment",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg payment(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -98,7 +98,7 @@ public class PaymentController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/reserves",method = RequestMethod.POST)
+	@RequestMapping(value = "/Reserves",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg reserves(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);

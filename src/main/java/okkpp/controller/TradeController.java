@@ -27,7 +27,7 @@ public class TradeController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/commercial_service_export",method = RequestMethod.POST)
+	@RequestMapping(value = "/CommercialServiceExport",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg commercial_service_export(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -45,7 +45,7 @@ public class TradeController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/commercial_service_import",method = RequestMethod.POST)
+	@RequestMapping(value = "/CommercialServiceImport",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg commercial_service_import(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -63,7 +63,7 @@ public class TradeController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/exports_by_commodity_groups",method = RequestMethod.POST)
+	@RequestMapping(value = "/ExportsByCommodityGroups",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg exports_by_commodity_groups(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -81,7 +81,7 @@ public class TradeController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/goods_and_services",method = RequestMethod.POST)
+	@RequestMapping(value = "/GoodsAndServices",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg goods_and_services(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -135,7 +135,7 @@ public class TradeController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/merchandise_imports",method = RequestMethod.POST)
+	@RequestMapping(value = "/MerchandiseImports",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg merchandise_imports(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -153,7 +153,7 @@ public class TradeController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/merchandise_imports_and_exports",method = RequestMethod.POST)
+	@RequestMapping(value = "/MerchandiseImportsAndExports",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg merchandise_imports_and_exports(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
