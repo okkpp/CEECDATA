@@ -1,6 +1,9 @@
 package okkpp.system.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Table(name = "s_role")
@@ -81,10 +84,29 @@ public class Role implements Serializable {
         return remark;
     }
 
-    /**
-     * @param remark
-     */
     public void setRemark(String remark) {
         this.remark = remark;
     }
+    
+    @Transient
+    private List<User> users = new ArrayList<User>();
+    
+    @Transient
+    private List<Resource> resources = new ArrayList<Resource>();
+    
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+
+	public List<Resource> getResources() {
+		return resources;
+	}
+
+	public void setResources(List<Resource> resources) {
+		this.resources = resources;
+	}
 }

@@ -15,4 +15,8 @@
     -->
     id, resource_id, role_id
   </sql>
+  <delete id="deleteRoleResourcesByRoleId" parameterType="java.lang.Integer" >
+    delete from s_resource_role
+    where role_id = #{roleId,jdbcType=INTEGER}
+  </delete>
 </mapper>

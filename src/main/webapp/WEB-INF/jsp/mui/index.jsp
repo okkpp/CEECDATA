@@ -46,6 +46,8 @@
 					class="icon-caret-right"></span>网站设置</a></li>
 			<li><a href="mui.do?str=pass" target="right"><span
 					class="icon-caret-right"></span>修改密码</a></li>
+			<li><a href="user.do" target="right"><span
+					class="icon-caret-right"></span>用户管理</a></li>
 			<li><a href="mui.do?str=page" target="right"><span
 					class="icon-caret-right"></span>单页管理</a></li>
 			<li><a href="mui.do?str=adv" target="right"><span
