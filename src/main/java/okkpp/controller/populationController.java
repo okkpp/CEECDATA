@@ -14,28 +14,39 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import okkpp.service.population.*;
-import okkpp.service.traffic.AirFreightService;
 import okkpp.model.Msg;
 import okkpp.model.population.*;
+<<<<<<< HEAD
 import okkpp.model.price.Producer;
 import okkpp.model.traffic.AirFreight;
+=======
+>>>>>>> d0139bd9fc30a7b604936054ad68ca936ce451a1
 
 @Controller
 @RequestMapping("/population")
 public class populationController {
 
 	@Autowired
+<<<<<<< HEAD
 	BirthAndDeathRateService birthAndDeathRateService;
 
 	@RequestMapping("/BirthAndDeathRate")
 	public String BirthAndDeathRate(Model model) {
 		List<BirthAndDeathRate> list = birthAndDeathRateService.selectAll();
 		model.addAttribute("data", list);
+=======
+	BirthRateDeathRateService birthAndDeathRateService;
+	@RequestMapping("/BirthAndDeathRate")
+	public String BirthAndDeathRate(Model model) {
+		List<BirthRateDeathRate> list = birthAndDeathRateService.selectAll();
+		model.addAttribute("data",list);
+>>>>>>> d0139bd9fc30a7b604936054ad68ca936ce451a1
 		return "404";
 	}
 
 	@RequestMapping(value = "/birth_rate_death_rate", method = RequestMethod.POST)
 	@ResponseBody
+<<<<<<< HEAD
 	public Msg birthAndDeathRate(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);
 		List<BirthAndDeathRate> list = birthAndDeathRateService.selectAll();
@@ -54,6 +65,14 @@ public class populationController {
 		PageInfo pageInfo = new PageInfo(list, 10);
 		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);
+=======
+	public Msg birthAndDeathRate(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
+		PageHelper.startPage(pn,10);
+		List<BirthRateDeathRate> list = birthAndDeathRateService.selectAll();
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo",pageInfo);
+>>>>>>> d0139bd9fc30a7b604936054ad68ca936ce451a1
 	}
 
 	@Autowired

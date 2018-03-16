@@ -22,31 +22,16 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.system.model"
+		<javaModelGenerator targetPackage="okkpp.model.population"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.system.dao"
+		<sqlMapGenerator targetPackage="okkpp.dao.population"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.system.dao"
+		<javaClientGenerator targetPackage="okkpp.dao.population"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table tableName="s_resource" domainObjectName="Resource"
+		<table tableName="t_population_birth_rate_death_rate" domainObjectName="BirthRateDeathRate"
 			enableCountByExample="false" enableDeleteByExample="false" 
 			enableSelectByExample="false" enableUpdateByExample="false" 
 			schema="${jdbc.username}"/>
-		<table tableName="s_resource_role" domainObjectName="ResourceRole"
-			enableCountByExample="false" enableDeleteByExample="false" 
-			enableSelectByExample="false" enableUpdateByExample="false" 
-			schema="${jdbc.username}"/>
-		<table tableName="s_role" domainObjectName="Role"
-			enableCountByExample="false" enableDeleteByExample="false" 
-			enableSelectByExample="false" enableUpdateByExample="false" 
-			schema="${jdbc.username}"/>
-		<table tableName="s_user" domainObjectName="User"
-			enableCountByExample="false" enableDeleteByExample="false" 
-			enableSelectByExample="false" enableUpdateByExample="false" 
-			schema="${jdbc.username}"/>
-		<table tableName="s_user_role" domainObjectName="UserRole"
-			enableCountByExample="false" enableDeleteByExample="false" 
-			enableSelectByExample="false" enableUpdateByExample="false" 
-			schema="${jdbc.username}"/>
+
 	</context>
 </generatorConfiguration>

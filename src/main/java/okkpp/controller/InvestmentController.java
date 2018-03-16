@@ -13,10 +13,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import okkpp.service.investment.*;
-import okkpp.service.population.BirthAndDeathRateService;
 import okkpp.model.Msg;
 import okkpp.model.investment.*;
-import okkpp.model.population.BirthAndDeathRate;
 
 @Controller
 @RequestMapping("/investment")
