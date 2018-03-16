@@ -6,85 +6,343 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>能源平衡表——中东欧统计数据库</title>
   <link rel="stylesheet" href="../zdo_static/css/normalize.css">
-  <link rel="stylesheet" href="../zdo_static/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../zdo_static/css/zdoData.css">
-  <link rel="stylesheet" href="../zdo_static/css/specialData.css">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+
   <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+  <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
   <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
-  <script src="../zdo_static/js/ShowHide2.js"></script>
 </head>
 <body>
-  <div id="zdodata">
-  <!--           表格与数据图切换栏-->
-      <div class="zdoTab">
-          <input type="radio" name="radio-set" checked="checked" id="radio-form">
-          <a href="#zdoForm"></a>
-          <input type="radio" name="radio-set" id="radio-anal">
-          <a href="#zdoAnalysis"></a>
+    <div class="container">
+        <div>
+            <ul class="nav nav-tabs">
+                <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+                <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+            </ul>
+        </div>
 
-
-  <!--            基础数据图表-->
-      <section id="zdoForm">
-          <form action="" method="">
-            <table id="zdoTable" class="table table-striped table-bordered table-hover table-condensed">
-              <caption>能源平衡表</caption>
-              <thead>
-                  <th>国家</th>
-                  <th>时间</th>
-                  <th>煤和煤制品生产量</th>
-                  <th>天然气生产量</th>
-                  <th>能源生产量总计</th>
-                  <th>煤和煤制品进口</th>
-                  <th>天然气进口</th>
-                  <th>能源进口总计</th>
-              </thead>
-              <tbody>
-                  <tr id="aebny">
-                      <td rowspan="5">阿尔巴尼亚</td>
-                      <td>2015年</td>
-                      <td>999</td>
-                      <td>999</td>
-                      <td>999</td>
-                      <td>999</td>
-                      <td>999</td>
-                      <td>999</td>
-                  </tr>
-<!-- 最近五年 -->
-
-              </tbody>
-            </table>
-            <div id="formDown">
-              <span>此处数据只展示最近五年，若需全部数据请点击</span>
-              <a href="#" class="datadown" title="下载" onclick="noDown()"></a>
-                <script type="text/javascript">
-                    function noDown(){
-                      alert("开发正在努力中，请等候");
-                    }
-                </script>
-
+        <div id="tableView">
+            <div class="page-header" style="text-align: center;">
+                <h3>能源平衡表（2014）</h3>
+                <br>
+                <h4 style="margin-top: -20px;">Energy Balance Sheet（2014）</h4>
             </div>
-            <!-- <div id="selectBtn"> -->
-                <!-- 行的显示|隐藏 -->
-                <!-- <input type="checkbox" checked="checked" name="checkCol" title="aebny">阿尔巴尼亚
-                <br> -->
-                <!-- 列的显示|隐藏 -->
-                <!-- <input type="checkbox" checked="checked" name="checkRow" title="zb">指标
-            </div> -->
-          </form>
-      </section>
-  <!--            数据图-->
-      <section id="zdoAnalysis">
-          <form action="" method="">
-              <div id="analysis">
-                <script type="text/javascript">
 
-                </script>
-              </div>
-          </form>
-      </section>
+            <div style="text-align: right;">单位:&nbsp;千吨标准油</div>
 
-      </div>
-  </div>
+            <table id="tableData"></table>
+        </div>
 
+        <div id="imageView">
+            <div class="page-header" style="text-align: center;">
+                <h3>能源平衡表（2014）</h3>
+                <br>
+                <h4 style="margin-top: -20px;">Energy Balance Sheet（2014）</h4>
+            </div>
+
+            <div class="panel" style="margin-top: 40px;">
+                <div id="main" style="width: 100%;height:400px;">
+                    <script type="text/javascript">
+                      var dom = document.getElementById("main");
+                      var myChart = echarts.init(dom);
+                      var app = {};
+                      option = null;
+                      var dataMap = {};
+                      function dataFormatter(obj){
+                          var Plist = ['阿尔巴尼亚','周二','周三','周四','周五','周六','周日'];
+                          var temp;
+                          for(var year = 2014;year<=2018;year++){
+                              temp = obj[year];
+                              for(var i = 0,l = temp.length;i<l;i++){
+                                  obj[year][i] = {
+                                      name : Plist[i],
+                                      value : temp[i]
+                                  }
+                              }
+                          }
+                          return obj;
+                      }
+
+                      dataMap.dataMSC = dataFormatter({
+                          2014:[222,444,333,666,555,444,777],
+                          2015:[333,222,212,454,666,363,787],
+                          2016:[109,205,305,405,605,335,456],
+                          2017:[664,555,445,662,335,745,641],
+                          2018:[653,123,454,235,226,442,941]
+                      });
+                      dataMap.dataTSC = dataFormatter({
+                          2014:[222,444,333,666,555,444,777],
+                          2015:[333,222,212,454,666,363,787],
+                          2016:[109,205,305,405,605,335,456],
+                          2017:[664,555,445,662,335,745,641],
+                          2018:[653,123,454,235,226,442,941]
+                      });
+                      dataMap.dataNYSC = dataFormatter({
+                          2014:[222,444,333,666,555,444,777],
+                          2015:[333,222,212,454,666,363,787],
+                          2016:[109,205,305,405,605,335,456],
+                          2017:[664,555,445,662,335,745,641],
+                          2018:[653,123,454,235,226,442,941]
+                      });
+                      dataMap.dataMJK = dataFormatter({
+                          2014:[222,444,333,666,555,444,777],
+                          2015:[333,222,212,454,666,363,787],
+                          2016:[109,205,305,405,605,335,456],
+                          2017:[664,555,445,662,335,745,641],
+                          2018:[653,123,454,235,226,442,941]
+                      });
+                      dataMap.dataTJK = dataFormatter({
+                          2014:[222,444,333,666,555,444,777],
+                          2015:[333,222,212,454,666,363,787],
+                          2016:[109,205,305,405,605,335,456],
+                          2017:[664,555,445,662,335,745,641],
+                          2018:[653,123,454,235,226,442,941]
+                      });
+                      dataMap.dataNYJK = dataFormatter({
+                          2014:[222,444,333,666,555,444,777],
+                          2015:[333,222,212,454,666,363,787],
+                          2016:[109,205,305,405,605,335,456],
+                          2017:[664,555,445,662,335,745,641],
+                          2018:[653,123,454,235,226,442,941]
+                      });
+                      option = {
+                          baseOption:{
+                              timeline:{
+                                  axisType:'category',
+                                  autoPlay:true,
+                                  playInterval:1000,
+                                  data:['2014-01-01','2015-01-01','2016-01-01','2017-01-01','2018-01-01'],
+                                  bottom:'0',
+                                  label:{
+                                      formatter:function(s){
+                                          return(new Date(s)).getFullYear();
+                                      }
+                                  }
+                              },
+                              title:{
+                                  subtext:'数据来源'
+                              },
+                              tooltip : {
+                                  trigger: 'axis',
+                                  axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                                      type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                  }
+                              },
+                              legend: {
+                                  data:['煤和煤制品生产量','天然气生产量','能源生产量总计','煤和煤制品进口','天然气进口','能源进口总计']
+                              },
+                              grid: {
+                                  left: '3%',
+                                  right: '4%',
+                                  bottom: 80,
+                                  containLabel: true
+                              },
+                              xAxis : [
+                                  {
+                                      type : 'category',
+                                      data : ['阿尔巴尼亚','周二','周三','周四','周五','周六','周日']
+                                  }
+                              ],
+                              yAxis : [
+                                  {
+                                      type : 'value'
+                                  }
+                              ],
+                              series:[
+                                  {
+                                      name:'煤和煤制品生产量',
+                                      type:'bar',
+                                      stack:'能源生产量总计',
+                                  },
+                                  {
+                                      name:'天然气生产量',
+                                      type:'bar',
+                                      stack: '能源生产量总计',
+                                  },
+                                  {
+                                      name:'能源生产量总计',
+                                      type:'bar',
+                                  },
+                                  {
+                                      name:'煤和煤制品进口',
+                                      type:'bar',
+                                      stack:'能源进口总计',
+                                  },
+                                  {
+                                      name:'天然气进口',
+                                      type:'bar',
+                                      barWidth : 5,
+                                      stack: '能源进口总计',
+                                  },
+                                  {
+                                      name:'能源进口总计',
+                                      type:'bar',
+                                  },
+                              ]
+                          },
+                          options:[
+                              {
+                                  title:{text:'2014能源平衡'},
+                                  series:[
+                                      {data: dataMap.dataMSC['2014']},
+                                      {data: dataMap.dataTSC['2014']},
+                                      {data: dataMap.dataNYSC['2014']},
+                                      {data: dataMap.dataMJK['2014']},
+                                      {data: dataMap.dataTJK['2014']},
+                                      {data: dataMap.dataNYJK['2014']},
+                                  ]
+                              },
+                              {
+                                  title:{text:'2015能源平衡'},
+                                  series:[
+                                      {data: dataMap.dataMSC['2015']},
+                                      {data: dataMap.dataTSC['2015']},
+                                      {data: dataMap.dataNYSC['2015']},
+                                      {data: dataMap.dataMJK['2015']},
+                                      {data: dataMap.dataTJK['2015']},
+                                      {data: dataMap.dataNYJK['2015']},
+                                  ]
+                              },
+                              {
+                                  title:{text:'2016能源平衡'},
+                                  series:[
+                                      {data: dataMap.dataMSC['2016']},
+                                      {data: dataMap.dataTSC['2016']},
+                                      {data: dataMap.dataNYSC['2016']},
+                                      {data: dataMap.dataMJK['2016']},
+                                      {data: dataMap.dataTJK['2016']},
+                                      {data: dataMap.dataNYJK['2016']},
+                                  ]
+                              },
+                              {
+                                  title:{text:'2017能源平衡'},
+                                  series:[
+                                      {data: dataMap.dataMSC['2017']},
+                                      {data: dataMap.dataTSC['2017']},
+                                      {data: dataMap.dataNYSC['2017']},
+                                      {data: dataMap.dataMJK['2017']},
+                                      {data: dataMap.dataTJK['2017']},
+                                      {data: dataMap.dataNYJK['2017']},
+                                  ]
+                              },
+                              {
+                                  title:{text:'2018能源平衡'},
+                                  series:[
+                                      {data: dataMap.dataMSC['2018']},
+                                      {data: dataMap.dataTSC['2018']},
+                                      {data: dataMap.dataNYSC['2018']},
+                                      {data: dataMap.dataMJK['2018']},
+                                      {data: dataMap.dataTJK['2018']},
+                                      {data: dataMap.dataNYJK['2018']},
+                                  ]
+                              },
+                          ]
+
+                      };
+                      ;
+                      if (option && typeof option === "object") {
+                          myChart.setOption(option, true);
+                      }
+                   </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function(){
+            $('#imageView').hide();
+            $('#tableTag').attr('class','active');
+        })
+
+        function showTable() {
+            $('#tableView').show();
+            $('#imageView').hide();
+            $('#tableTag').attr('class','active');
+            $('#imageTag').removeClass('active');
+        }
+
+        function showImage() {
+            $('#imageView').show();
+            $('#tableView').hide();
+            $('#imageTag').attr('class','active');
+            $('#tableTag').removeClass('active');
+        }
+
+        $('#tableData').bootstrapTable({
+            striped: true,
+            columns: [
+                {
+                    field: 'country',
+                    title: '国家'
+                },
+                {
+                    field: 'year',
+                    title: '时间'
+                },
+                {
+                    field: 'msc',
+                    title: '煤和煤制品生产量'
+                },
+                {
+                    field: 'tsc',
+                    title: '天然气生产量'
+                },
+                {
+                    field: 'psc',
+                    title: '能源生产量总计'
+                },
+                {
+                    field: 'mjk',
+                    title: '煤和煤制品进口'
+                },
+                {
+                    field: 'tjk',
+                    title: '天然气进口'
+                },
+                {
+                    field: 'pjk',
+                    title: '能源进口总计'
+                },
+
+            ],
+            data: [
+                {
+                    country: '阿尔巴尼亚',
+                    year: '2014',
+                    msc: '/',
+                    tsc: '25',
+                    psc: '2013',
+                    mjk: '86',
+                    tjk: '/',
+                    pjk: '1905'
+                },
+                {
+                    country: '波黑',
+                    year: '2014',
+                    msc: '/',
+                    tsc: '25',
+                    psc: '2013',
+                    mjk: '86',
+                    tjk: '/',
+                    pjk: '1905'
+                },
+                {
+                    country: '保加利亚',
+                    year: '2014',
+                    msc: '/',
+                    tsc: '25',
+                    psc: '2013',
+                    mjk: '86',
+                    tjk: '/',
+                    pjk: '1905'
+                }
+            ]
+        });
+
+
+    </script>
 </body>
 </html>

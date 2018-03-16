@@ -6,262 +6,325 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>年中人口——中东欧统计数据库</title>
   <link rel="stylesheet" href="../zdo_static/css/normalize.css">
-  <link rel="stylesheet" href="../zdo_static/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../zdo_static/css/zdoData.css">
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+
   <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+  <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
   <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
-  <script src="../zdo_static/js/ShowHide2.js"></script>
 </head>
 <body>
-  <div id="zdodata">
-  <!--           表格与数据图切换栏-->
-      <div class="zdoTab">
-          <input type="radio" name="radio-set" checked="checked" id="radio-form">
-          <a href="#zdoForm"></a>
-          <input type="radio" name="radio-set" id="radio-anal">
-          <a href="#zdoAnalysis"></a>
+    <div class="container">
+        <div>
+            <ul class="nav nav-tabs">
+                <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+                <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+            </ul>
+        </div>
 
-
-  <!--            基础数据图表-->
-      <section id="zdoForm">
-          <form action="" method="">
-            <table id="zdoTable" class="table table-striped table-bordered table-hover table-condensed">
-              <caption>年中人口（人）</caption>
-              <thead>
-                  <th>国家</th>
-                  <th>2015年</th>
-                  <th>2010年</th>
-                  <th>2005年</th>
-                  <th>2000年</th>
-                  <th>2015年增长率（%）</th>
-              </thead>
-              <tbody>
-                  <tr id="aebny">
-                      <td>阿尔巴尼亚</td>
-                      <td class="numCen">999333</td>
-                      <td class="numCen">999444</td>
-                      <td class="numCen">999555</td>
-                      <td class="numCen">999666</td>
-                      <td class="numCen">0.1</td>
-                  </tr>
-
-
-              </tbody>
-            </table>
-            <div id="formDown">
-              <span>此处数据只展示最近五年，若需全部数据请点击</span>
-              <a href="#" class="datadown" title="下载" onclick="noDown()"></a>
-                <script type="text/javascript">
-                    function noDown(){
-                      alert("开发正在努力中，请等候");
-                    }
-                </script>
-
+        <div id="tableView">
+            <div class="page-header" style="text-align: center;">
+                <h3>年中人口</h3>
+                <br>
+                <h4 style="margin-top: -20px;">Mid-year Population</h4>
             </div>
-            <!-- <div id="selectBtn"> -->
-                <!-- 行的显示|隐藏 -->
-                <!-- <input type="checkbox" checked="checked" name="checkCol" title="aebny">阿尔巴尼亚
-                <br> -->
-                <!-- 列的显示|隐藏 -->
-                <!-- <input type="checkbox" checked="checked" name="checkRow" title="zb">指标
-            </div> -->
-          </form>
-      </section>
-  <!--            数据图-->
-      <section id="zdoAnalysis">
-          <form action="" method="">
-              <div id="analysis">
-                <script type="text/javascript">
-                  var dom = document.getElementById("analysis");
-                  var myChart = echarts.init(dom);
-                  var app = {};
-                  option = null;
 
-                  var colors = ['#5793f3', '#d14a61'];
-                  var dataMap = {};
-                  function dataFormatter(obj) {
-                      var pList = ['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南','西藏','陕西','甘肃','青海','宁夏','新疆'];
-                      var temp;
-                      for (var year = 2011; year <= 2016; year++) {
-                          var max = 0;
-                          var sum = 0;
-                          temp = obj[year];
-                          for (var i = 0, l = temp.length; i < l; i++) {
-                              obj[year][i] = {
-                                  name : pList[i],
-                                  value : temp[i]
+            <!-- <div style="text-align: right;">单位:&nbsp;%</div> -->
+
+            <table id="tableData"></table>
+        </div>
+
+        <div id="imageView">
+            <div class="page-header" style="text-align: center;">
+                <h3>年中人口</h3>
+                <br>
+                <h4 style="margin-top: -20px;">Mid-year Population</h4>
+            </div>
+
+            <div class="panel" style="margin-top: 40px;">
+                <div id="main" style="width: 100%;height:400px;">
+                  <script type="text/javascript">
+                      var dom = document.getElementById("main");
+                      var myChart = echarts.init(dom);
+                      var app = {};
+                      option = null;
+
+                      var colors = ['#5793f3', '#d14a61'];
+                      var dataMap = {};
+                      function dataFormatter(obj) {
+                          var pList = ['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南','西藏','陕西','甘肃','青海','宁夏','新疆'];
+                          var temp;
+                          for (var year = 2011; year <= 2016; year++) {
+                              var max = 0;
+                              var sum = 0;
+                              temp = obj[year];
+                              for (var i = 0, l = temp.length; i < l; i++) {
+                                  obj[year][i] = {
+                                      name : pList[i],
+                                      value : temp[i]
+                                  }
                               }
                           }
+                          return obj;
                       }
-                      return obj;
-                  }
-                  dataMap.dataNZ = dataFormatter({
-                      2011:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-                      2012:[3.0, 3.9, 3.0, 33.2, 35.6, 73.7, 133.6, 132.2, 33.6, 30.0, 3.4, 3.3],
-                      2013:[4.0, 4.4, 7.4, 43.2, 45.6, 46.7, 145.6, 142.2, 42.6, 24.0, 4.4, 4.3],
-                      2014:[5.0, 5.9, 7.5, 53.2, 55.6, 56.7, 155.6, 152.2, 52.6, 25.0, 56.4, 53.3],
-                      2015:[6.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-                      2016:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-                  })
+                      dataMap.dataNZ = dataFormatter({
+                          2011:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                          2012:[3.0, 3.9, 3.0, 33.2, 35.6, 73.7, 133.6, 132.2, 33.6, 30.0, 3.4, 3.3],
+                          2013:[4.0, 4.4, 7.4, 43.2, 45.6, 46.7, 145.6, 142.2, 42.6, 24.0, 4.4, 4.3],
+                          2014:[5.0, 5.9, 7.5, 53.2, 55.6, 56.7, 155.6, 152.2, 52.6, 25.0, 56.4, 53.3],
+                          2015:[6.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                          2016:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+                      })
 
-                  option = {
-                      baseOption:{
-                          timeline: {
-                              // y: 0,
-                              axisType: 'category',
-                              // realtime: false,
-                              // loop: false,
-                              autoPlay: true,
-                              // currentIndex: 2,
-                              playInterval: 1000,
-                              // controlStyle: {
-                              //     position: 'left'
-                              // },
-                              data: [
-                                  '2011-01-01','2012-01-01','2013-01-01','2014-01-01','2015-01-01','2016-01-01'
-                              ],
-                              label: {
-                                  formatter : function(s) {
-                                      return (new Date(s)).getFullYear();
-                                  }
+                      option = {
+                          baseOption:{
+                              timeline: {
+                                  // y: 0,
+                                  axisType: 'category',
+                                  // realtime: false,
+                                  // loop: false,
+                                  autoPlay: true,
+                                  // currentIndex: 2,
+                                  playInterval: 1000,
+                                  // controlStyle: {
+                                  //     position: 'left'
+                                  // },
+                                  data: [
+                                      '2011-01-01','2012-01-01','2013-01-01','2014-01-01','2015-01-01','2016-01-01'
+                                  ],
+                                  label: {
+                                      formatter : function(s) {
+                                          return (new Date(s)).getFullYear();
+                                      }
+                                  },
+
                               },
-
-                          },
-                          title: {
-                              subtext: '数据来自国家统计局'
-                          },
-                          color: colors,
-                          tooltip: {
-                              trigger: 'axis',
-                              axisPointer: {
-                                  type: 'cross'
-                              }
-                          },
-                          grid: {
-                              top: 80,
-                              bottom: 100,
+                              title: {
+                                  subtext: '数据来自国家统计局'
+                              },
+                              color: colors,
                               tooltip: {
                                   trigger: 'axis',
                                   axisPointer: {
-                                      type: 'shadow',
-                                      label: {
-                                          show: true,
-                                          formatter: function (params) {
-                                              return params.value.replace('\n', '');
+                                      type: 'cross'
+                                  }
+                              },
+                              grid: {
+                                  top: 80,
+                                  bottom: 100,
+                                  tooltip: {
+                                      trigger: 'axis',
+                                      axisPointer: {
+                                          type: 'shadow',
+                                          label: {
+                                              show: true,
+                                              formatter: function (params) {
+                                                  return params.value.replace('\n', '');
+                                              }
                                           }
                                       }
                                   }
-                              }
-                          },
+                              },
 
-                          xAxis: [
-                              {
-                                  'type':'category',
-                                  'axisLabel':{'interval':0},
-                                  'data':[
-                                      '北京','\n天津','河北','\n山西','内蒙古','\n辽宁','吉林','\n黑龙江',
-                                      '上海','\n江苏','浙江','\n安徽','福建','\n江西','山东','\n河南',
-                                      '湖北','\n湖南','广东','\n广西','海南','\n重庆','四川','\n贵州',
-                                      '云南','\n西藏','陕西','\n甘肃','青海','\n宁夏','新疆'
-                                  ],
-                                  splitLine: {show: false}
-                              }
-                          ],
-                          yAxis: [
-                              {
-                                  type: 'value',
-                                  name: '年中人口',
-                                  min: 0,
-                                  max: 250,
-                                  position: 'left',
-                                  axisLine: {
-                                      lineStyle: {
-                                          color: colors[0]
+                              xAxis: [
+                                  {
+                                      'type':'category',
+                                      'axisLabel':{'interval':0},
+                                      'data':[
+                                          '北京','\n天津','河北','\n山西','内蒙古','\n辽宁','吉林','\n黑龙江',
+                                          '上海','\n江苏','浙江','\n安徽','福建','\n江西','山东','\n河南',
+                                          '湖北','\n湖南','广东','\n广西','海南','\n重庆','四川','\n贵州',
+                                          '云南','\n西藏','陕西','\n甘肃','青海','\n宁夏','新疆'
+                                      ],
+                                      splitLine: {show: false}
+                                  }
+                              ],
+                              yAxis: [
+                                  {
+                                      type: 'value',
+                                      name: '年中人口',
+                                      min: 0,
+                                      max: 250,
+                                      position: 'left',
+                                      axisLine: {
+                                          lineStyle: {
+                                              color: colors[0]
+                                          }
+                                      },
+                                      axisLabel: {
+                                          formatter: '{value} 人'
                                       }
                                   },
-                                  axisLabel: {
-                                      formatter: '{value} 人'
+                                  {
+                                      type: 'value',
+                                      name: '2015年增长率',
+                                      min: 0,
+                                      max: 25,
+                                      position: 'right',
+                                      axisLine: {
+                                          lineStyle: {
+                                              color: colors[1]
+                                          }
+                                      },
+                                      axisLabel: {
+                                          formatter: '{value} %'
+                                      }
                                   }
+                              ],
+                              series: [
+                                  {name: '城镇人口', type: 'bar'},
+                                  {name: '人口密度', type: 'line'}
+                              ]
+
+                          },
+
+                          options:[
+                              {
+                                  title: {text: '2011人口密度和城镇人口'},
+                                  series: [
+                                      {data: dataMap.dataNZ['2011']},
+
+                                  ]
                               },
                               {
-                                  type: 'value',
-                                  name: '2015年增长率',
-                                  min: 0,
-                                  max: 25,
-                                  position: 'right',
-                                  axisLine: {
-                                      lineStyle: {
-                                          color: colors[1]
-                                      }
-                                  },
-                                  axisLabel: {
-                                      formatter: '{value} %'
-                                  }
+                                  title: {text: '2012人口密度和城镇人口'},
+                                  series: [
+                                      {data: dataMap.dataNZ['2012']},
+
+                                  ]
+                              },
+                              {
+                                  title: {text: '2013人口密度和城镇人口'},
+                                  series: [
+                                      {data: dataMap.dataNZ['2013']},
+
+                                  ]
+                              },
+                              {
+                                  title: {text: '2014人口密度和城镇人口'},
+                                  series: [
+                                      {data: dataMap.dataNZ['2014']},
+
+                                  ]
+                              },
+                              {
+                                  title: {text: '2015人口密度和城镇人口'},
+                                  series: [
+                                      {data: dataMap.dataNZ['2015']},
+                                      {data: [2.0, 2.2, 3.3, 64.5, 66.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]},
+                                  ]
+                              },
+                              {
+                                  title: {text: '2016人口密度和城镇人口'},
+                                  series: [
+                                      {data: dataMap.dataNZ['2016']},
+                                      {data: [0]}
+                                  ]
                               }
-                          ],
-                          series: [
-                              {name: '城镇人口', type: 'bar'},
-                              {name: '人口密度', type: 'line'}
                           ]
+                      };
+                      ;
+                      if (option && typeof option === "object") {
+                          myChart.setOption(option, true);
+                      }
+                  </script>
+                </div>
+            </div>
+        </div>
 
-                      },
+        <div style="color: #959595; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+          <span class="glyphicon glyphicon-save"></span> 下载
+      </a></div>
 
-                      options:[
-                          {
-                              title: {text: '2011人口密度和城镇人口'},
-                              series: [
-                                  {data: dataMap.dataNZ['2011']},
+        <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+    </div>
+    <script>
+        $(function(){
+            $('#imageView').hide();
+            $('#tableTag').attr('class','active');
+        })
 
-                              ]
-                          },
-                          {
-                              title: {text: '2012人口密度和城镇人口'},
-                              series: [
-                                  {data: dataMap.dataNZ['2012']},
+        function showTable() {
+            $('#tableView').show();
+            $('#imageView').hide();
+            $('#tableTag').attr('class','active');
+            $('#imageTag').removeClass('active');
+        }
 
-                              ]
-                          },
-                          {
-                              title: {text: '2013人口密度和城镇人口'},
-                              series: [
-                                  {data: dataMap.dataNZ['2013']},
+        function showImage() {
+            $('#imageView').show();
+            $('#tableView').hide();
+            $('#imageTag').attr('class','active');
+            $('#tableTag').removeClass('active');
+        }
 
-                              ]
-                          },
-                          {
-                              title: {text: '2014人口密度和城镇人口'},
-                              series: [
-                                  {data: dataMap.dataNZ['2014']},
+        $('#tableData').bootstrapTable({
+            striped: true,
+            columns: [
+                {
+                    field: 'country',
+                    title: '国家'
+                },
+                {
+                    field: 'year1',
+                    title: '2015年(万人)'
+                },
+                {
+                    field: 'year2',
+                    title: '2014年(万人)'
+                },
+                {
+                    field: 'year3',
+                    title: '2013年(万人)'
+                },
+                {
+                    field: 'year4',
+                    title: '2012年(万人)'
+                },
+                {
+                    field: 'year5',
+                    title: '2011年(万人)'
+                },
+                {
+                    field: 'GrowthRate',
+                    title: '2015年增长率(%)'
+                },
+            ],
+            data: [
+                {
+                    country: '阿尔巴尼亚',
+                    year1: '89.9',
+                    year2: '94.4',
+                    year3: '89.7',
+                    year4: '90.3',
+                    year5: '91.3',
+                    GrowthRate: '-0.2'
+                },
+                {
+                    country: '波黑',
+                    year1: '89.9',
+                    year2: '94.4',
+                    year3: '89.7',
+                    year4: '90.3',
+                    year5: '91.3',
+                    GrowthRate: '-0.2'
+                },
+                {
+                    country: '保加利亚',
+                    year1: '89.9',
+                    year2: '94.4',
+                    year3: '89.7',
+                    year4: '90.3',
+                    year5: '91.3',
+                    GrowthRate: '-0.2'
+                },
 
-                              ]
-                          },
-                          {
-                              title: {text: '2015人口密度和城镇人口'},
-                              series: [
-                                  {data: dataMap.dataNZ['2015']},
-                                  {data: [2.0, 2.2, 3.3, 64.5, 66.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]},
-                              ]
-                          },
-                          {
-                              title: {text: '2016人口密度和城镇人口'},
-                              series: [
-                                  {data: dataMap.dataNZ['2016']},
-                                  {data: [0]}
-                              ]
-                          }
-                      ]
-                  };
-                  ;
-                  if (option && typeof option === "object") {
-                      myChart.setOption(option, true);
-                  }
-                </script>
-              </div>
-          </form>
-      </section>
+            ]
+        });
 
-      </div>
-  </div>
 
+    </script>
 </body>
 </html>
