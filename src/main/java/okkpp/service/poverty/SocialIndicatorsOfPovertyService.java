@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import okkpp.dao.poverty.SocialIndicatorsOfPovertyMapper;
 import okkpp.model.poverty.SocialIndicatorsOfPoverty;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 @Service
 @Transactional
@@ -21,8 +22,11 @@ public class SocialIndicatorsOfPovertyService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<SocialIndicatorsOfPoverty> selectByExample(String country){
-		return null;
+	public List<SocialIndicatorsOfPoverty> selectByExample(String column,String condition){
+		Example example = new Example(SocialIndicatorsOfPoverty.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import okkpp.dao.poverty.InternationalPovertyRatioMapper;
 import okkpp.model.poverty.InternationalPovertyRatio;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +24,11 @@ public class InternationalPovertyRatioService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<InternationalPovertyRatio> selectByExample(String country){
-		return null;
+	public List<InternationalPovertyRatio> selectByExample(String column,String condition){
+		Example example = new Example(InternationalPovertyRatio.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
 	
 }

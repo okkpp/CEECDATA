@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.investment.CostOfBusinessMapper;
-import okkpp.model.industry.ValueAddedInManufacturing;
 import okkpp.model.investment.CostOfBusiness;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;

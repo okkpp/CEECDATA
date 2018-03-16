@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import okkpp.dao.investment.DensityOfBusinessMapper;
-import okkpp.model.investment.CostOfBusiness;
 import okkpp.model.investment.DensityOfBusiness;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;

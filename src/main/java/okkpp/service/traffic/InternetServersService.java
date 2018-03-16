@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import okkpp.dao.traffic.InternetServersMapper;
 import okkpp.model.traffic.InternetServers;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 @Service
 @Transactional
@@ -21,7 +22,10 @@ public class InternetServersService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<InternetServers> selectByExample(String country){
-		return null;
+	public List<InternetServers> selectByExample(String column,String condition){
+		Example example = new Example(InternetServers.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
 }

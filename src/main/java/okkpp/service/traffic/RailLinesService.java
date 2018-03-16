@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import okkpp.dao.traffic.RailLinesMapper;
 import okkpp.model.traffic.RailLines;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 @Service
 @Transactional
@@ -21,7 +22,10 @@ public class RailLinesService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<RailLines> selectByExample(String country){
-		return null;
+	public List<RailLines> selectByExample(String column,String condition){
+		Example example = new Example(RailLines.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
 }
