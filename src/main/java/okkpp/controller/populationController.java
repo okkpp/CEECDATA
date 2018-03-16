@@ -14,20 +14,18 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import okkpp.service.population.*;
-import okkpp.service.traffic.AirFreightService;
 import okkpp.model.Msg;
 import okkpp.model.population.*;
-import okkpp.model.traffic.AirFreight;
 
 @Controller
 @RequestMapping("/population")
 public class populationController {
 
 	@Autowired
-	BirthAndDeathRateService birthAndDeathRateService;
+	BirthRateDeathRateService birthAndDeathRateService;
 	@RequestMapping("/BirthAndDeathRate")
 	public String BirthAndDeathRate(Model model) {
-		List<BirthAndDeathRate> list = birthAndDeathRateService.selectAll();
+		List<BirthRateDeathRate> list = birthAndDeathRateService.selectAll();
 		model.addAttribute("data",list);
 		return "404";
 	}
@@ -35,7 +33,7 @@ public class populationController {
 	@ResponseBody
 	public Msg birthAndDeathRate(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
-		List<BirthAndDeathRate> list = birthAndDeathRateService.selectAll();
+		List<BirthRateDeathRate> list = birthAndDeathRateService.selectAll();
 		PageInfo pageInfo = new PageInfo(list,10);
 		model.addAttribute("pageInfo",pageInfo);
 		return Msg.success().add("pageInfo",pageInfo);

@@ -8,10 +8,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
 <title></title>
-<link rel="stylesheet" href="../MUI/css/pintuer.css">
-<link rel="stylesheet" href="../MUI/css/admin.css">
-<script src="../MUI/js/jquery.js"></script>
-<script src="../MUI/js/jquery.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/pintuer.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/admin.css">
+<script src="${pageContext.request.contextPath}/MUI/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/MUI/js/pintuer.js"></script>
+<script type="text/javascript">
+if(${msg!=null}&&${msg!=''})
+alert('${msg}');
+</script>
 </head>
 <body>
 <div class="panel admin-panel">
@@ -49,7 +53,7 @@
           <label for="sitename">确认新密码：</label>
         </div>
         <div class="field">
-          <input type="password" class="input w50" id="renewpass" name="renewpass" size="50" placeholder="请再次输入新密码" onchange="checkPass()" data-validate="required:请再次输入新密码,repeat#newpass:两次输入的密码不一致" />
+          <input type="password" class="input w50" id="renewpass" name="renewpass" size="50" placeholder="请再次输入新密码" data-validate="required:请再次输入新密码,repeat#newpass:两次输入的密码不一致" />
           <p id="checkmsg" style="color:red;"></p>        
         </div>
       </div>
@@ -59,26 +63,11 @@
           <label></label>
         </div>
         <div class="field">
-          <button class="button bg-main icon-check-square-o" onclick="formSubmit()"> 提交</button>   
+          <button class="button bg-main icon-check-square-o" type="submit"> 提交</button>   
         </div>
       </div>      
     </form>
   </div>
 </div>
 </body>
-<script type="text/javascript">
-function formSubmit(){
-	/***/
-}
-function checkPass(){
-	//alert($("#newpass").val());
-	if($("#newpass").val()!=$("#renewpass").val()){
-		$("#checkmsg").text("*两次密码不一致。");
-		return false;
-	}
-	return true;
-}
-
-
-</script>
 </html>

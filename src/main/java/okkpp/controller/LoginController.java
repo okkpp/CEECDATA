@@ -66,8 +66,13 @@ public class LoginController {
 	@RequestMapping("renewpsw")
 	public String renewPass(Model model,String mpass,String newpass,String renewpass) {
 		User user = (User) SecurityUtils.getSubject().getSession().getAttribute("user");
-		user.setPassword(newpass);
-		usermapper.updateByPrimaryKey(user);
+		if(newpass.equals(renewpass)&&user.getPassword().equals(newpass)) {
+			user.setPassword(newpass);
+			usermapper.updateByPrimaryKey(user);
+			model.addAttribute("msg", "ĞŞ¸ÄÃÜÂë³É¹¦£¡");
+		}else {
+			model.addAttribute("msg", "ĞŞ¸ÄÃÜÂëÊ§°Ü£¡");
+		}
 		return "/mui/pass";
 	}
 	@RequestMapping("/mui")

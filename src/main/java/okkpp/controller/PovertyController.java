@@ -15,7 +15,6 @@ import com.github.pagehelper.PageInfo;
 
 import okkpp.service.poverty.*;
 import okkpp.model.Msg;
-import okkpp.model.population.BirthAndDeathRate;
 import okkpp.model.poverty.*;
 
 @Controller

@@ -5,25 +5,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import okkpp.dao.population.BirthAndDeathRateMapper;
-import okkpp.model.population.BirthAndDeathRate;
+import okkpp.dao.population.BirthRateDeathRateMapper;
+import okkpp.model.population.BirthRateDeathRate;
 import okkpp.utils.CountryCode;
 
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class BirthAndDeathRateService {
+public class BirthRateDeathRateService {
 
 	@Autowired
-	BirthAndDeathRateMapper mapper;
+	BirthRateDeathRateMapper mapper;
 	
-	public List<BirthAndDeathRate> selectAll(){
+	public List<BirthRateDeathRate> selectAll(){
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<BirthAndDeathRate> selectByExample(String country){
+	public List<BirthRateDeathRate> selectByExample(String country){
 		return null;
 	}
 	

@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "t_population_birth_rate_death_rate")
-public class BirthAndDeathRate implements Serializable {
+public class BirthRateDeathRate implements Serializable {
     @Id
     private Integer id;
 
