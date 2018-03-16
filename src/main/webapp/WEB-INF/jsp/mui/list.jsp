@@ -143,7 +143,7 @@
 								json[index] = item.Field;
 						});
 						$("<th></th>").append("操作").appendTo("#search_result thead");
-						to_page(1);
+						to_page(1,"normal");
 												
 						/* <td><div class="button-group">
 						<a class="button border-main" href="add.html"><span
@@ -158,7 +158,7 @@
 	});
 	
 	//构建导航条元素
-	function builde_page_nav(result){			
+	function builde_page_nav(result,type){			
 		$("#page_nav_area").empty();
 		var firstPageSpan = $("<span></span>").append("首页").attr("href","#");
 		var prePageSpan = $("<span></span>").append("上一页").attr("href","#");
@@ -168,10 +168,10 @@
 		} else {
 			//为元素添加点击翻页的事件
 			firstPageSpan.click(function() {
-				to_page(1);
+				to_page(1,type);
 			});
 			prePageSpan.click(function() {
-				to_page(result.extend.pageInfo.pageNum - 1);
+				to_page(result.extend.pageInfo.pageNum - 1,type);
 			});
 		}
 		//添加到导航条
@@ -185,7 +185,7 @@
 				numSpan.addClass("current");
 			}
 			numSpan.click(function() {
-				to_page(item);
+				to_page(item,type);
 			});
 			numSpan.appendTo("#page_nav_area");
 		});
@@ -197,10 +197,10 @@
 			lastPageSpan.addClass("disabled");
 		} else {
 			nextPageSpan.click(function() {
-				to_page(result.extend.pageInfo.pageNum + 1);
+				to_page(result.extend.pageInfo.pageNum + 1,type);
 			});
 			lastPageSpan.click(function() {
-				to_page(result.extend.pageInfo.pages);
+				to_page(result.extend.pageInfo.pages,type);
 			});
 		}
 		//添加到导航条
@@ -209,20 +209,46 @@
 		
 	}
 	
+	//按条件搜索
+	function search() {
+		to_page(1,"search");
+		/* var chapter = $("#chapter_choose").val();
+		var sheet = $("#sheet_choose").val();
+		var column = $("#column_choose").val();
+		var condition = $("#condition").val();
+		//var str = "../"+chapter+"/"+sheet+"/selectConsumerByExample.do?&column="+column+"&condition="+condition;
+		var str = "../price/selectConsumerByExample.do?&column="+column+"&condition="+condition;
+		$.ajax({
+			url : str,
+			type : "GET",
+			success : function(result){
+				result = eval('('+ result+ ')');
+				to_page(result,"search");
+			}
+		}); */
+	}
 	//跳转页数
-	function to_page(pn){
-		var str ="../"+$("#chapter_choose").val()+"/"+$("#sheet_choose").val()+".do";
+	function to_page(pn,type){
+		var str;
+		if(type == "normal"){
+			str = "../"+$("#chapter_choose").val()+"/"+$("#sheet_choose").val()+".do";				
+		}else if(type == "search"){
+			var chapter = $("#chapter_choose").val();
+			var sheet = $("#sheet_choose").val();
+			var column = $("#column_choose").val();
+			var condition = $("#condition").val()
+			str = "../" + chapter + "/"+tranformStr("select_" + sheet)+"ByExample.do?column="+column+"&condition="+condition;
+		}
 		$.ajax({
 			url : str,
 			data : "pn=" + pn,
 			type : "POST",
 			success : function(result) {
-				//console.log(result);
 				result = eval('('+ result+ ')');
 				//解析显示数据结果
 				create_result(result);
 				//解析显示分页条数据
-				builde_page_nav(result);
+				builde_page_nav(result,type);
 			}
 		});
 	}
@@ -230,7 +256,6 @@
 	//解析显示数据结果
 	function create_result(result){
 		$("#search_result tbody").empty();
-		console.log(json);
 		$.each(result.extend.pageInfo.list,function(index,item){		
 			var tr = $("<tr></tr>");
 			for(var i = 0;i<json.length;i++){		
@@ -252,7 +277,6 @@
 			tr.append($("<td><td>").append("编辑"));
 			tr.appendTo("#search_result tbody");
 		});
-		console.log(json);
 	}	
 	//转成驼峰命名法
 	function tranformStr(str){	
@@ -262,23 +286,7 @@
 		}
 		return strArr.join('');
 	}	
-	//搜索
-	function search() {
-		var chapter = $("#chapter_choose").val();
-		var sheet = $("#sheet_choose").val();
-		var column = $("#column_choose").val();
-		var condition = $("#condition").val();
-		var str = "../"+chapter+"/"+sheet+"/searchByCondition.do?&column="+column+"&condition="+condition;
-		//console.log(str);
-		$.ajax({
-			url : str,
-			type : "GET",
-			success : function(result){
-				create_result(result);
-			}
-		});
-	}
-
+	
 	//单个删除
 	function del(id, mid, iscid) {
 		if (confirm("您确定要删除吗?")) {

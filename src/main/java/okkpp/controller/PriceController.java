@@ -21,56 +21,68 @@ public class PriceController {
 
 	@Autowired
 	ConsumerService consumerService;
-	@RequestMapping(value = "/Consumer",method = RequestMethod.POST)
+
+	@RequestMapping(value = "/Consumer", method = RequestMethod.POST)
 	public String Consumer(Model model) {
 		List<Consumer> list = consumerService.selectAll();
-		model.addAttribute("data",list);
+		model.addAttribute("data", list);
 		return "404";
 	}
+
+	// 查找所有
 	@RequestMapping("/consumer")
 	@ResponseBody
-	public Msg Consumer(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
-		PageHelper.startPage(pn,10);
+	public Msg Consumer(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
+		PageHelper.startPage(pn, 10);
 		List<Consumer> list = consumerService.selectAll();
-		PageInfo pageInfo = new PageInfo(list,10);
-		model.addAttribute("pageInfo",pageInfo);
-		return Msg.success().add("pageInfo",pageInfo);
-	}
-	@RequestMapping(value = "/selectByExample")
-	public Msg selectByExample(@RequestParam(value = "pn",defaultValue = "1")Integer pn,Model model
-			,@RequestParam("column")String column,@RequestParam("condition")String condition) {
-		PageHelper.startPage(pn,10);
-		List<Consumer> list = consumerService.selectByExample(column, condition);
-		PageInfo pageInfo = new PageInfo(list,10);
-		model.addAttribute("pageInfo",pageInfo);
+		PageInfo pageInfo = new PageInfo(list, 10);
+		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);
 	}
-	
+
+	// 按条件查找
+	@RequestMapping("/selectConsumerByExample")
+	@ResponseBody
+	public Msg selectConsumerByExample(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
+			@RequestParam("column") String column, @RequestParam("condition") String condition) {
+		PageHelper.startPage(pn, 10);
+		List<Consumer> list = consumerService.selectByExample(column, condition);
+		PageInfo pageInfo = new PageInfo(list, 10);
+		model.addAttribute("pageInfo", pageInfo);
+		return Msg.success().add("pageInfo", pageInfo);
+	}
+
 	@Autowired
 	ProducerService producerService;
-	@RequestMapping(value = "/Producer",method = RequestMethod.POST)
+
+	@RequestMapping(value = "/Producer", method = RequestMethod.POST)
 	public String Producer(Model model) {
 		List<Producer> list = producerService.selectAll();
-		model.addAttribute("data",list);
+		model.addAttribute("data", list);
 		return "404";
 	}
+
+	// 查找所有Produce
 	@RequestMapping("/producer")
 	@ResponseBody
-	public Msg Producer(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
-		PageHelper.startPage(pn,10);
+	public Msg Producer(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
+		PageHelper.startPage(pn, 10);
 		List<Producer> list = producerService.selectAll();
-		PageInfo pageInfo = new PageInfo(list,10);
-		model.addAttribute("pageInfo",pageInfo);
-		return Msg.success().add("pageInfo",pageInfo);
+		PageInfo pageInfo = new PageInfo(list, 10);
+		model.addAttribute("pageInfo", pageInfo);
+		return Msg.success().add("pageInfo", pageInfo);
 	}
-	
-	public Msg searchConsumerByCondition(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model,
-			@RequestParam("column")String column,@RequestParam("condition")String condition) {
-		PageHelper.startPage(pn,10);
-		List<Consumer> list = consumerService.selectByExample(column,condition);
-		PageInfo pageInfo = new PageInfo(list,10);
-		model.addAttribute("pageInfo",pageInfo);
-		return Msg.success().add("pageInfo",pageInfo);
+
+	// 按条件查找Produce
+	@RequestMapping("/selectProducerByExample")
+	@ResponseBody
+	public Msg selectProducerByExample(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
+			@RequestParam("column") String column, @RequestParam("condition") String condition) {
+		PageHelper.startPage(pn, 10);
+		List<Producer> list = producerService.selectByExample(column, condition);
+		PageInfo pageInfo = new PageInfo(list, 10);
+		model.addAttribute("pageInfo", pageInfo);
+		return Msg.success().add("pageInfo", pageInfo);
 	}
-	
+
 }

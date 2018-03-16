@@ -23,8 +23,9 @@ public class ConsumerService {
 	}
 	
 	public List<Consumer> selectByExample(String column,String condition){
-		//Example example = new Example
-		return null;
+		Example example = new Example(Consumer.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
-	
 }
