@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import okkpp.dao.price.ConsumerMapper;
 import okkpp.model.price.Consumer;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 @Service
 @Transactional
@@ -22,6 +23,7 @@ public class ConsumerService {
 	}
 	
 	public List<Consumer> selectByExample(String column,String condition){
+		//Example example = new Example
 		return null;
 	}
 	

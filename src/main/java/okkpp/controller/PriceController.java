@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,6 +35,15 @@ public class PriceController {
 		PageInfo pageInfo = new PageInfo(list,10);
 		model.addAttribute("pageInfo",pageInfo);
 		return Msg.success().add("pageInfo",pageInfo);
+	}
+	@RequestMapping(value = "/selectByExample")
+	public Msg selectByExample(@RequestParam(value = "pn",defaultValue = "1")Integer pn,Model model
+			,@RequestParam("column")String column,@RequestParam("condition")String condition) {
+		PageHelper.startPage(pn,10);
+		List<Consumer> list = consumerService.selectByExample(column, condition);
+		PageInfo pageInfo = new PageInfo(list,10);
+		model.addAttribute("pageInfo",pageInfo);
+		return Msg.success().add("pageInfo", pageInfo);
 	}
 	
 	@Autowired
