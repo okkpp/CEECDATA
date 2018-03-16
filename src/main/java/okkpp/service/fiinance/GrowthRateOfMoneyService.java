@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.dao.finance.GrowthRateOfMoneyMapper;
+import okkpp.model.finance.GlobalEquityIndices;
 import okkpp.model.finance.GrowthRateOfMoney;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 /**
 * @author duck
@@ -22,5 +24,12 @@ public class GrowthRateOfMoneyService {
 	GrowthRateOfMoneyMapper mapper;
 	public List<GrowthRateOfMoney> selectAll() {
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	public List<GrowthRateOfMoney> selectByExample(String column,String condition){
+		Example example = new Example(GrowthRateOfMoney.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
 }

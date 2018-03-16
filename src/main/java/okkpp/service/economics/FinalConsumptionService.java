@@ -1,14 +1,13 @@
 package okkpp.service.economics;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import okkpp.dao.economics.FinalConsumptionMapper;
 import okkpp.model.economics.FinalConsumption;
 import okkpp.utils.CountryCode;
+import tk.mybatis.mapper.entity.Example;
 
 /**
 * @author duck
@@ -22,5 +21,12 @@ public class FinalConsumptionService {
 	FinalConsumptionMapper mapper;
 	public List<FinalConsumption> selectAll() {
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	public List<FinalConsumption> selectByExample(String column,String condition){
+		Example example = new Example(FinalConsumption.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%"+condition+"%");
+		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
 }
