@@ -29,7 +29,7 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/birth_rate_death_rate",method = RequestMethod.POST)
+	@RequestMapping(value = "/BirthRateDeathRate",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg birthAndDeathRate(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -47,7 +47,7 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/composition_dependency_ratio",method = RequestMethod.POST)
+	@RequestMapping(value = "/CompositionDependencyRatio",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg compositionDependencyRatio(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -65,7 +65,7 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/density",method = RequestMethod.POST)
+	@RequestMapping(value = "/Density",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg density(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -83,7 +83,7 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/female_percent",method = RequestMethod.POST)
+	@RequestMapping(value = "/FemalePercent",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg femalePercent(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -95,13 +95,13 @@ public class populationController {
 	
 	@Autowired
 	InfantMortalityRateService infantMortalityRateService;
-	@RequestMapping(value = "/InfantMortalityRate",method = RequestMethod.POST)
+	@RequestMapping("/InfantMortalityRate")
 	public String InfantMortalityRate(Model model) {
 		List<InfantMortalityRate> list = infantMortalityRateService.selectAll();
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping("/infant_mortality_rate")
+	@RequestMapping(value = "/InfantMortalityRate",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg infantMortalityRate(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -119,7 +119,7 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/life_expectancy_at_birth",method = RequestMethod.POST)
+	@RequestMapping(value = "/LifeExpectancyAtBirth",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg lifeExpectancyAtBirth(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -137,7 +137,7 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/mid_year_poplation",method = RequestMethod.POST)
+	@RequestMapping(value = "/MidYearPoplation",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg midYearPoplation(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -155,7 +155,7 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/reproductive_health",method = RequestMethod.POST)
+	@RequestMapping(value = "/ReproductiveHealth",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg reproductiveHealth(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -173,7 +173,7 @@ public class populationController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/rural_and_urban_rate",method = RequestMethod.POST)
+	@RequestMapping(value = "/RuralAndUrbanRate",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg ruralAndUrbanRate(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);

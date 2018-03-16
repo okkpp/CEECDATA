@@ -26,7 +26,7 @@ public class TrafficController {
 		model.addAttribute("data",list);
 		return "404";
 	}	
-	@RequestMapping(value = "/air_freight",method = RequestMethod.POST)
+	@RequestMapping(value = "/AirFreight",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg airFreight(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -44,7 +44,7 @@ public class TrafficController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/broadband",method = RequestMethod.POST)
+	@RequestMapping(value = "/Broadband",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg broadband(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -62,7 +62,7 @@ public class TrafficController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/container",method = RequestMethod.POST)
+	@RequestMapping(value = "/Container",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg container(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -80,7 +80,7 @@ public class TrafficController {
 		model.addAttribute("data",list);
 		return "404";	
 	}
-	@RequestMapping(value = "/freight",method = RequestMethod.POST)
+	@RequestMapping(value = "/Freight",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg freight(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -98,7 +98,7 @@ public class TrafficController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/internet_servers",method = RequestMethod.POST)
+	@RequestMapping(value = "/InternetServers",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg internetServers(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -116,7 +116,7 @@ public class TrafficController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/internet_users",method = RequestMethod.POST)
+	@RequestMapping(value = "/InternetUsers",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg internetUsers(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -134,7 +134,7 @@ public class TrafficController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/phone",method = RequestMethod.POST)
+	@RequestMapping(value = "/Phone",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg phone(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -152,7 +152,7 @@ public class TrafficController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/rail_lines",method = RequestMethod.POST)
+	@RequestMapping(value = "/RailLines",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg railLines(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);

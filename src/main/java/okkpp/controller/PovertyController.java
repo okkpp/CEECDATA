@@ -29,7 +29,7 @@ public class PovertyController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/household_consumption_expenditure",method = RequestMethod.POST)
+	@RequestMapping(value = "/HouseholdConsumptionExpenditure",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg household_consumption_expenditure(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -47,7 +47,7 @@ public class PovertyController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/international_poverty_ratio",method = RequestMethod.POST)
+	@RequestMapping(value = "/InternationalPovertyRatio",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg international_poverty_ratio(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -65,7 +65,7 @@ public class PovertyController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/personal_income",method = RequestMethod.POST)
+	@RequestMapping(value = "/PersonalIncome",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg personal_income(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -83,7 +83,7 @@ public class PovertyController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/poverty_rate",method = RequestMethod.POST)
+	@RequestMapping(value = "/PovertyRate",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg poverty_rate(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -101,7 +101,7 @@ public class PovertyController {
 		model.addAttribute("data",list);
 		return "404";
 	}
-	@RequestMapping(value = "/social_indicators_of_poverty",method = RequestMethod.POST)
+	@RequestMapping(value = "/SocialIndicatorsOfPoverty",method = RequestMethod.POST)
 	@ResponseBody
 	public Msg social_indicators_of_poverty(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);

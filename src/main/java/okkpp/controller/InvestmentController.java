@@ -28,7 +28,7 @@ public class InvestmentController {
 		model.addAttribute("data", list);
 		return "404";
 	}
-	@RequestMapping("/cost_of_business")
+	@RequestMapping("/CostOfBusiness")
 	@ResponseBody
 	public Msg cost_of_business(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -46,7 +46,7 @@ public class InvestmentController {
 		model.addAttribute("data", list);
 		return "404";
 	}
-	@RequestMapping("/density_of_business")
+	@RequestMapping("/DensityOfBusiness")
 	@ResponseBody
 	public Msg density_of_business(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -64,7 +64,7 @@ public class InvestmentController {
 		model.addAttribute("data", list);
 		return "404";
 	}
-	@RequestMapping("/rank_of_business")
+	@RequestMapping("/RankOfBusiness")
 	@ResponseBody
 	public Msg rank_of_business(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
@@ -82,7 +82,7 @@ public class InvestmentController {
 		model.addAttribute("data", list);
 		return "404";
 	}
-	@RequestMapping("/registered_of_business")
+	@RequestMapping("/RegisteredOfBusiness")
 	@ResponseBody
 	public Msg registered_of_business(@RequestParam(value="pn",defaultValue = "1")Integer pn,Model model) {
 		PageHelper.startPage(pn,10);
