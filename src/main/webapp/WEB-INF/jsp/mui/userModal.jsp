@@ -31,21 +31,7 @@ function showModal(ele){
 					<h4 class="modal-title">修改</h4>
 				</div>
 				<div class="modal-body">
-					<form class="form-horizontal" id="updateForm">
-						<div class="form-group">
-							<label for="empName_add_input" class="col-sm-2 control-label">empName</label>
-							<div class="col-sm-10">
-								<p class="form-control-static" id="empName_update_static"></p>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label">empEmail</label>
-							<div class="col-sm-10">
-								<input type="text" name="empEmail" class="form-control"
-									id="email_add_input" placeholder="email@163.com"> <span
-									class="help-block"></span> <span class="help-block"></span>
-							</div>
-						</div>
+					<form class="form-horizontal" id="update_form">
 					</form>
 				</div>
 				<div class="modal-footer">
