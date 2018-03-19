@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -14,44 +15,10 @@
 <script src="${pageContext.request.contextPath}/MUI/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/MUI/js/pintuer.js"></script>
 <script src="${pageContext.request.contextPath}/MUI/js/bootstrap.min.js"></script>
-
+<%@ include file="/WEB-INF/jsp/mui/userModal.jsp"%>
 
 </head>
 <body>
-	<!-- 修改模态框 -->
-	<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">修改</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal" id="updateForm">
-						<div class="form-group">
-							<label for="empName_add_input" class="col-sm-2 control-label">empName</label>
-							<div class="col-sm-10">
-								<p class="form-control-static" id="empName_update_static"></p>
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-2 control-label">empEmail</label>
-							<div class="col-sm-10">
-								<input type="text" name="empEmail" class="form-control"
-									id="email_add_input" placeholder="email@163.com"> <span
-									class="help-block"></span> <span class="help-block"></span>
-							</div>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" id="update_btn">更新</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<form method="post" action="" id="listform">
 		<div class="panel admin-panel">
 			<div class="panel-head">
@@ -59,7 +26,7 @@
 				<a href="" style="float: right; display: none;">添加字段</a>
 			</div>
 			<div class="padding border-bottom">
-				<ul class="search" style="padding-left: 10px;">
+				<ul claOrInputass="search" style="padding-left: 10px;">
 					<li>
 						<a class="button border-main icon-plus-square-o" href="mui.do?str=add"> 添加内容</a>
 					</li>
@@ -126,7 +93,7 @@
 			result = eval('(' + result + ')');
 			for ( var item in result) {
 				$("<option></option>").append(item).appendTo("#chapter_choose");
-			}
+			}		
 			//选择章节填充数据
 			$("#chapter_choose").change(function() {
 				var opt = result[$("#chapter_choose").val()];
@@ -158,6 +125,7 @@
 								if (item.Comment == "") {item.Comment = "id";}
 								$("<th></th>").append(item.Comment).appendTo("#search_result thead");
 								json[index] = item.Field;
+								
 						});
 						$("<th></th>").append("操作").appendTo("#search_result thead");
 						to_page(1,"normal");
@@ -242,6 +210,8 @@
 			type : "POST",
 			success : function(result) {
 				result = eval('('+ result+ ')');
+				//json排序
+				result = sortByJson(result,json);
 				//解析显示数据结果
 				create_result(result);
 				//解析显示分页条数据
@@ -258,7 +228,7 @@
 			//按照<th>顺序显示结果
 			var tr = $("<tr></tr>");
 			tr.append("<td><input type=\"checkbox\" class=\"check_item\"></td>");
-			for(var i = 0;i<json.length;i++){	
+			for(var i = 0;i<json.length;i++){
 				json[i] = tranformStr(json[i]);
 				if(item[json[i]] == null){
 					tr.append($("<td></td>").append("/"));
@@ -290,26 +260,71 @@
 		}
 		return strArr.join('');
 	}	
+	//按json数组格式排序
+	function sortByJson(result,json){
+		var newList = "[";
+		$.each(result.extend.pageInfo.list,function(index,item){
+			newList += "{";
+			for(var i = 0;i<json.length;i++){
+				json[i] = tranformStr(json[i]);
+				for(var y in item){
+					if(y == json[i]){
+						newList += "\""+y+"\":"+"\""+item[y]+"\",";		
+					}
+				}
+				
+			};
+			newList = newList.substring(0,newList.length - 1);
+			newList += "},";
+		});
+		newList = newList.substring(0,newList.length - 1) +"]";
+		newList = eval('('+ newList+ ')');
+		result.extend.pageInfo.list = newList;
+		return result;	
+	}
 	
 	//为所有修改按钮绑定事件
 	$(document).on("click", ".update_btn", function() {
 		var id = $(this).attr("edit-id");
 		//alert(id);
-		$("#updateForm").empty();
+		//$("#update_form").empty();
+		
 		$.each(items,function(index,item){		
 			if(item.id == id){
 				for(var i in item){
-					$("<div></div>").append(i).appendTo("#updateForm");
+					var pOrInput;
+					if(i == "id" || i == "updated"){
+						pOrInput = $("<p></p>").addClass("form-control-static").append(item[i]).attr("name",i);
+					}else{
+						pOrInput = $("<input></input>").addClass("form-control").attr("placeholder",item[i]).attr("name",i);
+					}
+					$("<div></div>").addClass("form-group").append(
+						$("<label></label>").addClass("col-sm-2 control-label").append(i))
+						.append($("<div></div>").addClass("col-sm-10").append(pOrInput))
+						.appendTo("#update_form");
 				}
 			}
 		});
+		
+		//把数据id传递给模态框的更新按钮
+		$("#update_btn").attr("edit-id",$(this).attr("edit-id"));
 		$("#updateModal").modal({
 			backdrop : "static"
 		});
 	});
 	
-	$("update_btn").click(function(){
-		//alert($(this).attr("del-id"));
+	$("#update_btn").click(function(){
+		var str = "../"+$("#chapter_choose").val()+"/"+tranformStr("_"+$("#sheet_choose").val())+".do/"+$(this).attr("edit-id");
+		//console.log($("#update_form").serialize() + "&_method=PUT");
+		$.ajax({
+			url : str,
+			type : "POST",
+			data : $("#update_form").serialize()+"&_method=PUT",
+			success : function(result){
+				console.log(result);
+				alert(result.msg);
+			}
+		})
 	});
 	
 	//为所有删除按钮绑定事件(单个删除)
@@ -346,9 +361,9 @@
 		ids = ids.substring(0,ids.length-1);
 		if(confirm("确认删除【"+ids+"】吗?")){
 			//发送ajax请求删除
-			$.ajax({
+			/* $.ajax({
 				
-			});
+			}); */
 		}
 	});
 </script>
