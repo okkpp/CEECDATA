@@ -1,6 +1,9 @@
 package okkpp.system.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Table(name = "s_user")
@@ -24,6 +27,9 @@ public class User implements Serializable {
 
     private String enabled;
 
+    @Transient
+    private List<Role> roles = new ArrayList<Role>();
+    
     private static final long serialVersionUID = 1L;
 
     /**
@@ -151,4 +157,12 @@ public class User implements Serializable {
     public void setEnabled(String enabled) {
         this.enabled = enabled;
     }
+    
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
 }

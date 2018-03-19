@@ -1,4 +1,4 @@
-package okkpp.controller;
+package okkpp.system.controller;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;

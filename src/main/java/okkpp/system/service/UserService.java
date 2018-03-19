@@ -16,6 +16,7 @@ import okkpp.utils.ExampleBuilder;
 /**
 * @author duck
 * @date 创建时间：2018年3月9日 上午9:15:52
+* 主要用于查询用户
 */
 @Service
 @Transactional
