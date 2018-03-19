@@ -3,6 +3,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
+<!--
+  @author 汪振宇
+  @email 1120023921@qq.com
+  @Description: 年平均存款利率和贷款利率
+-->
 <head lang="zh-CN">
     <title>年平均存款利率和贷款利率</title>
 
@@ -14,11 +19,8 @@
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- 引入Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <!-- 引入BootStrap-table -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
@@ -29,10 +31,8 @@
 
     <!-- 引入Echarts -->
     <script src="${pageContext.request.contextPath}/assets/libs/echarts/echarts.min.js"></script>
-
-    <!-- 引入wzyTable -->
-    <script src="${pageContext.request.contextPath}/assets/libs/wzy-bootstrap-table/wzy-bootstrap-table.js"></script>
 </head>
+
 <body>
 <div class="container">
     <div>
@@ -48,15 +48,31 @@
             <br>
             <h4 style="margin-top: -20px;">Annual Average Deposit Rate and Lending Rate</h4>
         </div>
-
         <div style="text-align: right;">单位:&nbsp;%</div>
-
-        <table id="tableData"></table>
-    </div>
+		<table class="table table-hover table-striped">
+				<tr>
+					<td>国家</td>
+					<td>年份</td>
+					<td>年平均存款利率</td>
+					<td>贷款利率</td>
+				</tr>
+				<c:forEach items="${data}" var="map">
+					<tr>
+						<td rowspan="3" style="font-size: 20px; text-align: center;"><div
+								style="text-align: center; padding-top: 15%;">${map.key}</div></td>
+						<c:forEach items="${map.value}" var="list">
+							<td>${list.year}</td>
+							<td>${list.depositRate}</td>
+							<td>${list.lendingRate}</td>
+							<tr>
+						</c:forEach>
+				</c:forEach>
+			</table>
+		</div>
 
     <div id="imageView">
         <div class="page-header" style="text-align: center;">
-            <h3>年平均存款利率和贷款利率柱状图</h3>
+            <h3>年平均存款利率和贷款利率</h3>
             <br>
             <h4 style="margin-top: -20px;">Annual Average Deposit Rate and Lending Rate</h4>
         </div>
@@ -68,74 +84,61 @@
     </div>
 
     <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
-          <span class="glyphicon glyphicon-save"></span> 下载
-        </a></div>
-
+        <span class="glyphicon glyphicon-save"></span> 下载
+    </a></div>
     <!-- <div style="text-align: right;"><div id="page"></div></div> -->
 </div>
 </body>
 <script>
-var jsondata = eval('('+ '${data}'+ ')');
-console.log(jsondata);
-    var column = [
-        {
-            title: '国家',
-            field: 'contry',
-            rowspan: 5,
-        },
-        {
-            title: '年份',
-            field: 'year',
-        },
-        {
-            title: '存款利率',
-            field: 'save_rate'
-        },
-        {
-            title: '贷款利率',
-            field: 'borrow_rate'
-        }
-    ];
-
-    var data = [
-
-    ];
-
-    $('#tableData').wzyTable({
-        column: column,
-        data: data,
-    });
-
-    $(function () {
+    $(function() {
+        $('#all').hide()
         $('#imageView').hide();
+        $('#imageView2').hide();
         $('#tableTag').attr('class', 'active');
     })
 
     function showTable() {
+        $('#all').hide()
         $('#tableView').show();
+        $('#tableView2').show();
         $('#imageView').hide();
+        $('#imageView2').hide()
         $('#tableTag').attr('class', 'active');
         $('#imageTag').removeClass('active');
+        $('#first').show()
+        $('#second').show()
     }
 
     function showImage() {
+        $('#all').show()
         $('#imageView').show();
         $('#tableView').hide();
+        $('#tableView2').hide();
+        $('#imageView2').show();
         $('#imageTag').attr('class', 'active');
         $('#tableTag').removeClass('active');
+        $('#first').hide()
+        $('#second').hide()
     }
+
 
     var all = {
         "data": [
-            [0,0,0,36.27421662,0,12.64537665,0,11.86241304,0,0,0,0,1.596143642,0,61.06416139,0],
-            [0,0,0,46.83704817,0,21.07369247,0,0,0,0,0,0,36.43978533,0,65.29249732,0],
-            [0,0.519205856,14.27699525,50.98148174,0,33.556452,0,50.43995596,40.63814613,34.59767353,0,0,44.59620698,0,81.65024779,0],
-            [0,0.625414512,17.20211519,55.15502839,0,40.82348997,0,41.59453671,46.99984111,41.57752702,0,0,53.30985846,0,94.28021046,47.78280607],
-            [0,0.629979215,0,55.59157203,0,0,0,0,43.76049951,41.50278607,0,0,63.20000379,0,94.53781897,46.0035936],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            //05 交易额
+            [5.087550872,2.132839881,3.08435,2.789600127,4.84375,1.174166667,1.714166667,2.780833333,2.4,6.415,5.225,12.13333333,2.44,3.175,5.167934585,3.564166667],
+            //5 周转
+            [13.075,4.928485792,8.660983333,6.831298668,0,5.776666667,11.19111667,6.106666667,5.271666667,19.60083333,12.13333333,16.83173462,6.675,7.8,8.540945327,9.6125],
+            //10 交易额
+            [6.417543373,1.10602655,4.076075,0,3.699525,1.081583333,1.7575,1.865,1.71,7.313333333,7.066666667,11.33,0,0,4.917692681,3.159166667],
+            //10 周转
+            [12.82232989,7.760177765,11.14436667,0,9.53,5.887833333,10.37666667,9.558333333,5.989166667,14.0725,9.483333333,17.3,0,0,7.586925113,7.888333333],
+            //13
+            [1.39187012,0.503435583,0.613891667,0,1.458083333,0.529332846,0,0,0,1.888333333,2.886194164,0,0,0,0.867014243,2.059663519],
+            //13
+            [8.70284668,4.481133401,7.484858333,0,8.933333333,4.282533329,0,0,0,6.7675,7.079158056,0,0,0,2.90249069,5.78888799]
         ],
-        "countrys": ["阿尔巴尼亚","波黑","保加利亚","克罗地亚","捷克","爱沙尼亚","匈牙利","拉脱维亚","立陶宛","马其顿","黑山","波兰","罗马尼亚","塞尔维亚","斯洛伐克","斯洛文尼亚"],
-        "years": ["2000年", "2005年", "2010年", "2013年", "2014年", "2015年"]
+        "countrys": ["阿尔巴尼亚", "爱沙尼亚", "保加利亚", "波兰", "黑山", "捷克", "克罗地亚", "拉脱维亚", "立陶宛", "罗马尼亚", "马其顿", "塞尔维亚", "斯洛伐克", "斯洛文尼亚", "匈牙利", "波黑"],
+        "years": ["2005年", "2010年", "2015年"]
     };
 
     var option = {
@@ -157,20 +160,6 @@ console.log(jsondata);
                 feature: {
                     mark: {
                         show: true
-                    },
-                    dataView: {
-                        show: true,
-                        readOnly: false
-                    },
-                    magicType: {
-                        show: true,
-                        type: ['line', 'bar']
-                    },
-                    restore: {
-                        show: true
-                    },
-                    saveAsImage: {
-                        show: true
                     }
                 }
             },
@@ -178,6 +167,9 @@ console.log(jsondata);
             grid: {
                 y: 100,
                 y2: 100
+            },
+            legend: {
+                data: ['年平均存款利率', '贷款利率']
             },
             xAxis: [{
                 type: 'category',
@@ -190,50 +182,47 @@ console.log(jsondata);
                 type: 'value',
                 name: ''
             }],
+            //05
             series: [{
-                name: '银行资本充足率',
+                name: '年平均存款利率',
                 type: 'bar',
                 data: all.data[0]
+            }, {
+                name: '贷款利率',
+                type: 'bar',
+                data: all.data[1]
             }]
         },
-            {
-                series: [{
-                    data: all.data[1]
-                }]
-            },
+            //10
             {
                 series: [{
                     data: all.data[2]
-                }]
-            },
-            {
-                series: [{
+                }, {
                     data: all.data[3]
                 }]
             },
+            //13
             {
                 series: [{
                     data: all.data[4]
-                }]
-            },
-            {
-                series: [{
+                }, {
                     data: all.data[5]
                 }]
             },
+            //14
             {
                 series: [{
                     data: all.data[6]
-                }]
-            },
-            {
-                series: [{
+                }, {
                     data: all.data[7]
                 }]
             },
+            //15
             {
                 series: [{
                     data: all.data[8]
+                }, {
+                    data: all.data[9]
                 }]
             }
         ]
@@ -242,4 +231,5 @@ console.log(jsondata);
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 </script>
+
 </html>

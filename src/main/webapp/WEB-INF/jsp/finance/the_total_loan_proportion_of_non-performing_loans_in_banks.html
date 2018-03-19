@@ -1,25 +1,18 @@
 <!DOCTYPE html>
-<html>
-<!-- 
-    @author: 朱鹏浩
-    @title: 中央政府公共债务占GDP比重
- -->
-<head lang="zh-CN">
-    <title>中央政府公共债务占GDP比重</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    <meta charset="utf-8">
-
+<html lang="en">
+<head>
+    <!--
+    @author 赵国杰
+    @title 银行不良贷款站全部贷款比重
+    -->
+    <meta charset="UTF-8">
+    <title>银行不良贷款站全部贷款比重</title>
     <!-- 引入Jquery -->
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- 引入Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <!-- 引入BootStrap-table -->
     <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
@@ -42,9 +35,9 @@
 
     <div id="tableView">
         <div class="page-header" style="text-align: center;">
-            <h3>中央政府公共债务占GDP比重</h3>
+            <h3>银行不良贷款站全部贷款比重</h3>
             <br>
-            <h4 style="margin-top: -20px;">Central Government Debt as Percentage of GDP</h4>
+            <h4 style="margin-top: -20px;">The total loan proportion of non-performing loans in Banks</h4>
         </div>
 
         <div style="text-align: right;">单位:&nbsp;%</div>
@@ -54,9 +47,9 @@
 
     <div id="imageView">
         <div class="page-header" style="text-align: center;">
-            <h3>中央政府公共债务占GDP比重柱状图</h3>
+            <h3>银行不良贷款站全部贷款比重柱状图</h3>
             <br>
-            <h4 style="margin-top: -20px;">Central Government Debt as Percentage of GDP</h4>
+            <h4 style="margin-top: -20px;">The total loan proportion of non-performing loans in Banks</h4>
         </div>
 
         <div class="panel" style="margin-top: 40px;">
@@ -65,30 +58,29 @@
         </div>
     </div>
 
-      <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+    <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
         <span class="glyphicon glyphicon-save"></span> 下载
     </a></div>
 
     <!-- <div style="text-align: right;"><div id="page"></div></div> -->
 </div>
-</body>
 <script>
-    $(function () {
+    $(function(){
         $('#imageView').hide();
-        $('#tableTag').attr('class', 'active');
+        $('#tableTag').attr('class','active');
     })
 
     function showTable() {
         $('#tableView').show();
         $('#imageView').hide();
-        $('#tableTag').attr('class', 'active');
+        $('#tableTag').attr('class','active');
         $('#imageTag').removeClass('active');
     }
 
     function showImage() {
         $('#imageView').show();
         $('#tableView').hide();
-        $('#imageTag').attr('class', 'active');
+        $('#imageTag').attr('class','active');
         $('#tableTag').removeClass('active');
     }
 
@@ -128,159 +120,158 @@
             {
                 country: '阿尔巴尼亚',
                 year1: '-',
-                year2: '-',
-                year3: '-',
-                year4: '-',
-                year5: '-',
-                year6: '-',
+                year2: '2.3',
+                year3: '14',
+                year4: '23.5',
+                year5: '22.8',
+                year6: '18.2',
             },
             {
-                country: '爱沙尼亚',
-                year1: '-',
-                year2: '-',
-                year3: '0.519205856',
-                year4: '0.625414512',
-                year5: '0.629979215',
-                year6: '-',
+                country: '波黑',
+                year1: '21.216',
+                year2: '5.276',
+                year3: '11.421782175376',
+                year4: '15.1198478740683',
+                year5: '14.1653123764986',
+                year6: '13.6656148912394',
             },
             {
                 country: '保加利亚',
-                year1: '-',
-                year2: '-',
-                year3: '14.27699525',
-                year4: '17.20211519',
+                year1: '17.3',
+                year2: '2.6',
+                year3: '15.4',
+                year4: '5.1',
                 year5: '-',
-                year6: '-',
-            },
-            {
-                country: '波兰',
-                year1: '36.27421662',
-                year2: '46.83704817',
-                year3: '50.98148174',
-                year4: '55.15502839',
-                year5: '55.59157203',
-                year6: '-',
-            },
-            {
-                country: '黑山',
-                year1: '-',
-                year2: '-',
-                year3: '-',
-                year4: '-',
-                year5: '-',
-                year6: '-',
-            },
-            {
-                country: '捷克',
-                year1: '12.64537665',
-                year2: '21.07369247',
-                year3: '33.556452',
-                year4: '40.82348997',
-                year5: '-',
-                year6: '-',
+                year6: '0.8',
             },
             {
                 country: '克罗地亚',
                 year1: '-',
-                year2: '-',
-                year3: '-',
-                year4: '-',
-                year5: '-',
+                year2: '2.2',
+                year3: '11.9177087634194',
+                year4: '16.8785208328338',
+                year5: '16.7465294214345',
                 year6: '-',
+            },
+            {
+                country: '捷克',
+                year1: '29.3',
+                year2: '3.9',
+                year3: '5.38606666822651',
+                year4: '5.19728134028281',
+                year5: '5.6074178141111',
+                year6: '5.63158910169986',
+            },
+            {
+                country: '爱沙尼亚',
+                year1: '1',
+                year2: '0.2',
+                year3: '5.375486401',
+                year4: '1.474622315',
+                year5: '1.388236099',
+                year6: '0.981873691',
+            },
+            {
+                country: '匈牙利',
+                year1: '3',
+                year2: '2.3',
+                year3: '10.0371611',
+                year4: '16.82572837',
+                year5: '15.62152681',
+                year6: '11.6751509',
             },
             {
                 country: '拉脱维亚',
-                year1: '11.86241304',
-                year2: '-',
-                year3: '50.43995596',
-                year4: '41.59453671',
-                year5: '-',
-                year6: '-',
+                year1: '4.6',
+                year2: '0.7',
+                year3: '15.93400614',
+                year4: '6.407040452',
+                year5: '4.597737487',
+                year6: '4.644654379',
             },
             {
                 country: '立陶宛',
-                year1: '-',
-                year2: '-',
-                year3: '40.63814613',
-                year4: '46.99984111',
-                year5: '43.76049951',
-                year6: '-',
-            },
-            {
-                country: '罗马尼亚',
-                year1: '-',
-                year2: '-',
-                year3: '34.59767353',
-                year4: '41.57752702',
-                year5: '41.50278607',
-                year6: '-',
+                year1: '11.3',
+                year2: '0.6',
+                year3: '23.3337719',
+                year4: '11.58602904',
+                year5: '8.186050131',
+                year6: '5.695986975',
             },
             {
                 country: '马其顿',
+                year1: '34.8',
+                year2: '15',
+                year3: '9.040709565',
+                year4: '10.93956843',
+                year5: '10.80591339',
+                year6: '10.31444988',
+            },
+            {
+                country: '黑山',
                 year1: '-',
-                year2: '-',
-                year3: '-',
-                year4: '-',
-                year5: '-',
-                year6: '-',
+                year2: '5.3',
+                year3: '20.97',
+                year4: '18.38',
+                year5: '16.78',
+                year6: '13.43',
+            },
+            {
+                country: '波兰',
+                year1: '15.5',
+                year2: '11',
+                year3: '4.912422601',
+                year4: '4.977912286',
+                year5: '4.823819241',
+                year6: '4.341512013',
+            },
+            {
+                country: '罗马尼亚',
+                year1: '5.2',
+                year2: '1.4',
+                year3: '11.8538635',
+                year4: '21.87297478',
+                year5: '13.93769567',
+                year6: '12.33137153',
             },
             {
                 country: '塞尔维亚',
                 year1: '-',
-                year2: '-',
-                year3: '-',
-                year4: '-',
-                year5: '-',
-                year6: '-',
+                year2: '23.8',
+                year3: '16.9',
+                year4: '21.37',
+                year5: '21.54',
+                year6: '22.33',
             },
             {
                 country: '斯洛伐克',
-                year1: '1.596143642',
-                year2: '36.43978533',
-                year3: '44.59620698',
-                year4: '53.30985846',
-                year5: '63.20000379',
-                year6: '-',
+                year1: '13.7',
+                year2: '5',
+                year3: '5.836314157',
+                year4: '5.139375572',
+                year5: '5.34689326',
+                year6: '4.34689326',
             },
             {
                 country: '斯洛文尼亚',
-                year1: '-',
-                year2: '-',
-                year3: '-',
-                year4: '-',
-                year5: '-',
-                year6: '-',
-            },
-            {
-                country: '匈牙利',
-                year1: '61.06416139',
-                year2: '65.29249732',
-                year3: '81.65024779',
-                year4: '94.28021046',
-                year5: '94.53781897',
-                year6: '-',
-            },
-            {
-                country: '波黑',
-                year1: '-',
-                year2: '-',
-                year3: '-',
-                year4: '47.78280607',
-                year5: '46.0035936',
-                year6: '-',
-            },
-
+                year1: '5',
+                year2: '1.3',
+                year3: '6',
+                year4: '5.1',
+                year5: '0.9',
+                year6: '1',
+            }
         ]
     });
 
     var all = {
         "data": [
-            [0,0,0,36.27421662,0,12.64537665,0,11.86241304,0,0,0,0,1.596143642,0,61.06416139,0],
-            [0,0,0,46.83704817,0,21.07369247,0,0,0,0,0,0,36.43978533,0,65.29249732,0],
-            [0,0.519205856,14.27699525,50.98148174,0,33.556452,0,50.43995596,40.63814613,34.59767353,0,0,44.59620698,0,81.65024779,0],
-            [0,0.625414512,17.20211519,55.15502839,0,40.82348997,0,41.59453671,46.99984111,41.57752702,0,0,53.30985846,0,94.28021046,47.78280607],
-            [0,0.629979215,0,55.59157203,0,0,0,0,43.76049951,41.50278607,0,0,63.20000379,0,94.53781897,46.0035936],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+            [0,0,0,0,0,0,42.1,0,0,0,0,38.2,0,0,0,6],
+            [0,0,2.6,1.7,25.3,0,19.7,0,0,1.6,0,8.6,1.4,2.6,0.1,1.3],
+            [0,0,15.4,5.9,98.4,0,68,0,0,18.3,0,27.9,9,9.7,0.1,6,],
+            [0,0,5.1,4.1,0,0,95.5,0,0,4.6,1.4,36.4,11.8,7.6,7.4,5.1],
+            [0,0,0,0,0,0,6.2,0,0,0,0,11.1,0,0,0,0.9],
+            [0,0,0.8,1.8,10.7,0,20.3,0,0,0.4,1.1,14.5,1,0.8,0.3,1]
         ],
         "countrys": ["阿尔巴尼亚","波黑","保加利亚","克罗地亚","捷克","爱沙尼亚","匈牙利","拉脱维亚","立陶宛","马其顿","黑山","波兰","罗马尼亚","塞尔维亚","斯洛伐克","斯洛文尼亚"],
         "years": ["2000年", "2005年", "2010年", "2013年", "2014年", "2015年"]
@@ -339,7 +330,7 @@
                 name: ''
             }],
             series: [{
-                name: '银行资本充足率',
+                name: '银行不良贷款站全部贷款比重',
                 type: 'bar',
                 data: all.data[0]
             }]
@@ -368,21 +359,6 @@
                 series: [{
                     data: all.data[5]
                 }]
-            },
-            {
-                series: [{
-                    data: all.data[6]
-                }]
-            },
-            {
-                series: [{
-                    data: all.data[7]
-                }]
-            },
-            {
-                series: [{
-                    data: all.data[8]
-                }]
             }
         ]
     };
@@ -390,4 +366,5 @@
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
 </script>
+</body>
 </html>
