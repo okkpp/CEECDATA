@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import okkpp.service.finance.DepositRateAndLendingRateService;
+import okkpp.utils.CountryMap;
 
 /**
 * @author duck
@@ -20,7 +21,7 @@ public class FinanceController {
 	
 	@RequestMapping("dralr")
 	public String page1(Model model) {
-		model.addAttribute("data", depositRateAndLendingRateService.selectAll());
+		model.addAttribute("data", CountryMap.mapByCountryToJson(depositRateAndLendingRateService.selectAll()));
 		return "/finance/annual_average_deposit_rate_and_lending_rate";
 	}
 }

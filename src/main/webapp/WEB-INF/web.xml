@@ -5,7 +5,6 @@
 	version="2.5">
 	<display-name>CEECDATA</display-name>
 
-
 	<servlet>
 		<servlet-name>spring</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>

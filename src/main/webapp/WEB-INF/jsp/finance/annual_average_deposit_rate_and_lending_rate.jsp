@@ -75,7 +75,8 @@
 </div>
 </body>
 <script>
-
+var jsondata = eval('('+ '${data}'+ ')');
+console.log(jsondata);
     var column = [
         {
             title: '国家',
