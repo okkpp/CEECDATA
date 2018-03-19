@@ -40,7 +40,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.37-bin</version>
+			<version>5.1.37</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -170,7 +170,7 @@
 					<dependency>
 						<groupId>mysql</groupId>
 						<artifactId>mysql-connector-java</artifactId>
-						<version>5.1.37-bin</version>
+						<version>5.1.37</version>
 					</dependency>
 					<dependency>
 						<groupId>tk.mybatis</groupId>

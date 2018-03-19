@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="okkpp.com/el-common" prefix="el" %>
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
@@ -60,7 +61,7 @@
 						<td>${user.enabled}</td>
 						<td>
 							<div class="button-group">
-								<a class="button border-main" href="#" onclick="showModal(${user})"> <span
+								<a class="button border-main" href="#" onclick="showModal(${el:toJsonString(user)})"> <span
 									class="icon-edit"> </span> 修改
 								</a> <a class="button border-red" href="javascript:void(0)"
 									onclick="return del(1,2)"> <span class="icon-trash-o"></span>
