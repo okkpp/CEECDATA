@@ -5,7 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.traffic.BroadbandMapper;
 import okkpp.model.traffic.Broadband;
 import okkpp.utils.CountryCode;
@@ -20,6 +21,13 @@ public class BroadbandService {
 
 	public List<Broadband> selectAll(){
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<Broadband> list = mapper.selectAll();
+		return new PageInfo(list, 10);
 	}
 	
 	public List<Broadband> selectByExample(String column,String condition){

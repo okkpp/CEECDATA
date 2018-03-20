@@ -195,8 +195,10 @@
 	//跳转页数
 	function to_page(pn,type){
 		var str;
+		var data = "pn="+pn;
 		if(type == "normal"){
-			str = "../"+$("#chapter_choose").val()+"/"+tranformStr("_"+$("#sheet_choose").val())+".do";
+			str = "../"+$("#chapter_choose").val()+"/getJson.do";
+			data +="&info="+tranformStr("_"+$("#sheet_choose").val());
 		}else if(type == "search"){
 			var chapter = $("#chapter_choose").val();
 			var sheet = $("#sheet_choose").val();
@@ -206,10 +208,11 @@
 		}
 		$.ajax({
 			url : str,
-			data : "pn=" + pn,
+			data : data,
 			type : "POST",
-			success : function(result) {
+			success : function(result) {				
 				result = eval('('+ result+ ')');
+				console.log(result);
 				//json排序
 				result = sortByJson(result,json);
 				//解析显示数据结果

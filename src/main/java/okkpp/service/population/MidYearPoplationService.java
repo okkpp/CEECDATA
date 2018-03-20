@@ -8,6 +8,8 @@ import okkpp.model.population.MidYearPoplation;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
 import org.springframework.transaction.annotation.Transactional;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service
 @Transactional
@@ -18,6 +20,13 @@ public class MidYearPoplationService {
 	
 	public List<MidYearPoplation> selectAll(){
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<MidYearPoplation> list = mapper.selectAll();
+		return new PageInfo(list, 10);
 	}
 	
 	public List<MidYearPoplation> selectByExample(String column,String condition){

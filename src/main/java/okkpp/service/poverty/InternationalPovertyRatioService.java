@@ -1,17 +1,17 @@
 package okkpp.service.poverty;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import okkpp.dao.poverty.InternationalPovertyRatioMapper;
 import okkpp.model.poverty.InternationalPovertyRatio;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
 
 import org.springframework.transaction.annotation.Transactional;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 @Service
 @Transactional
@@ -22,6 +22,13 @@ public class InternationalPovertyRatioService {
 	
 	public List<InternationalPovertyRatio> selectAll(){
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<InternationalPovertyRatio> list = mapper.selectAll();
+		return new PageInfo(list, 10);
 	}
 	
 	public List<InternationalPovertyRatio> selectByExample(String column,String condition){
