@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>生殖健康——中东欧统计数据库</title>
   <link rel="stylesheet" href="../zdo_static/css/normalize.css">
-  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
 
   <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
-  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="../zdo_static/js/bootstrap.min.js"></script>
   <script src="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
   <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
   <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
@@ -43,66 +43,117 @@
                 <h4 style="margin-top: -20px;">Reproductive Health</h4>
             </div>
 
-            <div class="panel" style="margin-top: 40px;">
+            <div class="panel" style="margin-top: 1.5em;">
                 <div id="main" style="width: 100%;height:400px;">
                   <script type="text/javascript">
-                      var dom = document.getElementById("main");
-                      var myChart = echarts.init(dom);
-                      var app = {};
-                      option = null;
-                      option = {
-                          title : {
+                    var dom = document.getElementById("main");
+                    var myChart = echarts.init(dom);
+                    var app = {};
+                    option = null;
+                    var colors = ['#675bba', '#5793f3', '#61a0a8','#d48265','#d14a61'];
 
-                              subtext: '',
+                    option = {
+                      color: colors,
+                      title: {
+                        subtext: '数据来源'
+                      },
+                      tooltip: {
+                          trigger: 'axis',
+                          axisPointer: {
+                              type: 'cross'
+                          }
+                      },
+                      grid: {
 
-                          },
-                          tooltip : {
-                              trigger: 'item'
-                          },
-                          legend: {
-                              show:'true',
-                              data:['陆地面积','耕地面积','森林面积'],
-
-                          },
-
-                          calculable : true,
-                          xAxis : [
-                              {
-                                  type : 'category',
-                                  data : ['阿尔巴尼亚','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
-                              }
-                          ],
-                          yAxis : [
-                              {
-                                  type : 'value',
-                                  name: '万公顷'
-                              }
-                          ],
-                          series : [
-                              {
-                                  name:'陆地面积',
-                                  type:'bar',
-                                  data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-
-
+                      },
+                      // toolbox: {
+                      //     feature: {
+                      //         dataView: {show: true, readOnly: false},
+                      //         restore: {show: true},
+                      //         saveAsImage: {show: true}
+                      //     }
+                      // },
+                      legend: {
+                          data:['总和人均生育率','15-19岁少女生育率','产妇死亡率']
+                      },
+                      xAxis: [
+                          {
+                              type: 'category',
+                              axisTick: {
+                                  alignWithLabel: true
                               },
-                              {
-                                  name:'耕地面积',
-                                  type:'bar',
-                                  data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
-
-
+                              axisLabel: {
+                                  interval: 0
                               },
-                              {
-                                  name:'森林面积',
-                                  type:'bar',
-                                  data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                              data: ['阿尔巴尼亚', '爱沙尼亚', '保加利亚', '波黑', '波兰', '黑山', '捷克', '克罗地亚', '拉脱维亚', '立陶宛', '罗马尼亚', '马其顿', '塞尔维亚',
+                               '斯洛伐克', '斯洛文尼亚', '匈牙利']
+                          }
+                      ],
+                      yAxis: [
+                          {
+                              type: 'value',
+                              name: '人',
+                              min: 0,
 
+                              position: 'left',
+                              axisLine: {
+                                  lineStyle: {
+                                      color: colors[0]
+                                  }
+                              },
 
-                              }
-                          ]
-                      };
-                      ;
+                          },
+                          {
+                              type: 'value',
+                              name: '‰',
+                              min: 0,
+
+                              position: 'right',
+
+                              axisLine: {
+                                  lineStyle: {
+                                      color: colors[1]
+                                  }
+                              },
+
+                          },
+
+                          {
+                              type: 'value',
+                              name: '1/(10+E5)',
+                              min: 0,
+                              offset: 60,
+                              position: 'right',
+                              axisLine: {
+                                  lineStyle: {
+                                      color: colors[2]
+                                  }
+                              },
+
+                          },
+                      ],
+                      series: [
+                          {
+                              name:'总和人均生育率',
+                              type:'bar',
+                              data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+                          },
+                          {
+                              name:'15-19岁少女生育率',
+                              type:'bar',
+                              yAxisIndex: 1,
+                              data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+                          },
+
+                          {
+                              name:'产妇死亡率',
+                              type:'bar',
+                              yAxisIndex: 2,
+                              data:[2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+                          },
+                      ]
+                    };;
+
                       if (option && typeof option === "object") {
                           myChart.setOption(option, true);
                       }

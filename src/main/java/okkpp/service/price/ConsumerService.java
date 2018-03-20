@@ -28,4 +28,10 @@ public class ConsumerService {
 		criteria.andLike(column, "%"+condition+"%");
 		return CountryCode.replaceCountry(mapper.selectByExample(example));
 	}
+
+	//Consumer¸üÐÂ
+	public int updateConsumer(Consumer consumer) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(consumer);
+	}
 }

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+      @author 陈周云
+      @Description: 社会缴款占财政收入比重
+    -->
+    <meta charset="UTF-8">
+    <title>社会缴款占财政收入比重</title>
+    <!-- 引入Jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script src="../assets/libs/echarts/echarts.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <ul class="nav nav-tabs">
+                <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+                <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+            </ul>
+        </div>
+
+        <div id="tableView">
+            <div class="page-header" style="text-align: center;">
+                <h3>社会缴款占财政收入比重</h3>
+                <br>
+                <h4 style="margin-top: -20px;">Social Contributions as Percentage of Revenue</h4>
+            </div>
+
+            <div style="text-align: right;">单位:&nbsp;%</div>
+
+            <table id="tableData"></table>
+        </div>
+
+        <div id="imageView">
+            <div class="page-header" style="text-align: center;">
+                <h3>社会缴款占财政收入比重</h3>
+                <br>
+                <h4 style="margin-top: -20px;">Social Contributions as Percentage of Revenue</h4>
+            </div>
+
+            <div class="panel" style="margin-top: 40px;">
+            	<div style="text-align: right;">单位:&nbsp;%</div>
+                <div id="main" style="width: 100%;height:400px;"></div>
+            </div>
+        </div>
+
+                <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近六年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+          <span class="glyphicon glyphicon-save"></span> 下载
+      </a></div>
+
+        <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+    </div>
+    <script>
+        $(function(){
+            $('#imageView').hide();
+            $('#tableTag').attr('class','active');
+        })
+
+        function showTable() {
+            $('#tableView').show();
+            $('#imageView').hide();
+            $('#tableTag').attr('class','active');
+            $('#imageTag').removeClass('active');
+        }
+
+        function showImage() {
+            $('#imageView').show();
+            $('#tableView').hide();
+            $('#imageTag').attr('class','active');
+            $('#tableTag').removeClass('active');
+        }
+
+        $('#tableData').bootstrapTable({
+            striped: true,
+            columns: [
+                {
+                    field: 'country',
+                    title: '国家'
+                },
+                {
+                    field: 'year1',
+                    title: '2000年'
+                },
+                {
+                    field: 'year2',
+                    title: '2005年'
+                },
+                {
+                    field: 'year3',
+                    title: '2010年'
+                },
+                {
+                    field: 'year4',
+                    title: '2013年'
+                },
+                {
+                    field: 'year5',
+                    title: '2014年'
+                },
+                {
+                    field: 'year6',
+                    title: '2015年'
+                },
+            ],
+            data: [
+                {
+                    country:"阿尔巴尼亚",
+                    year1:"",
+                    year2:"",
+                    year3:"",
+                    year4:"",
+                    year5:"",
+                    year6:"",
+                },
+                {
+                    country:"爱沙尼亚",
+                    year1:"35.02360081",
+                    year2:"34.41131885",
+                    year3:"37.45249243",
+                    year4:"34.60488317",
+                    year5:"",
+                    year6:"",
+                },
+                {
+                    country:"保加利亚",
+                    year1:"24.68940290",
+                    year2:"44.09609000",
+                    year3:"49.69794000",
+                    year4:"",
+                    year5:"",
+                    year6:"",
+                },
+                {
+                    country:"波兰",
+                    year1:"30.32491481",
+                    year2:"39.30350523",
+                    year3:"37.43475992",
+                    year4:"64.36625484",
+                    year5:"",
+                    year6:"",
+                },
+                {
+                    country:"黑山",
+                    year1:"",
+                    year2:"",
+                    year3:"",
+                    year4:"",
+                    year5:"",
+                    year6:"",
+                },
+                {
+                    country:"捷克",
+                    year1:"46.51139848",
+                    year2:"45.60736739",
+                    year3:"44.2405644",
+                    year4:"",
+                    year5:"",
+                    year6:"",
+                },
+                {
+                    country:"克罗地亚",
+                    year1:"32.32194539",
+                    year2:"33.78722917",
+                    year3:"34.92902172",
+                    year4:"",
+                    year5:"",
+                    year6:"",
+                },
+                {
+                    country:"拉脱维亚",
+                    year1:"33.56795445",
+                    year2:"28.53181387",
+                    year3:"28.89588334",
+                    year4:"",
+                    year5:"",
+                    year6:"",
+                },
+                {
+                    country:"立陶宛",
+                    year1:"28.38633461",
+                    year2:"27.65479411",
+                    year3:"34.98268117",
+                    year4:"34.37868043",
+                    year5:"34.20035117",
+                    year6:"",
+                },
+                {
+                    country:"罗马尼亚",
+                    year1:"35.61858428",
+                    year2:"33.12200055",
+                    year3:"30.51959576",
+                    year4:"28.48353064",
+                    year5:"27.54959275",
+                    year6:"",
+                },
+                {
+                    country:"马其顿",
+                    year1:"",
+                    year2:"29.78217439",
+                    year3:"30.2327217",
+                    year4:"",
+                    year5:"",
+                    year6:"",
+                },
+                {
+                    country:"塞尔维亚",
+                    year1:"",
+                    year2:"",
+                    year3:"33.63789169",
+                    year4:"",
+                    year5:"",
+                    year6:"",
+                },
+                {
+                    country:"斯洛伐克",
+                    year1:"38.24000896",
+                    year2:"39.44898694",
+                    year3:"42.96963139",
+                    year4:"1.028366223",
+                    year5:"0.684650366",
+                    year6:"",
+                },
+                {
+                    country:"斯洛文尼亚",
+                    year1:"38.68183964",
+                    year2:"38.32695938",
+                    year3:"41.75261659",
+                    year4:"",
+                    year5:"",
+                    year6:"",
+                },
+                {
+                    country:"匈牙利",
+                    year1:"34.02976553",
+                    year2:"34.49355097",
+                    year3:"29.73990806",
+                    year4:"30.56697343",
+                    year5:"30.41704034",
+                    year6:"",
+                },
+                {
+                    country:"波黑",
+                    year1:"",
+                    year2:"33.16165348",
+                    year3:"39.00236849",
+                    year4:"39.73939007",
+                    year5:"39.01544544",
+                    year6:"",
+                },
+
+            ]
+        });
+
+        var all = {
+            "data": [
+                ['', '35.02360081', '24.68940290', '30.32491481', '', '46.51139848', '32.32194539', '33.56795445', '28.38633461', '35.61858428', '', '', '38.24000896', '38.68183964', '34.02976553', ''],
+                ['', '34.41131885', '44.09609000', '39.30350523', '', '45.60736739', '33.78722917', '28.53181387', '27.65479411', '33.12200055', '29.78217439', '', '39.44898694', '38.32695938', '34.49355097', '33.16165348'],
+                ['', '37.45249243', '49.69794000', '37.43475992', '', '44.2405644', '34.92902172', '28.89588334', '34.98268117', '30.51959576', '30.2327217', '33.63789169', '42.96963139', '41.75261659', '29.73990806', '39.00236849'],
+                ['', '34.60488317', '', '64.36625484', '', '', '', '', '34.37868043', '28.48353064', '', '', '1.028366223', '', '30.56697343', '39.73939007'],
+                ['', '', '', '', '', '', '', '', '34.20035117', '27.54959275', '', '', '0.684650366', '', '30.41704034', '39.01544544'],
+                ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''],
+
+            ],
+            "countrys": ["阿尔巴尼亚","爱沙尼亚","保加利亚","波兰","黑山","捷克","克罗地亚","拉脱维亚","立陶宛","罗马尼亚","马其顿","塞尔维亚","斯洛伐克","斯洛文尼亚","匈牙利","波黑"],
+            "years": ["2000年", "2005年", "2010年", "2013年", "2014年"]
+        };
+
+        var option = {
+            timeline: {
+                axisType: 'category',
+                autoPlay: true,
+                playInterval: 5000,
+                data: all.years
+            },
+            options: [{
+                tooltip: {
+                    trigger: 'axis'
+                },
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    x: 'right',
+                    y: 'center',
+                    feature: {
+                        mark: {
+                            show: true
+                        },
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        magicType: {
+                            show: true,
+                            type: ['line', 'bar']
+                        },
+                        restore: {
+                            show: true
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                calculable: true,
+                grid: {
+                    y: 100,
+                    y2: 100
+                },
+                xAxis: [{
+                    type: 'category',
+                    axisLabel: {
+                        interval: 0
+                    },
+                    data: all.countrys
+                }],
+                yAxis: [{
+                    type: 'value',
+                    name: ''
+                }],
+                series: [{
+                    name: '社会缴款占财政收入比重',
+                    type: 'bar',
+                    data: all.data[0]
+                }]
+            },
+                {
+                    series: [{
+                        data: all.data[1]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[2]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[3]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[4]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[5]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[6]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[7]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[8]
+                    }]
+                }
+            ]
+        };
+        var myChart = echarts.init(document.getElementById('main'));
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

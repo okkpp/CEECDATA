@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+        @author: 姜存浩
+        @title: 金融部门国内信贷占国内生产总值比重
+    -->
+    <meta charset="UTF-8">
+    <title>金融部门国内信贷占国内生产总值比重</title>
+    <!-- 引入Jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script src="../assets/libs/echarts/echarts.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <ul class="nav nav-tabs">
+                <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+                <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+            </ul>
+        </div>
+
+        <div id="tableView">
+            <div class="page-header" style="text-align: center;">
+                <h3>金融部门国内信贷占国内生产总值比重</h3>
+                <br>
+                <h4 style="margin-top: -20px;">Domestic Credit Provided by Financial Sector (% of GDP)</h4>
+            </div>
+
+            <div style="text-align: right;">单位:&nbsp;%</div>
+            <table id="tableData"></table>
+        </div>
+
+        <div id="imageView">
+            <div class="page-header" style="text-align: center;">
+                <h3>金融部门国内信贷占国内生产总值比重</h3>
+                <br>
+                <h4 style="margin-top: -20px;">Domestic Credit Provided by Financial Sector (% of GDP)</h4>
+            </div>
+
+            <div class="panel" style="margin-top: 40px;">
+                <div style="text-align: right;">单位:&nbsp;%</div>
+                <div id="main" style="width: 100%;height:400px;"></div>
+            </div>
+        </div>
+
+          <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+            <span class="glyphicon glyphicon-save"></span> 下载
+        </a></div>
+
+        <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+    </div>
+    <script>
+        $(function(){
+            $('#imageView').hide();
+            $('#tableTag').attr('class','active');
+        })
+
+        function showTable() {
+            $('#tableView').show();
+            $('#imageView').hide();
+            $('#tableTag').attr('class','active');
+            $('#imageTag').removeClass('active');
+        }
+
+        function showImage() {
+            $('#imageView').show();
+            $('#tableView').hide();
+            $('#imageTag').attr('class','active');
+            $('#tableTag').removeClass('active');
+        }
+
+        $('#tableData').bootstrapTable({
+            striped: true,
+            columns: [
+                {
+                    field: 'country',
+                    title: '国家或地区'
+                },
+                {
+                    field: 'year1',
+                    title: '2000年'
+                },
+                {
+                    field: 'year2',
+                    title: '2005年'
+                },
+                {
+                    field: 'year3',
+                    title: '2010年'
+                },
+                {
+                    field: 'year4',
+                    title: '2013年'
+                },
+                {
+                    field: 'year5',
+                    title: '2014年'
+                },
+                {
+                    field: 'year6',
+                    title: '2015年'
+                },
+            ],
+            data: [
+                {
+                    country: "阿尔巴尼亚",
+					year1: "48.99763407",
+					year2: "49.8884971",
+					year3: "66.72476544",
+					year4: "67.63840856",
+					year5: "67.71931521",
+					year6: "62.58845515",
+                },
+                {
+                    country: "爱沙尼亚",
+					year1: "34.49715991",
+					year2: "4.345206704",
+					year3: "6.165162452",
+					year4: "4.523763678",
+					year5: "4.501068327",
+					year6: "",
+                },
+                {
+                    country: "保加利亚",
+					year1: "17.08675953",
+					year2: "39.02795175",
+					year3: "67.92281613",
+					year4: "69.74516342",
+					year5: "62.46540431",
+					year6: "61.82472148",
+                },
+                {
+                    country: "波兰",
+					year1: "34.31223087",
+					year2: "38.64023336",
+					year3: "63.24041908",
+					year4: "67.24816931",
+					year5: "70.98780441",
+					year6: "73.55176522",
+                },
+                {
+                    country: "黑山",
+					year1: "",
+					year2: "",
+					year3: "",
+					year4: "",
+					year5: "",
+					year6: "",
+                },
+                {
+                    country: "捷克",
+					year1: "45.57935708",
+					year2: "41.65806213",
+					year3: "62.86022717",
+					year4: "69.66990581",
+					year5: "73.44756466",
+					year6: "70.75397489",
+
+                },
+                {
+                   country: "克罗地亚",
+					year1: "39.97510965",
+					year2: "62.84584528",
+					year3: "90.73719511",
+					year4: "89.01896541",
+					year5: "90.00167739",
+					year6: "88.72842821",
+                },
+                {
+                    country: "拉脱维亚",
+					year1: "22.98000974",
+					year2: "68.21146151",
+					year3: "129.5566051",
+					year4: "85.83028267",
+					year5: "76.8250087",
+					year6: "",
+                },
+                {
+                    country: "立陶宛",
+					year1: "15.02589826",
+					year2: "42.81483797",
+					year3: "18.46882217",
+					year4: "14.75344242",
+					year5: "13.16723293",
+					year6: "",
+                },
+                {
+                    country: "罗马尼亚",
+					year1: "13.83441218",
+					year2: "20.59961348",
+					year3: "47.61800236",
+					year4: "41.65812363",
+					year5: "37.95139223",
+					year6: "37.513339",
+
+                },
+                {
+                   country: "马其顿",
+					year1: "13.65354761",
+					year2: "18.55483994",
+					year3: "47.10921825",
+					year4: "53.70491451",
+					year5: "54.65050748",
+					year6: "59.64666188",
+                },
+                {
+                    country: "塞尔维亚",
+					year1: "58.28709583",
+					year2: "28.00464573",
+					year3: "56.16012232",
+					year4: "49.52544413",
+					year5: "52.40550931",
+					year6: "55.46519919",
+                },
+                {
+                    country: "斯洛伐克",
+					year1: "55.77506872",
+					year2: "47.19553665",
+					year3: "64.76197967",
+					year4: "62.29965152",
+					year5: "65.6506111",
+					year6: "",
+                },
+                {
+                    country: "斯洛文尼亚",
+					year1: "41.98333367",
+					year2: "0.268553962",
+					year3: "95.98034889",
+					year4: "83.67886932",
+					year5: "68.68882562",
+					year6: "",
+                },
+                {
+                    country: "匈牙利",
+					year1: "54.40874798",
+					year2: "61.64877213",
+					year3: "80.79242687",
+					year4: "65.51788799",
+					year5: "61.3467977",
+					year6: "59.3777738",
+                },
+                {
+                    country: "波黑",
+					year1: "37.41206756",
+					year2: "38.93076087",
+					year3: "51.66494145",
+					year4: "58.37956357",
+					year5: "58.74288206",
+					year6: "58.49972032",
+                }
+            ]
+        });
+
+        var all = {
+            "data": [
+                [48.99763407,34.49715991,17.08675953,34.31223087,,45.57935708,39.97510965,22.98000974,15.02589826,13.83441218,13.65354761,58.28709583,55.77506872,41.98333367,54.40874798,37.41206756],
+                [49.8884971,4.345206704,39.02795175,38.64023336,,41.65806213,62.84584528,68.21146151,42.81483797,20.59961348,18.55483994,28.00464573,47.19553665,0.268553962,61.64877213,38.93076087],
+                [66.72476544,6.165162452,67.92281613,63.24041908,,62.86022717,90.73719511,129.5566051,18.46882217,47.61800236,47.10921825,56.16012232,64.76197967,95.98034889,80.79242687,51.66494145],
+                [67.63840856,4.523763678,69.74516342,67.24816931,,69.66990581,89.01896541,85.83028267,14.75344242,41.65812363,53.70491451,49.52544413,62.29965152,83.67886932,65.51788799,58.37956357],
+                [67.71931521,4.501068327,62.46540431,70.98780441,,73.44756466,90.00167739,76.8250087,13.16723293,37.95139223,54.65050748,52.40550931,65.6506111,68.68882562,61.3467977,58.74288206],
+                [62.58845515,,61.82472148,73.55176522,,70.75397489,88.72842821,,,37.513339,59.64666188,55.46519919,,,59.3777738,58.49972032],
+                []
+            ],
+            "countrys": ["阿尔巴尼亚","爱沙尼亚","保加利亚","波兰","黑山","捷克共和国","克罗地亚","拉脱维亚","立陶宛","罗马尼亚","马其顿","塞尔维亚","斯洛伐克","斯洛文尼亚","匈牙利","波黑"],
+            "years": ["2000年", "2005年", "2010年", "2013年", "2014年", "2015年"]
+        };
+
+        var option = {
+            timeline: {
+                axisType: 'category',
+                autoPlay: true,
+                playInterval: 5000,
+                data: all.years
+            },
+            options: [{
+                tooltip: {
+                    trigger: 'axis'
+                },
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    x: 'right',
+                    y: 'center',
+                    feature: {
+                        mark: {
+                            show: true
+                        },
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        magicType: {
+                            show: true,
+                            type: ['line', 'bar']
+                        },
+                        restore: {
+                            show: true
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                calculable: true,
+                grid: {
+                    y: 100,
+                    y2: 100
+                },
+                xAxis: [{
+                    type: 'category',
+                    axisLabel: {
+                        interval: 0
+                    },
+                    data: all.countrys
+                }],
+                yAxis: [{
+                    type: 'value',
+                    name: ''
+                }],
+                series: [{
+                    name: '广义货币占国内生产总值比重',
+                    type: 'bar',
+                    data: all.data[0]
+                }]
+            },
+                {
+                    series: [{
+                        data: all.data[1]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[2]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[3]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[4]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[5]
+                    }]
+                }
+            ]
+        };
+        var myChart = echarts.init(document.getElementById('main'));
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
