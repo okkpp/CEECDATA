@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,8 +40,21 @@ public class PriceController {
 		return Msg.success().add("pageInfo", pageInfo);
 	}
 	
+	@RequestMapping(value="/test/{id}",method = RequestMethod.PUT)
+	@ResponseBody
+	public Msg test(@PathVariable("id") Integer id,Consumer consumer) {
+		System.out.println(consumer.toString());
+		return Msg.success();
+	}
+
+	@RequestMapping("/testparam/{id}")
+    public String test(@PathVariable("id") Integer id){
+        System.out.println(id);
+        return "mui/add";
+    }
+	
 	//更新Consume更新方法
-	@RequestMapping(value = "/Consumer/{id}",method = RequestMethod.PUT)
+	@RequestMapping(value = "/Consumer",method = RequestMethod.PUT)
 	@ResponseBody
 	public Msg updateConsumer(Consumer consumer) {
 		System.out.println(consumer.toString());
@@ -95,5 +109,7 @@ public class PriceController {
 		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);
 	}
+	
+	
 
 }
