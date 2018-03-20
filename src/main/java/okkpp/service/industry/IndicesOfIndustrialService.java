@@ -1,13 +1,12 @@
 package okkpp.service.industry;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.industry.IndicesOfIndustrialMapper;
-import okkpp.model.finance.TaxAsPercentageOfEvenue;
 import okkpp.model.industry.IndicesOfIndustrial;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
@@ -24,6 +23,13 @@ public class IndicesOfIndustrialService {
 	IndicesOfIndustrialMapper mapper;
 	public List<IndicesOfIndustrial> selectAll() {
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<IndicesOfIndustrial> list = mapper.selectAll();
+		return new PageInfo(list, 10);
 	}
 	
 	public List<IndicesOfIndustrial> selectByExample(String column,String condition){

@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.employment.WagesMapper;
 import okkpp.model.employment.Wages;
 import okkpp.utils.CountryCode;
@@ -21,6 +23,13 @@ public class WagesService {
 	WagesMapper mapper;
 	public List<Wages> selectAll() {
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<Wages> list = mapper.selectAll();
+		return new PageInfo(list, 10);
 	}
 	
 	public List<Wages> selectByExample(String column,String condition){

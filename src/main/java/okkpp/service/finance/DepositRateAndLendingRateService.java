@@ -1,13 +1,12 @@
 package okkpp.service.finance;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.finance.DepositRateAndLendingRateMapper;
-import okkpp.model.finance.Debt;
 import okkpp.model.finance.DepositRateAndLendingRate;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
@@ -24,6 +23,13 @@ public class DepositRateAndLendingRateService {
 	DepositRateAndLendingRateMapper mapper;
 	public List<DepositRateAndLendingRate> selectAll() {
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<DepositRateAndLendingRate> list = mapper.selectAll();
+		return new PageInfo(list, 10);
 	}
 	
 	public List<DepositRateAndLendingRate> selectByExample(String column,String condition){

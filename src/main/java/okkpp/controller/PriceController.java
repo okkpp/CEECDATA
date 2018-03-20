@@ -2,7 +2,6 @@ package okkpp.controller;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,18 +43,26 @@ public class PriceController {
 		model.addAttribute("data", list);
 		return "404";
 	}
-
-	// 查找所有
-	@RequestMapping(value = "/Consumer",method = RequestMethod.POST)
+	
+	//后台获取数据
+	@RequestMapping(value = "/getJson",method = RequestMethod.POST)
 	@ResponseBody
-	public Msg Consumer(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
-		PageHelper.startPage(pn, 10);
-		List<Consumer> list = consumerService.selectAll();
-		PageInfo pageInfo = new PageInfo(list, 10);
-		model.addAttribute("pageInfo", pageInfo);
+	public <E> Msg getJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn,
+			Model model,@RequestParam("info")String info) {
+		PageInfo<E> pageInfo = null;
+		switch(info) {
+			case "Consumer":
+				pageInfo = consumerService.getPageInfo(pn);
+				break;
+			case "Producer":
+				pageInfo = producerService.getPageInfo(pn);			
+				break;
+			default :
+				break;
+		}
 		return Msg.success().add("pageInfo", pageInfo);
 	}
-	
+
 	//更新Consume更新方法
 	@RequestMapping(value = "/Consumer",method = RequestMethod.PUT)
 	@ResponseBody
@@ -81,26 +88,6 @@ public class PriceController {
 		return Msg.success().add("pageInfo", pageInfo);
 	}
 	
-	
-
-	@RequestMapping("/Producer")
-	public String Producer(Model model) {
-		List<Producer> list = producerService.selectAll();
-		model.addAttribute("data", list);
-		return "404";
-	}
-
-	// 查找所有Produce
-	@RequestMapping(value = "/Producer",method = RequestMethod.POST)
-	@ResponseBody
-	public Msg Producer(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
-		PageHelper.startPage(pn, 10);
-		List<Producer> list = producerService.selectAll();
-		PageInfo pageInfo = new PageInfo(list, 10);
-		model.addAttribute("pageInfo", pageInfo);
-		return Msg.success().add("pageInfo", pageInfo);
-	}
-
 	// 按条件查找Produce
 	@RequestMapping("/selectProducerByExample")
 	@ResponseBody
@@ -112,7 +99,4 @@ public class PriceController {
 		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);
 	}
-	
-	
-
 }

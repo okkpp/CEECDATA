@@ -2,11 +2,12 @@ package okkpp.service.trade;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.trade.CommercialServiceExportMapper;
 import okkpp.model.trade.CommercialServiceExport;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,12 @@ public class CommercialServiceExportService {
 		Example.Criteria criteria = example.createCriteria();
 		criteria.andLike(column, "%"+condition+"%");
 		return CountryCode.replaceCountry(mapper.selectByExample(example));
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<CommercialServiceExport> list = mapper.selectAll();
+		return new PageInfo(list, 10);
 	}
 }
