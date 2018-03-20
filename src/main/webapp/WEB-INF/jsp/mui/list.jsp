@@ -244,7 +244,6 @@
 					}
 				}
 			};
-			//tr.append($("<td><td>").append("编辑"));
 			//修改--删除按钮
 			tr.append($("<td></td>").append($("<div></div>").addClass("button-group")
 					.append($("<a></a>").addClass("button border-main update_btn").append($("<span></span>").addClass("icon-edit").append("修改")).attr("edit-id",item.id))
@@ -296,7 +295,7 @@
 					if(i == "id" || i == "updated"){
 						pOrInput = $("<p></p>").addClass("form-control-static").append(item[i]).attr("name",i);
 					}else{
-						pOrInput = $("<input></input>").addClass("form-control").attr("placeholder",item[i]).attr("name",i);
+						pOrInput = $("<input></input>").addClass("form-control").attr("value",item[i]).attr("name",i);
 					}
 					$("<div></div>").addClass("form-group").append(
 						$("<label></label>").addClass("col-sm-2 control-label").append(i))
@@ -314,15 +313,15 @@
 	});
 	
 	$("#update_btn").click(function(){
-		var str = "../"+$("#chapter_choose").val()+"/"+tranformStr("_"+$("#sheet_choose").val())+".do/"+$(this).attr("edit-id");
-		//console.log($("#update_form").serialize() + "&_method=PUT");
+		//var str = "../"+$("#chapter_choose").val()+"/"+tranformStr("_"+$("#sheet_choose").val())+".do";//+$(this).attr("edit-id");
+		var str = "../price/test.do/"+$(this).attr("edit-id");
 		$.ajax({
 			url : str,
 			type : "POST",
-			data : $("#update_form").serialize()+"&_method=PUT",
+			data : $("#update_form").serialize()+"&_method=put",
 			success : function(result){
 				console.log(result);
-				alert(result.msg);
+				//alert(result.msg);
 			}
 		})
 	});
@@ -330,7 +329,7 @@
 	//为所有删除按钮绑定事件(单个删除)
 	$(document).on("click",".delete_btn",function(){
 		if(confirm("您确定要删除吗?")){
-			alert($(this).attr("del-id"));	
+			alert($(this).parents("tr").find("td:eq(1)").text());
 		}		
 	});
 
