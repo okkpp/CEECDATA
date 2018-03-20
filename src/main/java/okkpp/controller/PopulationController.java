@@ -1,6 +1,7 @@
 package okkpp.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import okkpp.service.population.*;
+import okkpp.utils.CountryMap;
 import okkpp.model.Msg;
 import okkpp.model.population.*;
 
@@ -23,6 +25,49 @@ public class PopulationController {
 
 	@Autowired
 	BirthRateDeathRateService birthRateDeathRateService;
+	@Autowired
+	CompositionDependencyRatioService compositionDependencyRatioService;
+	@Autowired
+	DensityService densityService;
+	@Autowired
+	FemalePercentService femalePercentService;
+	@Autowired
+	InfantMortalityRateService infantMortalityRateService;
+	@Autowired
+	LifeExpectancyAtBirthService lifeExpectancyAtBirthService;
+	@Autowired
+	MidYearPoplationService midYearPoplationService;
+	@Autowired
+	ReproductiveHealthService reproductiveHealthService;
+	@Autowired
+	RuralAndUrbanRateService ruralAndUrbanRateService;
+	
+	@RequestMapping("/json")
+	@ResponseBody
+	public Map<String, Object> info(String info) {
+		switch (info) {
+			case "BirthRateDeathRate" :
+				return CountryMap.mapByCountry(birthRateDeathRateService.selectAll());
+			case "CompositionDependencyRatio" :
+				return CountryMap.mapByCountry(compositionDependencyRatioService.selectAll());
+			case "Density" :
+				return CountryMap.mapByCountry(densityService.selectAll());
+			case "FemalePercent" :
+				return CountryMap.mapByCountry(femalePercentService.selectAll());
+			case "InfantMortalityRate" :
+				return CountryMap.mapByCountry(infantMortalityRateService.selectAll());
+			case "LifeExpectancyAtBirth" :
+				return CountryMap.mapByCountry(lifeExpectancyAtBirthService.selectAll());
+			case "MidYearPoplation" :
+				return CountryMap.mapByCountry(midYearPoplationService.selectAll());
+			case "ReproductiveHealth" :
+				return CountryMap.mapByCountry(reproductiveHealthService.selectAll());
+			case "RuralAndUrbanRate" :
+				return CountryMap.mapByCountry(ruralAndUrbanRateService.selectAll());
+		}
+		return null;
+	}
+	
 	@RequestMapping("/BirthRateDeathRate")
 	public String BirthAndDeathRate(Model model) {
 		List<BirthRateDeathRate> list = birthRateDeathRateService.selectAll();
@@ -39,8 +84,7 @@ public class PopulationController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 
-	@Autowired
-	CompositionDependencyRatioService compositionDependencyRatioService;
+	
 	@RequestMapping("/CompositionDependencyRatio")
 	public String CompositionDependencyRatio(Model model) {
 		List<CompositionDependencyRatio> list = compositionDependencyRatioService.selectAll();
@@ -57,8 +101,7 @@ public class PopulationController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	DensityService densityService;
+	
 	@RequestMapping("/Density")
 	public String Density(Model model) {
 		List<Density> list = densityService.selectAll();
@@ -75,8 +118,7 @@ public class PopulationController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	FemalePercentService femalePercentService;
+	
 	@RequestMapping("/FemalePercent")
 	public String FemalePercent(Model model) {
 		List<FemalePercent> list = femalePercentService.selectAll();
@@ -93,8 +135,7 @@ public class PopulationController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	InfantMortalityRateService infantMortalityRateService;
+	
 	@RequestMapping("/InfantMortalityRate")
 	public String InfantMortalityRate(Model model) {
 		List<InfantMortalityRate> list = infantMortalityRateService.selectAll();
@@ -111,8 +152,7 @@ public class PopulationController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	LifeExpectancyAtBirthService lifeExpectancyAtBirthService;
+	
 	@RequestMapping("/LifeExpectancyAtBirth")
 	public String LifeExpectancyAtBirth(Model model) {
 		List<LifeExpectancyAtBirth> list = lifeExpectancyAtBirthService.selectAll();
@@ -129,8 +169,7 @@ public class PopulationController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	MidYearPoplationService midYearPoplationService;
+	
 	@RequestMapping("/MidYearPoplation")
 	public String MidYearPoplation(Model model) {
 		List<MidYearPoplation> list = midYearPoplationService.selectAll();
@@ -147,8 +186,7 @@ public class PopulationController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	ReproductiveHealthService reproductiveHealthService;
+	
 	@RequestMapping("/ReproductiveHealth")
 	public String ReproductiveHealth(Model model) {
 		List<ReproductiveHealth> list = reproductiveHealthService.selectAll();
@@ -165,8 +203,7 @@ public class PopulationController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	RuralAndUrbanRateService ruralAndUrbanRateService;
+	
 	@RequestMapping("/RuralAndUrbanRate")
 	public String RuralAndUrbanRate(Model model) {
 		List<RuralAndUrbanRate> list = ruralAndUrbanRateService.selectAll();

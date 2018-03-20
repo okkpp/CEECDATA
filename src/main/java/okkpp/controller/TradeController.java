@@ -1,6 +1,8 @@
 package okkpp.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import okkpp.service.trade.*;
+import okkpp.utils.CountryMap;
 import okkpp.model.Msg;
 import okkpp.model.price.Consumer;
 import okkpp.model.trade.*;
@@ -21,6 +24,45 @@ public class TradeController {
 
 	@Autowired
 	CommercialServiceExportService commercialServiceExportService;
+	@Autowired
+	CommercialServiceImportService commercialServiceImportService;
+	@Autowired
+	ExportsByCommodityGroupsService exportsByCommodityGroupsService;
+	@Autowired
+	GoodsAndServicesService goodsAndServicesService;
+	@Autowired
+	ImportsByCommodityGroupsService importsByCommodityGroupsService;
+	@Autowired
+	MerchandiseExportsService merchandiseExportsService;
+	@Autowired
+	MerchandiseImportsService merchandiseImportsService;
+	@Autowired
+	MerchandiseImportsAndExportsService merchandiseImportsAndExportsService;
+	
+	@RequestMapping("/json")
+	@ResponseBody
+	public Map<String, Object> info(String info) {
+		switch(info) {
+		 	case "CommercialServiceExport" :
+		 		return CountryMap.mapByCountry(commercialServiceExportService.selectAll());
+		 	case "CommercialServiceImport" :
+		 		return CountryMap.mapByCountry(commercialServiceImportService.selectAll());
+		 	case "ExportsByCommodityGroups" :
+		 		return CountryMap.mapByCountry(exportsByCommodityGroupsService.selectAll());
+		 	case "GoodsAndServices" :
+		 		return CountryMap.mapByCountry(goodsAndServicesService.selectAll());
+		 	case "ImportsByCommodityGroups" :
+		 		return CountryMap.mapByCountry(importsByCommodityGroupsService.selectAll());
+		 	case "MerchandiseExports" :
+		 		return CountryMap.mapByCountry(merchandiseExportsService.selectAll());
+		 	case "MerchandiseImports" :
+		 		return CountryMap.mapByCountry(merchandiseImportsService.selectAll());
+		 	case "MerchandiseImportsAndExports" :
+		 		return CountryMap.mapByCountry(merchandiseImportsAndExportsService.selectAll());			
+		}
+		return null;
+	}
+	
 	@RequestMapping("/CommercialServiceExport")
 	public String CommercialServiceExport(Model model) {
 		List<CommercialServiceExport> list = commercialServiceExportService.selectAll();
@@ -37,8 +79,7 @@ public class TradeController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	CommercialServiceImportService commercialServiceImportService;
+	
 	@RequestMapping("/CommercialServiceImport")
 	public String CommercialServiceImport(Model model) {
 		List<CommercialServiceImport> list = commercialServiceImportService.selectAll();
@@ -55,8 +96,7 @@ public class TradeController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	ExportsByCommodityGroupsService exportsByCommodityGroupsService;
+	
 	@RequestMapping("/ExportsByCommodityGroups")
 	public String ExportsByCommodityGroups(Model model) {
 		List<ExportsByCommodityGroups> list = exportsByCommodityGroupsService.selectAll();
@@ -73,8 +113,7 @@ public class TradeController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	GoodsAndServicesService goodsAndServicesService;
+	
 	@RequestMapping("/GoodsAndServices")
 	public String GoodsAndServices(Model model) {
 		List<GoodsAndServices> list = goodsAndServicesService.selectAll();
@@ -91,8 +130,7 @@ public class TradeController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	ImportsByCommodityGroupsService importsByCommodityGroupsService;
+	
 	@RequestMapping("/ImportsByCommodityGroups")
 	public String ImportsByCommodityGroups(Model model) {
 		List<ImportsByCommodityGroups> list = importsByCommodityGroupsService.selectAll();
@@ -109,8 +147,7 @@ public class TradeController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	MerchandiseExportsService merchandiseExportsService;
+	
 	@RequestMapping("/MerchandiseExports")
 	public String MerchandiseExports(Model model) {
 		List<MerchandiseExports> list = merchandiseExportsService.selectAll();
@@ -127,8 +164,7 @@ public class TradeController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	MerchandiseImportsService merchandiseImportsService;
+	
 	@RequestMapping("/MerchandiseImports")
 	public String MerchandiseImports(Model model) {
 		List<MerchandiseImports> list = merchandiseImportsService.selectAll();
@@ -145,8 +181,7 @@ public class TradeController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	MerchandiseImportsAndExportsService merchandiseImportsAndExportsService;
+	
 	@RequestMapping("/MerchandiseImportsAndExports")
 	public String MerchandiseImportsAndExports(Model model) {
 		List<MerchandiseImportsAndExports> list = merchandiseImportsAndExportsService.selectAll();

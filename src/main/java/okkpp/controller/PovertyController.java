@@ -1,6 +1,7 @@
 package okkpp.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import okkpp.service.poverty.*;
+import okkpp.utils.CountryMap;
 import okkpp.model.Msg;
 import okkpp.model.poverty.*;
 
@@ -23,6 +25,33 @@ public class PovertyController {
 
 	@Autowired
 	HouseholdConsumptionExpenditureService householdConsumptionExpenditureService;
+	@Autowired
+	InternationalPovertyRatioService internationalPovertyRatioService;
+	@Autowired
+	PersonalIncomeService personalIncomeService;
+	@Autowired
+	PovertyRateService povertyRateService;
+	@Autowired
+	SocialIndicatorsOfPovertyService socialIndicatorsOfPovertyService;
+	
+	@RequestMapping("/json")
+	@ResponseBody
+	public Map<String, Object> info(String info) {
+		switch (info) {
+			case "HouseholdConsumptionExpenditure" :
+				return CountryMap.mapByCountry(householdConsumptionExpenditureService.selectAll());
+			case "InternationalPovertyRatio" :
+				return CountryMap.mapByCountry(internationalPovertyRatioService.selectAll());
+			case "PersonalIncome" :
+				return CountryMap.mapByCountry(personalIncomeService.selectAll());
+			case "PovertyRate" :
+				return CountryMap.mapByCountry(povertyRateService.selectAll());
+			case "SocialIndicatorsOfPoverty" :
+				return CountryMap.mapByCountry(socialIndicatorsOfPovertyService.selectAll());
+		}
+		return null;
+	}
+
 	@RequestMapping("/HouseholdConsumptionExpenditure")
 	public String HouseholdConsumptionExpenditure(Model model) {
 		List<HouseholdConsumptionExpenditure> list = householdConsumptionExpenditureService.selectAll();
@@ -39,8 +68,7 @@ public class PovertyController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	InternationalPovertyRatioService internationalPovertyRatioService;
+	
 	@RequestMapping("/InternationalPovertyRatio")
 	public String InternationalPovertyRatio(Model model) {
 		List<InternationalPovertyRatio> list = internationalPovertyRatioService.selectAll();
@@ -57,8 +85,7 @@ public class PovertyController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	PersonalIncomeService personalIncomeService;
+	
 	@RequestMapping("/PersonalIncome")
 	public String PersonalIncome(Model model) {
 		List<PersonalIncome> list = personalIncomeService.selectAll();
@@ -75,8 +102,7 @@ public class PovertyController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 		
-	@Autowired
-	PovertyRateService povertyRateService;
+	
 	@RequestMapping("/PovertyRate")
 	public String PovertyRate(Model model) {
 		List<PovertyRate> list = povertyRateService.selectAll();
@@ -93,8 +119,7 @@ public class PovertyController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	SocialIndicatorsOfPovertyService socialIndicatorsOfPovertyService;
+	
 	@RequestMapping("/SocialIndicatorsOfPoverty")
 	public String SocialIndicatorsOfPoverty(Model model) {
 		List<SocialIndicatorsOfPoverty> list = socialIndicatorsOfPovertyService.selectAll();

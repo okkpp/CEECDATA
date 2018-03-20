@@ -1,6 +1,7 @@
 package okkpp.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,29 @@ public class InvestmentController {
 	
 	@Autowired
 	CostOfBusinessService costOfBusinessService;
+	@Autowired
+	DensityOfBusinessService densityOfBusinessService;
+	@Autowired
+	RankOfBusinessService rankOfBusinessService;
+	@Autowired
+	RegisteredOfBusinessService registeredOfBusinessService;
+	
+	@RequestMapping("/json")
+	@ResponseBody
+	public Map<String, Object> info(String info) {
+		switch(info) {
+		 	case "CostOfBusiness" :
+		 		return CountryMap.mapByCountry(costOfBusinessService.selectAll());
+		 	case "DensityOfBusiness" :
+		 		return CountryMap.mapByCountry(densityOfBusinessService.selectAll());
+		 	case "RankOfBusiness" :
+		 		return CountryMap.mapByCountry(rankOfBusinessService.selectAll());
+		 	case "RegisteredOfBusiness" :
+		 		return CountryMap.mapByCountry(registeredOfBusinessService.selectAll());
+		}
+		return null;
+	}
+	
 	@RequestMapping("/CostOfBusiness")
 	public String CostOfBusiness(Model model){
 		List<CostOfBusiness> list = costOfBusinessService.selectAll();
@@ -41,8 +65,7 @@ public class InvestmentController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	DensityOfBusinessService densityOfBusinessService;
+	
 	@RequestMapping("/DensityOfBusiness")
 	public String DensityOfBusiness(Model model){
 		List<DensityOfBusiness> list = densityOfBusinessService.selectAll();
@@ -60,8 +83,7 @@ public class InvestmentController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 
-	@Autowired
-	RankOfBusinessService rankOfBusinessService;
+	
 	@RequestMapping("/RankOfBusiness")
 	public String RankOfBusiness(Model model){
 		List<RankOfBusiness> list = rankOfBusinessService.selectAll();
@@ -79,8 +101,7 @@ public class InvestmentController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	RegisteredOfBusinessService registeredOfBusinessService;
+	
 	@RequestMapping("/RegisteredOfBusiness")
 	public String RegisteredOfBusiness(Model model){
 		List<RegisteredOfBusiness> list = registeredOfBusinessService.selectAll();

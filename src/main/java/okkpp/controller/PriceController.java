@@ -1,6 +1,9 @@
 package okkpp.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Case;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +17,7 @@ import com.github.pagehelper.PageInfo;
 import okkpp.model.Msg;
 import okkpp.model.price.*;
 import okkpp.service.price.*;
+import okkpp.utils.CountryMap;
 
 @Controller
 @RequestMapping("/price")
@@ -21,6 +25,20 @@ public class PriceController {
 	
 	@Autowired
 	ConsumerService consumerService;
+	@Autowired
+	ProducerService producerService;
+	
+	@RequestMapping("/json")
+	@ResponseBody
+	public Map<String, Object> info(String info) {
+		switch (info) {
+			case "Consumer" :
+				return CountryMap.mapByCountry(consumerService.selectAll());
+			case "Producer" :
+				return CountryMap.mapByCountry(producerService.selectAll());
+		}
+		return null;
+	}
 
 	@RequestMapping("/Consumer")
 	public String Consumer(Model model) {
@@ -65,7 +83,7 @@ public class PriceController {
 		return Msg.success().add("pageInfo", pageInfo);
 	}
 	
-	ProducerService producerService;
+	
 
 	@RequestMapping("/Producer")
 	public String Producer(Model model) {
