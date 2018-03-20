@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <!-- 
@@ -5,68 +7,84 @@
     @title: 港口集装箱吞吐量
  -->
 <head lang="zh-CN">
-    <title>港口集装箱吞吐量</title>
+<title>港口集装箱吞吐量</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
-    <meta charset="utf-8">
+<meta charset="utf-8">
 
-    <!-- 引入Jquery -->
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<!-- 引入Jquery -->
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- 引入Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- 引入Bootstrap -->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <!-- 引入BootStrap-table -->
-    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
-    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+<!-- 引入BootStrap-table -->
+<link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+<script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
 
-    <!-- 引入Bootstrap-paginator -->
-    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+<!-- 引入Bootstrap-paginator -->
+<script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
 
-    <!-- 引入Echarts -->
-    <script src="../assets/libs/echarts/echarts.min.js"></script>
+<!-- 引入Echarts -->
+<script src="../assets/libs/echarts/echarts.min.js"></script>
 </head>
 <body>
-<div class="container">
-    <div>
-        <ul class="nav nav-tabs">
-            <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
-            <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
-        </ul>
-    </div>
+	<div class="container">
+		<div>
+			<ul class="nav nav-tabs">
+				<li role="presentation" id="tableTag">
+					<a href="javascript:;" onclick="showTable()">
+						&nbsp;
+						<span class="glyphicon glyphicon-th-large"></span>
+						&nbsp;
+					</a>
+				</li>
+				<li role="presentation" id="imageTag">
+					<a href="javascript:;" onclick="showImage()">
+						&nbsp;
+						<span class="glyphicon glyphicon-tasks"></span>
+						&nbsp;
+					</a>
+				</li>
+			</ul>
+		</div>
 
-    <div id="tableView">
-        <div class="page-header" style="text-align: center;">
-            <h3>港口集装箱吞吐量</h3>
-            <br>
-            <h4 style="margin-top: -20px;">Goods and Services Tax as Percentage of Revenue</h4>
-        </div>
+		<div id="tableView">
+			<div class="page-header" style="text-align: center;">
+				<h3>港口集装箱吞吐量</h3>
+				<br>
+				<h4 style="margin-top: -20px;">Goods and Services Tax as Percentage of Revenue</h4>
+			</div>
 
-        <div style="text-align: right;">单位:&nbsp;标准集装箱(TEUs)</div>
-        <table id="tableData"></table>
-    </div>
+			<div style="text-align: right;">单位:&nbsp;标准集装箱(TEUs)</div>
+			<table id="tableData"></table>
+		</div>
 
-    <div id="imageView">
-        <div class="page-header" style="text-align: center;">
-            <h3>港口集装箱吞吐量柱状图</h3>
-            <br>
-            <h4 style="margin-top: -20px;">Goods and Services Tax as Percentage of Revenue</h4>
-        </div>
+		<div id="imageView">
+			<div class="page-header" style="text-align: center;">
+				<h3>港口集装箱吞吐量柱状图</h3>
+				<br>
+				<h4 style="margin-top: -20px;">Goods and Services Tax as Percentage of Revenue</h4>
+			</div>
 
-        <div class="panel" style="margin-top: 40px;">
-            <div style="text-align: right;">单位:&nbsp;标准集装箱(TEUs)</div>
-            <div id="main" style="width: 100%;height:400px;"></div>
-        </div>
-    </div>
+			<div class="panel" style="margin-top: 40px;">
+				<div style="text-align: right;">单位:&nbsp;标准集装箱(TEUs)</div>
+				<div id="main" style="width: 100%; height: 400px;"></div>
+			</div>
+		</div>
 
-      <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
-        <span class="glyphicon glyphicon-save"></span> 下载
-    </a></div>
+		<div style="color: #666666; margin-top: 15px;">
+			*此数据仅展现最近五年，若需全部数据请点击
+			<a href="#" class="btn btn-info btn-xs">
+				<span class="glyphicon glyphicon-save"></span>
+				下载
+			</a>
+		</div>
 
-    <!-- <div style="text-align: right;"><div id="page"></div></div> -->
-</div>
+		<!-- <div style="text-align: right;"><div id="page"></div></div> -->
+	</div>
 </body>
 <script>
     $(function(){

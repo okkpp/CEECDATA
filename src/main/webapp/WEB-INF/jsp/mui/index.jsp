@@ -25,7 +25,6 @@
 					height="50" alt="" />后台管理中心
 			</h1>
 		</div>
-		<a href="price/testparam/100">Test PathVariable</a>
 		<div class="head-l">
 			<a class="button button-little bg-green" href="" target="_blank">
 				<span class="icon-home"></span> 前台首页

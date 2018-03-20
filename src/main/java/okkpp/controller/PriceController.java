@@ -18,7 +18,7 @@ import okkpp.service.price.*;
 @Controller
 @RequestMapping("/price")
 public class PriceController {
-
+	
 	@Autowired
 	ConsumerService consumerService;
 
@@ -39,19 +39,6 @@ public class PriceController {
 		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);
 	}
-	
-	@RequestMapping(value="/test/{id}",method = RequestMethod.PUT)
-	@ResponseBody
-	public Msg test(@PathVariable("id") Integer id,Consumer consumer) {
-		System.out.println(consumer.toString());
-		return Msg.success();
-	}
-
-	@RequestMapping("/testparam/{id}")
-    public String test(@PathVariable("id") Integer id){
-        System.out.println(id);
-        return "mui/add";
-    }
 	
 	//更新Consume更新方法
 	@RequestMapping(value = "/Consumer",method = RequestMethod.PUT)
