@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>国土面积——中东欧统计数据库</title>
   <link rel="stylesheet" href="../zdo_static/css/normalize.css">
-  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
 
   <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
-  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="../zdo_static/js/bootstrap.min.js"></script>
   <script src="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
   <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
   <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
@@ -43,96 +43,92 @@
                 <h4 style="margin-top: -20px;">Country Area</h4>
             </div>
 
-            <div class="panel" style="margin-top: 40px;">
+            <div class="panel" style="margin-top: 1.5em;">
                 <div id="main" style="width: 100%;height:400px;">
                   <script type="text/javascript">
                       var dom = document.getElementById("main");
                       var myChart = echarts.init(dom);
                       var app = {};
                       option = null;
-                      var dataAxis = ['阿尔巴尼亚', '击', '柱', '子', '或', '者', '两', '指', '在', '触', '屏', '上', '滑', '动', '能', '够', '自', '动', '缩', '放'];
-                      var data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334, 198, 123, 125, 220];
+                      var dataAxis = ['阿尔巴尼亚', '爱沙尼亚', '保加利亚', '波黑', '波兰', '黑山', '捷克', '克罗地亚', '拉脱维亚', '立陶宛',
+                      '罗马尼亚', '马其顿', '塞尔维亚', '斯洛伐克', '斯洛文尼亚', '匈牙利'];
+                      var data = [220, 182, 191, 234, 290, 330, 310, 123, 442, 321, 90, 149, 210, 122, 133, 334];
                       var yMax = 500;
                       var dataShadow = [];
 
                       for (var i = 0; i < data.length; i++) {
-                      dataShadow.push(yMax);
+                        dataShadow.push(yMax);
                       }
 
                       option = {
-                      xAxis: {
-                          data: dataAxis,
-                          axisLabel: {
-                              inside: false,
-                              textStyle: {
-                                  color: '#fff'
-                              }
+                          title: {
+                            subtext: '数据来源',
+                            left: '6%'
                           },
-                          axisTick: {
-                              show: false
-                          },
-                          axisLine: {
-                              show: false
-                          },
-                          z: 10
-                      },
-                      yAxis: {
-                          name: 'km²',
-                          axisLine: {
-                              show: false
-                          },
-                          axisTick: {
-                              show: false
-                          },
-                          axisLabel: {
-                              textStyle: {
-                                  color: '#999'
-                              }
-                          }
-                      },
-                      dataZoom: [
-                          {
-                              type: 'inside'
-                          }
-                      ],
-                      series: [
-                          { // For shadow
-                              type: 'bar',
-                              itemStyle: {
-                                  normal: {color: 'rgba(0,0,0,0.05)'}  //阴影条纹颜色
+                          xAxis: {
+                              data: dataAxis,
+                              type: 'category',
+                              axisLabel: {
+                                  interval: 0
                               },
-                              barGap:'-100%',
-                              barCategoryGap:'40%',
-                              data: dataShadow,
-                              animation: false
                           },
-                          {
-                              type: 'bar',
-                              itemStyle: {
-                                  normal: {
-                                      color: new echarts.graphic.LinearGradient(
-                                          0, 0, 0, 1,
-                                          [
-                                              {offset: 0, color: '#83bff6'},
-                                              {offset: 0.5, color: '#188df0'},
-                                              {offset: 1, color: '#188df0'}
-                                          ]
-                                      )
-                                  },
-                                  emphasis: {
-                                      color: new echarts.graphic.LinearGradient(
-                                          0, 0, 0, 1,
-                                          [
-                                              {offset: 0, color: '#2378f7'},
-                                              {offset: 0.7, color: '#2378f7'},
-                                              {offset: 1, color: '#83bff6'}
-                                          ]
-                                      )
+                          yAxis: {
+                              name: 'km²',
+                              axisLine: {
+                                  show: false
+                              },
+                              axisTick: {
+                                  show: false
+                              },
+                              axisLabel: {
+                                  textStyle: {
+                                      color: '#999'
                                   }
+                              }
+                          },
+                          dataZoom: [
+                              {
+                                  type: 'inside'
+                              }
+                          ],
+                          series: [
+                              { // For shadow
+                                  type: 'bar',
+                                  itemStyle: {
+                                      normal: {color: 'rgba(0,0,0,0.05)'}  //阴影条纹颜色
+                                  },
+                                  barGap:'-100%',
+                                  barCategoryGap:'40%',
+                                  data: dataShadow,
+                                  animation: false
                               },
-                              data: data    //给data赋值，存储数据
-                          }
-                      ]
+                              {
+                                  type: 'bar',
+                                  itemStyle: {
+                                      normal: {
+                                          color: new echarts.graphic.LinearGradient(
+                                              0, 0, 0, 1,
+                                              [
+                                                  {offset: 0, color: '#83bff6'},
+                                                  {offset: 0.5, color: '#188df0'},
+                                                  {offset: 1, color: '#188df0'}
+                                              ]
+                                          )
+                                      },
+                                      emphasis: {
+                                          color: new echarts.graphic.LinearGradient(
+                                              0, 0, 0, 1,
+                                              [
+                                                  {offset: 0, color: '#2378f7'},
+                                                  {offset: 0.7, color: '#2378f7'},
+                                                  {offset: 1, color: '#83bff6'}
+                                              ]
+                                          )
+                                      }
+                                  },
+                                  data: data    //给data赋值，存储数据
+                              }
+                          ]
                       };
 
                       // Enable data zoom when user click bar.

@@ -3,16 +3,17 @@
 <head>
     <!--
       @author DoubleH
+      @email 1120023921@qq.com
       @Description: 银行资本充足率
     -->
     <meta charset="UTF-8">
-    <title>银行资本充足率——中东欧统计数据库</title>
+    <title>银行资本充足率</title>
     <!-- 引入Jquery -->
     <script src="../zdo_static/js/jquery-3.2.1.min.js"></script>
 
     <!-- 引入Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src="../zdo_static/js/bootstrap.min.js"></script>
 
     <!-- 引入BootStrap-table -->
     <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
@@ -52,12 +53,13 @@
                 <h4 style="margin-top: -20px;">Bank Capital to Assets Ratio</h4>
             </div>
 
-            <div class="panel" style="margin-top: 40px;">
+            <div class="panel" style="margin-top: 1.5em;">
+
                 <div id="main" style="width: 100%;height:400px;"></div>
             </div>
         </div>
 
-        <div style="color: #959595; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+        <div style="color: #959595; margin-top: 2em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
           <span class="glyphicon glyphicon-save"></span> 下载
       </a></div>
 
@@ -85,10 +87,11 @@
 
         $('#tableData').bootstrapTable({
             striped: true,
+
             columns: [
                 {
                     field: 'country',
-                    title: '国家'
+                    title: '国家或地区'
                 },
                 {
                     field: 'year1',
@@ -287,11 +290,47 @@
                 tooltip: {
                     trigger: 'axis'
                 },
-
+                // toolbox: {
+                //     show: true,
+                //     orient: 'vertical',
+                //     x: 'right',
+                //     y: 'center',
+                //     feature: {
+                //         mark: {
+                //             show: true
+                //         },
+                //         dataView: {
+                //             show: true,
+                //             readOnly: false
+                //         },
+                //         magicType: {
+                //             show: true,
+                //             type: ['line', 'bar']
+                //         },
+                //         restore: {
+                //             show: true
+                //         },
+                //         saveAsImage: {
+                //             show: true
+                //         }
+                //     }
+                // },
                 calculable: true,
                 grid: {
-
-                    y2: 100
+                  top: 40,
+                  bottom: 100,
+                  tooltip: {
+                      trigger: 'axis',
+                      axisPointer: {
+                          type: 'shadow',
+                          label: {
+                              show: true,
+                              formatter: function (params) {
+                                  return params.value.replace('\n', '');
+                              }
+                          }
+                      }
+                  }
                 },
                 xAxis: [{
                     type: 'category',
