@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import okkpp.model.finance.DepositRateAndLendingRate;
 import okkpp.service.finance.BankCapitalService;
+import okkpp.service.finance.CentralGovernmentRevenueService;
 import okkpp.service.finance.DepositRateAndLendingRateService;
+import okkpp.service.finance.DomesticCreditService;
 import okkpp.utils.CountryMap;
 
 /**
@@ -24,6 +26,23 @@ public class FinanceController {
 
 	@Autowired
 	DepositRateAndLendingRateService depositRateAndLendingRateService;
+	@Autowired
+	BankCapitalService bankCapitalService;
+	@Autowired
+	CentralGovernmentRevenueService centralGovernmentRevenueService;
+	@Autowired
+	DomesticCreditService domesticCreditService;
+	
+	@RequestMapping("/json")
+	@ResponseBody
+	public Map<String, Object> info(String str) {
+		switch(str) {
+		case "annual_average_deposit_rate_and_lending_rate":
+			return CountryMap.mapByCountry(depositRateAndLendingRateService.selectAll());
+			
+		}
+		return null;
+	}
 	@RequestMapping("annualAverageDepositRateAndLendingRate")
 	public String annual_average_deposit_rate_and_lending_rate(Model model) {
 		List<DepositRateAndLendingRate> list = depositRateAndLendingRateService.selectAll();
@@ -31,17 +50,5 @@ public class FinanceController {
 		model.addAttribute("jsondata", CountryMap.mapByCountryToJson(list));
 		return "/finance/annual_average_deposit_rate_and_lending_rate";
 	}
-	@RequestMapping("annualAverageDepositRateAndLendingRateJson")
-	@ResponseBody
-	public Map<String, Object> annual_average_deposit_rate_and_lending_rate_json() {
-		return CountryMap.mapByCountry(depositRateAndLendingRateService.selectAll());
-	}
-	
-	@Autowired
-	BankCapitalService bankCapitalService;
-	@RequestMapping("bankCapitalToAssetsRatioJson")
-	@ResponseBody
-	public Map<String, Object> bank_capital_to_assets_ratio_json() {
-		return CountryMap.mapByCountry(bankCapitalService.selectAll());
-	}
+
 }
