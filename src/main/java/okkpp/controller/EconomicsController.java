@@ -1,7 +1,6 @@
 package okkpp.controller;
 
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,16 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.github.pagehelper.PageInfo;
-
 import okkpp.model.Msg;
 import okkpp.service.economics.*;
 import okkpp.utils.CountryMap;
 
 @Controller
 @RequestMapping("/economics")
-public class EconomincsController {
+public class EconomicsController {
 
 	@Autowired
 	FinalConsumptionService FinalConsumptionService;
@@ -59,9 +56,9 @@ public class EconomincsController {
 			return CountryMap.mapByCountry(GDPService.selectAll());
 		case "GNIPC":
 			return CountryMap.mapByCountry(GNIPCService.selectAll());
-		case "GrowthOfGDPPC":
+		case "GrowthRateGdppc":
 			return CountryMap.mapByCountry(GrowthOfGDPPCService.selectAll());
-		case "IndicatorsOfNA":
+		case "IndicatorsOfNa":
 			return CountryMap.mapByCountry(IndicatorsOfNAService.selectAll());
 		case "PercentageOfAgriculture":
 			return CountryMap.mapByCountry(PercentageOfAgricultureService.selectAll());
@@ -89,19 +86,19 @@ public class EconomincsController {
 		case "FinalConsumption":
 			pageInfo = FinalConsumptionService.getPageInfo(pn);
 			break;
-		case "GDPPC":
+		case "Gdppc":
 			pageInfo = GDPPCService.getPageInfo(pn);
 			break;
-		case "GDP":
+		case "Gdp":
 			pageInfo = GDPService.getPageInfo(pn);
 			break;
-		case "GNIPC":
+		case "Gnipc":
 			pageInfo = GNIPCService.getPageInfo(pn);
 			break;
-		case "GrowthOfGDPPC":
+		case "GrowthRateGdp":
 			pageInfo = GrowthOfGDPPCService.getPageInfo(pn);
 			break;
-		case "IndicatorsOfNA":
+		case "IndicatorsOfNa":
 			pageInfo = IndicatorsOfNAService.getPageInfo(pn);
 			break;
 		case "PercentageOfAgriculture":

@@ -26,12 +26,12 @@
 				<a href="" style="float: right; display: none;">添加字段</a>
 			</div>
 			<div class="padding border-bottom">
-				<ul claOrInputass="search" style="padding-left: 10px;">
+				<ul style="padding-left: 10px;">
 					<li>
 						<a class="button border-main icon-plus-square-o" href="mui.do?str=add"> 添加内容</a>
 					</li>
-					<li>搜索</li>
-					<li>
+					<li>搜索&nbsp;&nbsp;
+					
 						章节:
 						<select id="chapter_choose" class="input" style="width: 120px; line-height: 17px; display: inline-block">
 							<option></option>
@@ -42,38 +42,19 @@
 						&nbsp;&nbsp; 搜索类别:
 						<select id="column_choose" class="input" style="width: 120px; line-height: 17px; display: inline-block">
 						</select>
-					</li>
-					<li>
+						&nbsp;&nbsp;
 						<input type="text" placeholder="请输入搜索关键字" id="condition" class="input" style="width: 250px; line-height: 17px; display: inline-block" />
 						<input type="button" class="button border-main icon-search" onclick="search()" value="搜索">
-					</li>
-					<li>
+						&nbsp;&nbsp;
 						<input type="button" class="button border-red" id="delete_all" value="删除选中">
 					</li>
 				</ul>
 			</div>
 			<table id="search_result" class="table table-hover text-center">
 				<thead>
-
 				</thead>
 				<tbody>
 				</tbody>
-				<!-- <tr>
-				<td style="text-align: left; padding: 19px 0; padding-left: 20px;">
-					<input type="checkbox" id="checkall" />
-					全选
-				</td>
-				<td colspan="7" style="text-align: left; padding-left: 20px;">
-					<a href="javascript:void(0)" class="button border-red icon-trash-o" style="padding: 5px 15px;" onclick="DelSelect()"> 删除</a>
-					<a href="javascript:void(0)" style="padding: 5px 15px; margin: 0 10px;" class="button border-blue icon-edit" onclick="sorts()"> 排序</a>
-					操作：
-					<select name="ishome" style="padding: 5px 15px; border: 1px solid #ddd;" onchange="changeishome(this)">
-						<option value="">首页</option>
-						<option value="1">是</option>
-						<option value="0">否</option>
-					</select>
-				</td>
-			</tr>-->
 			</table>
 			<div class="col-xs-12">
 				<div class="pagelist" id="page_nav_area"></div>
@@ -197,7 +178,7 @@
 		var str;
 		var data = "pn="+pn;
 		if(type == "normal"){
-			str = "../"+$("#chapter_choose").val()+"/getJson.do";
+			str = "../"+$("#chapter_choose").val()+"/getJson.do";			
 			data +="&info="+tranformStr("_"+$("#sheet_choose").val());
 		}else if(type == "search"){
 			var chapter = $("#chapter_choose").val();
