@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.economics.GrowthOfGDPMapper;
 import okkpp.model.economics.GrowthOfGDP;
 import okkpp.utils.CountryCode;
@@ -21,6 +23,13 @@ public class GrowthOfGDPService {
 	GrowthOfGDPMapper mapper;
 	public List<GrowthOfGDP> selectAll() {
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<GrowthOfGDP> list = mapper.selectAll();
+		return new PageInfo(list, 10);
 	}
 	
 	public List<GrowthOfGDP> selectByExample(String column,String condition){
