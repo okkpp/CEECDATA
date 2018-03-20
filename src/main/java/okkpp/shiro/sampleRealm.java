@@ -13,6 +13,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import okkpp.system.dao.ResourceMapper;
 import okkpp.system.dao.RoleMapper;
@@ -27,8 +28,11 @@ import okkpp.system.model.User;
  */
 public class sampleRealm extends AuthorizingRealm {
 
+	@Autowired
 	private RoleMapper roleMapper;
+	@Autowired
 	private UserMapper userMapper;
+	@Autowired
 	private ResourceMapper resourceMapper;
 
 	// 这是授权方法
@@ -70,15 +74,15 @@ public class sampleRealm extends AuthorizingRealm {
 		return info;
 	}
 
-	public void setUserMapper(UserMapper userMapper) {
-		this.userMapper = userMapper;
-	}
-
-	public void setRoleMapper(RoleMapper roleMapper) {
-		this.roleMapper = roleMapper;
-	}
-
-	public void setResourceMapper(ResourceMapper resourceMapper) {
-		this.resourceMapper = resourceMapper;
-	}
+//	public void setUserMapper(UserMapper userMapper) {
+//		this.userMapper = userMapper;
+//	}
+//
+//	public void setRoleMapper(RoleMapper roleMapper) {
+//		this.roleMapper = roleMapper;
+//	}
+//
+//	public void setResourceMapper(ResourceMapper resourceMapper) {
+//		this.resourceMapper = resourceMapper;
+//	}
 }

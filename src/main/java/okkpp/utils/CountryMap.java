@@ -32,7 +32,7 @@ public class CountryMap {
 					if(map.containsKey(key)) {
 						List<E> l = (List<E>) map.get(key);
 						l.add(ele);
-						map.replace(key, l);
+						map.put(key, l);
 					}else {
 						List<E> l = new ArrayList<E>();
 						l.add(ele);
