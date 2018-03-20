@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<!--
+    @author: 言伟
+    @title: 外债及其构成
+ -->
+<head lang="zh-CN">
+    <title>外债及其构成（2014）</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta charset="utf-8">
+
+    <!-- 引入Jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script src="../assets/libs/echarts/echarts.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div>
+        <ul class="nav nav-tabs">
+            <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+            <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+        </ul>
+    </div>
+
+    <div id="tableView">
+        <div class="page-header" style="text-align: center;">
+            <h3>外债及其构成（2014）</h3>
+            <br>
+            <h4 style="margin-top: -20px;">External Debts by Type（2014）</h4>
+        </div>
+
+        <div style="text-align: right;">单位:美元（USD）</div>
+
+        <table id="tableData"></table>
+    </div>
+
+    <div id="imageView">
+        <div class="page-header" style="text-align: center;">
+            <h3>外债及其构成（2014）</h3>
+            <br>
+            <h4 style="margin-top: -20px;">External Debts by Type（2014）</h4>
+        </div>
+
+        <div class="panel" style="margin-top: 40px;">
+            <div style="text-align: right;">单位:美元（USD）</div>
+            <div id="main" style="width: 100%;height:400px;"></div>
+        </div>
+    </div>
+
+    <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+        <span class="glyphicon glyphicon-save"></span> 下载
+    </a></div>
+
+    <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+</div>
+</body>
+<script>
+    $(function(){
+        $('#imageView').hide();
+        $('#tableTag').attr('class','active');
+    })
+
+    function showTable() {
+        $('#tableView').show();
+        $('#imageView').hide();
+        $('#tableTag').attr('class','active');
+        $('#imageTag').removeClass('active');
+    }
+
+    function showImage() {
+        $('#imageView').show();
+        $('#tableView').hide();
+        $('#imageTag').attr('class','active');
+        $('#tableTag').removeClass('active');
+    }
+
+    $('#tableData').bootstrapTable({
+        striped: true,
+        columns: [
+            {
+                field: 'country',
+                title: '国家或地区'
+            },
+            {
+                field: 'year1',
+                title: '外债总额'
+            },
+            {
+                field: 'year2',
+                title: '长期外债'
+            },
+            {
+                field: 'year3',
+                title: '私人非担保外债'
+            },
+            {
+                field: 'year4',
+                title: '政府及政府担保外债'
+            },
+            {
+                field: 'year5',
+                title: '国际货币基金组织贷款'
+            },
+        ],
+        data: [
+            {
+                country: '阿尔巴尼亚',
+                year1: '8000121000',
+                year2: '6375561000',
+                year3: '2704782000',
+                year4: '3670779000',
+                year5: '71561000',
+            },
+            {
+                country: '爱沙尼亚',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+            },
+            {
+                country: '波黑',
+                year1: '10590579000',
+                year2: '639249000',
+                year3: '-',
+                year4: '639249000',
+                year5: '-',
+            },
+            {
+                country: '保加利亚',
+                year1: '148742394000',
+                year2: '4771486000',
+                year3: '29569304000',
+                year4: '629851000',
+                year5: '-',
+            },
+            {
+                country: '波兰',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+            },
+            {
+                country: '黑山',
+                year1: '2454474000',
+                year2: '492854000',
+                year3: '29519000',
+                year4: '463335000',
+                year5: '-',
+            },
+            {
+                country: '捷克',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+            },
+            {
+                country: '克罗地亚',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+            },
+            {
+                country: '罗马尼亚',
+                year1: '111289915000',
+                year2: '19340984000',
+                year3: '12986419000',
+                year4: '6354565000',
+                year5: '-',
+            },
+            {
+                country: '立陶宛',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+            },
+            {
+                country: '拉脱维亚',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+            },
+            {
+                country: '马其顿',
+                year1: '7241004000',
+                year2: '1513775000',
+                year3: '414657000',
+                year4: '1099118000',
+                year5: '-',
+            },
+            {
+                country: '塞尔维亚',
+                year1: '33102741000',
+                year2: '4973383000',
+                year3: '3083116000',
+                year4: '1890267000',
+                year5: '-',
+            },
+            {
+                country: '斯洛伐克',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+            },
+            {
+                country: '斯洛文尼亚',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+            },
+            {
+                country: '匈牙利',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+            },
+
+        ]
+    });
+
+    var options={
+        bootstrapMajorVersion:1,    //版本
+        currentPage:1,    //当前页数
+        numberOfPages:5,    //最多显示Page页
+        totalPages:10,    //所有数据可以显示的页数
+        onPageClicked:function(e,originalEvent,type,page){
+
+
+        }
+    }
+    $("#page").bootstrapPaginator(options);
+
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var dataS='["外债总额","长期外债","私人非担保外债","政府及政府担保外债","国际货币基金组织贷款"]';
+    var dataNames='["five","fourteen","ten","thirteen","zero",]';
+    var pageViews='[{"country":"阿尔巴尼亚","five":"8000121000","fourteen":"6375561000","id":1,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"2704782000","thirteen":"3670779000","zero":"71561000"},' +
+        '{"country":"爱沙尼亚","five":"0","fourteen":"0","id":2,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"0","thirteen":"0","zero":"0"},' +
+        '{"country":"波黑","five":"10590579000","fourteen":"639249000","id":2,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"0","thirteen":"639249000","zero":"0"},' +
+        '{"country":"保加利亚","five":"48742394000","fourteen":"4771486000","id":3,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"29569304000","thirteen":"629851000","zero":"0"},' +
+        '{"country":"波兰","five":"0","fourteen":"0","id":4,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"0","thirteen":"0","zero":"0"},' +
+        '{"country":"黑山","five":"2454474000","fourteen":"492854000","id":5,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"29519000","thirteen":"463335000","zero":"0"},' +
+        '{"country":"捷克","five":"0","fourteen":"0","id":6,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"0","thirteen":"0","zero":"0"},' +
+        '{"country":"克罗地亚","five":"0","fourteen":"0","id":7,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"0","thirteen":"0","zero":"0"},' +
+        '{"country":"罗马尼亚","five":"111289915000","fourteen":"19340984000","id":8,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"12986419000","thirteen":"6354565000","zero":"0"},' +
+        '{"country":"立陶宛","five":"0","fourteen":"0","id":9,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"0","thirteen":"0","zero":"0"},' +
+        '{"country":"拉脱维亚","five":"0","fourteen":"0","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"0","thirteen":"0","zero":"0"},' +
+        '{"country":"马其顿","five":"7241004000","fourteen":"1513775000","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"414657000","thirteen":"1099118000","zero":"0"},' +
+        '{"country":"塞尔维亚","five":"33102741000","fourteen":"4973383000","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"3083116000","thirteen":"1890267000","zero":"0"},' +
+        '{"country":"斯洛伐克","five":"0","fourteen":"0","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"0","thirteen":"0","zero":"0"},' +
+        '{"country":"斯洛文尼亚","five":"0","fourteen":"0","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"0","thirteen":"0","zero":"0"},' +
+        '{"country":"匈牙利","five":"0","fourteen":"0","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"0","thirteen":"0","zero":"0"}]';
+
+    var datas = eval('(' + dataS + ')');
+    var dataName = eval('(' + dataNames + ')');
+    var pageView = eval('(' + pageViews + ')');
+
+    var contry=new Array();
+    var seriesData=new Array();
+    for(var i=0;i<datas.length;i++){
+        var obj=new Object();
+        obj.name=datas[i];
+        obj.type='bar';
+        obj.data=new Array();
+        seriesData.push(obj);
+    }
+    for(var i=0;i<pageView.length;i++){
+
+        // 		var d=transform(pageView[i]);
+        var contrys=pageView[i];
+        var c=contrys['country'];
+        contry.push(c);
+    }
+
+    var i=0;
+    for(var j=0;j<dataName.length;j++){
+        for(var k=0;k<pageView.length;k++){
+            var b=pageView[k];
+            var c=b[dataName[j]];
+            seriesData[i].data.push(c);
+        }
+        i++;
+    }
+    function transform(obj){
+        var arr = [];
+        for(var item in obj){
+            arr.push(obj[item]);
+        }
+        return arr;
+    }
+    // 	app.title = '堆叠柱状图';
+
+    option = {
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        legend: {
+            data:datas
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                type : 'category',
+                data : contry,
+                axisLabel:{
+                    interval:0,
+                    inside:false,
+                    rotate:30,
+                }
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : seriesData
+    };
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</html>

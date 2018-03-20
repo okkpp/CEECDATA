@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>制造业主要指标</title>
+    <!-- 引入Jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script src="../assets/libs/echarts/echarts.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <ul class="nav nav-tabs">
+                <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+                <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+            </ul>
+        </div>
+
+        <div id="tableView">
+            <div class="page-header" style="text-align: center;">
+                <h3>制造业主要指标</h3>
+                <br>
+                <h4 style="margin-top: -20px;">The main indicators of manufacturing industry</h4>
+            </div>
+
+            <div style="text-align: right;">单位:&nbsp;%</div>
+            <table id="tableData"></table>
+        </div>
+
+        <div id="imageView">
+            <div class="page-header" style="text-align: center;">
+                <h3>制造业主要指标</h3>
+                <br>
+                <h4 style="margin-top: -20px;">The main indicators of manufacturing industry</h4>
+            </div>
+
+            <div class="panel" style="margin-top: 40px;">
+                <div style="text-align: right;">单位:&nbsp;%</div>
+                <div id="main" style="width: 100%;height:400px;"></div>
+            </div>
+        </div>
+
+          <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+            <span class="glyphicon glyphicon-save"></span> 下载
+        </a></div>
+
+        <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+    </div>
+    <script>
+        $(function(){
+            $('#imageView').hide();
+            $('#tableTag').attr('class','active');
+        })
+
+        function showTable() {
+            $('#tableView').show();
+            $('#imageView').hide();
+            $('#tableTag').attr('class','active');
+            $('#imageTag').removeClass('active');
+        }
+
+        function showImage() {
+            $('#imageView').show();
+            $('#tableView').hide();
+            $('#imageTag').attr('class','active');
+            $('#tableTag').removeClass('active');
+        }
+
+        $('#tableData').bootstrapTable({
+            striped: true,
+            columns: [
+                {
+                    field: 'country',
+                    title: '国家或地区'
+                },
+                {
+                    field: 'year1',
+                    title: '2010年'
+                },
+                {
+                    field: 'year2',
+                    title: '2011年'
+                },
+                {
+                    field: 'year3',
+                    title: '2012年'
+                },
+                {
+                    field: 'year4',
+                    title: '2013年'
+                },
+                {
+                    field: 'year5',
+                    title: '2014年'
+                },
+                {
+                    field: 'year6',
+                    title: '2015年'
+                },
+            ],
+            data: [
+                {
+                    country: "阿尔巴尼亚",
+					year1: "8.4",
+					year2: "8.79",
+					year3: "6.87",
+					year4: "3.05",
+					year5: "3.75",
+					year6: "8.07",
+                },
+                {
+                    country: "爱沙尼亚",
+					year1: "7.05",
+					year2: "8.25",
+					year3: "5.35",
+					year4: "1.15",
+					year5: "2.51",
+					year6: "4.6",
+                },
+                {
+                    country: "保加利亚",
+					year1: "3.35",
+					year2: "7.83",
+					year3: "2.46",
+					year4: "3.64",
+					year5: "9.8",
+					year6: "7.26",
+                },
+                {
+                    country: "波兰",
+					year1: "5.31",
+					year2: "1.7",
+					year3: "8.04",
+					year4: "2.25",
+					year5: "3.16",
+					year6: "7.52",
+                },
+                {
+                    country: "黑山",
+					year1: "3.1",
+					year2: "4.97",
+					year3: "6.2",
+					year4: "7.92",
+					year5: "5.4",
+					year6: "1.51",
+                },
+                {
+                    country: "捷克",
+					year1: "7.29",
+					year2: "3.96",
+					year3: "4.55",
+					year4: "3.82",
+					year5: "7.87",
+					year6: "5.29",
+
+                },
+                {
+                   country: "克罗地亚",
+					year1: "6.94",
+					year2: "4.57",
+					year3: "5.54",
+					year4: "9.44",
+					year5: "9.9",
+					year6: "1.57",
+                },
+                {
+                    country: "拉脱维亚",
+					year1: "8.84",
+					year2: "5.63",
+					year3: "4",
+					year4: "8.89",
+					year5: "6.72",
+					year6: "6.47",
+                },
+                {
+                    country: "立陶宛",
+					year1: "8.36",
+					year2: "7.43",
+					year3: "5.38",
+					year4: "5.19",
+					year5: "4.6",
+					year6: "6",
+                },
+                {
+                    country: "罗马尼亚",
+					year1: "2.85",
+					year2: "1.12",
+					year3: "8.13",
+					year4: "2.2",
+					year5: "9.32",
+					year6: "6.05",
+
+                },
+                {
+                   country: "马其顿",
+					year1: "4.13",
+					year2: "6.58",
+					year3: "6.88",
+					year4: "6.6",
+					year5: "2.33",
+					year6: "6.91",
+                },
+                {
+                    country: "塞尔维亚",
+					year1: "4.38",
+					year2: "2.47",
+					year3: "1.89",
+					year4: "9.38",
+					year5: "9.4",
+					year6: "4.32",
+                },
+                {
+                    country: "斯洛伐克",
+					year1: "6.22",
+					year2: "5.92",
+					year3: "5.17",
+					year4: "8.18",
+					year5: "4.94",
+					year6: "7.17",
+                },
+                {
+                    country: "斯洛文尼亚",
+					year1: "1.66",
+					year2: "8.07",
+					year3: "1.17",
+					year4: "5.15",
+					year5: "1.18",
+					year6: "9.12",
+                },
+                {
+                    country: "匈牙利",
+					year1: "5.13",
+					year2: "3.59",
+					year3: "3.18",
+					year4: "8.28",
+					year5: "2.29",
+					year6: "5.3",
+                },
+                {
+                    country: "波黑",
+					year1: "2.73",
+					year2: "2.45",
+					year3: "5.25",
+					year4: "6.84",
+					year5: "2.22",
+					year6: "5.4516",
+                }
+            ]
+        });
+
+        var all = {
+            "data": [
+                [8.4,7.05,3.35,5.31,3.1,7.29,6.94,8.84,8.36,2.85,4.13,4.38,6.22,1.66,5.13,2.73],
+                [8.79,8.25,7.83,1.7,4.97,3.96,4.57,5.63,7.43,1.12,6.58,2.47,5.92,8.07,3.59,2.45],
+                [6.87,5.35,2.46,8.04,6.2,4.55,5.54,4,5.38,8.13,6.88,1.89,5.17,1.17,3.18,5.25],
+                [3.05,1.15,3.64,2.25,7.92,3.82,9.44,8.89,5.19,2.2,6.6,9.38,8.18,5.15,8.28,6.84],
+                [3.75,2.51,9.8,3.16,5.4,7.87,9.9,6.72,4.6,9.32,2.33,9.4,4.94,1.18,2.29,2.22],
+                [8.07,4.6,7.26,7.52,1.51,5.29,1.57,6.47,6,6.05,6.91,4.32,7.17,9.12,5.3,5.45],
+                []
+            ],
+            "countrys": ["阿尔巴尼亚","爱沙尼亚","保加利亚","波兰","黑山","捷克共和国","克罗地亚","拉脱维亚","立陶宛","罗马尼亚","马其顿","塞尔维亚","斯洛伐克","斯洛文尼亚","匈牙利","波黑"],
+            "years": ["2010年", "2011年", "2012年", "2013年", "2014年", "2015年"]
+        };
+
+        var option = {
+            timeline: {
+                axisType: 'category',
+                autoPlay: true,
+                playInterval: 5000,
+                data: all.years
+            },
+            options: [{
+                tooltip: {
+                    trigger: 'axis'
+                },
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    x: 'right',
+                    y: 'center',
+                    feature: {
+                        mark: {
+                            show: true
+                        },
+                        dataView: {
+                            show: true,
+                            readOnly: false
+                        },
+                        magicType: {
+                            show: true,
+                            type: ['line', 'bar']
+                        },
+                        restore: {
+                            show: true
+                        },
+                        saveAsImage: {
+                            show: true
+                        }
+                    }
+                },
+                calculable: true,
+                grid: {
+                    y: 100,
+                    y2: 100
+                },
+                xAxis: [{
+                    type: 'category',
+                    axisLabel: {
+                        interval: 0
+                    },
+                    data: all.countrys
+                }],
+                yAxis: [{
+                    type: 'value',
+                    name: ''
+                }],
+                series: [{
+                    name: '货物进出口总额',
+                    type: 'bar',
+                    data: all.data[0]
+                }]
+            },
+                {
+                    series: [{
+                        data: all.data[1]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[2]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[3]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[4]
+                    }]
+                },
+                {
+                    series: [{
+                        data: all.data[5]
+                    }]
+                }
+            ]
+        };
+        var myChart = echarts.init(document.getElementById('main'));
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+</body>
+</html>
