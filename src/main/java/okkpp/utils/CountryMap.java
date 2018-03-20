@@ -32,7 +32,7 @@ public class CountryMap {
 					if(map.containsKey(key)) {
 						List<E> l = (List<E>) map.get(key);
 						l.add(ele);
-						map.replace(key, l);
+						map.put(key, l);
 					}else {
 						List<E> l = new ArrayList<E>();
 						l.add(ele);
@@ -64,9 +64,12 @@ public class CountryMap {
 		return new Gson().toJson(mapByCountry(list));
 	}
 	
-	public static <E> void mapByCountryWithPageInfo(int page,int pageSize,List<E> list) {
+	public static <E> PageInfo<E> mapByCountryWithPageInfo(int page,int pageSize,List<E> list) {
 		PageHelper.startPage(page, pageSize);
 		PageInfo<E> pi = new PageInfo<E>(list);
-		pi.getList();
+		
+		Map<String, Object> map = mapByCountry(pi.getList());
+		map.put("_endRow", pi.getEndRow());
+		return pi;
 	}
 }

@@ -4,8 +4,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import okkpp.dao.economics.GDPPCMapper;
-import okkpp.model.economics.GDPPC;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import okkpp.dao.economics.GdppcMapper;
+import okkpp.model.economics.Gdppc;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
 
@@ -18,13 +20,20 @@ import tk.mybatis.mapper.entity.Example;
 public class GDPPCService {
 
 	@Autowired
-	GDPPCMapper mapper;
-	public List<GDPPC> selectAll() {
+	GdppcMapper mapper;
+	public List<Gdppc> selectAll() {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<GDPPC> selectByExample(String column,String condition){
-		Example example = new Example(GDPPC.class);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<Gdppc> list = mapper.selectAll();
+		return new PageInfo(list, 10);
+	}
+	
+	public List<Gdppc> selectByExample(String column,String condition){
+		Example example = new Example(Gdppc.class);
 		Example.Criteria criteria = example.createCriteria();
 		criteria.andLike(column, "%"+condition+"%");
 		return CountryCode.replaceCountry(mapper.selectByExample(example));

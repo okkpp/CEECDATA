@@ -31,7 +31,7 @@ public class ContentService {
 			if (map.containsKey(p)) {
 				List<Content> l = map.get(p);
 				l.add(c);
-				map.replace(p, l);
+				map.put(p, l);
 			} else {
 				List<Content> l = new ArrayList<Content>();
 				l.add(c);

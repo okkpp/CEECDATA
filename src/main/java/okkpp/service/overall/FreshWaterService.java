@@ -1,15 +1,15 @@
 package okkpp.service.overall;
 
 import java.util.List;
-
 import okkpp.dao.overall.FreshWaterMapper;
 import okkpp.model.overall.FreshWater;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 /**
  * @author DUCK  E-mail: okkpp@qq.com
@@ -24,6 +24,13 @@ public class FreshWaterService {
 	FreshWaterMapper mapper;
 	public List<FreshWater> selectAll(){
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<FreshWater> list = mapper.selectAll();
+		return new PageInfo(list, 10);
 	}
 	
 	public List<FreshWater> selectByExample(String column,String condition){

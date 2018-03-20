@@ -1,10 +1,11 @@
 package okkpp.service.investment;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.investment.DensityOfBusinessMapper;
 import okkpp.model.investment.DensityOfBusiness;
 import okkpp.utils.CountryCode;
@@ -19,6 +20,13 @@ public class DensityOfBusinessService {
 	
 	public List<DensityOfBusiness> selectAll(){
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<DensityOfBusiness> list = mapper.selectAll();
+		return new PageInfo(list, 10);
 	}
 	
 	public List<DensityOfBusiness> selectByExample(String column,String condition){

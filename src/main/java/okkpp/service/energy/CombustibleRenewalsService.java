@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.energy.CombustibleRenewalsMapper;
 import okkpp.model.energy.CombustibleRenewals;
 import okkpp.utils.CountryCode;
@@ -21,6 +23,13 @@ public class CombustibleRenewalsService {
 	CombustibleRenewalsMapper mapper;
 	public List<CombustibleRenewals> selectAll() {
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<CombustibleRenewals> list = mapper.selectAll();
+		return new PageInfo(list, 10);
 	}
 	
 	public List<CombustibleRenewals> selectByExample(String column,String condition){

@@ -1,13 +1,12 @@
 package okkpp.service.finance;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.finance.CentralGovernmentRevenueMapper;
-import okkpp.model.finance.BankNonPerformingLoans;
 import okkpp.model.finance.CentralGovernmentRevenue;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
@@ -24,6 +23,13 @@ public class CentralGovernmentRevenueService {
 	CentralGovernmentRevenueMapper mapper;
 	public List<CentralGovernmentRevenue> selectAll() {
 		return CountryCode.replaceCountry(mapper.selectAll());
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<CentralGovernmentRevenue> list = mapper.selectAll();
+		return new PageInfo(list, 10);
 	}
 	
 	public List<CentralGovernmentRevenue> selectByExample(String column,String condition){

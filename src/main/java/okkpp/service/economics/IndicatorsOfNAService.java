@@ -4,8 +4,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import okkpp.dao.economics.IndicatorsOfNAMapper;
-import okkpp.model.economics.IndicatorsOfNA;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import okkpp.dao.economics.IndicatorsOfNaMapper;
+import okkpp.model.economics.IndicatorsOfNa;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
 
@@ -18,13 +20,20 @@ import tk.mybatis.mapper.entity.Example;
 public class IndicatorsOfNAService {
 
 	@Autowired
-	IndicatorsOfNAMapper mapper;
-	public List<IndicatorsOfNA> selectAll() {
+	IndicatorsOfNaMapper mapper;
+	public List<IndicatorsOfNa> selectAll() {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<IndicatorsOfNA> selectByExample(String column,String condition){
-		Example example = new Example(IndicatorsOfNA.class);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn){		
+		PageHelper.startPage(pn, 10);
+		List<IndicatorsOfNa> list = mapper.selectAll();
+		return new PageInfo(list, 10);
+	}
+	
+	public List<IndicatorsOfNa> selectByExample(String column,String condition){
+		Example example = new Example(IndicatorsOfNa.class);
 		Example.Criteria criteria = example.createCriteria();
 		criteria.andLike(column, "%"+condition+"%");
 		return CountryCode.replaceCountry(mapper.selectByExample(example));
