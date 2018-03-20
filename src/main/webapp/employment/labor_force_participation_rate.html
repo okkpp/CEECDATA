@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>劳动参与率——中东欧统计数据库</title>
   <link rel="stylesheet" href="../zdo_static/css/normalize.css">
-  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
 
   <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
-  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="../zdo_static/js/bootstrap.min.js"></script>
   <script src="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
   <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
   <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
@@ -35,7 +35,7 @@
 
             <table class="table table-striped table-hover">
               <thead>
-                  <th>国家</th>
+                  <th style="text-align:center;">国家</th>
                   <th>时间</th>
                   <th>劳动人口（万人）</th>
                   <th>劳动参与率（%）</th>
@@ -68,7 +68,7 @@
                 <h4 style="margin-top: -20px;">Labor Force Participation Rate</h4>
             </div>
 
-            <div class="panel" style="margin-top: 40px;">
+            <div class="panel" style="margin-top: 1.5em;">
                 <div id="main" style="width: 100%;height:400px;">
                   <script type="text/javascript">
                       var dom = document.getElementById("main");
@@ -79,7 +79,8 @@
                       var colors = ['#5793f3', '#d14a61','#4445e9'];
                       var dataMap = {};
                       function dataFormatter(obj) {
-                          var pList = ['北京','天津','河北','山西','内蒙古','辽宁','吉林','黑龙江','上海','江苏','浙江','安徽','福建','江西','山东','河南','湖北','湖南','广东','广西','海南','重庆','四川','贵州','云南','西藏','陕西','甘肃','青海','宁夏','新疆'];
+                          var pList = ['阿尔巴尼亚', '爱沙尼亚', '保加利亚', '波黑', '波兰', '黑山', '捷克', '克罗地亚', '拉脱维亚', '立陶宛', '罗马尼亚', '马其顿', '塞尔维亚',
+                           '斯洛伐克', '斯洛文尼亚', '匈牙利'];
                           var temp;
                           for (var year = 2011; year <= 2016; year++) {
                               var max = 0;
@@ -142,7 +143,7 @@
 
                               },
                               title: {
-                                  subtext: '数据来自国家统计局'
+                                  subtext: '数据来源'
                               },
                               color: colors,
                               tooltip: {
@@ -175,10 +176,8 @@
                                       'type':'category',
                                       'axisLabel':{'interval':0},
                                       'data':[
-                                          '北京','\n天津','河北','\n山西','内蒙古','\n辽宁','吉林','\n黑龙江',
-                                          '上海','\n江苏','浙江','\n安徽','福建','\n江西','山东','\n河南',
-                                          '湖北','\n湖南','广东','\n广西','海南','\n重庆','四川','\n贵州',
-                                          '云南','\n西藏','陕西','\n甘肃','青海','\n宁夏','新疆'
+                                        '阿尔巴尼亚', '爱沙尼亚', '保加利亚', '波黑', '波兰', '黑山', '捷克', '克罗地亚', '拉脱维亚', '立陶宛', '罗马尼亚', '马其顿', '塞尔维亚',
+                                         '斯洛伐克', '斯洛文尼亚', '匈牙利'
                                       ],
                                       splitLine: {show: false}
                                   }
@@ -216,10 +215,10 @@
                                   },
                                   {
                                       type: 'value',
-                                      name: '女性劳动参与率',
+                                      name: '女性参与率',
                                       min: 0,
                                       max: 100,
-                                      offset: 80,
+                                      offset: 70,
                                       position: 'right',
                                       axisLine: {
                                           lineStyle: {
@@ -241,7 +240,10 @@
 
                           options:[
                               {
-                                  title: {text: '2011劳动参与率'},
+                                  title: {text: '2011劳动参与率',textStyle: {
+                                    fontWeight: '400',
+                                    fontSize: '14'
+                                  }},
                                   series: [
                                       {data: dataMap.dataCZ['2011']},
                                       {data: dataMap.dataMD['2011']},
@@ -249,7 +251,10 @@
                                   ]
                               },
                               {
-                                title: {text: '2012劳动参与率'},
+                                title: {text: '2012劳动参与率',textStyle: {
+                                  fontWeight: '400',
+                                  fontSize: '14'
+                                }},
                                 series: [
                                     {data: dataMap.dataCZ['2012']},
                                     {data: dataMap.dataMD['2012']},
@@ -257,7 +262,10 @@
                                 ]
                               },
                               {
-                                title: {text: '2013劳动参与率'},
+                                title: {text: '2013劳动参与率',textStyle: {
+                                  fontWeight: '400',
+                                  fontSize: '14'
+                                }},
                                 series: [
                                     {data: dataMap.dataCZ['2013']},
                                     {data: dataMap.dataMD['2013']},
@@ -265,7 +273,10 @@
                                 ]
                               },
                               {
-                                title: {text: '2014劳动参与率'},
+                                title: {text: '2014劳动参与率',textStyle: {
+                                  fontWeight: '400',
+                                  fontSize: '14'
+                                }},
                                 series: [
                                     {data: dataMap.dataCZ['2014']},
                                     {data: dataMap.dataMD['2014']},
@@ -273,7 +284,10 @@
                                 ]
                               },
                               {
-                                title: {text: '2015劳动参与率'},
+                                title: {text: '2015劳动参与率',textStyle: {
+                                  fontWeight: '400',
+                                  fontSize: '14'
+                                }},
                                 series: [
                                     {data: dataMap.dataCZ['2015']},
                                     {data: dataMap.dataMD['2015']},
@@ -281,7 +295,10 @@
                                 ]
                               },
                               {
-                                title: {text: '2016劳动参与率'},
+                                title: {text: '2016劳动参与率',textStyle: {
+                                  fontWeight: '400',
+                                  fontSize: '14'
+                                }},
                                 series: [
                                     {data: dataMap.dataCZ['2016']},
                                     {data: dataMap.dataMD['2016']},
@@ -299,7 +316,7 @@
             </div>
         </div>
 
-        <div style="color: #959595; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+        <div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
           <span class="glyphicon glyphicon-save"></span> 下载
       </a></div>
 
