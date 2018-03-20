@@ -1,30 +1,30 @@
-package okkpp.service.emoloyment;
+package okkpp.service.employment;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import okkpp.dao.employment.CompositionEmploymentMapper;
-import okkpp.model.employment.CompositionEmployment;
+import okkpp.dao.employment.LaborForceParticipationRateMapper;
+import okkpp.model.employment.LaborForceParticipationRate;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
 
 /**
 * @author duck
-* @date 创建时间：2018年3月6日 上午9:24:38
+* @date 创建时间：2018年3月6日 上午9:32:01
 */
 @Service
 @Transactional
-public class CompositionEmploymentService {
+public class LaborForceParticipationRateService {
 
 	@Autowired
-	CompositionEmploymentMapper mapper;
-	public List<CompositionEmployment> selectAll() {
+	LaborForceParticipationRateMapper mapper;
+	public List<LaborForceParticipationRate> selectAll() {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<CompositionEmployment> selectByExample(String column,String condition){
-		Example example = new Example(CompositionEmployment.class);
+	public List<LaborForceParticipationRate> selectByExample(String column,String condition){
+		Example example = new Example(LaborForceParticipationRate.class);
 		Example.Criteria criteria = example.createCriteria();
 		criteria.andLike(column, "%"+condition+"%");
 		return CountryCode.replaceCountry(mapper.selectByExample(example));

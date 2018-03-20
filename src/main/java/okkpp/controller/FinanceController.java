@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import okkpp.model.finance.DepositRateAndLendingRate;
-import okkpp.service.finance.BankCapitalService;
-import okkpp.service.finance.CentralGovernmentRevenueService;
-import okkpp.service.finance.DepositRateAndLendingRateService;
-import okkpp.service.finance.DomesticCreditService;
+import okkpp.service.finance.*;
 import okkpp.utils.CountryMap;
 
 /**
@@ -25,27 +22,75 @@ import okkpp.utils.CountryMap;
 public class FinanceController {
 
 	@Autowired
-	DepositRateAndLendingRateService depositRateAndLendingRateService;
+	BankCapitalService BankCapitalService;
 	@Autowired
-	BankCapitalService bankCapitalService;
+	BankNonPerformingLoansService BankNonPerformingLoansService;
 	@Autowired
-	CentralGovernmentRevenueService centralGovernmentRevenueService;
+	CentralGovernmentRevenueService CentralGovernmentRevenueService;
 	@Autowired
-	DomesticCreditService domesticCreditService;
-	
+	DebtService DebtService;
+	@Autowired
+	DepositRateAndLendingRateService DepositRateAndLendingRateService;
+	@Autowired
+	DomesticCreditService DomesticCreditService;
+	@Autowired
+	GlobalEquityIndicesService GlobalEquityIndicesService;
+	@Autowired
+	GrowthRateOfMoneyService GrowthRateOfMoneyService;
+	@Autowired
+	ListedDomesticCompaniesService ListedDomesticCompaniesService;
+	@Autowired
+	MoneySupplyService MoneySupplyService;
+	@Autowired
+	QuasiMoneyService QuasiMoneyService;
+	@Autowired
+	SocialContributionsService SocialContributionsService;
+	@Autowired
+	StocksTradedValueService StocksTradedValueService;
+	@Autowired
+	SurplusService SurplusService;
+	@Autowired
+	TaxAsPercentageOfEvenueService TaxAsPercentageOfEvenueService;
 	@RequestMapping("/json")
 	@ResponseBody
-	public Map<String, Object> info(String str) {
-		switch(str) {
-		case "annual_average_deposit_rate_and_lending_rate":
-			return CountryMap.mapByCountry(depositRateAndLendingRateService.selectAll());
-			
+	public Map<String, Object> info(String info) {
+		switch(info) {
+		case "BankCapital":
+			return CountryMap.mapByCountry(BankCapitalService.selectAll());
+		case "BankNonPerformingLoans":
+			return CountryMap.mapByCountry(BankNonPerformingLoansService.selectAll());
+		case "CentralGovernmentRevenue":
+			return CountryMap.mapByCountry(CentralGovernmentRevenueService.selectAll());
+		case "Debt":
+			return CountryMap.mapByCountry(DebtService.selectAll());
+		case "DepositRateAndLendingRate":
+			return CountryMap.mapByCountry(DepositRateAndLendingRateService.selectAll());
+		case "DomesticCredit":
+			return CountryMap.mapByCountry(DomesticCreditService.selectAll());
+		case "GlobalEquityIndices":
+			return CountryMap.mapByCountry(GlobalEquityIndicesService.selectAll());
+		case "GrowthRateOfMoney":
+			return CountryMap.mapByCountry(GrowthRateOfMoneyService.selectAll());
+		case "ListedDomesticCompanies":
+			return CountryMap.mapByCountry(ListedDomesticCompaniesService.selectAll());
+		case "MoneySupply":
+			return CountryMap.mapByCountry(MoneySupplyService.selectAll());
+		case "QuasiMoney":
+			return CountryMap.mapByCountry(QuasiMoneyService.selectAll());
+		case "SocialContributions":
+			return CountryMap.mapByCountry(SocialContributionsService.selectAll());
+		case "StocksTradedValue":
+			return CountryMap.mapByCountry(StocksTradedValueService.selectAll());
+		case "Surplus":
+			return CountryMap.mapByCountry(SurplusService.selectAll());
+		case "TaxAsPercentageOfEvenue":
+			return CountryMap.mapByCountry(TaxAsPercentageOfEvenueService.selectAll());
 		}
 		return null;
 	}
 	@RequestMapping("annualAverageDepositRateAndLendingRate")
 	public String annual_average_deposit_rate_and_lending_rate(Model model) {
-		List<DepositRateAndLendingRate> list = depositRateAndLendingRateService.selectAll();
+		List<DepositRateAndLendingRate> list = DepositRateAndLendingRateService.selectAll();
 		model.addAttribute("data", CountryMap.mapByCountry(list));
 		model.addAttribute("jsondata", CountryMap.mapByCountryToJson(list));
 		return "/finance/annual_average_deposit_rate_and_lending_rate";

@@ -1,4 +1,4 @@
-package okkpp.service.emoloyment;
+package okkpp.service.employment;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
