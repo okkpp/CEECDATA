@@ -2,4 +2,5 @@
 .classpath
 /bin/
 target/m2e-wtp/web-resources/META-INF/maven/okkpp/CEECDATA/pom.properties
-target/m2e-wtp/web-resources/META-INF/maven/okkpp/CEECDATA/pom.properties
+target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
+

@@ -1,6 +1,8 @@
 package okkpp.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import okkpp.service.payment.*;
+import okkpp.utils.CountryMap;
 import okkpp.model.Msg;
 import okkpp.model.payment.*;
 
@@ -20,6 +23,33 @@ public class PaymentController {
 
 	@Autowired
 	ExchangeService exchangeService;
+	@Autowired
+	ExternalService externalService;
+	@Autowired
+	ForeignService foreignService;
+	@Autowired
+	PaymentService paymentService;
+	@Autowired
+	ReservesService reservesService;
+	
+	@RequestMapping("/json")
+	@ResponseBody
+	public Map<String, Object> info(String info) {
+		switch(info) {
+		 	case "Exchange" :
+		 		return CountryMap.mapByCountry(exchangeService.selectAll());
+		 	case "External" :
+		 		return CountryMap.mapByCountry(externalService.selectAll());
+		 	case "Foreign" :
+		 		return CountryMap.mapByCountry(foreignService.selectAll());
+		 	case "Payment" :
+		 		return CountryMap.mapByCountry(paymentService.selectAll());
+		 	case "Reserves" :
+		 		return CountryMap.mapByCountry(reservesService.selectAll());
+		}
+		return null;
+	}
+	
 	@RequestMapping(value = "/Exchange",method = RequestMethod.POST)
 	public String Exchange(Model model) {
 		List<Exchange> list = exchangeService.selectAll();
@@ -36,8 +66,7 @@ public class PaymentController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	ExternalService externalService;
+	
 	@RequestMapping("/External")
 	public String External(Model model) {
 		List<External> list = externalService.selectAll();
@@ -54,8 +83,7 @@ public class PaymentController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	ForeignService foreignService;
+	
 	@RequestMapping("/Foreign")
 	public String Foreign(Model model) {
 		List<Foreign> list = foreignService.selectAll();
@@ -72,8 +100,7 @@ public class PaymentController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	PaymentService paymentService;
+	
 	@RequestMapping("/Payment")
 	public String Payment(Model model) {
 		List<Payment> list = paymentService.selectAll();
@@ -90,8 +117,7 @@ public class PaymentController {
 		return Msg.success().add("pageInfo",pageInfo);
 	}
 	
-	@Autowired
-	ReservesService reservesService;
+	
 	@RequestMapping("/Reserves")
 	public String Reserves(Model model) {
 		List<Reserves> list = reservesService.selectAll();

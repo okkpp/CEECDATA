@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html>
+<!--
+  @author 汪振宇
+  @email 1120023921@qq.com
+  @Description: 年平均存款利率和贷款利率
+-->
+<head lang="zh-CN">
+    <title>年平均存款利率和贷款利率</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta charset="utf-8">
+
+    <!-- 引入Jquery -->
+    <script src="../zdo_static/js/jquery-3.2.1.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src="../zdo_static/js/bootstrap.min.js"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script src="../zdo_static/js/echarts.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div>
+        <ul class="nav nav-tabs">
+            <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+            <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+        </ul>
+    </div>
+
+    <div id="tableView">
+        <div class="page-header" style="text-align: center;">
+            <h3>年平均存款利率和贷款利率</h3>
+            <br>
+            <h4 style="margin-top: -20px;">Annual Average Deposit Rate and Lending Rate</h4>
+        </div>
+        <div style="text-align: right;">单位:&nbsp;%</div>
+        <table class="table table-hover table-striped">
+            <thead>
+                <th>国家</th>
+                <th>年份</th>
+                <th>年平均存款利率</th>
+                <th>贷款利率</th>
+            </thead>
+            <tbody>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">阿尔巴尼亚</td>
+                  <td>2005</td>
+                  <td>5.087550872</td>
+                  <td>13.075</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>6.417543373</td>
+                  <td>12.82232989</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>1.39187012</td>
+                  <td>8.70284668</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">爱沙尼亚</td>
+                  <td>2005</td>
+                  <td>2.132839881</td>
+                  <td>4.928485792</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>1.10602655</td>
+                  <td>7.760177765</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>0.503435583</td>
+                  <td>4.481133401</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">保加利亚</td>
+                  <td>2005</td>
+                  <td>3.08435</td>
+                  <td>8.660983333</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>4.076075</td>
+                  <td>11.14436667</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>0.613891667</td>
+                  <td>7.484858333</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">波兰</td>
+                  <td>2005</td>
+                  <td>2.789600127</td>
+                  <td>6.831298668</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>-</td>
+                  <td>-</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>-</td>
+                  <td>-</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">黑山</td>
+                  <td>2005</td>
+                  <td>4.84375</td>
+                  <td>-</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>3.699525</td>
+                  <td>9.53</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>1.458083333</td>
+                  <td>8.933333333</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">捷克</td>
+                  <td>2005</td>
+                  <td>1.174166667</td>
+                  <td>5.776666667</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>1.081583333</td>
+                  <td>5.887833333</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>0.529332846</td>
+                  <td>4.282533329</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">克罗地亚</td>
+                  <td>2005</td>
+                  <td>1.714166667</td>
+                  <td>11.19111667</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>1.7575</td>
+                  <td>10.37666667</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>-</td>
+                  <td>-</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">拉脱维亚</td>
+                  <td>2005</td>
+                  <td>2.780833333</td>
+                  <td>6.106666667</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>1.865</td>
+                  <td>9.558333333</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>-</td>
+                  <td>-</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">立陶宛</td>
+                  <td>2005</td>
+                  <td>2.4</td>
+                  <td>5.271666667</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>1.71</td>
+                  <td>5.989166667</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>-</td>
+                  <td>-</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">罗马尼亚</td>
+                  <td>2005</td>
+                  <td>6.415</td>
+                  <td>19.60083333</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>7.313333333</td>
+                  <td>14.0725</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>1.888333333</td>
+                  <td>6.7675</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">马其顿</td>
+                  <td>2005</td>
+                  <td>5.225</td>
+                  <td>12.13333333</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>7.066666667</td>
+                  <td>9.483333333</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>2.886194164</td>
+                  <td>7.079158056</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">塞尔维亚</td>
+                  <td>2005</td>
+                  <td>12.13333333</td>
+                  <td>16.83173462</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>11.33</td>
+                  <td>17.3</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>-</td>
+                  <td>-</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">斯洛伐克</td>
+                  <td>2005</td>
+                  <td>2.44</td>
+                  <td>6.675</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>-</td>
+                  <td>-</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>-</td>
+                  <td>-</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">斯洛文尼亚</td>
+                  <td>2005</td>
+                  <td>3.175</td>
+                  <td>7.8</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>-</td>
+                  <td>-</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>-</td>
+                  <td>-</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">匈牙利</td>
+                  <td>2005</td>
+                  <td>5.167934585</td>
+                  <td>8.540945327</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>4.917692681</td>
+                  <td>7.586925113</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>0.867014243</td>
+                  <td>2.90249069</td>
+              </tr>
+              <tr>
+                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">波黑</td>
+                  <td>2005</td>
+                  <td>3.564166667</td>
+                  <td>9.6125</td>
+              </tr>
+              <tr>
+                  <td>2010</td>
+                  <td>3.159166667</td>
+                  <td>7.888333333</td>
+              </tr>
+              <tr>
+                  <td>2015</td>
+                  <td>2.059663519</td>
+                  <td>5.78888799</td>
+              </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <div id="imageView">
+        <div class="page-header" style="text-align: center;">
+            <h3>年平均存款利率和贷款利率</h3>
+            <br>
+            <h4 style="margin-top: -20px;">Annual Average Deposit Rate and Lending Rate</h4>
+        </div>
+
+        <div class="panel" style="margin-top: 1.5em;">
+
+            <div id="main" style="width: 100%;height:400px;"></div>
+        </div>
+    </div>
+
+    <div style="color: #959595; margin-top: 2em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+        <span class="glyphicon glyphicon-save"></span> 下载
+    </a></div>
+    <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+</div>
+</body>
+<script>
+    $(function() {
+        $('#all').hide()
+        $('#imageView').hide();
+        $('#imageView2').hide();
+        $('#tableTag').attr('class', 'active');
+    })
+
+    function showTable() {
+        $('#all').hide()
+        $('#tableView').show();
+        $('#tableView2').show();
+        $('#imageView').hide();
+        $('#imageView2').hide()
+        $('#tableTag').attr('class', 'active');
+        $('#imageTag').removeClass('active');
+        $('#first').show()
+        $('#second').show()
+    }
+
+    function showImage() {
+        $('#all').show()
+        $('#imageView').show();
+        $('#tableView').hide();
+        $('#tableView2').hide();
+        $('#imageView2').show();
+        $('#imageTag').attr('class', 'active');
+        $('#tableTag').removeClass('active');
+        $('#first').hide()
+        $('#second').hide()
+    }
+
+
+    var all = {
+        "data": [
+            //05 交易额
+            [5.087550872,2.132839881,3.08435,2.789600127,4.84375,1.174166667,1.714166667,2.780833333,2.4,6.415,5.225,12.13333333,2.44,3.175,5.167934585,3.564166667],
+            //5 周转
+            [13.075,4.928485792,8.660983333,6.831298668,0,5.776666667,11.19111667,6.106666667,5.271666667,19.60083333,12.13333333,16.83173462,6.675,7.8,8.540945327,9.6125],
+            //10 交易额
+            [6.417543373,1.10602655,4.076075,0,3.699525,1.081583333,1.7575,1.865,1.71,7.313333333,7.066666667,11.33,0,0,4.917692681,3.159166667],
+            //10 周转
+            [12.82232989,7.760177765,11.14436667,0,9.53,5.887833333,10.37666667,9.558333333,5.989166667,14.0725,9.483333333,17.3,0,0,7.586925113,7.888333333],
+            //13
+            [1.39187012,0.503435583,0.613891667,0,1.458083333,0.529332846,0,0,0,1.888333333,2.886194164,0,0,0,0.867014243,2.059663519],
+            //13
+            [8.70284668,4.481133401,7.484858333,0,8.933333333,4.282533329,0,0,0,6.7675,7.079158056,0,0,0,2.90249069,5.78888799]
+        ],
+        "countrys": ["阿尔巴尼亚", "爱沙尼亚", "保加利亚", "波兰", "黑山", "捷克", "克罗地亚", "拉脱维亚", "立陶宛", "罗马尼亚", "马其顿", "塞尔维亚", "斯洛伐克", "斯洛文尼亚", "匈牙利", "波黑"],
+        "years": ["2005年", "2010年", "2015年"]
+    };
+
+    var option = {
+        timeline: {
+            axisType: 'category',
+            autoPlay: true,
+            playInterval: 5000,
+            data: all.years
+        },
+        options: [{
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                x: 'right',
+                y: 'center',
+                feature: {
+                    mark: {
+                        show: true
+                    }
+                }
+            },
+            calculable: true,
+            grid: {
+              top: 40,
+              bottom: 100,
+              tooltip: {
+                  trigger: 'axis',
+                  axisPointer: {
+                      type: 'shadow',
+                      label: {
+                          show: true,
+                          formatter: function (params) {
+                              return params.value.replace('\n', '');
+                          }
+                      }
+                  }
+              }
+            },
+            legend: {
+                data: ['年平均存款利率', '贷款利率']
+            },
+            xAxis: [{
+                type: 'category',
+                axisLabel: {
+                    interval: 0
+                },
+                data: all.countrys
+            }],
+            yAxis: [{
+                type: 'value',
+                name: '%'
+            }],
+            //05
+            series: [{
+                name: '年平均存款利率',
+                type: 'bar',
+                data: all.data[0]
+            }, {
+                name: '贷款利率',
+                type: 'bar',
+                data: all.data[1]
+            }]
+        },
+            //10
+            {
+                series: [{
+                    data: all.data[2]
+                }, {
+                    data: all.data[3]
+                }]
+            },
+            //13
+            {
+                series: [{
+                    data: all.data[4]
+                }, {
+                    data: all.data[5]
+                }]
+            },
+            //14
+            {
+                series: [{
+                    data: all.data[6]
+                }, {
+                    data: all.data[7]
+                }]
+            },
+            //15
+            {
+                series: [{
+                    data: all.data[8]
+                }, {
+                    data: all.data[9]
+                }]
+            }
+        ]
+    };
+    var myChart = echarts.init(document.getElementById('main'));
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+</html>
