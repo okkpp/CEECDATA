@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+	<!-- 
+    @author: 林子捷
+    @title: 出口货物构成
+ -->
+
+	<head lang="zh-CN">
+		<title>出口货物构成（2015年）</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<meta charset="utf-8">
+
+		<!-- 引入Jquery -->
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+		<!-- 引入Bootstrap -->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<!-- 引入BootStrap-table -->
+		<link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+		<script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+		<!-- 引入Bootstrap-paginator -->
+		<script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+		<!-- 引入Echarts -->
+		<script src="../assets/libs/echarts/echarts.min.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<div>
+				<ul class="nav nav-tabs">
+					<li role="presentation" id="tableTag">
+						<a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a>
+					</li>
+					<li role="presentation" id="imageTag">
+						<a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a>
+					</li>
+				</ul>
+			</div>
+
+			<div id="tableView">
+				<div class="page-header" style="text-align: center;">
+					<h3>出口货物构成（2015年）</h3>
+					<br>
+					<h4 style="margin-top: -20px;">Exports by Commodity Groups（2015）</h4>
+				</div>
+
+				<div style="text-align: right;">单位:&nbsp;%</div>
+
+				<table id="tableData"></table>
+			</div>
+
+			<div id="imageView">
+				<div class="page-header" style="text-align: center;">
+					<h3>出口货物构成（2015年）</h3>
+					<br>
+					<h4 style="margin-top: -20px;">Exports by Commodity Groups（2015）</h4>
+				</div>
+
+				<div class="panel" style="margin-top: 40px;">
+					<div style="text-align: right;">单位:&nbsp;%</div>
+					<div id="main" style="width: 100%;height:400px;"></div>
+				</div>
+			</div>
+
+			<div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击
+				<a href="#" class="btn btn-info btn-xs">
+					<span class="glyphicon glyphicon-save"></span> 下载
+				</a>
+			</div>
+
+			<!-- <div style="text-align: right;"><div id="page"></div></div> -->
+		</div>
+	</body>
+	<script>
+		$(function() {
+			$('#imageView').hide();
+			$('#tableTag').attr('class', 'active');
+		})
+
+		function showTable() {
+			$('#tableView').show();
+			$('#imageView').hide();
+			$('#tableTag').attr('class', 'active');
+			$('#imageTag').removeClass('active');
+		}
+
+		function showImage() {
+			$('#imageView').show();
+			$('#tableView').hide();
+			$('#imageTag').attr('class', 'active');
+			$('#tableTag').removeClass('active');
+		}
+
+		$('#tableData').bootstrapTable({
+			striped: true,
+			columns: [{
+					field: 'country',
+					title: '国家或地区'
+				},
+				{
+					field: 'year1',
+					title: '农业原材料'
+				},
+				{
+					field: 'year2',
+					title: '食品'
+				},
+				{
+					field: 'year3',
+					title: '燃料'
+				},
+				{
+					field: 'year4',
+					title: '矿物和金属'
+				},
+				{
+					field: 'year5',
+					title: '制成品'
+				},
+				{
+					field: 'year6',
+					title: '其他'
+				},
+			],
+			data: [{
+					country: '阿尔巴尼亚',
+					year1: '0.86',
+					year2: '14.49',
+					year3: '9.61',
+					year4: '1.87',
+					year5: '58.54',
+					year6: '-',
+				},
+				{
+					country: '爱沙尼亚',
+					year1: '2.49',
+					year2: '10.31',
+					year3: '12.59',
+					year4: '1.43',
+					year5: '64.66',
+					year6: '-',
+				},
+				{
+					country: '波黑',
+					year1: '1.49',
+					year2: '17.98',
+					year3: '13.58',
+					year4: '2.65',
+					year5: '64.16',
+					year6: '-',
+				},
+				{
+					country: '保加利亚',
+					year1: '1.09',
+					year2: '9.69',
+					year3: '14.97',
+					year4: '8.79',
+					year5: '60.65',
+					year6: '-',
+				},
+				{
+					country: '波兰',
+					year1: '1.62',
+					year2: '8.53',
+					year3: '7.56',
+					year4: '3.48',
+					year5: '77.22',
+					year6: '-',
+				},
+				{
+					country: '黑山',
+					year1: '-',
+					year2: '-',
+					year3: '-',
+					year4: '-',
+					year5: '-',
+					year6: '-',
+				},
+				{
+					country: '捷克',
+					year1: '1.27',
+					year2: '6.03',
+					year3: '6.73',
+					year4: '3.40',
+					year5: '82.48',
+					year6: '-',
+				},
+				{
+					country: '克罗地亚',
+					year1: '1.20',
+					year2: '13.20',
+					year3: '15.24',
+					year4: '2.17',
+					year5: '68.09',
+					year6: '-',
+				},
+				{
+					country: '罗马尼亚',
+					year1: '1.57',
+					year2: '8.84',
+					year3: '6.44',
+					year4: '2.70',
+					year5: '76.74',
+					year6: '-',
+				},
+				{
+					country: '立陶宛',
+					year1: '2.19',
+					year2: '12.85',
+					year3: '20.29',
+					year4: '1.88',
+					year5: '58.55',
+					year6: '-',
+				},
+				{
+					country: '拉脱维亚',
+					year1: '2.32',
+					year2: '13.35',
+					year3: '11.20',
+					year4: '1.39',
+					year5: '60.77',
+					year6: '-',
+				},
+				{
+					country: '马其顿',
+					year1: '0.91',
+					year2: '11.72',
+					year3: '10.91',
+					year4: '14.84',
+					year5: '61.52',
+					year6: '-',
+				},
+				{
+					country: '塞尔维亚',
+					year1: '-',
+					year2: '-',
+					year3: '-',
+					year4: '-',
+					year5: '-',
+					year6: '-',
+				},
+				{
+					country: '斯洛伐克',
+					year1: '1.01',
+					year2: '5.61',
+					year3: '8.12',
+					year4: '2.63',
+					year5: '82.20',
+					year6: '-',
+				},
+				{
+					country: '斯洛文尼亚',
+					year1: '2.84',
+					year2: '8.70',
+					year3: '10.45',
+					year4: '5.77',
+					year5: '71.98',
+					year6: '-',
+				},
+				{
+					country: '匈牙利',
+					year1: '1.13',
+					year2: '5.27',
+					year3: '8.25',
+					year4: '2.53',
+					year5: '78.10',
+					year6: '-',
+				},
+
+			]
+		});
+
+		var options = {
+			bootstrapMajorVersion: 1, //版本
+			currentPage: 1, //当前页数
+			numberOfPages: 5, //最多显示Page页
+			totalPages: 10, //所有数据可以显示的页数
+			onPageClicked: function(e, originalEvent, type, page) {
+
+			}
+		}
+		$("#page").bootstrapPaginator(options);
+
+		// 基于准备好的dom，初始化echarts实例
+		var myChart = echarts.init(document.getElementById('main'));
+
+		var dataS = '["农业原材料","食品","燃料","矿物和金属","制成品","其他"]';
+		var dataNames = '["zero","five","ten","thirteen","fourteen","fiveteen"]';
+		var pageViews = '[{"country":"阿尔巴尼亚","five":"14.49","fiveteen":"　/","fourteen":"58.54","id":1,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"9.61","thirteen":"1.87","zero":"0.86"},{"country":"爱沙尼亚","five":"10.31","fiveteen":"　/","fourteen":"64.66","id":2,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"12.59","thirteen":"1.43","zero":"2.49"},{"country":"波黑","five":"17.98","fiveteen":"　/","fourteen":"64.16","id":2,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"13.58","thirteen":"2.65","zero":"1.49"},{"country":"保加利亚","five":"9.69","fiveteen":" /","fourteen":"60.65","id":3,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"14.97","thirteen":"8.79","zero":"1.09"},{"country":"波兰","five":"8.53","fiveteen":" /","fourteen":"77.22","id":4,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"7.56","thirteen":"3.48","zero":"1.62"},{"country":"黑山","five":"　/","fiveteen":"　/","fourteen":"　/","id":5,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"　/","thirteen":"/　","zero":"/　"},{"country":"捷克","five":"6.03","fiveteen":" /","fourteen":"82.48","id":6,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"6.73","thirteen":"3.40","zero":"1.27"},{"country":"克罗地亚","five":"13.20","fiveteen":" /","fourteen":"68.09","id":7,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"15.24","thirteen":"2.17","zero":"1.20"},{"country":"罗马尼亚","five":"8.84","fiveteen":" /","fourteen":"76.74","id":8,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"6.44","thirteen":"2.70","zero":"1.57"},{"country":"立陶宛","five":"12.85","fiveteen":" /","fourteen":"58.55","id":9,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"20.29","thirteen":"1.88","zero":"2.19"},{"country":"拉脱维亚","five":" 13.35","fiveteen":" /","fourteen":"60.77","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"11.20","thirteen":"1.39","zero":"2.32"},{"country":"马其顿","five":"11.72","fiveteen":" /","fourteen":"61.52","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"10.91","thirteen":"14.84","zero":"0.91"},{"country":"塞尔维亚","five":"/","fiveteen":" /","fourteen":"/","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"/","thirteen":"/","zero":"/"},{"country":"斯洛伐克","five":" 5.61","fiveteen":" /","fourteen":"82.20","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"8.12","thirteen":"2.63","zero":"1.01"},{"country":"斯洛文尼亚","five":"8.70","fiveteen":" /","fourteen":"71.98","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"10.45","thirteen":"5.77","zero":"2.84"},{"country":"匈牙利","five":"5.27","fiveteen":" /","fourteen":"78.10","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue","ten":"8.25","thirteen":"2.53","zero":"1.13"}]';
+
+		var datas = eval('(' + dataS + ')');
+		var dataName = eval('(' + dataNames + ')');
+		var pageView = eval('(' + pageViews + ')');
+
+		var contry = new Array();
+		var seriesData = new Array();
+		for(var i = 0; i < datas.length; i++) {
+			var obj = new Object();
+			obj.name = datas[i];
+			obj.type = 'bar';
+			obj.data = new Array();
+			seriesData.push(obj);
+		}
+		for(var i = 0; i < pageView.length; i++) {
+
+			// 		var d=transform(pageView[i]);
+			var contrys = pageView[i];
+			var c = contrys['country'];
+			contry.push(c);
+		}
+
+		var i = 0;
+		for(var j = 0; j < dataName.length; j++) {
+			for(var k = 0; k < pageView.length; k++) {
+				var b = pageView[k];
+				var c = b[dataName[j]];
+				seriesData[i].data.push(c);
+			}
+			i++;
+		}
+
+		function transform(obj) {
+			var arr = [];
+			for(var item in obj) {
+				arr.push(obj[item]);
+			}
+			return arr;
+		}
+		// 	app.title = '堆叠柱状图';
+
+		option = {
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: { // 坐标轴指示器，坐标轴触发有效
+					type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+				}
+			},
+			legend: {
+				data: datas
+			},
+			grid: {
+				left: '3%',
+				right: '4%',
+				bottom: '3%',
+				containLabel: true
+			},
+			xAxis: [{
+				type: 'category',
+				data: contry,
+				axisLabel: {
+					interval: 0,
+					inside: false,
+					rotate: 30,
+				}
+			}],
+			yAxis: [{
+				type: 'value'
+			}],
+			series: seriesData
+		};
+
+		// 使用刚指定的配置项和数据显示图表。
+		myChart.setOption(option);
+	</script>
+
+</html>

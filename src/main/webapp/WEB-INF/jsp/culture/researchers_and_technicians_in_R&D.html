@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<!--
+  @author 胡昊
+  @email 1120023921@qq.com
+  @Description: 每百万人中研究人员和技术人员
+-->
+<head lang="zh-CN">
+    <title>每百万人中研究人员和技术人员</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta charset="utf-8">
+
+    <!-- 引入Jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script src="../assets/libs/echarts/echarts.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div>
+        <ul class="nav nav-tabs">
+            <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+            <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+        </ul>
+    </div>
+
+    <div id="tableView">
+        <div class="page-header" style="text-align: center;">
+            <h3>每百万人中研究人员和技术人员</h3>
+            <br>
+            <h4 style="margin-top: -20px;">Researchers and Technicians in R&D（per Million People）</h4>
+        </div>
+        <div style="text-align: right;">单位:&nbsp;人</div>
+        <table class="table table-hover table-striped">
+            <tr>
+                <td>国家</td>
+                <td>年份</td>
+                <td>每百万人中研究人员数</td>
+                <td>每百万人中技术人员数</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">阿尔巴尼亚</div></td>
+                <td>2005</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">爱沙尼亚</div></td>
+                <td>2005</td>
+                <td>1905.4494</td>
+                <td>378.80277</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>2457.10214</td>
+                <td>418.24585</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>3338.5099</td>
+                <td>801.48479</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">保加利亚</div></td>
+                <td>2005</td>
+                <td>1184.79947</td>
+                <td>479.09446</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>1308.53899</td>
+                <td>491.75971</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>1692.51072</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">波兰</div></td>
+                <td>2005</td>
+                <td>1433.60086</td>
+                <td>354.61965</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>1616.13419</td>
+                <td>232.61005</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>1850.71749</td>
+                <td>380.07755</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">黑山</div></td>
+                <td>2005</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>646.76426</td>
+                <td>102.4577</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">捷克</div></td>
+                <td>2005</td>
+                <td>1349.7015</td>
+                <td>713.14361</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>2362.36532</td>
+                <td>1346.18567</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>3249.88938</td>
+                <td>1795.34559</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">克罗地亚</div></td>
+                <td>2005</td>
+                <td>1529.3348</td>
+                <td>395.20613</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>1308.11483</td>
+                <td>601.40848</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>1528.50394</td>
+                <td>660.19009</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">拉脱维亚</div></td>
+                <td>2005</td>
+                <td>660.19009</td>
+                <td>267.76516</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>1473.36165</td>
+                <td>476.75505</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>1801.81792</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">立陶宛</div></td>
+                <td>2005</td>
+                <td>2230.68501</td>
+                <td>508.83827</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>2284.2919</td>
+                <td>429.51986</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>2887.16213</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">罗马尼亚</div></td>
+                <td>2005</td>
+                <td>925.33764</td>
+                <td>292.93019</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>1072.42193</td>
+                <td>233.46828</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>944.92503</td>
+                <td>252.24608</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">马其顿</div></td>
+                <td>2005</td>
+                <td>658.53202</td>
+                <td>115.80223</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>544.81535</td>
+                <td>82.23628</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>676.42505</td>
+                <td>53.40782</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">塞尔维亚</div></td>
+                <td>2005</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>1380.90685</td>
+                <td>259.68926</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">斯洛伐克</div></td>
+                <td>2005</td>
+                <td>1848.28813</td>
+                <td>667.8345</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>2027.89427</td>
+                <td>416.84679</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>2717.58947</td>
+                <td>329.50823</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">斯洛文尼亚</div></td>
+                <td>2005</td>
+                <td>2180.37143</td>
+                <td>1615.6673</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>2631.07544</td>
+                <td>1412.45626</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>4216.8345</td>
+                <td>2520.80207</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">匈牙利</div></td>
+                <td>2005</td>
+                <td>1409.02199</td>
+                <td>505.27611</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>1572.70767</td>
+                <td>454.73617</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>2522.84572</td>
+                <td>780.69369</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">波黑</div></td>
+                <td>2005</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>65.95047</td>
+                <td>51.69567</td>
+            </tr>
+            <tr>
+                <td>2015</td>
+                <td>216.68441</td>
+                <td>37.76612</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="imageView">
+        <div class="page-header" style="text-align: center;">
+            <h3>每百万人中研究人员和技术人员</h3>
+            <br>
+            <h4 style="margin-top: -20px;">Researchers and Technicians in R&D（per Million People）</h4>
+        </div>
+
+        <div class="panel" style="margin-top: 40px;">
+            <div style="text-align: right;">单位:&nbsp;人</div>
+            <div id="main" style="width: 100%;height:400px;"></div>
+        </div>
+    </div>
+
+    <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+        <span class="glyphicon glyphicon-save"></span> 下载
+    </a></div>
+    <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+</div>
+</body>
+<script>
+    $(function() {
+        $('#all').hide()
+        $('#imageView').hide();
+        $('#imageView2').hide();
+        $('#tableTag').attr('class', 'active');
+    })
+
+    function showTable() {
+        $('#all').hide()
+        $('#tableView').show();
+        $('#tableView2').show();
+        $('#imageView').hide();
+        $('#imageView2').hide()
+        $('#tableTag').attr('class', 'active');
+        $('#imageTag').removeClass('active');
+        $('#first').show()
+        $('#second').show()
+    }
+
+    function showImage() {
+        $('#all').show()
+        $('#imageView').show();
+        $('#tableView').hide();
+        $('#tableView2').hide();
+        $('#imageView2').show();
+        $('#imageTag').attr('class', 'active');
+        $('#tableTag').removeClass('active');
+        $('#first').hide()
+        $('#second').hide()
+    }
+
+
+    var all = {
+        "data": [
+            //05 交易额
+            [22.82407356,65.90589844,42.59748019,34.9243948,43.54912468,62.31477741,39.29553538,43.22458308,53.91963628,32.9085321,34.80760066,27.14087111,72.28140577,59.57993745,62.7933141,31.62496407],
+            //5 周转
+            [47.47122764,71.01071717,57.27596225,35.86619813,61.07601458,59.96110464,45.4323053,57.72366649,61.09648822,43.01911124,51.03340282,47.13920156,76.88456505,60.21754155,65.06715733,71.61980936],
+            //13
+            [1.39187012,0.503435583,0.613891667,0,1.458083333,0.529332846,0,0,0,1.888333333,2.886194164,0,0,0,0.867014243,2.059663519],
+            //13
+            [8.70284668,4.481133401,7.484858333,0,8.933333333,4.282533329,0,0,0,6.7675,7.079158056,0,0,0,2.90249069,5.78888799]
+        ],
+        "countrys": ["阿尔巴尼亚", "爱沙尼亚", "保加利亚", "波兰", "黑山", "捷克", "克罗地亚", "拉脱维亚", "立陶宛", "罗马尼亚", "马其顿", "塞尔维亚", "斯洛伐克", "斯洛文尼亚", "匈牙利", "波黑"],
+        "years": ["2000年", "2013年"]
+    };
+
+    var option = {
+        timeline: {
+            axisType: 'category',
+            autoPlay: true,
+            playInterval: 5000,
+            data: all.years
+        },
+        options: [{
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                x: 'right',
+                y: 'center',
+                feature: {
+                    mark: {
+                        show: true
+                    }
+                }
+            },
+            calculable: true,
+            grid: {
+                y: 100,
+                y2: 100
+            },
+            legend: {
+                data: ['每百万人中研究人员数', '每百万人中技术人员数']
+            },
+            xAxis: [{
+                type: 'category',
+                axisLabel: {
+                    interval: 0
+                },
+                data: all.countrys
+            }],
+            yAxis: [{
+                type: 'value',
+                name: ''
+            }],
+            //05
+            series: [{
+                name: '每百万人中研究人员数',
+                type: 'bar',
+                data: all.data[0]
+            },{
+                name: '每百万人中技术人员数',
+                type: 'bar',
+                data: all.data[1]
+            }]
+        },
+            {
+            series: [{
+                data: all.data[2]
+            }, {
+                data: all.data[3]
+            }]
+        }
+        ]
+    };
+    var myChart = echarts.init(document.getElementById('main'));
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+</html>

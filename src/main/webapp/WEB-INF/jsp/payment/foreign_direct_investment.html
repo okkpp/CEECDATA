@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+    @author: 牛志远
+    @title: 商品和服务税占财政收入比重
+ -->
+<head lang="zh-CN">
+    <title>外商直接投资</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta charset="utf-8">
+
+    <!-- 引入Jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script src="../assets/libs/echarts/echarts.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div>
+        <ul class="nav nav-tabs">
+            <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+            <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+        </ul>
+    </div>
+
+    <div id="tableView">
+        <div class="page-header" style="text-align: center;">
+            <h3>外商直接投资</h3>
+            <br>
+            <h4 style="margin-top: -20px;">Foreign Direct Investment</h4>
+        </div>
+
+        <div style="text-align: right;">单位:&nbsp;百万美元</div>
+
+        <table id="tableData"></table>
+    </div>
+
+    <div id="imageView">
+        <div class="page-header" style="text-align: center;">
+            <h3>外商直接投资</h3>
+            <br>
+            <h4 style="margin-top: -20px;">Foreign Direct Investment</h4>
+        </div>
+
+        <div class="panel" style="margin-top: 40px;">
+            <div style="text-align: right;">单位:&nbsp;百万美元</div>
+            <div id="main" style="width: 100%;height:400px;"></div>
+        </div>
+    </div>
+
+              <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+            <span class="glyphicon glyphicon-save"></span> 下载
+        </a></div>
+
+
+    <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+</div>
+</body>
+<script>
+    $(function(){
+        $('#imageView').hide();
+        $('#tableTag').attr('class','active');
+    })
+
+    function showTable() {
+        $('#tableView').show();
+        $('#imageView').hide();
+        $('#tableTag').attr('class','active');
+        $('#imageTag').removeClass('active');
+    }
+
+    function showImage() {
+        $('#imageView').show();
+        $('#tableView').hide();
+        $('#imageTag').attr('class','active');
+        $('#tableTag').removeClass('active');
+    }
+
+    $('#tableData').bootstrapTable({
+        striped: true,
+        columns: [
+            {
+                field: 'country',
+                title: '国家或地区'
+            },
+            {
+                field: 'year1',
+                title: '2010'
+            },
+            {
+                field: 'year2',
+                title: '2011'
+            },
+            {
+                field: 'year3',
+                title: '2012'
+            },
+            {
+                field: 'year4',
+                title: '2013'
+            },
+            {
+                field: 'year5',
+                title: '2014'
+            },
+            {
+                field: 'year6',
+                title: '2015'
+            },
+        ],
+        data: [
+            {
+                country: '阿尔巴尼亚',
+                year1: '0.86',
+                year2: '14.49',
+                year3: '9.61',
+                year4: '1.87',
+                year5: '58.54',
+                year6: '-',
+            },
+            {
+                country: '爱沙尼亚',
+                year1: '2.49',
+                year2: '10.31',
+                year3: '12.59',
+                year4: '1.43',
+                year5: '64.66',
+                year6: '-',
+            },
+            {
+                country: '波黑',
+                year1: '1.49',
+                year2: '17.98',
+                year3: '13.58',
+                year4: '2.65',
+                year5: '64.16',
+                year6: '-',
+            },
+            {
+                country: '保加利亚',
+                year1: '1.09',
+                year2: '9.69',
+                year3: '14.97',
+                year4: '8.79',
+                year5: '60.65',
+                year6: '-',
+            },
+            {
+                country: '波兰',
+                year1: '1.62',
+                year2: '8.53',
+                year3: '7.56',
+                year4: '3.48',
+                year5: '77.22',
+                year6: '-',
+            },
+            {
+                country: '黑山',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+                year6: '-',
+            },
+            {
+                country: '捷克',
+                year1: '1.27',
+                year2: '6.03',
+                year3: '6.73',
+                year4: '3.40',
+                year5: '82.48',
+                year6: '-',
+            },
+            {
+                country: '克罗地亚',
+                year1: '1.20',
+                year2: '13.20',
+                year3: '15.24',
+                year4: '2.17',
+                year5: '68.09',
+                year6: '-',
+            },
+            {
+                country: '罗马尼亚',
+                year1: '1.57',
+                year2: '8.84',
+                year3: '6.44',
+                year4: '2.70',
+                year5: '76.74',
+                year6: '-',
+            },
+            {
+                country: '立陶宛',
+                year1: '2.19',
+                year2: '12.85',
+                year3: '20.29',
+                year4: '1.88',
+                year5: '58.55',
+                year6: '-',
+            },
+            {
+                country: '拉脱维亚',
+                year1: '2.32',
+                year2: '13.35',
+                year3: '11.20',
+                year4: '1.39',
+                year5: '60.77',
+                year6: '-',
+            },
+            {
+                country: '马其顿',
+                year1: '0.91',
+                year2: '11.72',
+                year3: '10.91',
+                year4: '14.84',
+                year5: '61.52',
+                year6: '-',
+            },
+            {
+                country: '塞尔维亚',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+                year6: '-',
+            },
+            {
+                country: '斯洛伐克',
+                year1: '1.01',
+                year2: '5.61',
+                year3: '8.12',
+                year4: '2.63',
+                year5: '82.20',
+                year6: '-',
+            },
+            {
+                country: '斯洛文尼亚',
+                year1: '2.84',
+                year2: '8.70',
+                year3: '10.45',
+                year4: '5.77',
+                year5: '71.98',
+                year6: '-',
+            },
+            {
+                country: '匈牙利',
+                year1: '1.13',
+                year2: '5.27',
+                year3: '8.25',
+                year4: '2.53',
+                year5: '78.10',
+                year6: '-',
+            },
+
+        ]
+    });
+
+  var options={
+        bootstrapMajorVersion:1,    //版本
+        currentPage:1,    //当前页数
+        numberOfPages:5,    //最多显示Page页
+        totalPages:10,    //所有数据可以显示的页数
+        onPageClicked:function(e,originalEvent,type,page){
+
+
+        }
+    }
+   // $("#page").bootstrapPaginator(options);
+
+   var dom = document.getElementById("main");
+var myChart = echarts.init(dom);
+var app = {};
+option = null;
+var dataMap = {};
+function dataFormatter(obj) {
+    var pList = ['阿尔巴尼亚','波黑','保加利亚','克罗地亚','捷克','爱沙尼亚','匈牙利','拉脱维亚','立陶宛','马其顿','黑山','波兰','罗马尼亚','塞尔维亚','斯洛伐克','斯洛文尼亚'];
+    var temp;
+    for (var year = 2010; year <= 2015; year++) {
+        var max = 0;
+        var sum = 0;
+        temp = obj[year];
+        for (var i = 0, l = temp.length; i < l; i++) {
+            max = Math.max(max, temp[i]);
+            sum += temp[i];
+            obj[year][i] = {
+                name : pList[i],
+                value : temp[i]
+            }
+        }
+        obj[year + 'max'] = Math.floor(max / 100) * 100;
+        obj[year + 'sum'] = sum;
+    }
+    return obj;
+}
+
+dataMap.dataGDP = dataFormatter({
+    //max : 60000,
+    2015:[1215.96,1132.15,1982.63,1355.62,662.34,5014.32,581.64,668.61,437.25,3546.14,0,2251.54,579.22,1495.26,4831.15,665.18],
+    2014:[1128.62,1022.54,1846.36,1242.56,642.25,4364.25,652.84,681.67,516.28,3462.81,0,2454.24,584.22,1598.31,4262.45,643.15],
+    2013:[1358.52,883.62,1932.88,1326.28,518.24,5588.62,489.14,453.23,347.24,3584.21,0,2395.26,571.35,1662.39,4019.28,654.54],
+    2012:[1093.48,982.92,1732.98,1324.58,497,5908.5,389.14,473.53,217.14,3234.01,0,2195.79,478.75,1564.29,4039.38,564.99],
+    2011:[1265.56,552.92,1837.23,1198.6,447.35,3639.13,955.15,903.12,468.99,3601.52,0,2408.53,591.01,1403.5,3097.26,283.49],
+    2010:[1050.71,1023.71,1549.13,1279.67,760.44,6140.58,1321.15,379.40,799.60,3041.04,0,2170.60,1769.76,1035.37,2192.81,406.03]
+});
+
+
+option = {
+    baseOption: {
+        timeline: {
+            // y: 0,
+            axisType: 'category',
+            // realtime: false,
+            // loop: false,
+            autoPlay: true,
+            // currentIndex: 2,
+            playInterval: 1000,
+            // controlStyle: {
+            //     position: 'left'
+            // },
+            data: [
+                '2010-01-01','2011-01-01','2012-01-01',
+                {
+                    value: '2013-01-01',
+                    tooltip: {
+                        formatter: '{b} GDP达到一个高度'
+                    },
+                    symbol: 'diamond',
+                    symbolSize: 16
+                },
+                '2014-01-01', '2015-01-01'
+            
+            ],
+            label: {
+                formatter : function(s) {
+                    return (new Date(s)).getFullYear();
+                }
+            }
+        },
+        title: {
+            // subtext: '数据来自国家统计局'
+        },
+        tooltip: {
+        },
+        calculable : true,
+        grid: {
+            top: 80,
+            bottom: 100,
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow',
+                    label: {
+                        show: true,
+                        formatter: function (params) {
+                            return params.value.replace('\n', '');
+                        }
+                    }
+                }
+            }
+        },
+        xAxis: [
+            {
+                'type':'category',
+                'axisLabel':{'interval':0},
+                'data':[
+                    '阿尔巴尼亚','波黑','保加利亚','克罗地亚','捷克','爱沙尼亚','匈牙利','拉脱维亚','立陶宛','马其顿','黑山','波兰','罗马尼亚','塞尔维亚','斯洛伐克','斯洛文尼亚'
+                ],
+                splitLine: {show: false}
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value',
+                name: '百万美元'
+            }
+        ],
+        series: [
+           
+            {name: '外商直接投资', type: 'bar'}
+        ]
+    },
+    options: [
+        {
+            // title: {text: '2010外商直接投资'},
+            series: [
+                {data: dataMap.dataGDP['2010']},
+            ]
+        },
+         {
+            // title: {text: '2011外商直接投资'},
+            series: [
+                {data: dataMap.dataGDP['2011']},
+            ]
+        },
+         {
+            // title: {text: '2012外商直接投资'},
+            series: [
+                {data: dataMap.dataGDP['2012']},
+            ]
+        },
+         {
+            // title: {text: '2013外商直接投资'},
+            series: [
+                {data: dataMap.dataGDP['2013']},
+            ]
+        },
+         {
+            // title: {text: '2014外商直接投资'},
+            series: [
+                {data: dataMap.dataGDP['2014']},
+            ]
+        },
+         {
+            // title: {text: '2015外商直接投资'},
+            series: [
+                {data: dataMap.dataGDP['2015']},
+            ]
+        },
+    ]
+};
+
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</html>

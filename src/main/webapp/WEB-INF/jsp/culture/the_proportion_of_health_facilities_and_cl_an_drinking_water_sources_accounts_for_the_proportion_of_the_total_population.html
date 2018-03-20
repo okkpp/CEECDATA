@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<!--
+  @author 金夏溢
+  @email 1310054026@qq.com
+  @Description: 享有卫生设施和清洁饮用水源人口占总人口比重
+-->
+<head lang="zh-CN">
+    <title>享有卫生设施和清洁饮用水源人口占总人口比重</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta charset="utf-8">
+
+    <!-- 引入Jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script src="../assets/libs/echarts/echarts.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+    <div>
+        <ul class="nav nav-tabs">
+            <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+            <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+        </ul>
+    </div>
+
+    <div id="tableView">
+        <div class="page-header" style="text-align: center;">
+            <h3>享有卫生设施和清洁饮用水源人口占总人口比重</h3>
+            <br>
+            <h4 style="margin-top: -20px;">The proportion of health facilities and clean drinking water sources accounts for the proportion of the total population</h4>
+        </div>
+        <div style="text-align: right;">单位:&nbsp;%</div>
+        <table class="table table-hover table-striped">
+            <tr>
+                <td>国家</td>
+                <td>年份</td>
+                <td>享有卫生设施人口占总人口比重</td>
+                <td>享有清洁饮用水源人口占总人口比重</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">阿尔巴尼亚</div></td>
+                <td>2005</td>
+                <td>87.4</td>
+                <td>96</td>
+            <tr>
+                <td>2010</td>
+                <td>90.0</td>
+                <td>95.6</td>
+            <tr>
+                <td>2015</td>
+                <td>93.2</td>
+                <td>95.1</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">爱沙尼亚</div></td>
+                <td>2005</td>
+                <td>97.1</td>
+                <td>99.2</td>
+            <tr>
+                <td>2010</td>
+                <td>97.2</td>
+                <td>99.5</td>
+            <tr>
+                <td>2015</td>
+                <td>97.2</td>
+                <td>99.6</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">保加利亚</div></td>
+                <td>2005</td>
+                <td>99.6</td>
+                <td>99.3</td>
+            <tr>
+                <td>2010</td>
+                <td>99.5</td>
+                <td>99.1</td>
+            <tr>
+                <td>2015</td>
+                <td>99.4</td>
+                <td>99.0</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">波兰</div></td>
+                <td>2005</td>
+                <td>90.6</td>
+                <td>94.3</td>
+            <tr>
+                <td>2010</td>
+                <td>94.3</td>
+                <td>97.6</td>
+            <tr>
+                <td>2015</td>
+                <td>97.2</td>
+                <td>98.3</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">黑山</div></td>
+                <td>2005</td>
+                <td>90.9</td>
+                <td>97.9</td>
+            <tr>
+                <td>2010</td>
+                <td>93.5</td>
+                <td>98.9</td>
+            <tr>
+                <td>2015</td>
+                <td>95.9</td>
+                <td>99.7</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">捷克</div></td>
+                <td>2005</td>
+                <td>99.1</td>
+                <td>99.9</td>
+            <tr>
+                <td>2010</td>
+                <td>99.1</td>
+                <td>100.0</td>
+            <tr>
+                <td>2015</td>
+                <td>99.1</td>
+                <td>100.0</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">克罗地亚</div></td>
+                <td>2005</td>
+                <td>98.1</td>
+                <td>98.7</td>
+            <tr>
+                <td>2010</td>
+                <td>98.0</td>
+                <td>99.2</td>
+            <tr>
+                <td>2015</td>
+                <td>97.8</td>
+                <td>99.6</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">拉脱维亚</div></td>
+                <td>2005</td>
+                <td>83.5</td>
+                <td>98.6</td>
+            <tr>
+                <td>2010</td>
+                <td>85.6</td>
+                <td>98.9</td>
+            <tr>
+                <td>2015</td>
+                <td>87.8</td>
+                <td>99.3</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">立陶宛</div></td>
+                <td>2005</td>
+                <td>88.5</td>
+                <td>93.0</td>
+            <tr>
+                <td>2010</td>
+                <td>90.5</td>
+                <td>95.0</td>
+            <tr>
+                <td>2015</td>
+                <td>92.4</td>
+                <td>96.6</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">罗马尼亚</div></td>
+                <td>2005</td>
+                <td>75.6</td>
+                <td>91.1</td>
+            <tr>
+                <td>2010</td>
+                <td>77.5</td>
+                <td>96.9</td>
+            <tr>
+                <td>2015</td>
+                <td>79.1</td>
+                <td>100.0</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">马其顿</div></td>
+                <td>2005</td>
+                <td>90.0</td>
+                <td>99.3</td>
+            <tr>
+                <td>2010</td>
+                <td>90.8</td>
+                <td>99.4</td>
+            <tr>
+                <td>2015</td>
+                <td>90.9</td>
+                <td>99.4</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">塞尔维亚</div></td>
+                <td>2005</td>
+                <td>96.7</td>
+                <td>99.3</td>
+            <tr>
+                <td>2010</td>
+                <td>96.6</td>
+                <td>99.3</td>
+            <tr>
+                <td>2015</td>
+                <td>96.4</td>
+                <td>99.2</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">斯洛伐克</div></td>
+                <td>2005</td>
+                <td>98.9</td>
+                <td>99.9</td>
+            <tr>
+                <td>2010</td>
+                <td>98.8</td>
+                <td>100.0</td>
+            <tr>
+                <td>2015</td>
+                <td>98.8</td>
+                <td>100.0</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">斯洛文尼亚</div></td>
+                <td>2005</td>
+                <td>99.1</td>
+                <td>99.6</td>
+            <tr>
+                <td>2010</td>
+                <td>99.1</td>
+                <td>99.5</td>
+            <tr>
+                <td>2015</td>
+                <td>99.1</td>
+                <td>99.5</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">匈牙利</div></td>
+                <td>2005</td>
+                <td>98.0</td>
+                <td>99.2</td>
+            <tr>
+                <td>2010</td>
+                <td>98.0</td>
+                <td>100.0</td>
+            <tr>
+                <td>2015</td>
+                <td>98.0</td>
+                <td>100.0</td>
+            <tr>
+                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">波黑</div></td>
+                <td>2005</td>
+                <td>94.9</td>
+                <td>98.3</td>
+            <tr>
+                <td>2010</td>
+                <td>94.8</td>
+                <td>99.2</td>
+            <tr>
+                <td>2015</td>
+                <td>94.8</td>
+                <td>99.9</td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="imageView">
+        <div class="page-header" style="text-align: center;">
+            <h3>享有卫生设施和清洁饮用水源人口占总人口比重</h3>
+            <br>
+            <h4 style="margin-top: -20px;">The proportion of health facilities and clean drinking water sources accounts for the proportion of the total population</h4>
+        </div>
+
+        <div class="panel" style="margin-top: 40px;">
+            <div style="text-align: right;">单位:&nbsp;%</div>
+            <div id="main" style="width: 100%;height:400px;"></div>
+        </div>
+    </div>
+
+    <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+        <span class="glyphicon glyphicon-save"></span> 下载
+    </a></div>
+    <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+</div>
+</body>
+<script>
+    $(function() {
+        $('#all').hide()
+        $('#imageView').hide();
+        $('#imageView2').hide();
+        $('#tableTag').attr('class', 'active');
+    })
+
+    function showTable() {
+        $('#all').hide()
+        $('#tableView').show();
+        $('#tableView2').show();
+        $('#imageView').hide();
+        $('#imageView2').hide()
+        $('#tableTag').attr('class', 'active');
+        $('#imageTag').removeClass('active');
+        $('#first').show()
+        $('#second').show()
+    }
+
+    function showImage() {
+        $('#all').show()
+        $('#imageView').show();
+        $('#tableView').hide();
+        $('#tableView2').hide();
+        $('#imageView2').show();
+        $('#imageTag').attr('class', 'active');
+        $('#tableTag').removeClass('active');
+        $('#first').hide()
+        $('#second').hide()
+    }
+
+
+    var all = {
+        "data": [
+            //5 卫生设施
+            [87.4, 97.1, 99.6, 90.6, 90.9, 99.1, 98.1, 83.5, 88.5, 75.6, 90, 96.7, 98.9, 99.1, 98, 94.9],
+            //5 水源
+            [96, 99.2, 99.3, 96.8, 97.9, 99.9, 98.7, 98.6, 93, 91.1, 99.3, 99.3, 99.9, 99.6, 99.2, 98.3],
+            //10 卫生设施
+            [90.9, 97.2, 99.5, 94.3, 93.5, 99.1, 98, 85.6, 90.5, 77.5, 90.8, 96.6, 98.8, 99.1, 98, 94.8],
+            //10 水源
+            [95.6, 99.5, 99.1, 97.6, 98.9, 100 ,99.2 ,98.9, 95, 96.9, 99.4, 99.3, 100, 99.5, 100, 99.2],
+            //15 卫生设施
+            [93.2, 97.2, 99.4, 97.2, 95.9, 99.1, 97.8, 87.8, 92.4, 79.1, 90.9, 96.4, 98.8, 99.1, 98, 94.8],
+            //15
+            [95.1, 99.6, 99,98.3,99.7,100,99.6,99.3,96.6,100,99.4,99.2,100,99.5,100,99.9]
+        ],
+        "countrys": ["阿尔巴尼亚", "爱沙尼亚", "保加利亚", "波兰", "黑山", "捷克", "克罗地亚", "拉脱维亚", "立陶宛", "罗马尼亚", "马其顿", "塞尔维亚", "斯洛伐克", "斯洛文尼亚", "匈牙利", "波黑"],
+        "years": ["2005年", "2010年", "2015年"]
+    };
+
+    var option = {
+        timeline: {
+            axisType: 'category',
+            autoPlay: true,
+            playInterval: 5000,
+            data: all.years
+        },
+        options: [{
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                x: 'right',
+                y: 'center',
+                feature: {
+                    mark: {
+                        show: true
+                    }
+                }
+            },
+            calculable: true,
+            grid: {
+                y: 100,
+                y2: 100
+            },
+            legend: {
+                data: ['研究与开发经费支出占国内生产总值比重', '公共教育经费支出占国内生产总值比重']
+            },
+            xAxis: [{
+                type: 'category',
+                axisLabel: {
+                    interval: 0
+                },
+                data: all.countrys
+            }],
+            yAxis: [{
+                type: 'value',
+                name: ''
+            }],
+            //05
+            series: [{
+                name: '研究与开发经费支出占国内生产总值比重',
+                type: 'bar',
+                data: all.data[0]
+            }, {
+                name: '公共教育经费支出占国内生产总值比重',
+                type: 'bar',
+                data: all.data[1]
+            }]
+        },
+            //10
+            {
+                series: [{
+                    data: all.data[2]
+                }, {
+                    data: all.data[3]
+                }]
+            },
+            //13
+            {
+                series: [{
+                    data: all.data[4]
+                }, {
+                    data: all.data[5]
+                }]
+            },
+            //14
+            {
+                series: [{
+                    data: all.data[6]
+                }, {
+                    data: all.data[7]
+                }]
+            },
+            //15
+            {
+                series: [{
+                    data: all.data[8]
+                }, {
+                    data: all.data[9]
+                }]
+            }
+        ]
+    };
+    var myChart = echarts.init(document.getElementById('main'));
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+</html>
