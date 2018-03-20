@@ -15,7 +15,6 @@ import com.github.pagehelper.PageInfo;
 import okkpp.service.trade.*;
 import okkpp.utils.CountryMap;
 import okkpp.model.Msg;
-import okkpp.model.price.Consumer;
 import okkpp.model.trade.*;
 
 @Controller

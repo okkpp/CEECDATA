@@ -22,45 +22,49 @@ import okkpp.model.traffic.*;
 public class TrafficController {
 
 	@Autowired
-	AirFreightService airFreightService;
+	AirFreightService AirFreightService;
 	@Autowired
-	BroadbandService broadbandService;
+	BroadbandService BroadbandService;
 	@Autowired
-	ContainerService containerService;
+	ContainerService ContainerService;
 	@Autowired
-	FreightService freightService;
+	FreightService FreightService;
 	@Autowired
-	InternetServersService internetServersService;
+	InternetServersService InternetServersService;
 	@Autowired
-	InternetUsersService internetUsersService;
+	InternetUsersService InternetUsersService;
 	@Autowired
-	PhoneService phoneService;
+	PhoneService PhoneService;
 	@Autowired
-	RailLinesService railLinesService;
+	RailLinesService RailLinesService;
 	
 	@RequestMapping("/json")
 	@ResponseBody
-	public Map<String, Object> info(String str) {
-		switch (str) {
-			case "container_port_traffic":
-				return CountryMap.mapByCountry(containerService.selectAll());
-			case "freight_and_passengers_carried_by_air":
-				return CountryMap.mapByCountry(freightService.selectAll());
-			case "internet_servers":
-				return CountryMap.mapByCountry(internetServersService.selectAll());
-			case "internet_users":
-				return CountryMap.mapByCountry(internetUsersService.selectAll());
-			case "telephone_mainlines_and_mobile_phones":
-				return CountryMap.mapByCountry(phoneService.selectAll());
-			case "the_railway_transport":
-				return CountryMap.mapByCountry(railLinesService.selectAll());
+	public Map<String, Object> info(String info) {
+		switch (info) {
+			case "AirFreight":
+				return CountryMap.mapByCountry(AirFreightService.selectAll());
+			case "Broadband":
+				return CountryMap.mapByCountry(BroadbandService.selectAll());
+			case "Container":
+				return CountryMap.mapByCountry(ContainerService.selectAll());
+			case "Freight":
+				return CountryMap.mapByCountry(FreightService.selectAll());
+			case "InternetServers":
+				return CountryMap.mapByCountry(InternetServersService.selectAll());
+			case "InternetUsers":
+				return CountryMap.mapByCountry(InternetUsersService.selectAll());
+			case "Phone":
+				return CountryMap.mapByCountry(PhoneService.selectAll());
+			case "RailLines":
+				return CountryMap.mapByCountry(RailLinesService.selectAll());
 		}
 		return null;
 	}
 
 	@RequestMapping("/AirFreight")
 	public String AirFreight(Model model) {
-		List<AirFreight> list = airFreightService.selectAll();
+		List<AirFreight> list = AirFreightService.selectAll();
 		model.addAttribute("data", list);
 		return "404";
 	}
@@ -69,7 +73,7 @@ public class TrafficController {
 	@ResponseBody
 	public Msg airFreight(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);
-		List<AirFreight> list = airFreightService.selectAll();
+		List<AirFreight> list = AirFreightService.selectAll();
 		PageInfo pageInfo = new PageInfo(list, 10);
 		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);
@@ -77,7 +81,7 @@ public class TrafficController {
 
 	@RequestMapping("/Broadband")
 	public String Broadband(Model model) {
-		List<Broadband> list = broadbandService.selectAll();
+		List<Broadband> list = BroadbandService.selectAll();
 		model.addAttribute("data", list);
 		return "404";
 	}
@@ -86,7 +90,7 @@ public class TrafficController {
 	@ResponseBody
 	public Msg broadband(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);
-		List<Broadband> list = broadbandService.selectAll();
+		List<Broadband> list = BroadbandService.selectAll();
 		PageInfo pageInfo = new PageInfo(list, 10);
 		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);
@@ -94,7 +98,7 @@ public class TrafficController {
 
 	@RequestMapping("/Container")
 	public String Container(Model model) {
-		List<Container> list = containerService.selectAll();
+		List<Container> list = ContainerService.selectAll();
 		model.addAttribute("data", list);
 		return "404";
 	}
@@ -103,7 +107,7 @@ public class TrafficController {
 	@ResponseBody
 	public Msg container(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);
-		List<Container> list = containerService.selectAll();
+		List<Container> list = ContainerService.selectAll();
 		PageInfo pageInfo = new PageInfo(list, 10);
 		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);
@@ -111,7 +115,7 @@ public class TrafficController {
 
 	@RequestMapping("/Freight")
 	public String Freight(Model model) {
-		List<Freight> list = freightService.selectAll();
+		List<Freight> list = FreightService.selectAll();
 		model.addAttribute("data", list);
 		return "404";
 	}
@@ -120,7 +124,7 @@ public class TrafficController {
 	@ResponseBody
 	public Msg freight(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);
-		List<Freight> list = freightService.selectAll();
+		List<Freight> list = FreightService.selectAll();
 		PageInfo pageInfo = new PageInfo(list, 10);
 		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);
@@ -128,7 +132,7 @@ public class TrafficController {
 
 	@RequestMapping("/InternetServers")
 	public String InternetServers(Model model) {
-		List<InternetServers> list = internetServersService.selectAll();
+		List<InternetServers> list = InternetServersService.selectAll();
 		model.addAttribute("data", list);
 		return "404";
 	}
@@ -137,7 +141,7 @@ public class TrafficController {
 	@ResponseBody
 	public Msg internetServers(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);
-		List<InternetServers> list = internetServersService.selectAll();
+		List<InternetServers> list = InternetServersService.selectAll();
 		PageInfo pageInfo = new PageInfo(list, 10);
 		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);
@@ -145,7 +149,7 @@ public class TrafficController {
 
 	@RequestMapping("/InternetUsers")
 	public String InternetUsers(Model model) {
-		List<InternetUsers> list = internetUsersService.selectAll();
+		List<InternetUsers> list = InternetUsersService.selectAll();
 		model.addAttribute("data", list);
 		return "404";
 	}
@@ -154,7 +158,7 @@ public class TrafficController {
 	@ResponseBody
 	public Msg internetUsers(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);
-		List<InternetUsers> list = internetUsersService.selectAll();
+		List<InternetUsers> list = InternetUsersService.selectAll();
 		PageInfo pageInfo = new PageInfo(list, 10);
 		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);
@@ -162,7 +166,7 @@ public class TrafficController {
 
 	@RequestMapping("/Phone")
 	public String Phone(Model model) {
-		List<Phone> list = phoneService.selectAll();
+		List<Phone> list = PhoneService.selectAll();
 		model.addAttribute("data", list);
 		return "404";
 	}
@@ -171,7 +175,7 @@ public class TrafficController {
 	@ResponseBody
 	public Msg phone(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);
-		List<Phone> list = phoneService.selectAll();
+		List<Phone> list = PhoneService.selectAll();
 		PageInfo pageInfo = new PageInfo(list, 10);
 		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);
@@ -179,7 +183,7 @@ public class TrafficController {
 
 	@RequestMapping("/RailLines")
 	public String RailLines(Model model) {
-		List<RailLines> list = railLinesService.selectAll();
+		List<RailLines> list = RailLinesService.selectAll();
 		model.addAttribute("data", list);
 		return "404";
 	}
@@ -188,7 +192,7 @@ public class TrafficController {
 	@ResponseBody
 	public Msg railLines(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		PageHelper.startPage(pn, 10);
-		List<RailLines> list = railLinesService.selectAll();
+		List<RailLines> list = RailLinesService.selectAll();
 		PageInfo pageInfo = new PageInfo(list, 10);
 		model.addAttribute("pageInfo", pageInfo);
 		return Msg.success().add("pageInfo", pageInfo);

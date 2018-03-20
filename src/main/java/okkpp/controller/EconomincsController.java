@@ -16,7 +16,7 @@ import okkpp.utils.CountryMap;
 public class EconomincsController {
 
 	@Autowired
-	FinalConsumptionService finalConsumptionService;
+	FinalConsumptionService FinalConsumptionService;
 	@Autowired
 	GDPPCService GDPPCService;
 	@Autowired
@@ -46,8 +46,8 @@ public class EconomincsController {
 	@ResponseBody
 	public Map<String, Object> info(String info) {
 		switch(info) {
-		case "finalConsumption":
-			return CountryMap.mapByCountry(finalConsumptionService.selectAll());
+		case "FinalConsumption":
+			return CountryMap.mapByCountry(FinalConsumptionService.selectAll());
 		case "GDPPC":
 			return CountryMap.mapByCountry(GDPPCService.selectAll());
 		case "GDP":
@@ -75,7 +75,7 @@ public class EconomincsController {
 	}
 	@RequestMapping("/FinalConsumption")
 	public String FinalConsumption(Model model) {
-		model.addAttribute("data",finalConsumptionService.selectAll());
+		model.addAttribute("data",FinalConsumptionService.selectAll());
 		return "economics/FinalConsumption";
 	}
 }
