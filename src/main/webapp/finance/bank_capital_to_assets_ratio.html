@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <title>银行资本充足率</title>
     <!-- 引入Jquery -->
-    <script src="../zdo_static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
 
     <!-- 引入Bootstrap -->
     <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
@@ -23,7 +23,7 @@
     <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
 
     <!-- 引入Echarts -->
-    <script src="../zdo_static/js/echarts.js"></script>
+    <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
 </head>
 <body>
     <div class="container">
@@ -48,18 +48,18 @@
 
         <div id="imageView">
             <div class="page-header" style="text-align: center;">
-                <h3>银行资本充足率柱状图</h3>
+                <h3>银行资本充足率</h3>
                 <br>
                 <h4 style="margin-top: -20px;">Bank Capital to Assets Ratio</h4>
             </div>
 
             <div class="panel" style="margin-top: 1.5em;">
-
+               <!-- <div style="text-align: right;">单位:&nbsp;%</div>-->
                 <div id="main" style="width: 100%;height:400px;"></div>
             </div>
         </div>
 
-        <div style="color: #959595; margin-top: 2em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+        <div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
           <span class="glyphicon glyphicon-save"></span> 下载
       </a></div>
 
@@ -87,11 +87,10 @@
 
         $('#tableData').bootstrapTable({
             striped: true,
-
             columns: [
                 {
                     field: 'country',
-                    title: '国家或地区'
+                    title: '国家'
                 },
                 {
                     field: 'year1',
@@ -283,54 +282,26 @@
             timeline: {
                 axisType: 'category',
                 autoPlay: true,
-                playInterval: 5000,
+                playInterval: 2000,
                 data: all.years
             },
             options: [{
                 tooltip: {
                     trigger: 'axis'
                 },
-                // toolbox: {
-                //     show: true,
-                //     orient: 'vertical',
-                //     x: 'right',
-                //     y: 'center',
-                //     feature: {
-                //         mark: {
-                //             show: true
-                //         },
-                //         dataView: {
-                //             show: true,
-                //             readOnly: false
-                //         },
-                //         magicType: {
-                //             show: true,
-                //             type: ['line', 'bar']
-                //         },
-                //         restore: {
-                //             show: true
-                //         },
-                //         saveAsImage: {
-                //             show: true
-                //         }
-                //     }
-                // },
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    x: 'right',
+                    y: 'center'
+                },
+                title:{
+                  subtext: '数据来源'
+                },
                 calculable: true,
                 grid: {
-                  top: 40,
-                  bottom: 100,
-                  tooltip: {
-                      trigger: 'axis',
-                      axisPointer: {
-                          type: 'shadow',
-                          label: {
-                              show: true,
-                              formatter: function (params) {
-                                  return params.value.replace('\n', '');
-                              }
-                          }
-                      }
-                  }
+                    top: 50,
+                    bottom: 100
                 },
                 xAxis: [{
                     type: 'category',
