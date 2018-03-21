@@ -13,21 +13,21 @@
     <meta charset="utf-8">
 
     <!-- 引入Jquery -->
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
 
     <!-- 引入Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src="../zdo_static/js/bootstrap.min.js"></script>
 
     <!-- 引入BootStrap-table -->
-    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
-    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+    <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
 
     <!-- 引入Bootstrap-paginator -->
-    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+    <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
 
     <!-- 引入Echarts -->
-    <script src="../assets/libs/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
 </head>
 
 <body>
@@ -45,16 +45,16 @@
             <br>
             <h4 style="margin-top: -20px;">Listed Domestic Companies and Market Capitalization of Listed Companies as Percentage of GDP</h4>
         </div>
-        <div style="text-align: right;">单位:&nbsp;%</div>
+        <!-- <div style="text-align: right;">单位:&nbsp;%</div> -->
         <table class="table table-hover table-striped">
             <tr>
-                <td>国家</td>
+                <td style="text-align: center;">国家</td>
                 <td>年份</td>
-                <td>上市公司数</td>
-                <td>占国内生产总值比重</td>
+                <td>上市公司数（个）</td>
+                <td>占国内生产总值比重（%）</td>
             </tr>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">阿尔巴尼亚</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">阿尔巴尼亚</td>
                 <td>2005</td>
                 <td>-</td>
                 <td>-</td>
@@ -67,7 +67,7 @@
                 <td>-</td>
                 <td>-</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">爱沙尼亚</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">爱沙尼亚</td>
                 <td>2005</td>
                 <td>-</td>
                 <td>-</td>
@@ -80,7 +80,7 @@
                 <td>-</td>
                 <td>-</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">保加利亚</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">保加利亚</td>
                 <td>2005</td>
                 <td>331</td>
                 <td>17.05344225</td>
@@ -93,7 +93,7 @@
                 <td>-</td>
                 <td>-</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">波兰</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">波兰</td>
                 <td>2005</td>
                 <td>234</td>
                 <td>30.88875777</td>
@@ -106,7 +106,7 @@
                 <td>570</td>
                 <td>29.01735445</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">黑山</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">黑山</td>
                 <td>2005</td>
                 <td>-</td>
                 <td>-</td>
@@ -119,7 +119,7 @@
                 <td>-</td>
                 <td>-</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">捷克</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">捷克</td>
                 <td>2005</td>
                 <td>23</td>
                 <td>25.65361762</td>
@@ -132,7 +132,7 @@
                 <td>13</td>
                 <td>-</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">克罗地亚</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">克罗地亚</td>
                 <td>2005</td>
                 <td>177</td>
                 <td>28.4440906</td>
@@ -145,7 +145,7 @@
                 <td>186</td>
                 <td>-</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">拉脱维亚</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">拉脱维亚</td>
                 <td>2005</td>
                 <td>-</td>
                 <td>-</td>
@@ -158,7 +158,7 @@
                 <td>-</td>
                 <td>-</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">立陶宛</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">立陶宛</td>
                 <td>2005</td>
                 <td>-</td>
                 <td>-</td>
@@ -171,7 +171,7 @@
                 <td>-</td>
                 <td>-</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">罗马尼亚</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">罗马尼亚</td>
                 <td>2005</td>
                 <td>59</td>
                 <td>15.90594488</td>
@@ -184,7 +184,7 @@
                 <td>82</td>
                 <td>-</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">马其顿</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">马其顿</td>
                 <td>2005</td>
                 <td>57</td>
                 <td>10.32145375</td>
@@ -197,7 +197,7 @@
                 <td>-</td>
                 <td>-</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">塞尔维亚</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">塞尔维亚</td>
                 <td>2005</td>
                 <td>751</td>
                 <td>26.65171382</td>
@@ -210,7 +210,7 @@
                 <td>-</td>
                 <td>-</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">斯洛伐克</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">斯洛伐克</td>
                 <td>2005</td>
                 <td>7</td>
                 <td>148.8271893</td>
@@ -223,7 +223,7 @@
                 <td>-</td>
                 <td>-</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">斯洛文尼亚</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">斯洛文尼亚</td>
                 <td>2005</td>
                 <td>116</td>
                 <td>21.73187921</td>
@@ -236,7 +236,7 @@
                 <td>46</td>
                 <td>14.11793273</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">匈牙利</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">匈牙利</td>
                 <td>2005</td>
                 <td>44</td>
                 <td>28.94819788</td>
@@ -249,7 +249,7 @@
                 <td>45</td>
                 <td>14.65520708</td>
             <tr>
-                <td rowspan="3" style="font-size:20px;text-align: center;"><div style="text-align: center; padding-top: 15%;">波黑</div></td>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">波黑</td>
                 <td>2005</td>
                 <td>751</td>
                 <td>14.53336214</td>
@@ -272,16 +272,16 @@
             <h4 style="margin-top: -20px;">Listed Domestic Companies and Market Capitalization of Listed Companies as Percentage of GDP</h4>
         </div>
 
-        <div class="panel" style="margin-top: 40px;">
-            <div style="text-align: right;">单位:&nbsp;%</div>
+        <div class="panel" style="margin-top: 1.5em;">
+            <!--<div style="text-align: right;">单位:&nbsp;%</div>-->
             <div id="main" style="width: 100%;height:400px;"></div>
         </div>
     </div>
 
-    <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+    <div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
         <span class="glyphicon glyphicon-save"></span> 下载
     </a></div>
-    <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+     <div style="text-align: right;"><div id="page"></div></div>
 </div>
 </body>
 <script>
@@ -335,36 +335,44 @@
         "countrys": ["阿尔巴尼亚", "爱沙尼亚", "保加利亚", "波兰", "黑山", "捷克", "克罗地亚", "拉脱维亚", "立陶宛", "罗马尼亚", "马其顿", "塞尔维亚", "斯洛伐克", "斯洛文尼亚", "匈牙利", "波黑"],
         "years": ["2005年", "2010年", "2015年"]
     };
-
+    var colors = ['#5793f3', '#d14a61'];
     var option = {
+
         timeline: {
             axisType: 'category',
             autoPlay: true,
-            playInterval: 5000,
+            playInterval: 2000,
             data: all.years
         },
         options: [{
+            color: colors,
             tooltip: {
-                trigger: 'axis'
-            },
-            toolbox: {
-                show: true,
-                orient: 'vertical',
-                x: 'right',
-                y: 'center',
-                feature: {
-                    mark: {
-                        show: true
-                    }
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross'
                 }
+            },
+            // toolbox: {
+            //     show: true,
+            //     orient: 'vertical',
+            //     x: 'right',
+            //     y: 'center',
+            //     feature: {
+            //         mark: {
+            //             show: true
+            //         }
+            //     }
+            // },
+            title:{
+              subtext: '数据来源'
             },
             calculable: true,
             grid: {
-                y: 100,
-                y2: 100
+                top: 50,
+                bottom: 100
             },
             legend: {
-                data: ['货物和服务出口占国内生产总值比重', '货物和服务进口占国内生产总值比重']
+                data: ['上市公司数', '占国内生产总值比重']
             },
             xAxis: [{
                 type: 'category',
@@ -375,24 +383,32 @@
             }],
             yAxis: [{
                 type: 'value',
-                name: '货物和服务出口占国内生产总值比重'
-            },{
-                type: 'value',
-                name: '货物和服务进口占国内生产总值比重',
+                name: '个',
+                position: 'left',
                 axisLine: {
                     lineStyle: {
-                        color: '#d14a61'
+                        color: colors[0]
+                    }
+                },
+              },
+              {
+                type: 'value',
+                name: '%',
+                position: 'right',
+                axisLine: {
+                    lineStyle: {
+                        color: colors[1]
                     }
                 },
             }],
             //05
             series: [{
-                name: '货物和服务出口占国内生产总值比重',
+                name: '上市公司数',
                 type: 'bar',
                 yAxisIndex: 0,
                 data: all.data[0]
             }, {
-                name: '货物和服务进口占国内生产总值比重',
+                name: '占国内生产总值比重',
                 type: 'bar',
                 yAxisIndex: 1,
                 data: all.data[1]

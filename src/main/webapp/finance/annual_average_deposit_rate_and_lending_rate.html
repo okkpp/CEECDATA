@@ -13,7 +13,7 @@
     <meta charset="utf-8">
 
     <!-- 引入Jquery -->
-    <script src="../zdo_static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
 
     <!-- 引入Bootstrap -->
     <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
@@ -27,7 +27,7 @@
     <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
 
     <!-- 引入Echarts -->
-    <script src="../zdo_static/js/echarts.js"></script>
+    <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
 </head>
 
 <body>
@@ -47,270 +47,223 @@
         </div>
         <div style="text-align: right;">单位:&nbsp;%</div>
         <table class="table table-hover table-striped">
-            <thead>
-                <th>国家</th>
-                <th>年份</th>
-                <th>年平均存款利率</th>
-                <th>贷款利率</th>
-            </thead>
-            <tbody>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">阿尔巴尼亚</td>
-                  <td>2005</td>
-                  <td>5.087550872</td>
-                  <td>13.075</td>
+            <tr>
+                <td style="text-align: center;">国家</td>
+                <td>年份</td>
+                <td>年平均存款利率</td>
+                <td>贷款利率</td>
+            </tr>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">阿尔巴尼亚</td>
+                <td>2005</td>
+                <td>5.087550872</td>
+                <td>13.075</td>
+            </tr>
+            <tr>
+                <td>2010</td>
+                <td>6.417543373</td>
+                <td>12.82232989</td>
               </tr>
               <tr>
-                  <td>2010</td>
-                  <td>6.417543373</td>
-                  <td>12.82232989</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>1.39187012</td>
-                  <td>8.70284668</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">爱沙尼亚</td>
-                  <td>2005</td>
-                  <td>2.132839881</td>
-                  <td>4.928485792</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>1.10602655</td>
-                  <td>7.760177765</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>0.503435583</td>
-                  <td>4.481133401</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">保加利亚</td>
-                  <td>2005</td>
-                  <td>3.08435</td>
-                  <td>8.660983333</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>4.076075</td>
-                  <td>11.14436667</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>0.613891667</td>
-                  <td>7.484858333</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">波兰</td>
-                  <td>2005</td>
-                  <td>2.789600127</td>
-                  <td>6.831298668</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>-</td>
-                  <td>-</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>-</td>
-                  <td>-</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">黑山</td>
-                  <td>2005</td>
-                  <td>4.84375</td>
-                  <td>-</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>3.699525</td>
-                  <td>9.53</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>1.458083333</td>
-                  <td>8.933333333</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">捷克</td>
-                  <td>2005</td>
-                  <td>1.174166667</td>
-                  <td>5.776666667</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>1.081583333</td>
-                  <td>5.887833333</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>0.529332846</td>
-                  <td>4.282533329</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">克罗地亚</td>
-                  <td>2005</td>
-                  <td>1.714166667</td>
-                  <td>11.19111667</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>1.7575</td>
-                  <td>10.37666667</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>-</td>
-                  <td>-</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">拉脱维亚</td>
-                  <td>2005</td>
-                  <td>2.780833333</td>
-                  <td>6.106666667</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>1.865</td>
-                  <td>9.558333333</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>-</td>
-                  <td>-</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">立陶宛</td>
-                  <td>2005</td>
-                  <td>2.4</td>
-                  <td>5.271666667</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>1.71</td>
-                  <td>5.989166667</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>-</td>
-                  <td>-</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">罗马尼亚</td>
-                  <td>2005</td>
-                  <td>6.415</td>
-                  <td>19.60083333</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>7.313333333</td>
-                  <td>14.0725</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>1.888333333</td>
-                  <td>6.7675</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">马其顿</td>
-                  <td>2005</td>
-                  <td>5.225</td>
-                  <td>12.13333333</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>7.066666667</td>
-                  <td>9.483333333</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>2.886194164</td>
-                  <td>7.079158056</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">塞尔维亚</td>
-                  <td>2005</td>
-                  <td>12.13333333</td>
-                  <td>16.83173462</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>11.33</td>
-                  <td>17.3</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>-</td>
-                  <td>-</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">斯洛伐克</td>
-                  <td>2005</td>
-                  <td>2.44</td>
-                  <td>6.675</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>-</td>
-                  <td>-</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>-</td>
-                  <td>-</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">斯洛文尼亚</td>
-                  <td>2005</td>
-                  <td>3.175</td>
-                  <td>7.8</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>-</td>
-                  <td>-</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>-</td>
-                  <td>-</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">匈牙利</td>
-                  <td>2005</td>
-                  <td>5.167934585</td>
-                  <td>8.540945327</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>4.917692681</td>
-                  <td>7.586925113</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>0.867014243</td>
-                  <td>2.90249069</td>
-              </tr>
-              <tr>
-                  <td rowspan="3" style="text-align:center;font-size:1.5em;display: table-cell;vertical-align: inherit;">波黑</td>
-                  <td>2005</td>
-                  <td>3.564166667</td>
-                  <td>9.6125</td>
-              </tr>
-              <tr>
-                  <td>2010</td>
-                  <td>3.159166667</td>
-                  <td>7.888333333</td>
-              </tr>
-              <tr>
-                  <td>2015</td>
-                  <td>2.059663519</td>
-                  <td>5.78888799</td>
-              </tr>
-          </tbody>
+                <td>2015</td>
+                <td>1.39187012</td>
+                <td>8.70284668</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">爱沙尼亚</td>
+                <td>2005</td>
+                <td>2.132839881</td>
+                <td>4.928485792</td>
+            <tr>
+                <td>2010</td>
+                <td>1.10602655</td>
+                <td>7.760177765</td>
+            <tr>
+                <td>2015</td>
+                <td>0.503435583</td>
+                <td>4.481133401</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">保加利亚</td>
+                <td>2005</td>
+                <td>3.08435</td>
+                <td>8.660983333</td>
+            <tr>
+                <td>2010</td>
+                <td>4.076075</td>
+                <td>11.14436667</td>
+            <tr>
+                <td>2015</td>
+                <td>0.613891667</td>
+                <td>7.484858333</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">波兰</td>
+                <td>2005</td>
+                <td>2.789600127</td>
+                <td>6.831298668</td>
+            <tr>
+                <td>2010</td>
+                <td>-</td>
+                <td>-</td>
+            <tr>
+                <td>2015</td>
+                <td>-</td>
+                <td>-</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">黑山</td>
+                <td>2005</td>
+                <td>4.84375</td>
+                <td>-</td>
+            <tr>
+                <td>2010</td>
+                <td>3.699525</td>
+                <td>9.53</td>
+            <tr>
+                <td>2015</td>
+                <td>1.458083333</td>
+                <td>8.933333333</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">捷克</td>
+                <td>2005</td>
+                <td>1.174166667</td>
+                <td>5.776666667</td>
+            <tr>
+                <td>2010</td>
+                <td>1.081583333</td>
+                <td>5.887833333</td>
+            <tr>
+                <td>2015</td>
+                <td>0.529332846</td>
+                <td>4.282533329</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">克罗地亚</td>
+                <td>2005</td>
+                <td>1.714166667</td>
+                <td>11.19111667</td>
+            <tr>
+                <td>2010</td>
+                <td>1.7575</td>
+                <td>10.37666667</td>
+            <tr>
+                <td>2015</td>
+                <td>-</td>
+                <td>-</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">拉脱维亚</td>
+                <td>2005</td>
+                <td>2.780833333</td>
+                <td>6.106666667</td>
+            <tr>
+                <td>2010</td>
+                <td>1.865</td>
+                <td>9.558333333</td>
+            <tr>
+                <td>2015</td>
+                <td>-</td>
+                <td>-</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">立陶宛</td>
+                <td>2005</td>
+                <td>2.4</td>
+                <td>5.271666667</td>
+            <tr>
+                <td>2010</td>
+                <td>1.71</td>
+                <td>5.989166667</td>
+            <tr>
+                <td>2015</td>
+                <td>-</td>
+                <td>-</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">罗马尼亚</td>
+                <td>2005</td>
+                <td>6.415</td>
+                <td>19.60083333</td>
+            <tr>
+                <td>2010</td>
+                <td>7.313333333</td>
+                <td>14.0725</td>
+            <tr>
+                <td>2015</td>
+                <td>1.888333333</td>
+                <td>6.7675</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">马其顿</td>
+                <td>2005</td>
+                <td>5.225</td>
+                <td>12.13333333</td>
+            <tr>
+                <td>2010</td>
+                <td>7.066666667</td>
+                <td>9.483333333</td>
+            <tr>
+                <td>2015</td>
+                <td>2.886194164</td>
+                <td>7.079158056</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">塞尔维亚</td>
+                <td>2005</td>
+                <td>12.13333333</td>
+                <td>16.83173462</td>
+            <tr>
+                <td>2010</td>
+                <td>11.33</td>
+                <td>17.3</td>
+            <tr>
+                <td>2015</td>
+                <td>-</td>
+                <td>-</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">斯洛伐克</td>
+                <td>2005</td>
+                <td>2.44</td>
+                <td>6.675</td>
+            <tr>
+                <td>2010</td>
+                <td>-</td>
+                <td>-</td>
+            <tr>
+                <td>2015</td>
+                <td>-</td>
+                <td>-</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">斯洛文尼亚</td>
+                <td>2005</td>
+                <td>3.175</td>
+                <td>7.8</td>
+            <tr>
+                <td>2010</td>
+                <td>-</td>
+                <td>-</td>
+            <tr>
+                <td>2015</td>
+                <td>-</td>
+                <td>-</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">匈牙利</td>
+                <td>2005</td>
+                <td>5.167934585</td>
+                <td>8.540945327</td>
+            <tr>
+                <td>2010</td>
+                <td>4.917692681</td>
+                <td>7.586925113</td>
+            <tr>
+                <td>2015</td>
+                <td>0.867014243</td>
+                <td>2.90249069</td>
+            <tr>
+                <td rowspan="3" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">波黑</td>
+                <td>2005</td>
+                <td>3.564166667</td>
+                <td>9.6125</td>
+            <tr>
+                <td>2010</td>
+                <td>3.159166667</td>
+                <td>7.888333333</td>
+            <tr>
+                <td>2015</td>
+                <td>2.059663519</td>
+                <td>5.78888799</td>
+            </tr>
         </table>
     </div>
 
@@ -322,12 +275,12 @@
         </div>
 
         <div class="panel" style="margin-top: 1.5em;">
-
+            <!--<div style="text-align: right;">单位:&nbsp;%</div>-->
             <div id="main" style="width: 100%;height:400px;"></div>
         </div>
     </div>
 
-    <div style="color: #959595; margin-top: 2em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+    <div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
         <span class="glyphicon glyphicon-save"></span> 下载
     </a></div>
     <!-- <div style="text-align: right;"><div id="page"></div></div> -->
@@ -389,12 +342,15 @@
         timeline: {
             axisType: 'category',
             autoPlay: true,
-            playInterval: 5000,
+            playInterval: 2000,
             data: all.years
         },
         options: [{
             tooltip: {
                 trigger: 'axis'
+            },
+            title: {
+              subtext: '数据来源'
             },
             toolbox: {
                 show: true,
@@ -409,20 +365,8 @@
             },
             calculable: true,
             grid: {
-              top: 40,
-              bottom: 100,
-              tooltip: {
-                  trigger: 'axis',
-                  axisPointer: {
-                      type: 'shadow',
-                      label: {
-                          show: true,
-                          formatter: function (params) {
-                              return params.value.replace('\n', '');
-                          }
-                      }
-                  }
-              }
+                top: 50,
+                bottom: 100
             },
             legend: {
                 data: ['年平均存款利率', '贷款利率']
@@ -451,6 +395,7 @@
         },
             //10
             {
+
                 series: [{
                     data: all.data[2]
                 }, {
@@ -459,6 +404,7 @@
             },
             //13
             {
+
                 series: [{
                     data: all.data[4]
                 }, {
@@ -467,6 +413,7 @@
             },
             //14
             {
+
                 series: [{
                     data: all.data[6]
                 }, {
@@ -475,6 +422,7 @@
             },
             //15
             {
+
                 series: [{
                     data: all.data[8]
                 }, {
