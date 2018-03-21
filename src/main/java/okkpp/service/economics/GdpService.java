@@ -17,7 +17,7 @@ import tk.mybatis.mapper.entity.Example;
 */
 @Service
 @Transactional
-public class GDPService {
+public class GdpService {
 
 	@Autowired
 	GdpMapper mapper;

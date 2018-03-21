@@ -20,17 +20,17 @@ public class EconomicsController {
 	@Autowired
 	FinalConsumptionService FinalConsumptionService;
 	@Autowired
-	GDPPCService GDPPCService;
+	GdppcService GDPPCService;
 	@Autowired
-	GDPService GDPService;
+	GdpService GDPService;
 	@Autowired
-	GNIPCService GNIPCService;
+	GnipcService GNIPCService;
 	@Autowired
-	GrowthOfGDPPCService GrowthOfGDPPCService;
+	GrowthRateGdppcService GrowthOfGDPPCService;
 	@Autowired
-	GrowthOfGDPService GrowthOfGDPService;
+	GrowthRateGdpService GrowthOfGDPService;
 	@Autowired
-	IndicatorsOfNAService IndicatorsOfNAService;
+	IndicatorsOfNaService IndicatorsOfNAService;
 	@Autowired
 	PercentageOfAgricultureService PercentageOfAgricultureService;
 	@Autowired
@@ -50,12 +50,14 @@ public class EconomicsController {
 		switch (info) {
 		case "FinalConsumption":
 			return CountryMap.mapByCountry(FinalConsumptionService.selectAll());
-		case "GDPPC":
+		case "Gdppc":
 			return CountryMap.mapByCountry(GDPPCService.selectAll());
-		case "GDP":
+		case "Gdp":
 			return CountryMap.mapByCountry(GDPService.selectAll());
-		case "GNIPC":
+		case "Gnipc":
 			return CountryMap.mapByCountry(GNIPCService.selectAll());
+		case "GrowthRateGdp" :
+			return CountryMap.mapByCountry(GrowthOfGDPService.selectAll());
 		case "GrowthRateGdppc":
 			return CountryMap.mapByCountry(GrowthOfGDPPCService.selectAll());
 		case "IndicatorsOfNa":
