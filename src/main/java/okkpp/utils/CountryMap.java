@@ -23,22 +23,48 @@ public class CountryMap {
 		try {
 			if(!list.isEmpty()) {
 				Class<?> c = list.get(0).getClass();
-				//获取country属性
-				Field field = c.getDeclaredField("country");
-				field.setAccessible(true);
-				//遍历数组
-				for(E ele : list) {
-					String key = field.get(ele).toString();
-					if(map.containsKey(key)) {
-						List<E> l = (List<E>) map.get(key);
-						l.add(ele);
-						map.put(key, l);
-					}else {
-						List<E> l = new ArrayList<E>();
-						l.add(ele);
-						map.put(key, l);
+				Field[] fields = c.getDeclaredFields();
+				boolean existCountry = false;
+				boolean existYear = false;
+				int fieldCount = 0;
+				List<String> fieldName = new ArrayList<>();
+				for(Field f : fields) {
+					switch(f.getName()) {
+					case "year": existYear = true;break;
+					case "country": existCountry = true;
+					case "serialVersionUID":
+					case "id":
+					case "sort":
+					case "updated":break;
+						default : fieldName.add(f.getName());fieldCount++;
 					}
 				}
+				//System.out.println(existYear+"/"+existCountry+"/"+fields.length+"/"+dataCount+"/"+dataName.size());
+				List<String> yearList = new ArrayList<>();
+				if(existCountry) {
+					//获取country属性
+					Field field = c.getDeclaredField("country");
+					field.setAccessible(true);
+					//遍历数组
+					for(E ele : list) {
+						String key = field.get(ele).toString();
+						if(map.containsKey(key)) {
+							List<E> l = (List<E>) map.get(key);
+							l.add(ele);
+							map.put(key, l);
+						}else {
+							List<E> l = new ArrayList<E>();
+							l.add(ele);
+							map.put(key, l);
+						}
+						if(existYear) {
+							Field yearF = c.getDeclaredField("year");
+							yearF.setAccessible(true);
+							yearList.add(yearF.get(ele).toString());
+						}
+					}
+				}
+				
 				int maxLength = 0;
 				int countryCount = 0;
 				for(String key : map.keySet()) {
@@ -47,8 +73,14 @@ public class CountryMap {
 					maxLength = maxLength >= i ? maxLength : i;
 				}
 				res.put("countries", map);
-				res.put("_maxLength", maxLength);
-				res.put("_countryCount", countryCount);
+				res.put("maxLength", maxLength);
+				res.put("countryCount", countryCount);
+				res.put("existYear", existYear);
+				if(existYear) {
+					res.put("yearList", yearList);
+				}
+				res.put("fieldName", fieldName);
+				res.put("fieldCount", fieldCount);
 			}
 		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
