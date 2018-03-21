@@ -193,7 +193,6 @@
 			type : "GET",
 			success : function(result) {				
 				result = eval('('+ result+ ')');
-				console.log(result);
 				if(result.code == 200){
 					alert("查询不到数据");
 					$("#search_result tbody").empty();

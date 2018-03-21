@@ -66,5 +66,4 @@ public class InvestmentController {
 		}
 		return Msg.success().add("pageInfo", pageInfo);
 	}
-
 }
