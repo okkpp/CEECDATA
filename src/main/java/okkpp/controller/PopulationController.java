@@ -4,6 +4,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,7 +64,7 @@ public class PopulationController {
 	}
 
 	// 后台获取数据
-	@RequestMapping(value = "/getJson", method = RequestMethod.POST)
+	@RequestMapping(value = "/getJson", method = RequestMethod.GET)
 	@ResponseBody
 	public <E> Msg getJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
 			@RequestParam("info") String info) {
@@ -98,6 +99,51 @@ public class PopulationController {
 			break;
 		default:
 			break;
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
+		}
+		return Msg.success().add("pageInfo", pageInfo);
+	}
+
+	// 后台按条件查找
+	@RequestMapping(value = "/getJsonByCondition/{info}", method = RequestMethod.GET)
+	@ResponseBody
+	public <E> Msg getJson(@PathVariable("info") String info,
+			@RequestParam(value = "pn", defaultValue = "1") Integer pn, @RequestParam("column") String column,
+			@RequestParam("condition") String condition) {
+		PageInfo<E> pageInfo = null;
+		switch (info) {
+		case "BirthRateDeathRate":
+			pageInfo = birthRateDeathRateService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "CompositionDependencyRatio":
+			pageInfo = compositionDependencyRatioService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Density":
+			pageInfo = densityService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "FemalePercent":
+			pageInfo = femalePercentService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "InfantMortalityRate":
+			pageInfo = infantMortalityRateService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "LifeExpectancyAtBirth":
+			pageInfo = lifeExpectancyAtBirthService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "MidYearPoplation":
+			pageInfo = midYearPoplationService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "ReproductiveHealth":
+			pageInfo = reproductiveHealthService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "RuralAndUrbanRate":
+			pageInfo = ruralAndUrbanRateService.getPageInfoByCondition(pn, column, condition);
+			break;
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
 		}
 		return Msg.success().add("pageInfo", pageInfo);
 	}

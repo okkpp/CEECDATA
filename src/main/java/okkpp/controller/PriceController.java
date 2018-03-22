@@ -29,10 +29,10 @@ public class PriceController {
 	@ResponseBody
 	public Map<String, Object> info(String info) {
 		switch (info) {
-			case "Consumer" :
-				return ChartInfo.mapByCountry(consumerService.selectAll());
-			case "Producer" :
-				return ChartInfo.mapByCountry(producerService.selectAll());
+		case "Consumer":
+			return ChartInfo.mapByCountry(consumerService.selectAll());
+		case "Producer":
+			return ChartInfo.mapByCountry(producerService.selectAll());
 		}
 		return null;
 	}

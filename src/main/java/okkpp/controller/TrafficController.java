@@ -4,6 +4,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,7 +60,7 @@ public class TrafficController {
 	}
 
 	// 后台获取数据
-	@RequestMapping(value = "/getJson", method = RequestMethod.POST)
+	@RequestMapping(value = "/getJson", method = RequestMethod.GET)
 	@ResponseBody
 	public <E> Msg getJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
 			@RequestParam("info") String info) {
@@ -89,10 +90,46 @@ public class TrafficController {
 		case "RailLines":
 			pageInfo = RailLinesService.getPageInfo(pn);
 			break;
-		default:
-			break;
 		}
 		return Msg.success().add("pageInfo", pageInfo);
 	}
 
+	// 后台按条件查找
+	@RequestMapping(value = "/getJsonByCondition/{info}", method = RequestMethod.GET)
+	@ResponseBody
+	public <E> Msg getJsonByCondition(@PathVariable("info") String info,
+			@RequestParam(value = "pn", defaultValue = "1") Integer pn, @RequestParam("column") String column,
+			@RequestParam("condition") String condition) {
+		PageInfo<E> pageInfo = null;
+		switch (info) {
+		case "AirFreight":
+			pageInfo = AirFreightService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Broadband":
+			pageInfo = BroadbandService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Container":
+			pageInfo = ContainerService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Freight":
+			pageInfo = FreightService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "InternetServers":
+			pageInfo = InternetServersService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "InternetUsers":
+			pageInfo = InternetUsersService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Phone":
+			pageInfo = PhoneService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "RailLines":
+			pageInfo = RailLinesService.getPageInfoByCondition(pn, column, condition);
+			break;
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
+		}
+		return Msg.success().add("pageInfo", pageInfo);
+	}
 }

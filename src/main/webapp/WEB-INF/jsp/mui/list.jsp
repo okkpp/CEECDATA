@@ -185,7 +185,7 @@
 			data += "&info=" + tranformStr("_" + $("#sheet_choose").val());
 		}else if(type == "search"){
 			str = "../" + $("#chapter_choose").val() + "/getJsonByCondition/"+tranformStr("_"+$("#sheet_choose").val())+".do";
-			data += "&column=" + $("#column_choose").val() + "&condition=" +$("#condition").val();
+			data += "&column=" + tranformStr($("#column_choose").val()) + "&condition=" +$("#condition").val();
 		}
 		$.ajax({
 			url : str,

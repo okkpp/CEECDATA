@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,9 +20,9 @@ import okkpp.service.finance.*;
 import okkpp.utils.ChartInfo;
 
 /**
-* @author duck
-* @date 创建时间：2018年3月19日 下午3:24:20
-*/
+ * @author duck
+ * @date 创建时间：2018年3月19日 下午3:24:20
+ */
 @RequestMapping("/finance")
 @Controller
 public class FinanceController {
@@ -56,10 +57,11 @@ public class FinanceController {
 	SurplusService SurplusService;
 	@Autowired
 	TaxAsPercentageOfEvenueService TaxAsPercentageOfEvenueService;
+
 	@RequestMapping("/json")
 	@ResponseBody
 	public Map<String, Object> info(String info) {
-		switch(info) {
+		switch (info) {
 		case "BankCapital":
 			return ChartInfo.mapByCountry(BankCapitalService.selectAll());
 		case "BankNonPerformingLoans":
@@ -93,65 +95,126 @@ public class FinanceController {
 		}
 		return null;
 	}
-	
+
 	// 后台获取数据
-		@RequestMapping(value = "/getJson", method = RequestMethod.POST)
-		@ResponseBody
-		public <E> Msg getJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
-				@RequestParam("info") String info) {
-			PageInfo<E> pageInfo = null;
-			switch (info) {
-			case "BankCapital":
-				pageInfo = BankCapitalService.getPageInfo(pn);
-				break;
-			case "BankNonPerformingLoans":
-				pageInfo = BankNonPerformingLoansService.getPageInfo(pn);
-				break;
-			case "CentralGovernmentRevenue":
-				pageInfo = CentralGovernmentRevenueService.getPageInfo(pn);
-				break;
-			case "Debt":
-				pageInfo = DebtService.getPageInfo(pn);
-				break;
-			case "DepositRateAndLendingRate":
-				pageInfo = DepositRateAndLendingRateService.getPageInfo(pn);
-				break;
-			case "DomesticCredit":
-				pageInfo = DomesticCreditService.getPageInfo(pn);
-				break;
-			case "GlobalEquityIndices":
-				pageInfo = GlobalEquityIndicesService.getPageInfo(pn);
-				break;
-			case "GrowthRateOfMoney":
-				pageInfo = GrowthRateOfMoneyService.getPageInfo(pn);
-				break;
-			case "ListedDomesticCompanies":
-				pageInfo = ListedDomesticCompaniesService.getPageInfo(pn);
-				break;
-			case "MoneySupply":
-				pageInfo = MoneySupplyService.getPageInfo(pn);
-				break;
-			case "QuasiMoney":
-				pageInfo = QuasiMoneyService.getPageInfo(pn);
-				break;
-			case "SocialContributions":
-				pageInfo = SocialContributionsService.getPageInfo(pn);
-				break;
-			case "StocksTradedValue":
-				pageInfo = StocksTradedValueService.getPageInfo(pn);
-				break;
-			case "Surplus":
-				pageInfo = SurplusService.getPageInfo(pn);
-				break;
-			case "TaxAsPercentageOfEvenue":
-				pageInfo = TaxAsPercentageOfEvenueService.getPageInfo(pn);
-				break;
-			default:
-				break;
-			}
-			return Msg.success().add("pageInfo", pageInfo);
+	@RequestMapping(value = "/getJson", method = RequestMethod.GET)
+	@ResponseBody
+	public <E> Msg getJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
+			@RequestParam("info") String info) {
+		PageInfo<E> pageInfo = null;
+		switch (info) {
+		case "BankCapital":
+			pageInfo = BankCapitalService.getPageInfo(pn);
+			break;
+		case "BankNonPerformingLoans":
+			pageInfo = BankNonPerformingLoansService.getPageInfo(pn);
+			break;
+		case "CentralGovernmentRevenue":
+			pageInfo = CentralGovernmentRevenueService.getPageInfo(pn);
+			break;
+		case "Debt":
+			pageInfo = DebtService.getPageInfo(pn);
+			break;
+		case "DepositRateAndLendingRate":
+			pageInfo = DepositRateAndLendingRateService.getPageInfo(pn);
+			break;
+		case "DomesticCredit":
+			pageInfo = DomesticCreditService.getPageInfo(pn);
+			break;
+		case "GlobalEquityIndices":
+			pageInfo = GlobalEquityIndicesService.getPageInfo(pn);
+			break;
+		case "GrowthRateOfMoney":
+			pageInfo = GrowthRateOfMoneyService.getPageInfo(pn);
+			break;
+		case "ListedDomesticCompanies":
+			pageInfo = ListedDomesticCompaniesService.getPageInfo(pn);
+			break;
+		case "MoneySupply":
+			pageInfo = MoneySupplyService.getPageInfo(pn);
+			break;
+		case "QuasiMoney":
+			pageInfo = QuasiMoneyService.getPageInfo(pn);
+			break;
+		case "SocialContributions":
+			pageInfo = SocialContributionsService.getPageInfo(pn);
+			break;
+		case "StocksTradedValue":
+			pageInfo = StocksTradedValueService.getPageInfo(pn);
+			break;
+		case "Surplus":
+			pageInfo = SurplusService.getPageInfo(pn);
+			break;
+		case "TaxAsPercentageOfEvenue":
+			pageInfo = TaxAsPercentageOfEvenueService.getPageInfo(pn);
+			break;
 		}
-	
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
+		}
+		return Msg.success().add("pageInfo", pageInfo);
+	}
+
+	// 后台按条件获取数据
+	@RequestMapping(value = "/getJsonByCondition/{info}", method = RequestMethod.GET)
+	@ResponseBody
+	public <E> Msg getJson(@PathVariable("info") String info,
+			@RequestParam(value = "pn", defaultValue = "1") Integer pn, @RequestParam("column") String column,
+			@RequestParam("condition") String condition) {
+		PageInfo<E> pageInfo = null;
+		switch (info) {
+		case "BankCapital":
+			pageInfo = BankCapitalService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "BankNonPerformingLoans":
+			pageInfo = BankNonPerformingLoansService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "CentralGovernmentRevenue":
+			pageInfo = CentralGovernmentRevenueService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Debt":
+			pageInfo = DebtService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "DepositRateAndLendingRate":
+			pageInfo = DepositRateAndLendingRateService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "DomesticCredit":
+			pageInfo = DomesticCreditService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "GlobalEquityIndices":
+			pageInfo = GlobalEquityIndicesService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "GrowthRateOfMoney":
+			pageInfo = GrowthRateOfMoneyService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "ListedDomesticCompanies":
+			pageInfo = ListedDomesticCompaniesService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "MoneySupply":
+			pageInfo = MoneySupplyService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "QuasiMoney":
+			pageInfo = QuasiMoneyService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "SocialContributions":
+			pageInfo = SocialContributionsService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "StocksTradedValue":
+			pageInfo = StocksTradedValueService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Surplus":
+			pageInfo = SurplusService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "TaxAsPercentageOfEvenue":
+			pageInfo = TaxAsPercentageOfEvenueService.getPageInfoByCondition(pn, column, condition);
+			break;
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
+		}
+		return Msg.success().add("pageInfo", pageInfo);
+	}
+
 	@RequestMapping("annualAverageDepositRateAndLendingRate")
 	public String annual_average_deposit_rate_and_lending_rate(Model model) {
 		List<DepositRateAndLendingRate> list = DepositRateAndLendingRateService.selectAll();

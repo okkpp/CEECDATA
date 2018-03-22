@@ -4,6 +4,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,7 +57,7 @@ public class EconomicsController {
 			return ChartInfo.mapByCountry(GDPService.selectAll());
 		case "Gnipc":
 			return ChartInfo.mapByCountry(GNIPCService.selectAll());
-		case "GrowthRateGdp" :
+		case "GrowthRateGdp":
 			return ChartInfo.mapByCountry(GrowthOfGDPService.selectAll());
 		case "GrowthRateGdppc":
 			return ChartInfo.mapByCountry(GrowthOfGDPPCService.selectAll());
@@ -79,7 +80,7 @@ public class EconomicsController {
 	}
 
 	// 后台获取数据
-	@RequestMapping(value = "/getJson", method = RequestMethod.POST)
+	@RequestMapping(value = "/getJson", method = RequestMethod.GET)
 	@ResponseBody
 	public <E> Msg getJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
 			@RequestParam("info") String info) {
@@ -121,8 +122,60 @@ public class EconomicsController {
 		case "ShareOfFormation":
 			pageInfo = ShareOfFormationService.getPageInfo(pn);
 			break;
-		default:
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
+		}
+		return Msg.success().add("pageInfo", pageInfo);
+	}
+
+	// 后台按条件获取数据
+	@RequestMapping(value = "/getJsonByCondition/{info}", method = RequestMethod.GET)
+	@ResponseBody
+	public <E> Msg getJson(@PathVariable("info") String info,
+			@RequestParam(value = "pn", defaultValue = "1") Integer pn, @RequestParam("column") String column,
+			@RequestParam("condition") String condition) {
+		PageInfo<E> pageInfo = null;
+		switch (info) {
+		case "FinalConsumption":
+			pageInfo = FinalConsumptionService.getPageInfoByCondition(pn, column, condition);
 			break;
+		case "Gdppc":
+			pageInfo = GDPPCService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Gdp":
+			pageInfo = GDPService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Gnipc":
+			pageInfo = GNIPCService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "GrowthRateGdp":
+			pageInfo = GrowthOfGDPPCService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "IndicatorsOfNa":
+			pageInfo = IndicatorsOfNAService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "PercentageOfAgriculture":
+			pageInfo = PercentageOfAgricultureService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "PercentageOfIndices":
+			pageInfo = PercentageOfIndicesService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "PercentageOfService":
+			pageInfo = PercentageOfServiceService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "RateOfConsumption":
+			pageInfo = RateOfConsumptionService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "RateOfFormation":
+			pageInfo = RateOfFormationService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "ShareOfFormation":
+			pageInfo = ShareOfFormationService.getPageInfoByCondition(pn, column, condition);
+			break;
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
 		}
 		return Msg.success().add("pageInfo", pageInfo);
 	}
