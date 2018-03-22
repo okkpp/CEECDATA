@@ -14,7 +14,7 @@ import com.github.pagehelper.PageInfo;
 
 import okkpp.model.Msg;
 import okkpp.service.agriculture.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 
 /**
  * @author duck
@@ -40,15 +40,15 @@ public class AgricultureController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "HarvestAreas":
-			return CountryMap.mapByCountry(HarvestAreasService.selectAll());
+			return ChartInfo.mapByCountry(HarvestAreasService.selectAll());
 		case "Livestock":
-			return CountryMap.mapByCountry(LivestockService.selectAll());
+			return ChartInfo.mapByCountry(LivestockService.selectAll());
 		case "OutputOfForestProducts":
-			return CountryMap.mapByCountry(OutputOfForestProductsServiece.selectAll());
+			return ChartInfo.mapByCountry(OutputOfForestProductsServiece.selectAll());
 		case "OutputOfLivestockProducts":
-			return CountryMap.mapByCountry(OutputOfLivestockProductsService.selectAll());
+			return ChartInfo.mapByCountry(OutputOfLivestockProductsService.selectAll());
 		case "ProductionOfFarmCrops":
-			return CountryMap.mapByCountry(ProductionOfFarmCropsService.selectAll());
+			return ChartInfo.mapByCountry(ProductionOfFarmCropsService.selectAll());
 		}
 		return null;
 	}

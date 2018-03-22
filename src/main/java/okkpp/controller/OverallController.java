@@ -6,7 +6,7 @@ import java.util.Map;
 import okkpp.model.Msg;
 import okkpp.model.overall.*;
 import okkpp.service.overall.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,11 +40,11 @@ public class OverallController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "Countryarea":
-			return CountryMap.mapByCountry(countryareaService.selectAll());
+			return ChartInfo.mapByCountry(countryareaService.selectAll());
 		case "Freshwater":
-			return CountryMap.mapByCountry(freshwaterService.selectAll());
+			return ChartInfo.mapByCountry(freshwaterService.selectAll());
 		case "LandUtilization":
-			return CountryMap.mapByCountry(landUtilizationService.selectAll());
+			return ChartInfo.mapByCountry(landUtilizationService.selectAll());
 		}
 		return null;
 	}

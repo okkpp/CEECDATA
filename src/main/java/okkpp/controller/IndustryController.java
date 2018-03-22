@@ -17,7 +17,7 @@ import okkpp.service.industry.IndicesOfIndustrialService;
 import okkpp.service.industry.IndicesOfManufacturingService;
 import okkpp.service.industry.IndicesOfMiningService;
 import okkpp.service.industry.ValueAddedInManufacturingService;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 
 @Controller
 @RequestMapping("/industry")
@@ -37,13 +37,13 @@ public class IndustryController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "IndicesOfIndustrial":
-			return CountryMap.mapByCountry(indicesOfIndustrialService.selectAll());
+			return ChartInfo.mapByCountry(indicesOfIndustrialService.selectAll());
 		case "IndicesOfManufacturing":
-			return CountryMap.mapByCountry(indicesOfManufacturingService.selectAll());
+			return ChartInfo.mapByCountry(indicesOfManufacturingService.selectAll());
 		case "IndicesOfMining":
-			return CountryMap.mapByCountry(indicesOfMiningService.selectAll());
+			return ChartInfo.mapByCountry(indicesOfMiningService.selectAll());
 		case "ValueAddedInManufacturing":
-			return CountryMap.mapByCountry(valueAddedInManufacturingService.selectAll());
+			return ChartInfo.mapByCountry(valueAddedInManufacturingService.selectAll());
 		}
 		return null;
 	}
