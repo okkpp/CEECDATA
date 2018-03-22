@@ -14,7 +14,7 @@ import com.github.pagehelper.PageInfo;
 
 import okkpp.service.investment.*;
 import okkpp.model.Msg;
-import okkpp.model.investment.*;
+import okkpp.model.investment.*;  
 
 @Controller
 @RequestMapping("/investment")
