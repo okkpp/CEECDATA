@@ -26,16 +26,38 @@ public class ElectricityGenerationService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(ElectricityGeneration.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<ElectricityGeneration> list = mapper.selectAll();
+		List<ElectricityGeneration> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<ElectricityGeneration> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(ElectricityGeneration.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<ElectricityGeneration> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// ElectricityGeneration¸üÐÂ
+	public int updateElectricityGeneration(ElectricityGeneration electricityGeneration) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(electricityGeneration);
+	}
+
+	// ElectricityGeneration²åÈë
+	public int insertElectricityGeneration(ElectricityGeneration electricityGeneration) {
+		return mapper.insertSelective(electricityGeneration);
+	}
+
+	// ElectricityGenerationÉ¾³ý
+	public int deleteElectricityGeneration(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

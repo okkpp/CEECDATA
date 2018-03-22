@@ -26,16 +26,38 @@ public class EducationalUnemploymentService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(EducationalUnemployment.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<EducationalUnemployment> list = mapper.selectAll();
+		List<EducationalUnemployment> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<EducationalUnemployment> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(EducationalUnemployment.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<EducationalUnemployment> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// EducationalUnemployment¸üÐÂ
+	public int updateEducationalUnemployment(EducationalUnemployment educationalUnemployment) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(educationalUnemployment);
+	}
+
+	// EducationalUnemployment²åÈë
+	public int insertEducationalUnemployment(EducationalUnemployment educationalUnemployment) {
+		return mapper.insertSelective(educationalUnemployment);
+	}
+
+	// EducationalUnemploymentÉ¾³ý
+	public int deleteEducationalUnemployment(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

@@ -26,16 +26,38 @@ public class QuasiMoneyService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(QuasiMoney.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<QuasiMoney> list = mapper.selectAll();
+		List<QuasiMoney> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<QuasiMoney> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(QuasiMoney.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<QuasiMoney> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// QuasiMoney¸üÐÂ
+	public int updateQuasiMoney(QuasiMoney quasiMoney) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(quasiMoney);
+	}
+
+	// QuasiMoney²åÈë
+	public int insertQuasiMoney(QuasiMoney quasiMoney) {
+		return mapper.insertSelective(quasiMoney);
+	}
+
+	// QuasiMoneyÉ¾³ý
+	public int deleteQuasiMoney(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

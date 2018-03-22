@@ -23,17 +23,39 @@ public class SocialIndicatorsOfPovertyService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(SocialIndicatorsOfPoverty.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<SocialIndicatorsOfPoverty> list = mapper.selectAll();
+		List<SocialIndicatorsOfPoverty> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<SocialIndicatorsOfPoverty> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(SocialIndicatorsOfPoverty.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<SocialIndicatorsOfPoverty> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// SocialIndicatorsOfPoverty¸üÐÂ
+	public int updateSocialIndicatorsOfPoverty(SocialIndicatorsOfPoverty socialIndicatorsOfPoverty) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(socialIndicatorsOfPoverty);
+	}
+
+	// SocialIndicatorsOfPoverty²åÈë
+	public int insertSocialIndicatorsOfPoverty(SocialIndicatorsOfPoverty socialIndicatorsOfPoverty) {
+		return mapper.insertSelective(socialIndicatorsOfPoverty);
+	}
+
+	// SocialIndicatorsOfPovertyÉ¾³ý
+	public int deleteSocialIndicatorsOfPoverty(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 	
 }

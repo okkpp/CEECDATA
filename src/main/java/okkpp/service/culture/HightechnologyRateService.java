@@ -26,16 +26,38 @@ public class HightechnologyRateService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(HightechnologyRate.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<HightechnologyRate> list = mapper.selectAll();
+		List<HightechnologyRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<HightechnologyRate> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(HightechnologyRate.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<HightechnologyRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// HightechnologyRate¸üÐÂ
+	public int updateHightechnologyRate(HightechnologyRate hightechnologyRate) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(hightechnologyRate);
+	}
+
+	// HightechnologyRate²åÈë
+	public int insertHightechnologyRate(HightechnologyRate hightechnologyRate) {
+		return mapper.insertSelective(hightechnologyRate);
+	}
+
+	// HightechnologyRateÉ¾³ý
+	public int deleteHightechnologyRate(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

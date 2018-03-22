@@ -26,16 +26,38 @@ public class BalanceSheetService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(BalanceSheet.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<BalanceSheet> list = mapper.selectAll();
+		List<BalanceSheet> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<BalanceSheet> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(BalanceSheet.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<BalanceSheet> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// BalanceSheet¸üÐÂ
+	public int updateBalanceSheet(BalanceSheet balanceSheet) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(balanceSheet);
+	}
+
+	// BalanceSheet²åÈë
+	public int insertBalanceSheet(BalanceSheet balanceSheet) {
+		return mapper.insertSelective(balanceSheet);
+	}
+
+	// BalanceSheetÉ¾³ý
+	public int deleteBalanceSheet(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

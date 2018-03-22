@@ -26,16 +26,38 @@ public class IndicatorsOfNaService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(IndicatorsOfNa.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<IndicatorsOfNa> list = mapper.selectAll();
+		List<IndicatorsOfNa> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<IndicatorsOfNa> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(IndicatorsOfNa.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<IndicatorsOfNa> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// IndicatorsOfNa¸üÐÂ
+	public int updateIndicatorsOfNa(IndicatorsOfNa indicatorsOfNa) {
+		// TODO Auto-generated method 
+		return mapper.updateByPrimaryKeySelective(indicatorsOfNa);
+	}
+
+	// IndicatorsOfNa²åÈë
+	public int insertIndicatorsOfNa(IndicatorsOfNa indicatorsOfNa) {
+		return mapper.insertSelective(indicatorsOfNa);
+	}
+
+	// IndicatorsOfNaÉ¾³ý
+	public int deleteIndicatorsOfNa(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

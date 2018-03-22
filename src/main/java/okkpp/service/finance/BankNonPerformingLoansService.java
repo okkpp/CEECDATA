@@ -26,16 +26,38 @@ public class BankNonPerformingLoansService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(BankNonPerformingLoans.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<BankNonPerformingLoans> list = mapper.selectAll();
+		List<BankNonPerformingLoans> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<BankNonPerformingLoans> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(BankNonPerformingLoans.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<BankNonPerformingLoans> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// BankNonPerformingLoans¸üÐÂ
+	public int updateBankNonPerformingLoans(BankNonPerformingLoans bankNonPerformingLoans) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(bankNonPerformingLoans);
+	}
+
+	// BankNonPerformingLoans²åÈë
+	public int insertBankNonPerformingLoans(BankNonPerformingLoans bankNonPerformingLoans) {
+		return mapper.insertSelective(bankNonPerformingLoans);
+	}
+
+	// BankNonPerformingLoanslÉ¾³ý
+	public int deleteBankNonPerformingLoans(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

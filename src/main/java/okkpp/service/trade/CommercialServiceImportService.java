@@ -24,16 +24,38 @@ public class CommercialServiceImportService {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <E> PageInfo<E> getPageInfo(int pn){		
+		Example example = new Example(CommercialServiceImport.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<CommercialServiceImport> list = mapper.selectAll();
+		List<CommercialServiceImport> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
 	
-	public List<CommercialServiceImport> selectByExample(String column,String condition){
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn,String column,String condition){
 		Example example = new Example(CommercialServiceImport.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
 		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		PageHelper.startPage(pn, 10);
+		List<CommercialServiceImport> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list,10);
+	}
+
+	//CommercialServiceImport¸üÐÂ
+	public int updateCommercialServiceImport(CommercialServiceImport commercialServiceImport) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(commercialServiceImport);
+	}
+	
+	//CommercialServiceImport²åÈë
+	public int insertCommercialServiceImport(CommercialServiceImport commercialServiceImport) {
+		return mapper.insertSelective(commercialServiceImport);
+	}
+	
+	//CommercialServiceImportÉ¾³ý
+	public int deleteCommercialServiceImport(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 	
 }

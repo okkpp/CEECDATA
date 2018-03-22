@@ -26,16 +26,38 @@ public class PatentApplicationsService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(PatentApplications.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<PatentApplications> list = mapper.selectAll();
+		List<PatentApplications> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<PatentApplications> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(PatentApplications.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<PatentApplications> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// PatentApplications¸üÐÂ
+	public int updatePatentApplications(PatentApplications patentApplications) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(patentApplications);
+	}
+
+	// PatentApplications²åÈë
+	public int insertPatentApplications(PatentApplications patentApplications) {
+		return mapper.insertSelective(patentApplications);
+	}
+
+	// PatentApplicationsÉ¾³ý
+	public int deletePatentApplications(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

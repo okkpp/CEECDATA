@@ -26,16 +26,38 @@ public class GdppcService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(Gdppc.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<Gdppc> list = mapper.selectAll();
+		List<Gdppc> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<Gdppc> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(Gdppc.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<Gdppc> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// Gdppc¸üÐÂ
+	public int updateGdppc(Gdppc gdppc) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(gdppc);
+	}
+
+	// Gdppc²åÈë
+	public int insertGdppc(Gdppc gdppc) {
+		return mapper.insertSelective(gdppc);
+	}
+
+	// GdppcÉ¾³ý
+	public int deleteGdppc(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

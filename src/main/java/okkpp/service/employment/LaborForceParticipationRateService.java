@@ -26,16 +26,38 @@ public class LaborForceParticipationRateService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(LaborForceParticipationRate.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<LaborForceParticipationRate> list = mapper.selectAll();
+		List<LaborForceParticipationRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<LaborForceParticipationRate> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(LaborForceParticipationRate.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<LaborForceParticipationRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// LaborForceParticipationRate¸üÐÂ
+	public int updateLaborForceParticipationRate(LaborForceParticipationRate laborForceParticipationRate) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(laborForceParticipationRate);
+	}
+
+	// LaborForceParticipationRate²åÈë
+	public int insertLaborForceParticipationRate(LaborForceParticipationRate laborForceParticipationRate) {
+		return mapper.insertSelective(laborForceParticipationRate);
+	}
+
+	// LaborForceParticipationRateÉ¾³ý
+	public int deleteLaborForceParticipationRate(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

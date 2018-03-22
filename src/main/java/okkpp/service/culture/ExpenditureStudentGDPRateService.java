@@ -26,16 +26,38 @@ public class ExpenditureStudentGDPRateService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(ExpenditureStudentGDPRate.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<ExpenditureStudentGDPRate> list = mapper.selectAll();
+		List<ExpenditureStudentGDPRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<ExpenditureStudentGDPRate> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(ExpenditureStudentGDPRate.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<ExpenditureStudentGDPRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// ExpenditureStudentGDPRate¸üÐÂ
+	public int updateExpenditureStudentGDPRate(ExpenditureStudentGDPRate expenditureStudentGDPRate) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(expenditureStudentGDPRate);
+	}
+
+	// ExpenditureStudentGDPRate²åÈë
+	public int insertExpenditureStudentGDPRate(ExpenditureStudentGDPRate expenditureStudentGDPRate) {
+		return mapper.insertSelective(expenditureStudentGDPRate);
+	}
+
+	// ExpenditureStudentGDPRateÉ¾³ý
+	public int deleteExpenditureStudentGDPRate(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

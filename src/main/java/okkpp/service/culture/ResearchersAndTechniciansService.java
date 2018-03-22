@@ -26,16 +26,38 @@ public class ResearchersAndTechniciansService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(ResearchersAndTechnicians.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<ResearchersAndTechnicians> list = mapper.selectAll();
+		List<ResearchersAndTechnicians> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<ResearchersAndTechnicians> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(ResearchersAndTechnicians.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<ResearchersAndTechnicians> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// ResearchersAndTechnicians¸üÐÂ
+	public int updateResearchersAndTechnicians(ResearchersAndTechnicians researchersAndTechnicians) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(researchersAndTechnicians);
+	}
+
+	// ResearchersAndTechnicians²åÈë
+	public int insertResearchersAndTechnicians(ResearchersAndTechnicians researchersAndTechnicians) {
+		return mapper.insertSelective(researchersAndTechnicians);
+	}
+
+	// ResearchersAndTechniciansÉ¾³ý
+	public int deleteResearchersAndTechnicians(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

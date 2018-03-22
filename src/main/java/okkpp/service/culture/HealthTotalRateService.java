@@ -26,16 +26,38 @@ public class HealthTotalRateService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(HealthTotalRate.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<HealthTotalRate> list = mapper.selectAll();
+		List<HealthTotalRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<HealthTotalRate> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(HealthTotalRate.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<HealthTotalRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// HealthTotalRate¸üÐÂ
+	public int updateHealthTotalRate(HealthTotalRate healthTotalRate) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(healthTotalRate);
+	}
+
+	// HealthTotalRate²åÈë
+	public int insertHealthTotalRate(HealthTotalRate healthTotalRate) {
+		return mapper.insertSelective(healthTotalRate);
+	}
+
+	// HealthTotalRateÉ¾³ý
+	public int deleteHealthTotalRate(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

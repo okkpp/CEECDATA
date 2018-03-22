@@ -26,16 +26,38 @@ public class BankCapitalService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(BankCapital.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<BankCapital> list = mapper.selectAll();
+		List<BankCapital> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<BankCapital> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(BankCapital.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<BankCapital> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// BankCapital¸üÐÂ
+	public int updateBankCapital(BankCapital bankCapital) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(bankCapital);
+	}
+
+	// BankCapital²åÈë
+	public int insertBankCapital(BankCapital bankCapital) {
+		return mapper.insertSelective(bankCapital);
+	}
+
+	// BankCapitalÉ¾³ý
+	public int deleteBankCapital(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

@@ -26,16 +26,38 @@ public class WaterPeopleRateService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(WaterPeopleRate.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<WaterPeopleRate> list = mapper.selectAll();
+		List<WaterPeopleRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<WaterPeopleRate> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(WaterPeopleRate.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<WaterPeopleRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// WaterPeopleRate¸üÐÂ
+	public int updateWaterPeopleRate(WaterPeopleRate waterPeopleRate) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(waterPeopleRate);
+	}
+
+	// WaterPeopleRate²åÈë
+	public int insertWaterPeopleRate(WaterPeopleRate waterPeopleRate) {
+		return mapper.insertSelective(waterPeopleRate);
+	}
+
+	// WaterPeopleRateÉ¾³ý
+	public int deleteWaterPeopleRate(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

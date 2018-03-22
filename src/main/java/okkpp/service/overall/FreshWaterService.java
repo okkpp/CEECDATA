@@ -27,16 +27,38 @@ public class FreshWaterService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(FreshWater.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<FreshWater> list = mapper.selectAll();
+		List<FreshWater> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<FreshWater> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(FreshWater.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<FreshWater> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// FreshWater¸üÐÂ
+	public int updateFreshWater(FreshWater freshWaterf) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(freshWaterf);
+	}
+
+	// FreshWater²åÈë
+	public int insertFreshWater(FreshWater freshWater) {
+		return mapper.insertSelective(freshWater);
+	}
+
+	// FreshWaterÉ¾³ý
+	public int deleteFreshWater(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

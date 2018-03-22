@@ -26,16 +26,38 @@ public class RateOfConsumptionService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(RateOfConsumption.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<RateOfConsumption> list = mapper.selectAll();
+		List<RateOfConsumption> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<RateOfConsumption> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(RateOfConsumption.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<RateOfConsumption> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// RateOfConsumption¸üÐÂ
+	public int updateRateOfConsumption(RateOfConsumption rateOfConsumption) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(rateOfConsumption);
+	}
+
+	// RateOfConsumption²åÈë
+	public int insertRateOfConsumption(RateOfConsumption rateOfConsumption) {
+		return mapper.insertSelective(rateOfConsumption);
+	}
+
+	// RateOfConsumptionÉ¾³ý
+	public int deleteRateOfConsumption(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }
