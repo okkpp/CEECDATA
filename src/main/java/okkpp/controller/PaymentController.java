@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import okkpp.service.payment.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 import okkpp.model.Msg;
 
 @Controller
@@ -33,15 +33,15 @@ public class PaymentController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "Exchange":
-			return CountryMap.mapByCountry(exchangeService.selectAll());
+			return ChartInfo.mapByCountry(exchangeService.selectAll());
 		case "External":
-			return CountryMap.mapByCountry(externalService.selectAll());
+			return ChartInfo.mapByCountry(externalService.selectAll());
 		case "Foreign":
-			return CountryMap.mapByCountry(foreignService.selectAll());
+			return ChartInfo.mapByCountry(foreignService.selectAll());
 		case "Payment":
-			return CountryMap.mapByCountry(paymentService.selectAll());
+			return ChartInfo.mapByCountry(paymentService.selectAll());
 		case "Reserves":
-			return CountryMap.mapByCountry(reservesService.selectAll());
+			return ChartInfo.mapByCountry(reservesService.selectAll());
 		}
 		return null;
 	}

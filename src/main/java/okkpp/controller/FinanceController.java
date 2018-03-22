@@ -16,7 +16,7 @@ import com.github.pagehelper.PageInfo;
 import okkpp.model.Msg;
 import okkpp.model.finance.DepositRateAndLendingRate;
 import okkpp.service.finance.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 
 /**
 * @author duck
@@ -61,35 +61,35 @@ public class FinanceController {
 	public Map<String, Object> info(String info) {
 		switch(info) {
 		case "BankCapital":
-			return CountryMap.mapByCountry(BankCapitalService.selectAll());
+			return ChartInfo.mapByCountry(BankCapitalService.selectAll());
 		case "BankNonPerformingLoans":
-			return CountryMap.mapByCountry(BankNonPerformingLoansService.selectAll());
+			return ChartInfo.mapByCountry(BankNonPerformingLoansService.selectAll());
 		case "CentralGovernmentRevenue":
-			return CountryMap.mapByCountry(CentralGovernmentRevenueService.selectAll());
+			return ChartInfo.mapByCountry(CentralGovernmentRevenueService.selectAll());
 		case "Debt":
-			return CountryMap.mapByCountry(DebtService.selectAll());
+			return ChartInfo.mapByCountry(DebtService.selectAll());
 		case "DepositRateAndLendingRate":
-			return CountryMap.mapByCountry(DepositRateAndLendingRateService.selectAll());
+			return ChartInfo.mapByCountry(DepositRateAndLendingRateService.selectAll());
 		case "DomesticCredit":
-			return CountryMap.mapByCountry(DomesticCreditService.selectAll());
+			return ChartInfo.mapByCountry(DomesticCreditService.selectAll());
 		case "GlobalEquityIndices":
-			return CountryMap.mapByCountry(GlobalEquityIndicesService.selectAll());
+			return ChartInfo.mapByCountry(GlobalEquityIndicesService.selectAll());
 		case "GrowthRateOfMoney":
-			return CountryMap.mapByCountry(GrowthRateOfMoneyService.selectAll());
+			return ChartInfo.mapByCountry(GrowthRateOfMoneyService.selectAll());
 		case "ListedDomesticCompanies":
-			return CountryMap.mapByCountry(ListedDomesticCompaniesService.selectAll());
+			return ChartInfo.mapByCountry(ListedDomesticCompaniesService.selectAll());
 		case "MoneySupply":
-			return CountryMap.mapByCountry(MoneySupplyService.selectAll());
+			return ChartInfo.mapByCountry(MoneySupplyService.selectAll());
 		case "QuasiMoney":
-			return CountryMap.mapByCountry(QuasiMoneyService.selectAll());
+			return ChartInfo.mapByCountry(QuasiMoneyService.selectAll());
 		case "SocialContributions":
-			return CountryMap.mapByCountry(SocialContributionsService.selectAll());
+			return ChartInfo.mapByCountry(SocialContributionsService.selectAll());
 		case "StocksTradedValue":
-			return CountryMap.mapByCountry(StocksTradedValueService.selectAll());
+			return ChartInfo.mapByCountry(StocksTradedValueService.selectAll());
 		case "Surplus":
-			return CountryMap.mapByCountry(SurplusService.selectAll());
+			return ChartInfo.mapByCountry(SurplusService.selectAll());
 		case "TaxAsPercentageOfEvenue":
-			return CountryMap.mapByCountry(TaxAsPercentageOfEvenueService.selectAll());
+			return ChartInfo.mapByCountry(TaxAsPercentageOfEvenueService.selectAll());
 		}
 		return null;
 	}
@@ -155,8 +155,8 @@ public class FinanceController {
 	@RequestMapping("annualAverageDepositRateAndLendingRate")
 	public String annual_average_deposit_rate_and_lending_rate(Model model) {
 		List<DepositRateAndLendingRate> list = DepositRateAndLendingRateService.selectAll();
-		model.addAttribute("data", CountryMap.mapByCountry(list));
-		model.addAttribute("jsondata", CountryMap.mapByCountryToJson(list));
+		model.addAttribute("data", ChartInfo.mapByCountry(list));
+		model.addAttribute("jsondata", ChartInfo.mapByCountryToJson(list));
 		return "/finance/annual_average_deposit_rate_and_lending_rate";
 	}
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import okkpp.service.poverty.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 import okkpp.model.Msg;
 
 @Controller
@@ -33,15 +33,15 @@ public class PovertyController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "HouseholdConsumptionExpenditure":
-			return CountryMap.mapByCountry(householdConsumptionExpenditureService.selectAll());
+			return ChartInfo.mapByCountry(householdConsumptionExpenditureService.selectAll());
 		case "InternationalPovertyRatio":
-			return CountryMap.mapByCountry(internationalPovertyRatioService.selectAll());
+			return ChartInfo.mapByCountry(internationalPovertyRatioService.selectAll());
 		case "PersonalIncome":
-			return CountryMap.mapByCountry(personalIncomeService.selectAll());
+			return ChartInfo.mapByCountry(personalIncomeService.selectAll());
 		case "PovertyRate":
-			return CountryMap.mapByCountry(povertyRateService.selectAll());
+			return ChartInfo.mapByCountry(povertyRateService.selectAll());
 		case "SocialIndicatorsOfPoverty":
-			return CountryMap.mapByCountry(socialIndicatorsOfPovertyService.selectAll());
+			return ChartInfo.mapByCountry(socialIndicatorsOfPovertyService.selectAll());
 		}
 		return null;
 	}

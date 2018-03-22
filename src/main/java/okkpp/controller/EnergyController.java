@@ -14,7 +14,7 @@ import com.github.pagehelper.PageInfo;
 
 import okkpp.model.Msg;
 import okkpp.service.energy.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 
 /**
  * @author duck
@@ -42,17 +42,17 @@ public class EnergyController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "BalanceSheet":
-			return CountryMap.mapByCountry(BalanceSheetService.selectAll());
+			return ChartInfo.mapByCountry(BalanceSheetService.selectAll());
 		case "CombustibleRenewals":
-			return CountryMap.mapByCountry(CombustibleRenewalsService.selectAll());
+			return ChartInfo.mapByCountry(CombustibleRenewalsService.selectAll());
 		case "ElectricityGeneration":
-			return CountryMap.mapByCountry(ElectricityGenerationService.selectAll());
+			return ChartInfo.mapByCountry(ElectricityGenerationService.selectAll());
 		case "EnergyImports":
-			return CountryMap.mapByCountry(EnergyImportsService.selectAll());
+			return ChartInfo.mapByCountry(EnergyImportsService.selectAll());
 		case "EnergyUseOfGDP":
-			return CountryMap.mapByCountry(EnergyUseOfGDPService.selectAll());
+			return ChartInfo.mapByCountry(EnergyUseOfGDPService.selectAll());
 		case "NuclearPercentage":
-			return CountryMap.mapByCountry(NuclearPercentageService.selectAll());
+			return ChartInfo.mapByCountry(NuclearPercentageService.selectAll());
 		}
 		return null;
 	}

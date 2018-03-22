@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import okkpp.service.traffic.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 import okkpp.model.Msg;
 
 @Controller
@@ -39,21 +39,21 @@ public class TrafficController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "AirFreight":
-			return CountryMap.mapByCountry(AirFreightService.selectAll());
+			return ChartInfo.mapByCountry(AirFreightService.selectAll());
 		case "Broadband":
-			return CountryMap.mapByCountry(BroadbandService.selectAll());
+			return ChartInfo.mapByCountry(BroadbandService.selectAll());
 		case "Container":
-			return CountryMap.mapByCountry(ContainerService.selectAll());
+			return ChartInfo.mapByCountry(ContainerService.selectAll());
 		case "Freight":
-			return CountryMap.mapByCountry(FreightService.selectAll());
+			return ChartInfo.mapByCountry(FreightService.selectAll());
 		case "InternetServers":
-			return CountryMap.mapByCountry(InternetServersService.selectAll());
+			return ChartInfo.mapByCountry(InternetServersService.selectAll());
 		case "InternetUsers":
-			return CountryMap.mapByCountry(InternetUsersService.selectAll());
+			return ChartInfo.mapByCountry(InternetUsersService.selectAll());
 		case "Phone":
-			return CountryMap.mapByCountry(PhoneService.selectAll());
+			return ChartInfo.mapByCountry(PhoneService.selectAll());
 		case "RailLines":
-			return CountryMap.mapByCountry(RailLinesService.selectAll());
+			return ChartInfo.mapByCountry(RailLinesService.selectAll());
 		}
 		return null;
 	}

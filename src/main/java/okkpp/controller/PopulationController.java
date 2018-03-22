@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import okkpp.service.population.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 import okkpp.model.Msg;
 
 @Controller
@@ -41,23 +41,23 @@ public class PopulationController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "BirthRateDeathRate":
-			return CountryMap.mapByCountry(birthRateDeathRateService.selectAll());
+			return ChartInfo.mapByCountry(birthRateDeathRateService.selectAll());
 		case "CompositionDependencyRatio":
-			return CountryMap.mapByCountry(compositionDependencyRatioService.selectAll());
+			return ChartInfo.mapByCountry(compositionDependencyRatioService.selectAll());
 		case "Density":
-			return CountryMap.mapByCountry(densityService.selectAll());
+			return ChartInfo.mapByCountry(densityService.selectAll());
 		case "FemalePercent":
-			return CountryMap.mapByCountry(femalePercentService.selectAll());
+			return ChartInfo.mapByCountry(femalePercentService.selectAll());
 		case "InfantMortalityRate":
-			return CountryMap.mapByCountry(infantMortalityRateService.selectAll());
+			return ChartInfo.mapByCountry(infantMortalityRateService.selectAll());
 		case "LifeExpectancyAtBirth":
-			return CountryMap.mapByCountry(lifeExpectancyAtBirthService.selectAll());
+			return ChartInfo.mapByCountry(lifeExpectancyAtBirthService.selectAll());
 		case "MidYearPoplation":
-			return CountryMap.mapByCountry(midYearPoplationService.selectAll());
+			return ChartInfo.mapByCountry(midYearPoplationService.selectAll());
 		case "ReproductiveHealth":
-			return CountryMap.mapByCountry(reproductiveHealthService.selectAll());
+			return ChartInfo.mapByCountry(reproductiveHealthService.selectAll());
 		case "RuralAndUrbanRate":
-			return CountryMap.mapByCountry(ruralAndUrbanRateService.selectAll());
+			return ChartInfo.mapByCountry(ruralAndUrbanRateService.selectAll());
 		}
 		return null;
 	}

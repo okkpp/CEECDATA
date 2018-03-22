@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import okkpp.model.Msg;
 import okkpp.service.economics.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 
 @Controller
 @RequestMapping("/economics")
@@ -49,31 +49,31 @@ public class EconomicsController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "FinalConsumption":
-			return CountryMap.mapByCountry(FinalConsumptionService.selectAll());
+			return ChartInfo.mapByCountry(FinalConsumptionService.selectAll());
 		case "Gdppc":
-			return CountryMap.mapByCountry(GDPPCService.selectAll());
+			return ChartInfo.mapByCountry(GDPPCService.selectAll());
 		case "Gdp":
-			return CountryMap.mapByCountry(GDPService.selectAll());
+			return ChartInfo.mapByCountry(GDPService.selectAll());
 		case "Gnipc":
-			return CountryMap.mapByCountry(GNIPCService.selectAll());
+			return ChartInfo.mapByCountry(GNIPCService.selectAll());
 		case "GrowthRateGdp" :
-			return CountryMap.mapByCountry(GrowthOfGDPService.selectAll());
+			return ChartInfo.mapByCountry(GrowthOfGDPService.selectAll());
 		case "GrowthRateGdppc":
-			return CountryMap.mapByCountry(GrowthOfGDPPCService.selectAll());
+			return ChartInfo.mapByCountry(GrowthOfGDPPCService.selectAll());
 		case "IndicatorsOfNa":
-			return CountryMap.mapByCountry(IndicatorsOfNAService.selectAll());
+			return ChartInfo.mapByCountry(IndicatorsOfNAService.selectAll());
 		case "PercentageOfAgriculture":
-			return CountryMap.mapByCountry(PercentageOfAgricultureService.selectAll());
+			return ChartInfo.mapByCountry(PercentageOfAgricultureService.selectAll());
 		case "PercentageOfIndices":
-			return CountryMap.mapByCountry(PercentageOfIndicesService.selectAll());
+			return ChartInfo.mapByCountry(PercentageOfIndicesService.selectAll());
 		case "PercentageOfService":
-			return CountryMap.mapByCountry(PercentageOfServiceService.selectAll());
+			return ChartInfo.mapByCountry(PercentageOfServiceService.selectAll());
 		case "RateOfConsumption":
-			return CountryMap.mapByCountry(RateOfConsumptionService.selectAll());
+			return ChartInfo.mapByCountry(RateOfConsumptionService.selectAll());
 		case "RateOfFormation":
-			return CountryMap.mapByCountry(RateOfFormationService.selectAll());
+			return ChartInfo.mapByCountry(RateOfFormationService.selectAll());
 		case "ShareOfFormation":
-			return CountryMap.mapByCountry(ShareOfFormationService.selectAll());
+			return ChartInfo.mapByCountry(ShareOfFormationService.selectAll());
 		}
 		return null;
 	}

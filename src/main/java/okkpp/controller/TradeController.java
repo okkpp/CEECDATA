@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import okkpp.service.trade.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 import okkpp.model.Msg;
 
 @Controller
@@ -39,21 +39,21 @@ public class TradeController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "CommercialServiceExport":
-			return CountryMap.mapByCountry(commercialServiceExportService.selectAll());
+			return ChartInfo.mapByCountry(commercialServiceExportService.selectAll());
 		case "CommercialServiceImport":
-			return CountryMap.mapByCountry(commercialServiceImportService.selectAll());
+			return ChartInfo.mapByCountry(commercialServiceImportService.selectAll());
 		case "ExportsByCommodityGroups":
-			return CountryMap.mapByCountry(exportsByCommodityGroupsService.selectAll());
+			return ChartInfo.mapByCountry(exportsByCommodityGroupsService.selectAll());
 		case "GoodsAndServices":
-			return CountryMap.mapByCountry(goodsAndServicesService.selectAll());
+			return ChartInfo.mapByCountry(goodsAndServicesService.selectAll());
 		case "ImportsByCommodityGroups":
-			return CountryMap.mapByCountry(importsByCommodityGroupsService.selectAll());
+			return ChartInfo.mapByCountry(importsByCommodityGroupsService.selectAll());
 		case "MerchandiseExports":
-			return CountryMap.mapByCountry(merchandiseExportsService.selectAll());
+			return ChartInfo.mapByCountry(merchandiseExportsService.selectAll());
 		case "MerchandiseImports":
-			return CountryMap.mapByCountry(merchandiseImportsService.selectAll());
+			return ChartInfo.mapByCountry(merchandiseImportsService.selectAll());
 		case "MerchandiseImportsAndExports":
-			return CountryMap.mapByCountry(merchandiseImportsAndExportsService.selectAll());
+			return ChartInfo.mapByCountry(merchandiseImportsAndExportsService.selectAll());
 		}
 		return null;
 	}

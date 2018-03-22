@@ -14,7 +14,7 @@ import com.github.pagehelper.PageInfo;
 
 import okkpp.model.Msg;
 import okkpp.service.culture.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 
 /**
  * @author duck
@@ -50,23 +50,23 @@ public class CultureController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "AdultLiteracyRate":
-			return CountryMap.mapByCountry(AdultLiteracyRateService.selectAll());
+			return ChartInfo.mapByCountry(AdultLiteracyRateService.selectAll());
 		case "ExpenditureStudentGDPRate":
-			return CountryMap.mapByCountry(ExpenditureStudentGDPRateService.selectAll());
+			return ChartInfo.mapByCountry(ExpenditureStudentGDPRateService.selectAll());
 		case "HealthTotalRate":
-			return CountryMap.mapByCountry(HealthTotalRateService.selectAll());
+			return ChartInfo.mapByCountry(HealthTotalRateService.selectAll());
 		case "HightechnologyRate":
-			return CountryMap.mapByCountry(HightechnologyRateService.selectAll());
+			return ChartInfo.mapByCountry(HightechnologyRateService.selectAll());
 		case "Hospital":
-			return CountryMap.mapByCountry(HospitalService.selectAll());
+			return ChartInfo.mapByCountry(HospitalService.selectAll());
 		case "PatentApplications":
-			return CountryMap.mapByCountry(PatentApplicationsService.selectAll());
+			return ChartInfo.mapByCountry(PatentApplicationsService.selectAll());
 		case "ResearchersAndTechnicians":
-			return CountryMap.mapByCountry(ResearchersAndTechniciansService.selectAll());
+			return ChartInfo.mapByCountry(ResearchersAndTechniciansService.selectAll());
 		case "SchoolEnrollmentRatio":
-			return CountryMap.mapByCountry(SchoolEnrollmentRatioService.selectAll());
+			return ChartInfo.mapByCountry(SchoolEnrollmentRatioService.selectAll());
 		case "WaterPeopleRate":
-			return CountryMap.mapByCountry(WaterPeopleRateService.selectAll());
+			return ChartInfo.mapByCountry(WaterPeopleRateService.selectAll());
 		}
 		return null;
 	}

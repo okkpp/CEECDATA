@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import okkpp.service.investment.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 import okkpp.model.Msg;
 
 @Controller
@@ -31,13 +31,13 @@ public class InvestmentController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "CostOfBusiness":
-			return CountryMap.mapByCountry(costOfBusinessService.selectAll());
+			return ChartInfo.mapByCountry(costOfBusinessService.selectAll());
 		case "DensityOfBusiness":
-			return CountryMap.mapByCountry(densityOfBusinessService.selectAll());
+			return ChartInfo.mapByCountry(densityOfBusinessService.selectAll());
 		case "RankOfBusiness":
-			return CountryMap.mapByCountry(rankOfBusinessService.selectAll());
+			return ChartInfo.mapByCountry(rankOfBusinessService.selectAll());
 		case "RegisteredOfBusiness":
-			return CountryMap.mapByCountry(registeredOfBusinessService.selectAll());
+			return ChartInfo.mapByCountry(registeredOfBusinessService.selectAll());
 		}
 		return null;
 	}
