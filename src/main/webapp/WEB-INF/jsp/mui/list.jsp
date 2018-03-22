@@ -30,9 +30,8 @@
 					<li>
 						<a class="button border-main icon-plus-square-o" href="mui.do?str=add"> 添加内容</a>
 					</li>
-					<li>搜索&nbsp;&nbsp;
-					
-						章节:
+					<li>
+						搜索&nbsp;&nbsp; 章节:
 						<select id="chapter_choose" class="input" style="width: 120px; line-height: 17px; display: inline-block">
 							<option></option>
 						</select>
@@ -64,58 +63,62 @@
 	<script type="text/javascript">	
 	var json = new Array();
 	var items;
+	var currentPage;
 	//显示数据库数据章节
-	$.ajax({
-		url : "../showTables.do",
-		type : "GET",
-		success : function(result) {
-			//alert(result);
-			//现实数据库的表
-			result = eval('(' + result + ')');
-			for ( var item in result) {
-				$("<option></option>").append(item).appendTo("#chapter_choose");
-			}		
-			//选择章节填充数据
-			$("#chapter_choose").change(function() {
-				var opt = result[$("#chapter_choose").val()];
-				$("#sheet_choose").empty();
-				$("#auto_create").empty();
-				//为章节添加空白选项
-				$("<option></option>").appendTo("#sheet_choose");
-				for ( var i in opt) {
-					$("<option></option>").append(opt[i]).appendTo("#sheet_choose");
-					}
-			});
-			//选择数据表填充数据
-			$("#sheet_choose").change(function() {
-				var tab = "t_"+ $("#chapter_choose").val() + "_"+ $("#sheet_choose").val();
-				$.ajax({
-					url : "../showColumns.do",
-					data : "tab=" + tab,
-					type : "GET",
-					success : function(result) {
-						result = eval('('+ result+ ')');	
-						json = result;
-						$("#column_choose").empty();
-						$("#search_result thead").empty();
-						//为搜索类别添加空白选项
-						$("<option></option>").appendTo("#column_choose");
-						$("#search_result thead").append("<th><input type=\"checkbox\" id=\"check_all\"></th>")
-						$.each(result,function(index,item) {
-							$("<option></option>").append(item.Field).appendTo("#column_choose");
-								if (item.Comment == "") {item.Comment = "id";}
-								$("<th></th>").append(item.Comment).appendTo("#search_result thead");
-								json[index] = item.Field;
-								
-						});
-						$("<th></th>").append("操作").appendTo("#search_result thead");
-						to_page(1,"normal");
-					}
-				})
-			});
-		}
-	});
 	
+	$(function(){
+		$.ajax({
+			url : "../showTables.do",
+			type : "GET",
+			success : function(result) {
+				//alert(result);
+				//现实数据库的表
+				result = eval('(' + result + ')');
+				for ( var item in result) {
+					$("<option></option>").append(item).appendTo("#chapter_choose");
+				}		
+				//选择章节填充数据
+				$("#chapter_choose").change(function() {
+					var opt = result[$("#chapter_choose").val()];
+					$("#sheet_choose").empty();
+					$("#auto_create").empty();
+					//为章节添加空白选项
+					$("<option></option>").appendTo("#sheet_choose");
+					for ( var i in opt) {
+						$("<option></option>").append(opt[i]).appendTo("#sheet_choose");
+						}
+				});
+				//选择数据表填充数据
+				$("#sheet_choose").change(function() {
+					var tab = "t_"+ $("#chapter_choose").val() + "_"+ $("#sheet_choose").val();
+					$.ajax({
+						url : "../showColumns.do",
+						data : "tab=" + tab,
+						type : "GET",
+						success : function(result) {
+							result = eval('('+ result+ ')');	
+							json = result;
+							$("#column_choose").empty();
+							$("#search_result thead").empty();
+							//为搜索类别添加空白选项
+							$("<option></option>").appendTo("#column_choose");
+							$("#search_result thead").append("<th><input type=\"checkbox\" id=\"check_all\"></th>")
+							$.each(result,function(index,item) {
+								$("<option></option>").append(item.Field).appendTo("#column_choose");
+									if (item.Comment == "") {item.Comment = "id";}
+									$("<th></th>").append(item.Comment).appendTo("#search_result thead");
+									json[index] = item.Field;
+									
+							});
+							$("<th></th>").append("操作").appendTo("#search_result thead");
+							to_page(1,"normal");
+						}
+					})
+				});
+			}
+		});
+	})
+		
 	//构建导航条元素
 	function builde_page_nav(result,type){			
 		$("#page_nav_area").empty();
@@ -176,30 +179,34 @@
 	//跳转页数
 	function to_page(pn,type){
 		var str;
-		var data = "pn="+pn;
+		var data = "pn=" + pn;
 		if(type == "normal"){
-			str = "../"+$("#chapter_choose").val()+"/getJson.do";			
-			data +="&info="+tranformStr("_"+$("#sheet_choose").val());
+			str = "../" + $("#chapter_choose").val() + "/getJson.do";			
+			data += "&info=" + tranformStr("_" + $("#sheet_choose").val());
 		}else if(type == "search"){
-			var chapter = $("#chapter_choose").val();
-			var sheet = $("#sheet_choose").val();
-			var column = $("#column_choose").val();
-			var condition = $("#condition").val()
-			str = "../" + chapter + "/"+tranformStr("select_" + sheet)+"ByExample.do?column="+column+"&condition="+condition;
+			str = "../" + $("#chapter_choose").val() + "/getJsonByCondition/"+tranformStr("_"+$("#sheet_choose").val())+".do";
+			data += "&column=" + $("#column_choose").val() + "&condition=" +$("#condition").val();
 		}
 		$.ajax({
 			url : str,
 			data : data,
-			type : "POST",
+			type : "GET",
 			success : function(result) {				
 				result = eval('('+ result+ ')');
 				console.log(result);
-				//json排序
-				result = sortByJson(result,json);
-				//解析显示数据结果
-				create_result(result);
-				//解析显示分页条数据
-				builde_page_nav(result,type);
+				if(result.code == 200){
+					alert("查询不到数据");
+					$("#search_result tbody").empty();
+					$("#page_nav_area").empty();
+				}else{
+					currentPage = result.extend.pageInfo.pageNum;
+					//json排序
+					result = sortByJson(result,json);
+					//解析显示数据结果
+					create_result(result);
+					//解析显示分页条数据
+					builde_page_nav(result,type);
+				}				
 			}
 		});
 	}
@@ -261,6 +268,7 @@
 			newList += "},";
 		});
 		newList = newList.substring(0,newList.length - 1) +"]";
+		//字符串转JSON
 		newList = eval('('+ newList+ ')');
 		result.extend.pageInfo.list = newList;
 		return result;	
@@ -269,9 +277,7 @@
 	//为所有修改按钮绑定事件
 	$(document).on("click", ".update_btn", function() {
 		var id = $(this).attr("edit-id");
-		//alert(id);
-		//$("#update_form").empty();
-		
+		$("#update_form").empty();		
 		$.each(items,function(index,item){		
 			if(item.id == id){
 				for(var i in item){
@@ -297,23 +303,34 @@
 	});
 	
 	$("#update_btn").click(function(){
-		//var str = "../"+$("#chapter_choose").val()+"/"+tranformStr("_"+$("#sheet_choose").val())+".do";//+$(this).attr("edit-id");
-		var str = "../price/test.do/"+$(this).attr("edit-id");
+		var str = "../"+$("#chapter_choose").val()+"/"+tranformStr("_"+$("#sheet_choose").val())+"/"+$(this).attr("edit-id")+".do";
 		$.ajax({
 			url : str,
 			type : "POST",
 			data : $("#update_form").serialize()+"&_method=put",
 			success : function(result){
-				console.log(result);
-				//alert(result.msg);
+				result = eval('('+ result+ ')');
+				$("#updateModal").modal("hide");
+				to_page(currentPage,"normal");
+				alert(result.msg);
 			}
 		})
 	});
 	
 	//为所有删除按钮绑定事件(单个删除)
 	$(document).on("click",".delete_btn",function(){
-		if(confirm("您确定要删除吗?")){
-			alert($(this).parents("tr").find("td:eq(1)").text());
+		if(confirm("您确定要删除第【"+$(this).attr('del-id')+"】条数据吗?")){
+			var str = "../"+$("#chapter_choose").val()+"/"+tranformStr("_"+$("#sheet_choose").val())+"/"+$(this).attr('del-id')+".do";
+			$.ajax({
+				url : str,
+				type : "POST",
+				data : "_method=delete",
+				success : function(result){
+					result = eval('('+ result+ ')');
+					alert(result.msg);
+					to_page(currentPage,"normal");
+				}
+			})
 		}		
 	});
 
