@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.agriculture.LivestockMapper;
 import okkpp.model.agriculture.Livestock;
 import okkpp.utils.CountryCode;
@@ -23,10 +25,39 @@ public class LivestockService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<Livestock> selectByExample(String column,String condition){
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn) {
 		Example example = new Example(Livestock.class);
+		example.setOrderByClause("country,sort");
+		PageHelper.startPage(pn, 10);
+		List<Livestock> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
+		Example example = new Example(Livestock.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<Livestock> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// Livestock¸üÐÂ
+	public int updateLivestock(Livestock livestock) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(livestock);
+	}
+
+	// Livestock²åÈë
+	public int insertLivestock(Livestock livestock) {
+		return mapper.insertSelective(livestock);
+	}
+
+	// LivestockÉ¾³ý
+	public int deleteLivestock(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

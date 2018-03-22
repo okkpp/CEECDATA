@@ -6,11 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>发电量——中东欧统计数据库</title>
   <link rel="stylesheet" href="../zdo_static/css/normalize.css">
-  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
 
   <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
-  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="../zdo_static/js/bootstrap.min.js"></script>
   <script src="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
   <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
   <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
@@ -43,85 +43,16 @@
                 <h4 style="margin-top: -20px;">Electricity Generation</h4>
             </div>
 
-            <div class="panel" style="margin-top: 40px;">
+            <div class="panel" style="margin-top: 1.5em;">
                 <div id="main" style="width: 100%;height:400px;">
                     <script type="text/javascript">
                       var dom = document.getElementById("main");
                       var myChart = echarts.init(dom);
                       var app = {};
                       option = null;
-                      var dataMap = {};
-                      function dataFormatter(obj){
-                          var Plist = ['阿尔巴尼亚','周二','周三','周四','周五','周六','周日'];
-                          var temp;
-                          for(var year = 2014;year<=2018;year++){
-                              temp = obj[year];
-                              for(var i = 0,l = temp.length;i<l;i++){
-                                  obj[year][i] = {
-                                      name : Plist[i],
-                                      value : temp[i]
-                                  }
-                              }
-                          }
-                          return obj;
-                      }
 
-                      dataMap.dataMSC = dataFormatter({
-                          2014:[222,444,333,666,555,444,777],
-                          2015:[333,222,212,454,666,363,787],
-                          2016:[109,205,305,405,605,335,456],
-                          2017:[664,555,445,662,335,745,641],
-                          2018:[653,123,454,235,226,442,941]
-                      });
-                      dataMap.dataTSC = dataFormatter({
-                          2014:[222,444,333,666,555,444,777],
-                          2015:[333,222,212,454,666,363,787],
-                          2016:[109,205,305,405,605,335,456],
-                          2017:[664,555,445,662,335,745,641],
-                          2018:[653,123,454,235,226,442,941]
-                      });
-                      dataMap.dataNYSC = dataFormatter({
-                          2014:[222,444,333,666,555,444,777],
-                          2015:[333,222,212,454,666,363,787],
-                          2016:[109,205,305,405,605,335,456],
-                          2017:[664,555,445,662,335,745,641],
-                          2018:[653,123,454,235,226,442,941]
-                      });
-                      dataMap.dataMJK = dataFormatter({
-                          2014:[222,444,333,666,555,444,777],
-                          2015:[333,222,212,454,666,363,787],
-                          2016:[109,205,305,405,605,335,456],
-                          2017:[664,555,445,662,335,745,641],
-                          2018:[653,123,454,235,226,442,941]
-                      });
-                      dataMap.dataTJK = dataFormatter({
-                          2014:[222,444,333,666,555,444,777],
-                          2015:[333,222,212,454,666,363,787],
-                          2016:[109,205,305,405,605,335,456],
-                          2017:[664,555,445,662,335,745,641],
-                          2018:[653,123,454,235,226,442,941]
-                      });
-                      dataMap.dataNYJK = dataFormatter({
-                          2014:[222,444,333,666,555,444,777],
-                          2015:[333,222,212,454,666,363,787],
-                          2016:[109,205,305,405,605,335,456],
-                          2017:[664,555,445,662,335,745,641],
-                          2018:[653,123,454,235,226,442,941]
-                      });
                       option = {
                           baseOption:{
-                              timeline:{
-                                  axisType:'category',
-                                  autoPlay:true,
-                                  playInterval:1000,
-                                  data:['2014-01-01','2015-01-01','2016-01-01','2017-01-01','2018-01-01'],
-                                  bottom:'0',
-                                  label:{
-                                      formatter:function(s){
-                                          return(new Date(s)).getFullYear();
-                                      }
-                                  }
-                              },
                               title:{
                                   subtext:'数据来源'
                               },
@@ -132,7 +63,7 @@
                                   }
                               },
                               legend: {
-                                  data:['煤和煤制品生产量','天然气生产量','能源生产量总计','煤和煤制品进口','天然气进口','能源进口总计']
+                                  data:['总计','热电','水电','核电','风电','太阳能电']
                               },
                               grid: {
                                   left: '3%',
@@ -143,103 +74,60 @@
                               xAxis : [
                                   {
                                       type : 'category',
-                                      data : ['阿尔巴尼亚','周二','周三','周四','周五','周六','周日']
+                                      axisLabel: {
+                                          interval: 0
+                                      },
+                                      data : ['阿尔巴尼亚', '爱沙尼亚', '保加利亚', '波黑', '波兰', '黑山', '捷克', '克罗地亚', '拉脱维亚', '立陶宛', '罗马尼亚', '马其顿', '塞尔维亚',
+                                       '斯洛伐克', '斯洛文尼亚', '匈牙利']
                                   }
                               ],
                               yAxis : [
                                   {
-                                      type : 'value'
+                                      type : 'value',
+                                      name: '百千瓦时'
                                   }
                               ],
                               series:[
                                   {
-                                      name:'煤和煤制品生产量',
+                                      name:'总计',
                                       type:'bar',
-                                      stack:'能源生产量总计',
+
+                                      data: [4724,16160,47485,13554,86024,12446,29371,5141,4397,'/',3174,159059,65676,36060,27401,17437]
                                   },
                                   {
-                                      name:'天然气生产量',
+                                      name:'热电',
                                       type:'bar',
-                                      stack: '能源生产量总计',
+                                      stack:'总计',
+                                      barWidth: 8,
+                                      data: ['/',10225,23872,3664,50138,11815,12707,3006,2597,'/',1422,148642,26903,22437,6837,4440]
                                   },
                                   {
-                                      name:'能源生产量总计',
+                                      name:'水电',
                                       type:'bar',
+                                      stack:'总计',
+                                      data: [4724,5935,5163,9125,2961,27,302,1994,1088,'/',1752,2734,19280,11617,4462,6366]
                                   },
                                   {
-                                      name:'煤和煤制品进口',
+                                      name:'核电',
                                       type:'bar',
-                                      stack:'能源进口总计',
+                                      stack:'总计',
+                                      data: ['/','/',15867,'/',30325,'/',15649,'/','/','/','/','/',11676,15499,6370]
                                   },
                                   {
-                                      name:'天然气进口',
+                                      name:'风电',
                                       type:'bar',
-                                      barWidth : 5,
-                                      stack: '能源进口总计',
+                                      stack: '总计',
+                                      data: ['/','/',1331,730,477,604,657,141,639,'/','/',7676,6201,'/',6,4]
                                   },
                                   {
-                                      name:'能源进口总计',
+                                      name:'太阳能电',
                                       type:'bar',
+                                      stack: '总计',
+                                      data: ['/','/',1252,35,2123,'/',56,'/',73,'/','/',7,1616,6,597,257]
                                   },
                               ]
                           },
-                          options:[
-                              {
-                                  title:{text:'2014能源平衡'},
-                                  series:[
-                                      {data: dataMap.dataMSC['2014']},
-                                      {data: dataMap.dataTSC['2014']},
-                                      {data: dataMap.dataNYSC['2014']},
-                                      {data: dataMap.dataMJK['2014']},
-                                      {data: dataMap.dataTJK['2014']},
-                                      {data: dataMap.dataNYJK['2014']},
-                                  ]
-                              },
-                              {
-                                  title:{text:'2015能源平衡'},
-                                  series:[
-                                      {data: dataMap.dataMSC['2015']},
-                                      {data: dataMap.dataTSC['2015']},
-                                      {data: dataMap.dataNYSC['2015']},
-                                      {data: dataMap.dataMJK['2015']},
-                                      {data: dataMap.dataTJK['2015']},
-                                      {data: dataMap.dataNYJK['2015']},
-                                  ]
-                              },
-                              {
-                                  title:{text:'2016能源平衡'},
-                                  series:[
-                                      {data: dataMap.dataMSC['2016']},
-                                      {data: dataMap.dataTSC['2016']},
-                                      {data: dataMap.dataNYSC['2016']},
-                                      {data: dataMap.dataMJK['2016']},
-                                      {data: dataMap.dataTJK['2016']},
-                                      {data: dataMap.dataNYJK['2016']},
-                                  ]
-                              },
-                              {
-                                  title:{text:'2017能源平衡'},
-                                  series:[
-                                      {data: dataMap.dataMSC['2017']},
-                                      {data: dataMap.dataTSC['2017']},
-                                      {data: dataMap.dataNYSC['2017']},
-                                      {data: dataMap.dataMJK['2017']},
-                                      {data: dataMap.dataTJK['2017']},
-                                      {data: dataMap.dataNYJK['2017']},
-                                  ]
-                              },
-                              {
-                                  title:{text:'2018能源平衡'},
-                                  series:[
-                                      {data: dataMap.dataMSC['2018']},
-                                      {data: dataMap.dataTSC['2018']},
-                                      {data: dataMap.dataNYSC['2018']},
-                                      {data: dataMap.dataMJK['2018']},
-                                      {data: dataMap.dataTJK['2018']},
-                                      {data: dataMap.dataNYJK['2018']},
-                                  ]
-                              },
-                          ]
+
 
                       };;
                       if (option && typeof option === "object") {
@@ -249,6 +137,9 @@
                 </div>
             </div>
         </div>
+        <div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+          <span class="glyphicon glyphicon-save"></span> 下载
+      </a></div>
     </div>
     <script>
         $(function(){

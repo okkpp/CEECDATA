@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html>
+	<!--
+		@author: 陈周云
+		@title: 国内贫困率
+	-->
+
+	<head lang="zh-CN">
+		<title> 国内贫困率</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<meta charset="utf-8">
+
+		<!-- 引入Jquery -->
+    <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src="../zdo_static/js/bootstrap.min.js"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<div>
+				<ul class="nav nav-tabs">
+				    <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+				    <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+				</ul>
+			</div>
+
+			<div id="tableView">
+				<div class="page-header" style="text-align: center;">
+					<h3>国内贫困率</h3>
+					<br>
+					<h4 style="margin-top: -20px;">Domestic Poverty Rate</h4>
+				</div>
+				<div style="text-align: right;">单位:&nbsp;%</div>
+ 				<table class="table table-hover table-striped">
+					<tr>
+						<td style="text-align: center;">国家</td>
+						<td>时间</td>
+						<td>全国贫困率</td>
+						<td>农村贫困率</td>
+						<td>城市贫困率</td>
+					</tr>
+
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">阿尔巴尼亚</td>
+						<td>2012</td>
+						<td>14.3</td>
+						<td>15.3</td>
+						<td>13.6</td>
+					</tr>
+
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">爱沙尼亚</td>
+						<td>2013</td>
+						<td>21.8</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+
+
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">波黑</td>
+						<td>2011</td>
+						<td>0</td>
+						<td>17.9</td>
+						<td>0</td>
+					</tr>
+
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">保加利亚</td>
+						<td>2015</td>
+						<td>22</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">波兰</td>
+						<td>2013</td>
+						<td>17</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">黑山</td>
+						<td>2013</td>
+						<td>8.6</td>
+						<td>9.7</td>
+						<td>7.9</td>
+					</tr>
+
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">捷克</td>
+						<td>2013</td>
+						<td>9.7</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">克罗地亚</td>
+						<td>2013</td>
+						<td>19.4</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">罗马尼亚</td>
+						<td>2013</td>
+						<td>25.4</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">立陶宛</td>
+						<td>2013</td>
+						<td>19.1</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">拉脱维亚</td>
+						<td>2014</td>
+						<td>22.5</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">马其顿</td>
+						<td>2014</td>
+						<td>22.1</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">塞尔维亚</td>
+						<td>2014</td>
+						<td>25.4</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">斯洛伐克</td>
+						<td>2013</td>
+						<td>12.6</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">斯洛文尼亚</td>
+						<td>2013</td>
+						<td>14.5</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+					<tr>
+						<td rowspan="1" style="font-size:1.5em;text-align: center;display: table-cell;vertical-align: inherit;">匈牙利</td>
+						<td>2013</td>
+						<td>15</td>
+						<td>0</td>
+						<td>0</td>
+					</tr>
+
+
+
+				</table>
+			</div>
+
+			<!--
+            	作者：1622472966@qq.com
+            	时间：2018-03-14
+            	描述：后部图表 股票周转率
+            -->
+			<div id="imageView">
+				<div class="page-header" style="text-align: center;">
+					<h3>国内贫困率</h3>
+					<br>
+					<h4 style="margin-top: -20px;">Domestic Poverty Rate</h4>
+				</div>
+
+				<div class="panel" style="margin-top: 1.5em;">
+					<!--<div style="text-align: right;">单位:&nbsp;%</div>-->
+					<div id="main" style="width: 100%;height:400px;"></div>
+				</div>
+			</div>
+			  <div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+			    <span class="glyphicon glyphicon-save"></span> 下载
+			</a></div>
+			<!-- <div style="text-align: right;"><div id="page"></div></div> -->
+		</div>
+	</body>
+	<script>
+		$(function() {
+			$('#all').hide()
+			$('#imageView').hide();
+			$('#imageView2').hide();
+			$('#tableTag').attr('class', 'active');
+		})
+
+		function showTable() {
+			$('#all').hide()
+			$('#tableView').show();
+			$('#tableView2').show();
+			$('#imageView').hide();
+			$('#imageView2').hide()
+			$('#tableTag').attr('class', 'active');
+			$('#imageTag').removeClass('active');
+			$('#first').show()
+			$('#second').show()
+		}
+
+		function showImage() {
+			$('#all').show()
+			$('#imageView').show();
+			$('#tableView').hide();
+			$('#tableView2').hide();
+			$('#imageView2').show();
+			$('#imageTag').attr('class', 'active');
+			$('#tableTag').removeClass('active');
+			$('#first').hide()
+			$('#second').hide()
+		}
+
+		$('#tableData').bootstrapTable({
+			striped: true,
+			columns: [{
+					field: 'country',
+					title: '国家',
+
+
+				},
+				{
+					field: 'year1',
+					title: '2011年'
+				},
+				{
+					field: 'year2',
+					title: '2012年'
+				},
+				{
+					field: 'year3',
+					title: '2013年'
+				},
+				{
+					field: 'year4',
+					title: '2014年'
+				},
+				{
+					field: 'year5',
+					title: '2015年'
+				},
+			],
+			data: [{
+					country: '阿尔巴尼亚',
+					year1: '0',
+					year2: '14.3',
+					year3: '0',
+					year4: '0',
+					year5: '0',
+				},
+				{
+					country: '爱沙尼亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '21.8',
+                    year4: '0',
+                    year5: '0',
+				},
+				{
+					country: '波黑',
+                    year1: '0',
+                    year2: '0',
+                    year3: '0',
+                    year4: '0',
+                    year5: '0',
+				},
+				{
+					country: '保加利亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '0',
+                    year4: '0',
+                    year5: '22',
+				},
+				{
+					country: '波兰',
+                    year1: '0',
+                    year2: '0',
+                    year3: '17',
+                    year4: '0',
+                    year5: '0',
+				}, {
+					country: '黑山',
+                    year1: '0',
+                    year2: '14.3',
+                    year3: '0',
+                    year4: '0',
+                    year5: '0',
+				}, {
+					country: '捷克',
+                    year1: '0',
+                    year2: '0',
+                    year3: '8.6',
+                    year4: '0',
+                    year5: '0',
+				}, {
+					country: '克罗地亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '19.4',
+                    year4: '0',
+                    year5: '0',
+				}, {
+					country: '罗马尼亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '25.4',
+                    year4: '0',
+                    year5: '0',
+				}, {
+					country: '立陶宛',
+                    year1: '0',
+                    year2: '0',
+                    year3: '19.1',
+                    year4: '0',
+                    year5: '0',
+				}, {
+					country: '拉脱维亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '0',
+                    year4: '22.5',
+                    year5: '0',
+				}, {
+					country: '马其顿',
+                    year1: '0',
+                    year2: '0',
+                    year3: '0',
+                    year4: '22.1',
+                    year5: '0',
+				}, {
+					country: '塞尔维亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '0',
+                    year4: '25.4',
+                    year5: '0',
+				}, {
+					country: '斯洛伐克',
+                    year1: '0',
+                    year2: '0',
+                    year3: '12.6',
+                    year4: '0',
+                    year5: '0',
+				},{
+					country: '斯洛文尼亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '14.5',
+                    year4: '0',
+                    year5: '0',
+				}, {
+					country: '匈牙利',
+                    year1: '0',
+                    year2: '0',
+                    year3: '15',
+                    year4: '0',
+                    year5: '0',
+				},
+
+			]
+		});
+		//tabledata2
+		$('#tableData2').bootstrapTable({
+			striped: true,
+			columns: [{
+					field: 'country',
+					title: '国家'
+				},
+
+				{
+					field: 'year2',
+					title: '2005年'
+				},
+				{
+					field: 'year3',
+					title: '2010年'
+				},
+				{
+					field: 'year4',
+					title: '2013年'
+				},
+				{
+					field: 'year5',
+					title: '2014年'
+				},
+				{
+					field: 'year6',
+					title: '2015年'
+				},
+			],
+			data: [{
+                country: '阿尔巴尼亚',
+                year1: '0',
+                year2: '14.3',
+                year3: '0',
+                year4: '0',
+                year5: '0',
+            },
+                {
+                    country: '爱沙尼亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '21.8',
+                    year4: '0',
+                    year5: '0',
+                },
+                {
+                    country: '波黑',
+                    year1: '0',
+                    year2: '0',
+                    year3: '0',
+                    year4: '0',
+                    year5: '0',
+                },
+                {
+                    country: '保加利亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '0',
+                    year4: '0',
+                    year5: '22',
+                },
+                {
+                    country: '波兰',
+                    year1: '0',
+                    year2: '0',
+                    year3: '17',
+                    year4: '0',
+                    year5: '0',
+                }, {
+                    country: '黑山',
+                    year1: '0',
+                    year2: '14.3',
+                    year3: '0',
+                    year4: '0',
+                    year5: '0',
+                }, {
+                    country: '捷克',
+                    year1: '0',
+                    year2: '0',
+                    year3: '8.6',
+                    year4: '0',
+                    year5: '0',
+                }, {
+                    country: '克罗地亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '19.4',
+                    year4: '0',
+                    year5: '0',
+                }, {
+                    country: '罗马尼亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '25.4',
+                    year4: '0',
+                    year5: '0',
+                }, {
+                    country: '立陶宛',
+                    year1: '0',
+                    year2: '0',
+                    year3: '19.1',
+                    year4: '0',
+                    year5: '0',
+                }, {
+                    country: '拉脱维亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '0',
+                    year4: '22.5',
+                    year5: '0',
+                }, {
+                    country: '马其顿',
+                    year1: '0',
+                    year2: '0',
+                    year3: '0',
+                    year4: '22.1',
+                    year5: '0',
+                }, {
+                    country: '塞尔维亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '0',
+                    year4: '25.4',
+                    year5: '0',
+                }, {
+                    country: '斯洛伐克',
+                    year1: '0',
+                    year2: '0',
+                    year3: '12.6',
+                    year4: '0',
+                    year5: '0',
+                },{
+                    country: '斯洛文尼亚',
+                    year1: '0',
+                    year2: '0',
+                    year3: '14.5',
+                    year4: '0',
+                    year5: '0',
+                }, {
+                    country: '匈牙利',
+                    year1: '0',
+                    year2: '0',
+                    year3: '15',
+                    year4: '0',
+                    year5: '0',
+                },
+
+			]
+		});
+
+		var all = {
+			"data": [
+				// 11
+			    [0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+                [14.3, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+                [0, 21.8, 0, 0, 17, 8.6, 9.7, 19.4, 25.4 ,19.1, 0, 0, 0, 12.6, 14.5, 15],
+                [0, 0, 0, 0, 0, 0, 0, 0 ,0, 22.5, 22.1, 25.4, 0, 0, 0, 0 ],
+                [0, 0, 0, 22, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+				// 11
+                [0, 0, 17.9, 0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+                [15.3, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+                [0, 0, 0, 0, 0, 9.7, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+                [0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+                [0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+                // 11
+				[0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+                [13.6, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+                [0, 0, 0, 0, 0, 7.9, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+                [0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+                [0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0 ],
+
+
+			],
+			"countrys": ["阿尔巴尼亚", "爱沙尼亚", "波黑", "黑山", "捷克", "克罗地亚", "罗马尼亚",  "立陶宛", "拉脱维亚", "马其顿", "塞尔维亚", "斯洛伐克", "斯洛文尼亚", "匈牙利"],
+			"years": ["2011年", "2012年", "2013年", "2014年", "2015年"]
+		};
+
+		var option = {
+			timeline: {
+				axisType: 'category',
+				autoPlay: true,
+				playInterval: 2000,
+				data: all.years
+			},
+			options: [{
+					tooltip: {
+						trigger: 'axis'
+					},
+					// toolbox: {
+					// 	show: true,
+					// 	orient: 'vertical',
+					// 	x: 'right',
+					// 	y: 'center',
+					// 	feature: {
+					// 		mark: {
+					// 			show: true
+					// 		}
+					// 	}
+					// },
+					title:{
+						subtext: '数据来源'
+					},
+					calculable: true,
+					grid: {
+							top: 50,
+							bottom: 100
+					},
+					legend: {
+						data: ['全国贫困率', '农村贫困率', '城市贫困率']
+					},
+					xAxis: [{
+						type: 'category',
+						axisLabel: {
+							interval: 0
+						},
+						data: all.countrys
+					}],
+					yAxis: [{
+						type: 'value',
+						name: '%'
+					}],
+					//11
+					series: [{
+						name: '全国贫困率',
+						type: 'bar',
+						data: all.data[0]
+					}, {
+						name: '农村贫困率',
+						type: 'bar',
+						data: all.data[5]
+					},{
+                        name: '城市贫困率',
+                        type: 'bar',
+                        data: all.data[10]
+                    }
+					]
+				},
+				//12
+				{
+					series: [{
+						data: all.data[1]
+					}, {
+						data: all.data[6]
+					},{
+                        data: all.data[11]
+                    }]
+				},
+				//13
+				{
+                    series: [{
+                        data: all.data[2]
+                    }, {
+                        data: all.data[7]
+                    },{
+                        data: all.data[12]
+                    }]
+				},
+				//14
+				{
+                    series: [{
+                        data: all.data[3]
+                    }, {
+                        data: all.data[8]
+                    },{
+                        data: all.data[13]
+                    }]
+				},
+				//15
+				{
+                    series: [{
+                        data: all.data[4]
+                    }, {
+                        data: all.data[9]
+                    },{
+                        data: all.data[14]
+                    }]
+				}
+			]
+		};
+		var myChart = echarts.init(document.getElementById('main'));
+		// 使用刚指定的配置项和数据显示图表。
+		myChart.setOption(option);
+	</script>
+
+</html>

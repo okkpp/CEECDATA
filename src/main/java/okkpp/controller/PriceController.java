@@ -1,6 +1,6 @@
 package okkpp.controller;
 
-import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,94 +9,141 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import okkpp.model.Msg;
 import okkpp.model.price.*;
 import okkpp.service.price.*;
+import okkpp.utils.ChartInfo;
+import okkpp.utils.TimeUtils;
 
 @Controller
 @RequestMapping("/price")
 public class PriceController {
-	
+
 	@Autowired
 	ConsumerService consumerService;
-
-	@RequestMapping("/Consumer")
-	public String Consumer(Model model) {
-		List<Consumer> list = consumerService.selectAll();
-		model.addAttribute("data", list);
-		return "404";
-	}
-
-	// 查找所有
-	@RequestMapping(value = "/Consumer",method = RequestMethod.POST)
-	@ResponseBody
-	public Msg Consumer(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
-		PageHelper.startPage(pn, 10);
-		List<Consumer> list = consumerService.selectAll();
-		PageInfo pageInfo = new PageInfo(list, 10);
-		model.addAttribute("pageInfo", pageInfo);
-		return Msg.success().add("pageInfo", pageInfo);
-	}
-	
-	//更新Consume更新方法
-	@RequestMapping(value = "/Consumer",method = RequestMethod.PUT)
-	@ResponseBody
-	public Msg updateConsumer(Consumer consumer) {
-		System.out.println(consumer.toString());
-		/*if(consumerService.updateConsumer(consumer) == 1) {
-			return Msg.success();
-		}else{
-			return Msg.fail();
-		}*/
-		return Msg.success();
-	}
-
-	// 按条件查找
-	@RequestMapping("/selectConsumerByExample")
-	@ResponseBody
-	public Msg selectConsumerByExample(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
-			@RequestParam("column") String column, @RequestParam("condition") String condition) {
-		PageHelper.startPage(pn, 10);
-		List<Consumer> list = consumerService.selectByExample(column, condition);
-		PageInfo pageInfo = new PageInfo(list, 10);
-		model.addAttribute("pageInfo", pageInfo);
-		return Msg.success().add("pageInfo", pageInfo);
-	}
-	
+	@Autowired
 	ProducerService producerService;
 
-	@RequestMapping("/Producer")
-	public String Producer(Model model) {
-		List<Producer> list = producerService.selectAll();
-		model.addAttribute("data", list);
-		return "404";
+	@RequestMapping("/json")
+	@ResponseBody
+	public Map<String, Object> info(String info) {
+		switch (info) {
+		case "Consumer":
+			return ChartInfo.mapByCountry(consumerService.selectAll());
+		case "Producer":
+			return ChartInfo.mapByCountry(producerService.selectAll());
+		}
+		return null;
 	}
 
-	// 查找所有Produce
-	@RequestMapping(value = "/Producer",method = RequestMethod.POST)
+	// 后台获取所有数据
+	@RequestMapping(value = "/getJson", method = RequestMethod.GET)
 	@ResponseBody
-	public Msg Producer(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
-		PageHelper.startPage(pn, 10);
-		List<Producer> list = producerService.selectAll();
-		PageInfo pageInfo = new PageInfo(list, 10);
-		model.addAttribute("pageInfo", pageInfo);
+	public <E> Msg getJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
+			@RequestParam("info") String info) {
+		PageInfo<E> pageInfo = null;
+		switch (info) {
+		case "Consumer":
+			pageInfo = consumerService.getPageInfo(pn);
+			break;
+		case "Producer":
+			pageInfo = producerService.getPageInfo(pn);
+			break;
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
+		}
 		return Msg.success().add("pageInfo", pageInfo);
 	}
 
-	// 按条件查找Produce
-	@RequestMapping("/selectProducerByExample")
+	// 后台按条件查找
+	@RequestMapping(value = "/getJsonByCondition/{info}", method = RequestMethod.GET)
 	@ResponseBody
-	public Msg selectProducerByExample(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
-			@RequestParam("column") String column, @RequestParam("condition") String condition) {
-		PageHelper.startPage(pn, 10);
-		List<Producer> list = producerService.selectByExample(column, condition);
-		PageInfo pageInfo = new PageInfo(list, 10);
-		model.addAttribute("pageInfo", pageInfo);
+	public <E> Msg getJsonByCondition(@PathVariable("info") String info,
+			@RequestParam(value = "pn", defaultValue = "1") Integer pn, @RequestParam("column") String column,
+			@RequestParam("condition") String condition) {
+		PageInfo<E> pageInfo = null;
+		switch (info) {
+		case "Consumer":
+			pageInfo = consumerService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Producer":
+			pageInfo = producerService.getPageInfoByCondition(pn, column, condition);
+			break;
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
+		}
 		return Msg.success().add("pageInfo", pageInfo);
 	}
-	
-	
+
+	// Consumer添加方法
+	@RequestMapping(value = "/Consumer", method = RequestMethod.POST)
+	@ResponseBody
+	public Msg insertConsumer(Consumer consumer) {
+		consumer.setUpdated(TimeUtils.getCurrentTime());
+		if (consumerService.insertConsumer(consumer) == 1) {
+			return Msg.success();
+		} else {
+			return Msg.fail();
+		}
+	}
+
+	// Consumer删除方法
+	@RequestMapping(value = "/Consumer/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Msg deleteConsumer(@PathVariable("id") Integer id) {
+		if (consumerService.deleteConsumer(id) == 1) {
+			return Msg.success();
+		}
+		return Msg.fail();
+	}
+
+	// Consume更新方法
+	@RequestMapping(value = "/Consumer/{id}", method = RequestMethod.PUT)
+	@ResponseBody
+	public Msg updateConsumer(@PathVariable("id") Integer id, Consumer consumer) {
+		consumer.setId(id);
+		consumer.setUpdated(TimeUtils.getCurrentTime());
+		if (consumerService.updateConsumer(consumer) == 1) {
+			return Msg.success();
+		}
+		return Msg.fail();
+	}
+
+	// Producer添加方法
+	@RequestMapping(value = "/Producer", method = RequestMethod.POST)
+	@ResponseBody
+	public Msg insertProducer(Producer producer) {
+		producer.setUpdated(TimeUtils.getCurrentTime());
+		if (producerService.insertProducer(producer) == 1) {
+			return Msg.success();
+		} else {
+			return Msg.fail();
+		}
+	}
+
+	// Producer删除方法
+	@RequestMapping(value = "/Producer/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Msg deleteProducer(@PathVariable("id") Integer id) {
+		if (producerService.deleteProducer(id) == 1) {
+			return Msg.success();
+		}
+		return Msg.fail();
+	}
+
+	// Producer更新方法
+	@RequestMapping(value = "/Producer/{id}", method = RequestMethod.PUT)
+	@ResponseBody
+	public Msg updateProducer(@PathVariable("id") Integer id, Producer producer) {
+		producer.setId(id);
+		producer.setUpdated(TimeUtils.getCurrentTime());
+		if (producerService.updateConsumer(producer) == 1) {
+			return Msg.success();
+		}
+		return Msg.fail();
+	}
 
 }

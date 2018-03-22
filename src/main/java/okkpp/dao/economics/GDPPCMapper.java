@@ -1,7 +1,7 @@
 package okkpp.dao.economics;
 
-import okkpp.model.economics.GDPPC;
+import okkpp.model.economics.Gdppc;
 import tk.mybatis.mapper.common.Mapper;
 
-public interface GDPPCMapper extends Mapper<GDPPC> {
+public interface GdppcMapper extends Mapper<Gdppc> {
 }

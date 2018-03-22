@@ -1,13 +1,12 @@
 package okkpp.service.finance;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.finance.GlobalEquityIndicesMapper;
-import okkpp.model.finance.DomesticCredit;
 import okkpp.model.finance.GlobalEquityIndices;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
@@ -26,10 +25,39 @@ public class GlobalEquityIndicesService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<GlobalEquityIndices> selectByExample(String column,String condition){
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn) {
 		Example example = new Example(GlobalEquityIndices.class);
+		example.setOrderByClause("country,sort");
+		PageHelper.startPage(pn, 10);
+		List<GlobalEquityIndices> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
+		Example example = new Example(GlobalEquityIndices.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<GlobalEquityIndices> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// GlobalEquityIndices¸üÐÂ
+	public int updateGlobalEquityIndices(GlobalEquityIndices globalEquityIndices) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(globalEquityIndices);
+	}
+
+	// GlobalEquityIndices²åÈë
+	public int insertGlobalEquityIndices(GlobalEquityIndices globalEquityIndices) {
+		return mapper.insertSelective(globalEquityIndices);
+	}
+
+	// GlobalEquityIndicesÉ¾³ý
+	public int deleteGlobalEquityIndices(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

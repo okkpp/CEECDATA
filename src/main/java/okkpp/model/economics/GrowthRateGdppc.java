@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "t_economics_growth_rate_gdp")
-public class GrowthOfGDP implements Serializable {
+@Table(name = "t_economics_growth_rate_gdppc")
+public class GrowthRateGdppc implements Serializable {
     @Id
     private Integer id;
 
     /**
-     * 国家代码
+     * 国家编码
      */
     private String country;
 
@@ -20,7 +20,7 @@ public class GrowthOfGDP implements Serializable {
     private String year;
 
     /**
-     * 增长率
+     * 人均国内生产总值增长率(%)
      */
     private Double rate;
 
@@ -30,7 +30,7 @@ public class GrowthOfGDP implements Serializable {
     private Integer sort;
 
     /**
-     * 更新时间
+     * 更新日期
      */
     private Date updated;
 
@@ -51,18 +51,18 @@ public class GrowthOfGDP implements Serializable {
     }
 
     /**
-     * 获取国家代码
+     * 获取国家编码
      *
-     * @return country - 国家代码
+     * @return country - 国家编码
      */
     public String getCountry() {
         return country;
     }
 
     /**
-     * 设置国家代码
+     * 设置国家编码
      *
-     * @param country 国家代码
+     * @param country 国家编码
      */
     public void setCountry(String country) {
         this.country = country;
@@ -87,18 +87,18 @@ public class GrowthOfGDP implements Serializable {
     }
 
     /**
-     * 获取增长率
+     * 获取人均国内生产总值增长率(%)
      *
-     * @return rate - 增长率
+     * @return rate - 人均国内生产总值增长率(%)
      */
     public Double getRate() {
         return rate;
     }
 
     /**
-     * 设置增长率
+     * 设置人均国内生产总值增长率(%)
      *
-     * @param rate 增长率
+     * @param rate 人均国内生产总值增长率(%)
      */
     public void setRate(Double rate) {
         this.rate = rate;
@@ -123,18 +123,18 @@ public class GrowthOfGDP implements Serializable {
     }
 
     /**
-     * 获取更新时间
+     * 获取更新日期
      *
-     * @return updated - 更新时间
+     * @return updated - 更新日期
      */
     public Date getUpdated() {
         return updated;
     }
 
     /**
-     * 设置更新时间
+     * 设置更新日期
      *
-     * @param updated 更新时间
+     * @param updated 更新日期
      */
     public void setUpdated(Date updated) {
         this.updated = updated;

@@ -1,13 +1,12 @@
 package okkpp.service.industry;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.industry.ValueAddedInManufacturingMapper;
-import okkpp.model.industry.IndicesOfMining;
 import okkpp.model.industry.ValueAddedInManufacturing;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
@@ -26,10 +25,39 @@ public class ValueAddedInManufacturingService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<ValueAddedInManufacturing> selectByExample(String column,String condition){
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn) {
 		Example example = new Example(ValueAddedInManufacturing.class);
+		example.setOrderByClause("country,sort");
+		PageHelper.startPage(pn, 10);
+		List<ValueAddedInManufacturing> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
+		Example example = new Example(ValueAddedInManufacturing.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<ValueAddedInManufacturing> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// ValueAddedInManufacturing¸üÐÂ
+	public int updateValueAddedInManufacturing(ValueAddedInManufacturing valueAddedInManufacturing) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(valueAddedInManufacturing);
+	}
+
+	// ValueAddedInManufacturing²åÈë
+	public int insertValueAddedInManufacturing(ValueAddedInManufacturing valueAddedInManufacturing) {
+		return mapper.insertSelective(valueAddedInManufacturing);
+	}
+
+	// ValueAddedInManufacturingÉ¾³ý
+	public int deleteValueAddedInManufacturing(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

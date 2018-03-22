@@ -22,17 +22,20 @@ public class CompositionEmployment implements Serializable {
     /**
      * 第一产业
      */
-    private Double primary;
+    @Column(name = "primary_edu")
+    private Double primaryEdu;
 
     /**
      * 第二产业
      */
-    private Double secondary;
+    @Column(name = "secondary_edu")
+    private Double secondaryEdu;
 
     /**
      * 第三产业
      */
-    private Double tertiary;
+    @Column(name = "tertiary_edu")
+    private Double tertiaryEdu;
 
     /**
      * 序号
@@ -99,55 +102,55 @@ public class CompositionEmployment implements Serializable {
     /**
      * 获取第一产业
      *
-     * @return primary - 第一产业
+     * @return primary_edu - 第一产业
      */
-    public Double getPrimary() {
-        return primary;
+    public Double getPrimaryEdu() {
+        return primaryEdu;
     }
 
     /**
      * 设置第一产业
      *
-     * @param primary 第一产业
+     * @param primaryEdu 第一产业
      */
-    public void setPrimary(Double primary) {
-        this.primary = primary;
+    public void setPrimaryEdu(Double primaryEdu) {
+        this.primaryEdu = primaryEdu;
     }
 
     /**
      * 获取第二产业
      *
-     * @return secondary - 第二产业
+     * @return secondary_edu - 第二产业
      */
-    public Double getSecondary() {
-        return secondary;
+    public Double getSecondaryEdu() {
+        return secondaryEdu;
     }
 
     /**
      * 设置第二产业
      *
-     * @param secondary 第二产业
+     * @param secondaryEdu 第二产业
      */
-    public void setSecondary(Double secondary) {
-        this.secondary = secondary;
+    public void setSecondaryEdu(Double secondaryEdu) {
+        this.secondaryEdu = secondaryEdu;
     }
 
     /**
      * 获取第三产业
      *
-     * @return tertiary - 第三产业
+     * @return tertiary_edu - 第三产业
      */
-    public Double getTertiary() {
-        return tertiary;
+    public Double getTertiaryEdu() {
+        return tertiaryEdu;
     }
 
     /**
      * 设置第三产业
      *
-     * @param tertiary 第三产业
+     * @param tertiaryEdu 第三产业
      */
-    public void setTertiary(Double tertiary) {
-        this.tertiary = tertiary;
+    public void setTertiaryEdu(Double tertiaryEdu) {
+        this.tertiaryEdu = tertiaryEdu;
     }
 
     /**
