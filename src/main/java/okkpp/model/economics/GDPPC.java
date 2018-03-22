@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "t_economics_gdppc")
-public class GDPPC implements Serializable {
+public class Gdppc implements Serializable {
     @Id
     private Integer id;
 

@@ -31,6 +31,15 @@ public enum CountryCode {
 		this.cn=cn;
 		this.en=en;
 	}
+	public static boolean contains(String _name) {
+		CountryCode[] countryCode = values();
+		for (CountryCode c : countryCode) {
+			if (c.name().equals(_name)) {
+				return true;
+			}
+		}
+		return false;
+	}
 	public static <E> List<E> replaceCountry(List<E> list) {
 		try {
 			if(!list.isEmpty()) {
@@ -40,14 +49,16 @@ public enum CountryCode {
 				field.setAccessible(true);
 				//遍历数组 替换国别信息
 				for(E ele : list) {
-					field.set(ele, CountryCode.valueOf(field.get(ele).toString()).cn);
+					String cc = field.get(ele).toString();
+					if(contains(cc)) {
+						field.set(ele, CountryCode.valueOf(cc).cn);
+					}
+					
 				}
 			}
 		} catch (NoSuchFieldException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();

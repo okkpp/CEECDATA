@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<!-- 
+<!--
     @author: 朱鹏浩
     @title: 消费者价格指数
  -->
@@ -12,24 +12,21 @@
     <meta charset="utf-8">
 
     <!-- 引入Jquery -->
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
 
     <!-- 引入Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src="../zdo_static/js/bootstrap.min.js"></script>
 
     <!-- 引入BootStrap-table -->
-    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
-    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+    <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
 
     <!-- 引入Bootstrap-paginator -->
-    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+    <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
 
     <!-- 引入Echarts -->
-    <script src="../assets/libs/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
 </head>
 <body>
 <div class="container">
@@ -46,23 +43,23 @@
             <br>
             <h4 style="margin-top: -20px;">Consumer Price Indices</h4>
         </div>
-
+        <div style="text-align: right;">单位:&nbsp;%</div>
         <table id="tableData"></table>
     </div>
 
     <div id="imageView">
         <div class="page-header" style="text-align: center;">
-            <h3>消费者价格指数柱状图</h3>
+            <h3>消费者价格指数</h3>
             <br>
             <h3>Consumer Price Indices</h3>
         </div>
 
-        <div class="panel" style="margin-top: 40px;">
+        <div class="panel" style="margin-top: 1.5em;">
             <div id="main" style="width: 100%;height:400px;"></div>
         </div>
     </div>
 
-      <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+      <div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
         <span class="glyphicon glyphicon-save"></span> 下载
     </a></div>
 
@@ -95,7 +92,7 @@
         columns: [
             {
                 field: 'country',
-                title: '国家或地区'
+                title: '国家'
             },
             {
                 field: 'year1',
@@ -298,42 +295,45 @@
         timeline: {
             axisType: 'category',
             autoPlay: true,
-            playInterval: 5000,
+            playInterval: 2000,
             data: all.years
         },
         options: [{
             tooltip: {
                 trigger: 'axis'
             },
-            toolbox: {
-                show: true,
-                orient: 'vertical',
-                x: 'right',
-                y: 'center',
-                feature: {
-                    mark: {
-                        show: true
-                    },
-                    dataView: {
-                        show: true,
-                        readOnly: false
-                    },
-                    magicType: {
-                        show: true,
-                        type: ['line', 'bar']
-                    },
-                    restore: {
-                        show: true
-                    },
-                    saveAsImage: {
-                        show: true
-                    }
-                }
+            // toolbox: {
+            //     show: true,
+            //     orient: 'vertical',
+            //     x: 'right',
+            //     y: 'center',
+            //     feature: {
+            //         mark: {
+            //             show: true
+            //         },
+            //         dataView: {
+            //             show: true,
+            //             readOnly: false
+            //         },
+            //         magicType: {
+            //             show: true,
+            //             type: ['line', 'bar']
+            //         },
+            //         restore: {
+            //             show: true
+            //         },
+            //         saveAsImage: {
+            //             show: true
+            //         }
+            //     }
+            // },
+            title:{
+              subtext: '数据来源'
             },
             calculable: true,
             grid: {
-                y: 100,
-                y2: 100
+                top: 50,
+                bottom: 100
             },
             xAxis: [{
                 type: 'category',
@@ -344,11 +344,12 @@
             }],
             yAxis: [{
                 type: 'value',
-                name: ''
+                name: '%'
             }],
             series: [{
-                name: '银行资本充足率',
+                name: '消费者价格指数',
                 type: 'bar',
+                barWidth: 30,
                 data: all.data[0]
             }]
         },

@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.culture.WaterPeopleRateMapper;
 import okkpp.model.culture.WaterPeopleRate;
 import okkpp.utils.CountryCode;
@@ -23,10 +25,39 @@ public class WaterPeopleRateService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<WaterPeopleRate> selectByExample(String column,String condition){
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn) {
 		Example example = new Example(WaterPeopleRate.class);
+		example.setOrderByClause("country,sort");
+		PageHelper.startPage(pn, 10);
+		List<WaterPeopleRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
+		Example example = new Example(WaterPeopleRate.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<WaterPeopleRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// WaterPeopleRate¸üÐÂ
+	public int updateWaterPeopleRate(WaterPeopleRate waterPeopleRate) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(waterPeopleRate);
+	}
+
+	// WaterPeopleRate²åÈë
+	public int insertWaterPeopleRate(WaterPeopleRate waterPeopleRate) {
+		return mapper.insertSelective(waterPeopleRate);
+	}
+
+	// WaterPeopleRateÉ¾³ý
+	public int deleteWaterPeopleRate(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

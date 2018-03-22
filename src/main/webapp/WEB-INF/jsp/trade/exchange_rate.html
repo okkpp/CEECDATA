@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+<!-- 
+    @author: 胡校辉
+    @title: 货币汇率
+ -->
+<head lang="zh-CN">
+    <title>货币汇率</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta charset="utf-8">
+
+    <!-- 引入Jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script src="../assets/libs/echarts/echarts.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div>
+        <ul class="nav nav-tabs">
+            <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+            <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+        </ul>
+    </div>
+
+    <div id="tableView">
+        <div class="page-header" style="text-align: center;">
+            <h3>货币汇率</h3>
+            <br>
+            <h4 style="margin-top: -20px;">Central Government Debt as Percentage of GDP</h4>
+        </div>
+
+        <div style="text-align: right;">单位:1美元合本币数</div>
+
+        <table id="tableData"></table>
+    </div>
+
+    <div id="imageView">
+        <div class="page-header" style="text-align: center;">
+            <h3>货币汇率</h3>
+            <br>
+            <h4 style="margin-top: -20px;">Central Government Debt as Percentage of GDP</h4>
+        </div>
+
+        <div class="panel" style="margin-top: 40px;">
+            <div style="text-align: right;">单位:1美元合本币数</div>
+            <div id="main" style="width: 100%;height:400px;"></div>
+        </div>
+    </div>
+
+      <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+        <span class="glyphicon glyphicon-save"></span> 下载
+    </a></div>
+
+    <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+</div>
+</body>
+<script>
+    $(function () {
+        $('#imageView').hide();
+        $('#tableTag').attr('class', 'active');
+    })
+
+    function showTable() {
+        $('#tableView').show();
+        $('#imageView').hide();
+        $('#tableTag').attr('class', 'active');
+        $('#imageTag').removeClass('active');
+    }
+
+    function showImage() {
+        $('#imageView').show();
+        $('#tableView').hide();
+        $('#imageTag').attr('class', 'active');
+        $('#tableTag').removeClass('active');
+    }
+
+    $('#tableData').bootstrapTable({
+        striped: true,
+        columns: [
+            {
+                field: 'country',
+                title: '国家或地区'
+            },
+            {
+                field: 'year1',
+                title: '2000年'
+            },
+            {
+                field: 'year2',
+                title: '2005年'
+            },
+            {
+                field: 'year3',
+                title: '2012年'
+            },
+            {
+                field: 'year4',
+                title: '2013年'
+            },
+            {
+                field: 'year5',
+                title: '2014年'
+            },
+            {
+                field: 'year6',
+                title: '2015年'
+            }
+        ],
+        data: [
+            {
+                country: "阿尔巴尼亚",
+                year1:"143.7094167",
+                year2:"99.87025448",
+                year3:"108.1846446",
+                year4:"105.6686734",
+                year5:"105.4792341",
+                year6:"125.9608304"
+            },
+            {
+                country: "爱沙尼亚",
+                year1:"16.96863667",
+                year2:"12.58378659",
+                year3:"",
+                year4:"",
+                year5:"",
+                year6:""
+            },
+            {
+                country: "保加利亚",
+                year1:"2.123275",
+                year2:"1.574133333",
+                year3:"1.52205",
+                year4:"1.473566667",
+                year5:"1.474183333",
+                year6:"1.7644"
+            },
+            {
+                country: "波兰",
+                year1:"4.346075",
+                year2:"3.235483333",
+                year3:"3.256541667",
+                year4:"3.160616667",
+                year5:"3.154541667",
+                year6:"3.7695"
+            },
+            {
+                country: "黑山",
+                year1:"1.085400833",
+                year2:"0.80412",
+                year3:"0.778293601",
+                year4:"0.753159182",
+                year5:"0.753730737",
+                year6:"0.901658962"
+            },
+            {
+                country: "捷克共和国",
+                year1:"38.59841667",
+                year2:"23.95741667",
+                year3:"19.5775",
+                year4:"19.57058333",
+                year5:"20.7575",
+                year6:"24.59875"
+            },
+            {
+                country: "克罗地亚",
+                year1:"8.277666417",
+                year2:"5.949236917",
+                year3:"5.850291833",
+                year4:"5.704880167",
+                year5:"5.748165417",
+                year6:"6.85830375"
+            },
+            {
+                country: "拉脱维亚",
+                year1:"0.6065",
+                year2:"0.564716667",
+                year3:"0.546875",
+                year4:"0.529391667",
+                year5:"",
+                year6:""
+            },
+            {
+                country: "立陶宛",
+                year1:"4",
+                year2:"2.774025",
+                year3:"2.686291667",
+                year4:"2.601008333",
+                year5:"2.600291667",
+                year6:""
+            },
+            {
+                country: "罗马尼亚",
+                year1:"2.170872083",
+                year2:"2.913653167",
+                year3:"3.4682",
+                year4:"3.327916667",
+                year5:"3.349175",
+                year6:"4.005666667"
+            },
+            {
+                country: "马其顿",
+                year1:"65.90386667",
+                year2:"49.28368333",
+                year3:"47.89025",
+                year4:"46.39534167",
+                year5:"46.43713083",
+                year6:"55.537075",
+            },
+            {
+                country: "塞尔维亚",
+                year1:"63.1659",
+                year2:"66.71380833",
+                year3:"87.9733",
+                year4:"85.15885",
+                year5:"88.40530833",
+                year6:"108.811425",
+            },
+            {
+                country: "斯洛伐克",
+                year1:"46.03516667",
+                year2:"31.01825",
+                year3:"",
+                year4:"",
+                year5:"",
+                year6:"",
+            },
+            {
+                country: "斯洛文尼亚",
+                year1:"222.6560858",
+                year2:"192.705468",
+                year3:"",
+                year4:"",
+                year5:"",
+                year6:"",
+            },
+            {
+                country: "匈牙利",
+                year1:"282.1791667",
+                year2:"199.5825",
+                year3:"225.1041667",
+                year4:"223.695",
+                year5:"232.6016667",
+                year6:"279.3325"
+            },
+            {
+                country: "波黑",
+                year1:"2.122859512",
+                year2:"1.57272202",
+                year3:"1.522209974",
+                year4:"1.473051323",
+                year5:"1.474169187",
+                year6:"1.763491647"
+            },
+
+        ]
+    });
+
+    var all = {
+        "data": [
+            [143.7094167,16.96863667,2.123275,4.346075,1.085400833,38.59841667,8.277666417,0.6065,4,2.170872083,65.90386667,63.1659,46.03516667,222.6560858,282.1791667,2.122859512],
+            [99.87025448,12.58378659,1.574133333,3.235483333,0.80412,23.95741667,5.949236917,0.564716667,2.774025,2.913653167,49.28368333,66.71380833,31.01825,192.705468,199.5825,1.57272202],
+            [108.1846446,0,1.52205,3.256541667,0.778293601,19.5775,5.850291833,0.546875,2.686291667,3.4682,47.89025,87.9733,0,0,225.1041667,1.522209974],
+            [105.6686734,0,1.473566667,3.160616667,0.753159182,19.57058333,5.704880167,0.529391667,2.601008333,3.327916667,46.39534167,85.15885,0,0,223.695,1.473051323],
+            [105.4792341,0,1.474183333,3.154541667,0.753730737,20.7575,5.748165417,0,2.600291667,3.349175,46.43713083,88.40530833,0,0,232.6016667,1.474169187],
+            [125.9608304,0,1.7644,3.7695,0.901658962,24.59875,6.85830375,0,0,4.005666667,55.537075,108.811425,0,0,279.3325,1.763491647]
+
+        ],
+        "countrys": ["阿尔巴尼亚","爱沙尼亚","保加利亚","波兰","黑山","捷克共和国","克罗地亚","拉脱维亚","立陶宛","罗马尼亚","马其顿","塞尔维亚","斯洛伐克","斯洛文尼亚","匈牙利","波黑"],
+        "years": ["2000年", "2005年", "2012年", "2013年", "2014年", "2015年"]
+    };
+
+    var option = {
+        timeline: {
+            axisType: 'category',
+            autoPlay: true,
+            playInterval: 5000,
+            data: all.years
+        },
+        options: [{
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                x: 'right',
+                y: 'center',
+                feature: {
+                    mark: {
+                        show: true
+                    },
+                    dataView: {
+                        show: true,
+                        readOnly: false
+                    },
+                    magicType: {
+                        show: true,
+                        type: ['line', 'bar']
+                    },
+                    restore: {
+                        show: true
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            calculable: true,
+            grid: {
+                y: 100,
+                y2: 100
+            },
+            xAxis: [{
+                type: 'category',
+                axisLabel: {
+                    interval: 0
+                },
+                data: all.countrys
+            }],
+            yAxis: [{
+                type: 'value',
+                name: ''
+            }],
+            series: [{
+                name: '银行资本充足率',
+                type: 'bar',
+                data: all.data[0]
+            }]
+        },
+            {
+                series: [{
+                    data: all.data[1]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[2]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[3]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[4]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[5]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[6]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[7]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[8]
+                }]
+            }
+        ]
+    };
+    var myChart = echarts.init(document.getElementById('main'));
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</html>

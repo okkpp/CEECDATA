@@ -4,6 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import okkpp.dao.energy.NuclearPercentageMapper;
 import okkpp.model.energy.NuclearPercentage;
 import okkpp.utils.CountryCode;
@@ -23,10 +25,39 @@ public class NuclearPercentageService {
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
 	
-	public List<NuclearPercentage> selectByExample(String column,String condition){
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfo(int pn) {
 		Example example = new Example(NuclearPercentage.class);
+		example.setOrderByClause("country,sort");
+		PageHelper.startPage(pn, 10);
+		List<NuclearPercentage> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
+		Example example = new Example(NuclearPercentage.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<NuclearPercentage> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// NuclearPercentage¸üÐÂ
+	public int updateNuclearPercentage(NuclearPercentage nuclearPercentage) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(nuclearPercentage);
+	}
+
+	// NuclearPercentage²åÈë
+	public int insertNuclearPercentage(NuclearPercentage nuclearPercentage) {
+		return mapper.insertSelective(nuclearPercentage);
+	}
+
+	// NuclearPercentageÉ¾³ý
+	public int deleteNuclearPercentage(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

@@ -8,9 +8,9 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="country" jdbcType="VARCHAR" property="country" />
     <result column="year" jdbcType="VARCHAR" property="year" />
-    <result column="primary" jdbcType="DOUBLE" property="primary" />
-    <result column="secondary" jdbcType="DOUBLE" property="secondary" />
-    <result column="tertiary" jdbcType="DOUBLE" property="tertiary" />
+    <result column="primary_edu" jdbcType="DOUBLE" property="primaryEdu" />
+    <result column="secondary_edu" jdbcType="DOUBLE" property="secondaryEdu" />
+    <result column="tertiary_edu" jdbcType="DOUBLE" property="tertiaryEdu" />
     <result column="sort" jdbcType="INTEGER" property="sort" />
     <result column="updated" jdbcType="TIMESTAMP" property="updated" />
   </resultMap>
@@ -18,6 +18,6 @@
     <!--
       WARNING - @mbggenerated
     -->
-    id, country, year, primary, secondary, tertiary, sort, updated
+    id, country, year, primary_edu, secondary_edu, tertiary_edu, sort, updated
   </sql>
 </mapper>

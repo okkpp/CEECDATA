@@ -139,4 +139,11 @@ public class Consumer implements Serializable {
     public void setUpdated(Date updated) {
         this.updated = updated;
     }
+
+	@Override
+	public String toString() {
+		return "Consumer [id=" + id + ", country=" + country + ", year=" + year + ", indices=" + indices + ", sort="
+				+ sort + ", updated=" + updated + "]";
+	}
+    
 }

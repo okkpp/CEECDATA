@@ -5,7 +5,7 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "t_economics_indicators_of_na")
-public class IndicatorsOfNA implements Serializable {
+public class IndicatorsOfNa implements Serializable {
     @Id
     private Integer id;
 

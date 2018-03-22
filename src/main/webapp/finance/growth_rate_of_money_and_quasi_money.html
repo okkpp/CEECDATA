@@ -8,21 +8,21 @@
     <meta charset="UTF-8">
     <title>广义货币增长率</title>
     <!-- 引入Jquery -->
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
 
     <!-- 引入Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src="../zdo_static/js/bootstrap.min.js"></script>
 
     <!-- 引入BootStrap-table -->
-    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
-    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+    <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
 
     <!-- 引入Bootstrap-paginator -->
-    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+    <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
 
     <!-- 引入Echarts -->
-    <script src="../assets/libs/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
 </head>
 <body>
     <div class="container">
@@ -47,18 +47,18 @@
 
         <div id="imageView">
             <div class="page-header" style="text-align: center;">
-                <h3>广义货币增长率柱状图</h3>
+                <h3>广义货币增长率</h3>
                 <br>
                 <h4 style="margin-top: -20px;">Growth Rate of Money and Quasi Money</h4>
             </div>
 
-            <div class="panel" style="margin-top: 40px;">
-                <div style="text-align: right;">单位:&nbsp;%</div>
+            <div class="panel" style="margin-top: 1.5em;">
+                <!--<div style="text-align: right;">单位:&nbsp;%</div>-->
                 <div id="main" style="width: 100%;height:400px;"></div>
             </div>
         </div>
 
-          <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+          <div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
             <span class="glyphicon glyphicon-save"></span> 下载
         </a></div>
 
@@ -89,7 +89,7 @@
             columns: [
                 {
                     field: 'country',
-                    title: '国家或地区'
+                    title: '国家'
                 },
                 {
                     field: 'year1',
@@ -125,7 +125,7 @@
 	    	year4: '2.2',
 	    	year5: '4.01',
 	    	year6: '1.9',
-	    }, 
+	    },
 	    {
 	    	country: '爱沙尼亚',
 	    	year1: '30.4',
@@ -152,7 +152,7 @@
 	    	year4: '8.9',
 	    	year5: '1.1',
 	    	year6: '8.76',
-	    }, 
+	    },
 	    {
 	    	country: '波兰',
 	    	year1: '11.5',
@@ -161,7 +161,7 @@
 	    	year4: '6.2',
 	    	year5: '8.1',
 	    	year6: '9.1',
-	    }, 
+	    },
 	    {
 	    	country: '黑山',
 	    	year1: '-',
@@ -170,7 +170,7 @@
 	    	year4: '-',
 	    	year5: '-',
 	    	year6: '-',
-	    }, 
+	    },
 	    {
 	    	country: '捷克',
 	    	year1: '16.0',
@@ -282,42 +282,30 @@
             timeline: {
                 axisType: 'category',
                 autoPlay: true,
-                playInterval: 5000,
+                playInterval: 2000,
                 data: all.years
             },
             options: [{
                 tooltip: {
                     trigger: 'axis'
                 },
-                toolbox: {
-                    show: true,
-                    orient: 'vertical',
-                    x: 'right',
-                    y: 'center',
-                    feature: {
-                        mark: {
-                            show: true
-                        },
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        magicType: {
-                            show: true,
-                            type: ['line', 'bar']
-                        },
-                        restore: {
-                            show: true
-                        },
-                        saveAsImage: {
-                            show: true
-                        }
-                    }
+                // toolbox: {
+                //     show: true,
+                //     orient: 'vertical',
+                //     x: 'right',
+                //     y: 'center'
+                // },
+                title:{
+                  text: '2000年各国的银行资本充足率',textStyle: {
+                    fontWeight: '400',
+                    fontSize: '14'
+                  },
+                  subtext: '数据来源'
                 },
                 calculable: true,
                 grid: {
-                    y: 100,
-                    y2: 100
+                    top: 50,
+                    bottom: 100
                 },
                 xAxis: [{
                     type: 'category',
@@ -328,7 +316,7 @@
                 }],
                 yAxis: [{
                     type: 'value',
-                    name: ''
+                    name: '%'
                 }],
                 series: [{
                     name: '银行资本充足率',
@@ -337,26 +325,51 @@
                 }]
             },
                 {
+                    title: {
+                      text: '2005年各国的银行资本充足率',textStyle: {
+                        fontWeight: '400',
+                        fontSize: '14'
+                      }},
                     series: [{
                         data: all.data[1]
                     }]
                 },
                 {
+                  title: {
+                    text: '2010年各国的银行资本充足率',textStyle: {
+                      fontWeight: '400',
+                      fontSize: '14'
+                    }},
                     series: [{
                         data: all.data[2]
                     }]
                 },
                 {
+                  title: {
+                    text: '2013年各国的银行资本充足率',textStyle: {
+                      fontWeight: '400',
+                      fontSize: '14'
+                    }},
                     series: [{
                         data: all.data[3]
                     }]
                 },
                 {
+                  title: {
+                    text: '2014年各国的银行资本充足率',textStyle: {
+                      fontWeight: '400',
+                      fontSize: '14'
+                    }},
                     series: [{
                         data: all.data[4]
                     }]
                 },
                 {
+                  title: {
+                    text: '2015年各国的银行资本充足率',textStyle: {
+                      fontWeight: '400',
+                      fontSize: '14'
+                    }},
                     series: [{
                         data: all.data[5]
                     }]

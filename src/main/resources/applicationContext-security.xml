@@ -25,6 +25,7 @@
 		</property> 
         <property name="filterChainDefinitions">
             <value>
+            	/assets/** = anon
             	/system/login* = anon
             	/system/logout* = anon
             	/system/index* = authc
@@ -46,9 +47,9 @@
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager" />
 	
 	<bean id="sampleRealm" class="okkpp.shiro.sampleRealm">
-		<property name="userMapper" ref="userMapper" />
+		<!-- <property name="userMapper" ref="userMapper" />
 		<property name="roleMapper" ref="roleMapper" />
-		<property name="resourceMapper" ref="resourceMapper" />
+		<property name="resourceMapper" ref="resourceMapper" /> -->
 	</bean>
 	
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>

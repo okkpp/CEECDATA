@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- 
+    @author: 赵国杰
+    @title: 居民消费支出
+ -->
+<head>
+    <meta charset="UTF-8">
+    <title>居民消费支出</title>
+    <!-- 引入Jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script src="../assets/libs/echarts/echarts.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div>
+        <ul class="nav nav-tabs">
+            <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+            <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+        </ul>
+    </div>
+
+    <div id="tableView">
+        <div class="page-header" style="text-align: center;">
+            <h3>居民消费支出</h3>
+            <br>
+            <h4 style="margin-top: -20px;">S&P Consumer Spending</h4>
+        </div>
+
+        <div style="text-align: right;">单位:&nbsp;%</div>
+        <table id="tableData"></table>
+    </div>
+
+    <div id="imageView">
+        <div class="page-header" style="text-align: center;">
+            <h3>居民消费支出柱状图</h3>
+            <br>
+            <h4 style="margin-top: -20px;">Consumer Spending</h4>
+        </div>
+
+        <div class="panel" style="margin-top: 40px;">
+            <div style="text-align: right;">单位:&nbsp;美元</div>
+            <div id="main" style="width: 100%;height:400px;"></div>
+        </div>
+    </div>
+
+    <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+          <span class="glyphicon glyphicon-save"></span> 下载
+        </a></div>
+
+    <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+</div>
+<script>
+    $(function(){
+        $('#imageView').hide();
+        $('#tableTag').attr('class','active');
+    })
+
+    function showTable() {
+        $('#tableView').show();
+        $('#imageView').hide();
+        $('#tableTag').attr('class','active');
+        $('#imageTag').removeClass('active');
+    }
+
+    function showImage() {
+        $('#imageView').show();
+        $('#tableView').hide();
+        $('#imageTag').attr('class','active');
+        $('#tableTag').removeClass('active');
+    }
+
+    $('#tableData').bootstrapTable({
+        striped: true,
+        columns: [
+            {
+                field: 'country',
+                title: '国家或地区'
+            },
+            {
+                field: 'year1',
+                title: '2005年'
+            },
+            {
+                field: 'year2',
+                title: '2010年'
+            },
+            {
+                field: 'year3',
+                title: '2015年'
+            },
+            {
+                field: 'year4',
+                title: '2014年'
+            }
+        ],
+        data: [
+            {
+                country: "阿尔巴尼亚",
+                year1:"6364888963",
+                year2:"9274774659",
+                year3:"8842322373",
+                year4:"/"
+            },
+            {
+                country: "爱沙尼亚",
+                year1:"7688620818",
+                year2:"10183841060",
+                year3:"11788022624",
+                year4:"/"
+            },
+            {
+                country: "波黑",
+                year1:"10501292681",
+                year2:"14418929442",
+                year3:"/",
+                year4:"15524202279"
+            },
+            {
+                country: "保加利亚",
+                year1:"20304802744",
+                year2:"31955319480",
+                year3:"29827331671",
+                year4:"/"
+            },
+            {
+                country: "波兰",
+                year1:"191611806521",
+                year2:"295198156070",
+                year3:"278488393686",
+                year4:"/"
+            },
+            {
+                country: "黑山",
+                year1:"1576818137",
+                year2:"3387025166",
+                year3:"3168815222",
+                year4:"/"
+            },
+            {
+                country: "捷克",
+                year1:"65385308923",
+                year2:"101950540100",
+                year3:"86644321358",
+                year4:"/"
+            },
+            {
+                country: "克罗地亚",
+                year1:"27199454698",
+                year2:"35178513645",
+                year3:"28901199102",
+                year4:"/"
+            },
+            {
+                country: "罗马尼亚",
+                year1:"68965370491",
+                year2:"106549387960",
+                year3:"109339341438",
+                year4:"/"
+            },
+            {
+                country: "立陶宛",
+                year1:"16896485135",
+                year2:"23775225888",
+                year3:"/",
+                year4:"30385055990"
+            },
+            {
+                country: "拉脱维亚",
+                year1:"10380110765",
+                year2:"15120842607",
+                year3:"/",
+                year4:"19146125779"
+            },
+            {
+                country: "马其顿",
+                year1:"5019103679",
+                year2:"7106403301",
+                year3:"6829483960",
+                year4:"/"
+            },
+            {
+                country: "塞尔维亚",
+                year1:"19877595040",
+                year2:"30793596719",
+                year3:"27404258194",
+                year4:"/"
+            },
+            {
+                country: "斯洛伐克",
+                year1:"35446178336",
+                year2:"51782384106",
+                year3:"48462348897",
+                year4:"/"
+            },
+            {
+                country: "斯洛文尼亚",
+                year1:"19473821664",
+                year2:"26909271523",
+                year3:"22179892842",
+                year4:"/"
+            },
+            {
+                country: "匈牙利",
+                year1:"61454932171",
+                year2:"68009305569",
+                year3:"/",
+                year4:"69608128401"
+            }
+        ]
+    });
+
+    var all = {
+        "data": [
+            [6364888963,7688620818,10501292681,20304802744,191611806521,1576818137,65385308923,27199454698,68965370491,16896485135,10380110765,5019103679,19877595040,35446178336,19473821664,61454932171],
+            [9274774659,10183841060,14418929442,31955319480,295198156070,3387025166,101950540100,35178513645,106549387960,23775225888,15120842607,7106403301,30793596719,51782384106,26909271523,68009305569],
+            [0,0,15524202279,0,0,0,0,0,0,30385055990,19146125779,0,0,0,0,69608128401],
+            [8842322373,11788022624,29827331671,0,278488393686,3168815222,86644321358,28901199102,109339341438,0,0,6829483960,27404258194,48462348897,22179892842,0]
+        ],
+        "countrys": ["阿尔巴尼亚","爱沙尼亚","保加利亚","波兰","黑山","捷克","克罗地亚","拉脱维亚","立陶宛","罗马尼亚","马其顿","塞尔维亚","斯洛伐克","斯洛文尼亚","匈牙利","波黑"],
+        "years": ["2005年", "2010年", "2014年", "2015年"]
+    };
+
+    var option = {
+        timeline: {
+            axisType: 'category',
+            autoPlay: true,
+            playInterval: 5000,
+            data: all.years
+        },
+        options: [{
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: true,
+                orient: 'vertical',
+                x: 'right',
+                y: 'center',
+                feature: {
+                    mark: {
+                        show: true
+                    },
+                    dataView: {
+                        show: true,
+                        readOnly: false
+                    },
+                    magicType: {
+                        show: true,
+                        type: ['line', 'bar']
+                    },
+                    restore: {
+                        show: true
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },
+            calculable: true,
+            grid: {
+                y: 100,
+                y2: 100
+            },
+            xAxis: [{
+                type: 'category',
+                axisLabel: {
+                    interval: 0
+                },
+                data: all.countrys
+            }],
+            yAxis: [{
+                type: 'value',
+                name: '美元'
+            }],
+            series: [{
+                name: '居民消费支付',
+                type: 'bar',
+                data: all.data[0]
+            }]
+        },
+            {
+                series: [{
+                    data: all.data[1]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[2]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[3]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[4]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[5]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[6]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[7]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[8]
+                }]
+            }
+        ]
+    };
+    var myChart = echarts.init(document.getElementById('main'));
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

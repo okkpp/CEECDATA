@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: moqianyi
 Build-Jdk: 1.8.0_131
+=======
+Built-By: ASUS
+Build-Jdk: 1.8.0_161
+>>>>>>> 7e436f732b564afbf42a151accf7c5eeccf454c3
 Created-By: Maven Integration for Eclipse
 

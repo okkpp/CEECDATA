@@ -22,16 +22,24 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.model.population"
+		<javaModelGenerator targetPackage="okkpp.model.employment"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.dao.population"
+		<sqlMapGenerator targetPackage="okkpp.dao.employment"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.dao.population"
+		<javaClientGenerator targetPackage="okkpp.dao.employment"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table tableName="t_population_birth_rate_death_rate" domainObjectName="BirthRateDeathRate"
-			enableCountByExample="false" enableDeleteByExample="false" 
-			enableSelectByExample="false" enableUpdateByExample="false" 
-			schema="${jdbc.username}"/>
+		<table tableName="t_employment_composition_employment"
+			domainObjectName="CompositionEmployment" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" schema="${jdbc.username}" />
+		<table tableName="t_employment_educational"
+			domainObjectName="Educational" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" schema="${jdbc.username}" />
+		<table tableName="t_employment_educational_unemployment"
+			domainObjectName="EducationalUnemployment" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" schema="${jdbc.username}" />
 
 	</context>
 </generatorConfiguration>

@@ -39,7 +39,7 @@
                 <br>
                 <h4 style="margin-top: -20px;">Producer Price Indices</h4>
             </div>
-
+            <div style="text-align: right;">单位:&nbsp;%</div>
             <table id="tableData"></table>
         </div>
 
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-          <div style="color: #666666; margin-top: 15px;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+          <div style="color: #666666; margin-top: 2em;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
             <span class="glyphicon glyphicon-save"></span> 下载
         </a></div>
 
@@ -289,26 +289,7 @@
                     show: true,
                     orient: 'vertical',
                     x: 'right',
-                    y: 'center',
-                    feature: {
-                        mark: {
-                            show: true
-                        },
-                        dataView: {
-                            show: true,
-                            readOnly: false
-                        },
-                        magicType: {
-                            show: true,
-                            type: ['line', 'bar']
-                        },
-                        restore: {
-                            show: true
-                        },
-                        saveAsImage: {
-                            show: true
-                        }
-                    }
+                    y: 'center'
                 },
                 calculable: true,
                 grid: {
@@ -324,7 +305,7 @@
                 }],
                 yAxis: [{
                     type: 'value',
-                    name: ''
+                    name: '%'
                 }],
                 series: [{
                     name: '生产者价格指数',
