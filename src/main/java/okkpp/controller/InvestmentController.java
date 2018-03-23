@@ -13,10 +13,6 @@ import com.github.pagehelper.PageInfo;
 import okkpp.service.investment.*;
 import okkpp.utils.ChartInfo;
 import okkpp.model.Msg;
-<<<<<<< HEAD
-import okkpp.model.investment.*;  
-=======
->>>>>>> 7e436f732b564afbf42a151accf7c5eeccf454c3
 
 @Controller
 @RequestMapping("/investment")
