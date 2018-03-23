@@ -26,16 +26,38 @@ public class SocialContributionsService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(SocialContributions.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<SocialContributions> list = mapper.selectAll();
+		List<SocialContributions> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<SocialContributions> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(SocialContributions.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<SocialContributions> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// SocialContributions¸üÐÂ
+	public int updateSocialContributions(SocialContributions socialContributions) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(socialContributions);
+	}
+
+	// SocialContributions²åÈë
+	public int insertSocialContributions(SocialContributions socialContributions) {
+		return mapper.insertSelective(socialContributions);
+	}
+
+	// SocialContributionsÉ¾³ý
+	public int deleteSocialContributions(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

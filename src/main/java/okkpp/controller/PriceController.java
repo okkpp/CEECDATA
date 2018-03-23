@@ -13,7 +13,7 @@ import com.github.pagehelper.PageInfo;
 import okkpp.model.Msg;
 import okkpp.model.price.*;
 import okkpp.service.price.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 import okkpp.utils.TimeUtils;
 
 @Controller
@@ -30,9 +30,9 @@ public class PriceController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "Consumer":
-			return CountryMap.mapByCountry(consumerService.selectAll());
+			return ChartInfo.mapByCountry(consumerService.selectAll());
 		case "Producer":
-			return CountryMap.mapByCountry(producerService.selectAll());
+			return ChartInfo.mapByCountry(producerService.selectAll());
 		}
 		return null;
 	}

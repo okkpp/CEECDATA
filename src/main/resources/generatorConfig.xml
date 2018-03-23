@@ -22,62 +22,22 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.model.economics"
+		<javaModelGenerator targetPackage="okkpp.model.employment"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.dao.economics"
+		<sqlMapGenerator targetPackage="okkpp.dao.employment"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.dao.economics"
+		<javaClientGenerator targetPackage="okkpp.dao.employment"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table tableName="t_economics_final_consumption"
-			domainObjectName="FinalConsumption" enableCountByExample="false"
+		<table tableName="t_employment_composition_employment"
+			domainObjectName="CompositionEmployment" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_economics_gdp"
-			domainObjectName="Gdp" enableCountByExample="false"
+		<table tableName="t_employment_educational"
+			domainObjectName="Educational" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_economics_gdppc"
-			domainObjectName="Gdppc" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_economics_gnipc"
-			domainObjectName="Gnipc" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_economics_growth_rate_gdp"
-			domainObjectName="GrowthRateGdp" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_economics_growth_rate_gdppc"
-			domainObjectName="GrowthRateGdppc" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_economics_indicators_of_na"
-			domainObjectName="IndicatorsOfNa" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_economics_percentage_of_agriculture"
-			domainObjectName="PercentageOfAgriculture" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_economics_percentage_of_indices"
-			domainObjectName="PercentageOfIndices" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_economics_percentage_of_service"
-			domainObjectName="PercentageOfService" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_economics_rate_of_consumption"
-			domainObjectName="RateOfConsumption" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_economics_rate_of_formation"
-			domainObjectName="RateOfFormation" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_economics_share_of_formation"
-			domainObjectName="ShareOfFormation" enableCountByExample="false"
+		<table tableName="t_employment_educational_unemployment"
+			domainObjectName="EducationalUnemployment" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" schema="${jdbc.username}" />
 

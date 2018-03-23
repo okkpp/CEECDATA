@@ -23,17 +23,39 @@ public class PersonalIncomeService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(PersonalIncome.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<PersonalIncome> list = mapper.selectAll();
+		List<PersonalIncome> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<PersonalIncome> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(PersonalIncome.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<PersonalIncome> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// PersonalIncome¸üÐÂ
+	public int updatePersonalIncome(PersonalIncome personalIncome) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(personalIncome);
+	}
+
+	// PersonalIncome²åÈë
+	public int insertPersonalIncome(PersonalIncome personalIncome) {
+		return mapper.insertSelective(personalIncome);
+	}
+
+	// PersonalIncomeÉ¾³ý
+	public int deletePersonalIncome(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 	
 }

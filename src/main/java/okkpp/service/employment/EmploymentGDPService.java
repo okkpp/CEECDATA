@@ -26,16 +26,38 @@ public class EmploymentGDPService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(EmploymentGDP.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<EmploymentGDP> list = mapper.selectAll();
+		List<EmploymentGDP> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<EmploymentGDP> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(EmploymentGDP.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<EmploymentGDP> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// EmploymentGDP¸üÐÂ
+	public int updateEmploymentGDP(EmploymentGDP employmentGDP) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(employmentGDP);
+	}
+
+	// EmploymentGDP²åÈë
+	public int insertEmploymentGDP(EmploymentGDP employmentGDP) {
+		return mapper.insertSelective(employmentGDP);
+	}
+
+	// EmploymentGDPÉ¾³ý
+	public int deleteEmploymentGDP(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

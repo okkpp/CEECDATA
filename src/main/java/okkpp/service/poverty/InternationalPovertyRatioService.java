@@ -25,17 +25,39 @@ public class InternationalPovertyRatioService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(InternationalPovertyRatio.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<InternationalPovertyRatio> list = mapper.selectAll();
+		List<InternationalPovertyRatio> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<InternationalPovertyRatio> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(InternationalPovertyRatio.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<InternationalPovertyRatio> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// InternationalPovertyRatio¸üÐÂ
+	public int updateInternationalPovertyRatio(InternationalPovertyRatio internationalPovertyRatio) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(internationalPovertyRatio);
+	}
+
+	// InternationalPovertyRatio²åÈë
+	public int insertInternationalPovertyRatio(InternationalPovertyRatio internationalPovertyRatio) {
+		return mapper.insertSelective(internationalPovertyRatio);
+	}
+
+	// InternationalPovertyRatioÉ¾³ý
+	public int deleteInternationalPovertyRatio(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 	
 }

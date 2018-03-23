@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +15,7 @@ import com.github.pagehelper.PageInfo;
 
 import okkpp.model.Msg;
 import okkpp.service.energy.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 
 /**
  * @author duck
@@ -42,23 +43,23 @@ public class EnergyController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "BalanceSheet":
-			return CountryMap.mapByCountry(BalanceSheetService.selectAll());
+			return ChartInfo.mapByCountry(BalanceSheetService.selectAll());
 		case "CombustibleRenewals":
-			return CountryMap.mapByCountry(CombustibleRenewalsService.selectAll());
+			return ChartInfo.mapByCountry(CombustibleRenewalsService.selectAll());
 		case "ElectricityGeneration":
-			return CountryMap.mapByCountry(ElectricityGenerationService.selectAll());
+			return ChartInfo.mapByCountry(ElectricityGenerationService.selectAll());
 		case "EnergyImports":
-			return CountryMap.mapByCountry(EnergyImportsService.selectAll());
+			return ChartInfo.mapByCountry(EnergyImportsService.selectAll());
 		case "EnergyUseOfGDP":
-			return CountryMap.mapByCountry(EnergyUseOfGDPService.selectAll());
+			return ChartInfo.mapByCountry(EnergyUseOfGDPService.selectAll());
 		case "NuclearPercentage":
-			return CountryMap.mapByCountry(NuclearPercentageService.selectAll());
+			return ChartInfo.mapByCountry(NuclearPercentageService.selectAll());
 		}
 		return null;
 	}
 
 	// 后台获取数据
-	@RequestMapping(value = "/getJson", method = RequestMethod.POST)
+	@RequestMapping(value = "/getJson", method = RequestMethod.GET)
 	@ResponseBody
 	public <E> Msg getJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
 			@RequestParam("info") String info) {
@@ -82,8 +83,42 @@ public class EnergyController {
 		case "NuclearPercentage":
 			pageInfo = NuclearPercentageService.getPageInfo(pn);
 			break;
-		default:
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
+		}
+		return Msg.success().add("pageInfo", pageInfo);
+	}
+
+	// 后台按条件获取数据
+	@RequestMapping(value = "/getJsonByCondition/{info}", method = RequestMethod.GET)
+	@ResponseBody
+	public <E> Msg getJson(@PathVariable("info") String info,
+			@RequestParam(value = "pn", defaultValue = "1") Integer pn, @RequestParam("column") String column,
+			@RequestParam("condition") String condition) {
+		PageInfo<E> pageInfo = null;
+		switch (info) {
+		case "BalanceSheet":
+			pageInfo = BalanceSheetService.getPageInfoByCondition(pn, column, condition);
 			break;
+		case "CombustibleRenewals":
+			pageInfo = CombustibleRenewalsService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "ElectricityGeneration":
+			pageInfo = ElectricityGenerationService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "EnergyImports":
+			pageInfo = EnergyImportsService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "EnergyUseOfGDP":
+			pageInfo = EnergyUseOfGDPService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "NuclearPercentage":
+			pageInfo = NuclearPercentageService.getPageInfoByCondition(pn, column, condition);
+			break;
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
 		}
 		return Msg.success().add("pageInfo", pageInfo);
 	}

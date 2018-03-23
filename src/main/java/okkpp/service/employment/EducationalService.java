@@ -26,16 +26,38 @@ public class EducationalService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(Educational.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<Educational> list = mapper.selectAll();
+		List<Educational> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<Educational> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(Educational.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<Educational> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// Educational¸üÐÂ
+	public int updateEducational(Educational educational) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(educational);
+	}
+
+	// Educational²åÈë
+	public int insertEducational(Educational educational) {
+		return mapper.insertSelective(educational);
+	}
+
+	// EducationalÉ¾³ý
+	public int deleteEducational(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

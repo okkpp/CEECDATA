@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 * @author duck
 * @date 创建时间：2018年3月19日 下午4:01:09
 */
-public class CountryMap {
+public class ChartInfo {
 	
 	@SuppressWarnings("unchecked")
 	public static <E> Map<String, Object> mapByCountry(List<E> list) {
@@ -60,7 +60,10 @@ public class CountryMap {
 						if(existYear) {
 							Field yearF = c.getDeclaredField("year");
 							yearF.setAccessible(true);
-							yearList.add(yearF.get(ele).toString());
+							String year = yearF.get(ele).toString();
+							if(!yearList.contains(year)) {
+								yearList.add(year);
+							}
 						}
 					}
 				}

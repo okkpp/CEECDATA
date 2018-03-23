@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import okkpp.dao.price.ProducerMapper;
-import okkpp.model.price.Consumer;
 import okkpp.model.price.Producer;
 import okkpp.utils.CountryCode;
 import tk.mybatis.mapper.entity.Example;
@@ -35,6 +34,7 @@ public class ProducerService {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <E> PageInfo<E> getPageInfoByCondition(Integer pn,String column,String condition){
 		Example example = new Example(Producer.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
 		criteria.andLike(column, "%"+condition+"%");
 		PageHelper.startPage(pn, 10);

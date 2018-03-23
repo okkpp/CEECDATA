@@ -21,18 +21,40 @@ public class RailLinesService {
 	public List<RailLines> selectAll(){
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
-	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <E> PageInfo<E> getPageInfo(int pn){		
+		Example example = new Example(RailLines.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<RailLines> list = mapper.selectAll();
+		List<RailLines> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
 	
-	public List<RailLines> selectByExample(String column,String condition){
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn,String column,String condition){
 		Example example = new Example(RailLines.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
 		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		PageHelper.startPage(pn, 10);
+		List<RailLines> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list,10);
 	}
+
+	//RailLines¸üÐÂ
+	public int updateRailLines(RailLines railLines) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(railLines);
+	}
+	
+	//RailLines²åÈë
+	public int insertRailLines(RailLines railLines) {
+		return mapper.insertSelective(railLines);
+	}
+	
+	//RailLinesÉ¾³ý
+	public int deleteRailLines(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
+	}
+		
 }

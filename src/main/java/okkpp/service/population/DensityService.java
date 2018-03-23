@@ -23,17 +23,39 @@ public class DensityService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(Density.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<Density> list = mapper.selectAll();
+		List<Density> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<Density> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(Density.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<Density> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// Density¸üÐÂ
+	public int updateDensity(Density density) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(density);
+	}
+
+	// Density²åÈë
+	public int insertDensity(Density density) {
+		return mapper.insertSelective(density);
+	}
+
+	// DensityÉ¾³ý
+	public int deleteDensity(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 	
 }

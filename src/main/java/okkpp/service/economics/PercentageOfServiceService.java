@@ -26,16 +26,38 @@ public class PercentageOfServiceService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(PercentageOfService.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<PercentageOfService> list = mapper.selectAll();
+		List<PercentageOfService> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<PercentageOfService> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(PercentageOfService.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<PercentageOfService> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// PercentageOfService¸üÐÂ
+	public int updatePercentageOfService(PercentageOfService percentageOfService) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(percentageOfService);
+	}
+
+	// PercentageOfService²åÈë
+	public int insertPercentageOfService(PercentageOfService percentageOfService) {
+		return mapper.insertSelective(percentageOfService);
+	}
+
+	// PercentageOfServiceÉ¾³ý
+	public int deletePercentageOfService(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

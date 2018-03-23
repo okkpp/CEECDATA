@@ -26,16 +26,38 @@ public class OutputOfForestProductsServiece {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(OutputOfForestProducts.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<OutputOfForestProducts> list = mapper.selectAll();
+		List<OutputOfForestProducts> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<OutputOfForestProducts> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(OutputOfForestProducts.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<OutputOfForestProducts> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// OutputOfForestProducts¸üÐÂ
+	public int updateOutputOfForestProducts(OutputOfForestProducts outputOfForestProducts) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(outputOfForestProducts);
+	}
+
+	// OutputOfForestProducts²åÈë
+	public int insertOutputOfForestProducts(OutputOfForestProducts outputOfForestProducts) {
+		return mapper.insertSelective(outputOfForestProducts);
+	}
+
+	// OutputOfForestProductsÉ¾³ý
+	public int deleteOutputOfForestProducts(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

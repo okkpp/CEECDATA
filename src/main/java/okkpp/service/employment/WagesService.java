@@ -26,16 +26,38 @@ public class WagesService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(Wages.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<Wages> list = mapper.selectAll();
+		List<Wages> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<Wages> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(Wages.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<Wages> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// Wages¸üÐÂ
+	public int updateWages(Wages wages) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(wages);
+	}
+
+	// Wages²åÈë
+	public int insertWages(Wages wages) {
+		return mapper.insertSelective(wages);
+	}
+
+	// WagesÉ¾³ý
+	public int deleteWagest(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

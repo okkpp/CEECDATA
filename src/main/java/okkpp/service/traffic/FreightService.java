@@ -24,15 +24,37 @@ public class FreightService {
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <E> PageInfo<E> getPageInfo(int pn){		
+		Example example = new Example(Freight.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<Freight> list = mapper.selectAll();
+		List<Freight> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
 	
-	public List<Freight> selectByExample(String column,String condition){
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn,String column,String condition){
 		Example example = new Example(Freight.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
 		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		PageHelper.startPage(pn, 10);
+		List<Freight> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list,10);
+	}
+
+	//Freight¸üÐÂ
+	public int updateFreight(Freight freight) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(freight);
+	}
+	
+	//Freight²åÈë
+	public int insertFreight(Freight freight) {
+		return mapper.insertSelective(freight);
+	}
+	
+	//FreightÉ¾³ý
+	public int deleteFreight(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

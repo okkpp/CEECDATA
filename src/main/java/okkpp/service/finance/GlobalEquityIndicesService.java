@@ -26,16 +26,38 @@ public class GlobalEquityIndicesService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(GlobalEquityIndices.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<GlobalEquityIndices> list = mapper.selectAll();
+		List<GlobalEquityIndices> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<GlobalEquityIndices> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(GlobalEquityIndices.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<GlobalEquityIndices> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// GlobalEquityIndices¸üÐÂ
+	public int updateGlobalEquityIndices(GlobalEquityIndices globalEquityIndices) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(globalEquityIndices);
+	}
+
+	// GlobalEquityIndices²åÈë
+	public int insertGlobalEquityIndices(GlobalEquityIndices globalEquityIndices) {
+		return mapper.insertSelective(globalEquityIndices);
+	}
+
+	// GlobalEquityIndicesÉ¾³ý
+	public int deleteGlobalEquityIndices(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

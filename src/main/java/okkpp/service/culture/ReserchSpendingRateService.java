@@ -26,16 +26,38 @@ public class ReserchSpendingRateService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(ReserchSpendingRate.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<ReserchSpendingRate> list = mapper.selectAll();
+		List<ReserchSpendingRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<ReserchSpendingRate> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(ReserchSpendingRate.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<ReserchSpendingRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// ReserchSpendingRate¸üÐÂ
+	public int updateReserchSpendingRate(ReserchSpendingRate reserchSpendingRate) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(reserchSpendingRate);
+	}
+
+	// ReserchSpendingRate²åÈë
+	public int insertReserchSpendingRate(ReserchSpendingRate reserchSpendingRate) {
+		return mapper.insertSelective(reserchSpendingRate);
+	}
+
+	// ReserchSpendingRateÉ¾³ý
+	public int deleteReserchSpendingRate(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

@@ -26,16 +26,38 @@ public class TaxAsPercentageOfEvenueService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(TaxAsPercentageOfEvenue.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<TaxAsPercentageOfEvenue> list = mapper.selectAll();
+		List<TaxAsPercentageOfEvenue> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<TaxAsPercentageOfEvenue> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(TaxAsPercentageOfEvenue.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<TaxAsPercentageOfEvenue> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// TaxAsPercentageOfEvenue¸üÐÂ
+	public int updateTaxAsPercentageOfEvenue(TaxAsPercentageOfEvenue taxAsPercentageOfEvenue) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(taxAsPercentageOfEvenue);
+	}
+
+	// TaxAsPercentageOfEvenue²åÈë
+	public int insertTaxAsPercentageOfEvenue(TaxAsPercentageOfEvenue taxAsPercentageOfEvenue) {
+		return mapper.insertSelective(taxAsPercentageOfEvenue);
+	}
+
+	// TaxAsPercentageOfEvenueÉ¾³ý
+	public int deleteTaxAsPercentageOfEvenue(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

@@ -48,10 +48,10 @@ public class testc {
 		for(int i=0;i<5;i++) {
 			AdultLiteracyRate a = new AdultLiteracyRate();
 			a.setCountry("country"+i);
-			a.setYear("201"+i);
+			a.setYear("201");
 			list.add(a);
 		}
-		System.out.println(new Gson().toJson(CountryMap.mapByCountryToJson(list)));
+		System.out.println(new Gson().toJson(ChartInfo.mapByCountryToJson(list)));
 	}
 
 }

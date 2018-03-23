@@ -26,16 +26,38 @@ public class StocksTradedValueService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(StocksTradedValue.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<StocksTradedValue> list = mapper.selectAll();
+		List<StocksTradedValue> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<StocksTradedValue> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(StocksTradedValue.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<StocksTradedValue> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// StocksTradedValue¸üÐÂ
+	public int updateStocksTradedValue(StocksTradedValue stocksTradedValue) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(stocksTradedValue);
+	}
+
+	// StocksTradedValue²åÈë
+	public int insertStocksTradedValue(StocksTradedValue stocksTradedValue) {
+		return mapper.insertSelective(stocksTradedValue);
+	}
+
+	// StocksTradedValueÉ¾³ý
+	public int deleteStocksTradedValue(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

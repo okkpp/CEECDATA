@@ -20,8 +20,7 @@ public class ConsumerService {
 
 	@Autowired
 	ConsumerMapper mapper;
-	
-	
+		
 	public List<Consumer> selectAll(){
 		return CountryCode.replaceCountry(mapper.selectAll());
 	}
@@ -38,6 +37,7 @@ public class ConsumerService {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <E> PageInfo<E> getPageInfoByCondition(Integer pn,String column,String condition){
 		Example example = new Example(Consumer.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
 		criteria.andLike(column, "%"+condition+"%");
 		PageHelper.startPage(pn, 10);

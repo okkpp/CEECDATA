@@ -23,17 +23,38 @@ public class BirthRateDeathRateService {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(BirthRateDeathRate.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<BirthRateDeathRate> list = mapper.selectAll();
+		List<BirthRateDeathRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<BirthRateDeathRate> selectByExample(String column,String condition){
-		Example example = new Example(BirthRateDeathRate.class);
-		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
+		Example example = new Example(BirthRateDeathRate.class);
+		example.setOrderByClause("country,sort");
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<BirthRateDeathRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// BirthRateDeathRate¸üÐÂ
+	public int updateBirthRateDeathRate(BirthRateDeathRate birthRateDeathRate) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(birthRateDeathRate);
+	}
+
+	// BirthRateDeathRate²åÈë
+	public int insertBirthRateDeathRate(BirthRateDeathRate birthRateDeathRate) {
+		return mapper.insertSelective(birthRateDeathRate);
+	}
+
+	// BirthRateDeathRateÉ¾³ý
+	public int deleteBirthRateDeathRate(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

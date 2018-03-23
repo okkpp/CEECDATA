@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +15,7 @@ import com.github.pagehelper.PageInfo;
 
 import okkpp.model.Msg;
 import okkpp.service.culture.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 
 /**
  * @author duck
@@ -50,29 +51,29 @@ public class CultureController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "AdultLiteracyRate":
-			return CountryMap.mapByCountry(AdultLiteracyRateService.selectAll());
+			return ChartInfo.mapByCountry(AdultLiteracyRateService.selectAll());
 		case "ExpenditureStudentGDPRate":
-			return CountryMap.mapByCountry(ExpenditureStudentGDPRateService.selectAll());
+			return ChartInfo.mapByCountry(ExpenditureStudentGDPRateService.selectAll());
 		case "HealthTotalRate":
-			return CountryMap.mapByCountry(HealthTotalRateService.selectAll());
+			return ChartInfo.mapByCountry(HealthTotalRateService.selectAll());
 		case "HightechnologyRate":
-			return CountryMap.mapByCountry(HightechnologyRateService.selectAll());
+			return ChartInfo.mapByCountry(HightechnologyRateService.selectAll());
 		case "Hospital":
-			return CountryMap.mapByCountry(HospitalService.selectAll());
+			return ChartInfo.mapByCountry(HospitalService.selectAll());
 		case "PatentApplications":
-			return CountryMap.mapByCountry(PatentApplicationsService.selectAll());
+			return ChartInfo.mapByCountry(PatentApplicationsService.selectAll());
 		case "ResearchersAndTechnicians":
-			return CountryMap.mapByCountry(ResearchersAndTechniciansService.selectAll());
+			return ChartInfo.mapByCountry(ResearchersAndTechniciansService.selectAll());
 		case "SchoolEnrollmentRatio":
-			return CountryMap.mapByCountry(SchoolEnrollmentRatioService.selectAll());
+			return ChartInfo.mapByCountry(SchoolEnrollmentRatioService.selectAll());
 		case "WaterPeopleRate":
-			return CountryMap.mapByCountry(WaterPeopleRateService.selectAll());
+			return ChartInfo.mapByCountry(WaterPeopleRateService.selectAll());
 		}
 		return null;
 	}
 
 	// 后台获取数据
-	@RequestMapping(value = "/getJson", method = RequestMethod.POST)
+	@RequestMapping(value = "/getJson", method = RequestMethod.GET)
 	@ResponseBody
 	public <E> Msg getJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
 			@RequestParam("info") String info) {
@@ -105,8 +106,51 @@ public class CultureController {
 		case "WaterPeopleRate":
 			pageInfo = WaterPeopleRateService.getPageInfo(pn);
 			break;
-		default:
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
+		}
+		return Msg.success().add("pageInfo", pageInfo);
+	}
+
+	// 后台按条件获取数据
+	@RequestMapping(value = "/getJsonByCondition/{info}", method = RequestMethod.GET)
+	@ResponseBody
+	public <E> Msg getJson(@PathVariable("info") String info,
+			@RequestParam(value = "pn", defaultValue = "1") Integer pn, @RequestParam("column") String column,
+			@RequestParam("condition") String condition) {
+		PageInfo<E> pageInfo = null;
+		switch (info) {
+		case "AdultLiteracyRate":
+			pageInfo = AdultLiteracyRateService.getPageInfoByCondition(pn, column, condition);
 			break;
+		case "ExpenditureStudentGDPRate":
+			pageInfo = ExpenditureStudentGDPRateService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "HealthTotalRate":
+			pageInfo = HealthTotalRateService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "HightechnologyRate":
+			pageInfo = HightechnologyRateService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Hospital":
+			pageInfo = HospitalService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "PatentApplications":
+			pageInfo = PatentApplicationsService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "ResearchersAndTechnicians":
+			pageInfo = ResearchersAndTechniciansService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "SchoolEnrollmentRatio":
+			pageInfo = SchoolEnrollmentRatioService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "WaterPeopleRate":
+			pageInfo = WaterPeopleRateService.getPageInfoByCondition(pn, column, condition);
+			break;
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
 		}
 		return Msg.success().add("pageInfo", pageInfo);
 	}

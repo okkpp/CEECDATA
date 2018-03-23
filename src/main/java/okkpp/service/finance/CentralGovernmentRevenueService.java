@@ -26,16 +26,38 @@ public class CentralGovernmentRevenueService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(CentralGovernmentRevenue.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<CentralGovernmentRevenue> list = mapper.selectAll();
+		List<CentralGovernmentRevenue> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<CentralGovernmentRevenue> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(CentralGovernmentRevenue.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<CentralGovernmentRevenue> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// CentralGovernmentRevenue¸üÐÂ
+	public int updateCentralGovernmentRevenue(CentralGovernmentRevenue centralGovernmentRevenue) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(centralGovernmentRevenue);
+	}
+
+	// CentralGovernmentRevenue²åÈë
+	public int insertCentralGovernmentRevenue(CentralGovernmentRevenue centralGovernmentRevenue) {
+		return mapper.insertSelective(centralGovernmentRevenue);
+	}
+
+	// CentralGovernmentRevenueÉ¾³ý
+	public int deleteCentralGovernmentRevenue(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

@@ -26,16 +26,38 @@ public class DepositRateAndLendingRateService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(DepositRateAndLendingRate.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<DepositRateAndLendingRate> list = mapper.selectAll();
+		List<DepositRateAndLendingRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<DepositRateAndLendingRate> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(DepositRateAndLendingRate.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<DepositRateAndLendingRate> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// DepositRateAndLendingRate¸üÐÂ
+	public int updateDepositRateAndLendingRate(DepositRateAndLendingRate depositRateAndLendingRate) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(depositRateAndLendingRate);
+	}
+
+	// DepositRateAndLendingRate²åÈë
+	public int insertDepositRateAndLendingRate(DepositRateAndLendingRate depositRateAndLendingRate) {
+		return mapper.insertSelective(depositRateAndLendingRate);
+	}
+
+	// DepositRateAndLendingRateÉ¾³ý
+	public int deleteDepositRateAndLendingRate(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

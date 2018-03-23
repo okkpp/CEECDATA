@@ -4,13 +4,14 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import okkpp.service.traffic.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 import okkpp.model.Msg;
 
 @Controller
@@ -39,27 +40,27 @@ public class TrafficController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "AirFreight":
-			return CountryMap.mapByCountry(AirFreightService.selectAll());
+			return ChartInfo.mapByCountry(AirFreightService.selectAll());
 		case "Broadband":
-			return CountryMap.mapByCountry(BroadbandService.selectAll());
+			return ChartInfo.mapByCountry(BroadbandService.selectAll());
 		case "Container":
-			return CountryMap.mapByCountry(ContainerService.selectAll());
+			return ChartInfo.mapByCountry(ContainerService.selectAll());
 		case "Freight":
-			return CountryMap.mapByCountry(FreightService.selectAll());
+			return ChartInfo.mapByCountry(FreightService.selectAll());
 		case "InternetServers":
-			return CountryMap.mapByCountry(InternetServersService.selectAll());
+			return ChartInfo.mapByCountry(InternetServersService.selectAll());
 		case "InternetUsers":
-			return CountryMap.mapByCountry(InternetUsersService.selectAll());
+			return ChartInfo.mapByCountry(InternetUsersService.selectAll());
 		case "Phone":
-			return CountryMap.mapByCountry(PhoneService.selectAll());
+			return ChartInfo.mapByCountry(PhoneService.selectAll());
 		case "RailLines":
-			return CountryMap.mapByCountry(RailLinesService.selectAll());
+			return ChartInfo.mapByCountry(RailLinesService.selectAll());
 		}
 		return null;
 	}
 
 	// 后台获取数据
-	@RequestMapping(value = "/getJson", method = RequestMethod.POST)
+	@RequestMapping(value = "/getJson", method = RequestMethod.GET)
 	@ResponseBody
 	public <E> Msg getJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
 			@RequestParam("info") String info) {
@@ -89,10 +90,46 @@ public class TrafficController {
 		case "RailLines":
 			pageInfo = RailLinesService.getPageInfo(pn);
 			break;
-		default:
-			break;
 		}
 		return Msg.success().add("pageInfo", pageInfo);
 	}
 
+	// 后台按条件查找
+	@RequestMapping(value = "/getJsonByCondition/{info}", method = RequestMethod.GET)
+	@ResponseBody
+	public <E> Msg getJsonByCondition(@PathVariable("info") String info,
+			@RequestParam(value = "pn", defaultValue = "1") Integer pn, @RequestParam("column") String column,
+			@RequestParam("condition") String condition) {
+		PageInfo<E> pageInfo = null;
+		switch (info) {
+		case "AirFreight":
+			pageInfo = AirFreightService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Broadband":
+			pageInfo = BroadbandService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Container":
+			pageInfo = ContainerService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Freight":
+			pageInfo = FreightService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "InternetServers":
+			pageInfo = InternetServersService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "InternetUsers":
+			pageInfo = InternetUsersService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Phone":
+			pageInfo = PhoneService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "RailLines":
+			pageInfo = RailLinesService.getPageInfoByCondition(pn, column, condition);
+			break;
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
+		}
+		return Msg.success().add("pageInfo", pageInfo);
+	}
 }

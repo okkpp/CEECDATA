@@ -26,16 +26,38 @@ public class RateOfFormationService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(RateOfFormation.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<RateOfFormation> list = mapper.selectAll();
+		List<RateOfFormation> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<RateOfFormation> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(RateOfFormation.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<RateOfFormation> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// RateOfFormation¸üÐÂ
+	public int updateRateOfFormation(RateOfFormation rateOfFormation) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(rateOfFormation);
+	}
+
+	// RateOfFormation²åÈë
+	public int insertRateOfFormation(RateOfFormation rateOfFormation) {
+		return mapper.insertSelective(rateOfFormation);
+	}
+
+	// RateOfFormationÉ¾³ý
+	public int deleteRateOfFormation(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +15,7 @@ import com.github.pagehelper.PageInfo;
 
 import okkpp.model.Msg;
 import okkpp.service.employment.*;
-import okkpp.utils.CountryMap;
+import okkpp.utils.ChartInfo;
 
 /**
  * @author duck
@@ -50,31 +51,31 @@ public class EmploymentController {
 	public Map<String, Object> info(String info) {
 		switch (info) {
 		case "CompositionEmployment":
-			return CountryMap.mapByCountry(CompositionEmploymentService.selectAll());
+			return ChartInfo.mapByCountry(CompositionEmploymentService.selectAll());
 		case "Educational":
-			return CountryMap.mapByCountry(EducationalService.selectAll());
+			return ChartInfo.mapByCountry(EducationalService.selectAll());
 		case "EducationalUnemployment":
-			return CountryMap.mapByCountry(EducationalUnemploymentService.selectAll());
+			return ChartInfo.mapByCountry(EducationalUnemploymentService.selectAll());
 		case "EmploymentGDP":
-			return CountryMap.mapByCountry(EmploymentGDPService.selectAll());
+			return ChartInfo.mapByCountry(EmploymentGDPService.selectAll());
 		case "Employment":
-			return CountryMap.mapByCountry(EmploymentService.selectAll());
+			return ChartInfo.mapByCountry(EmploymentService.selectAll());
 		case "LaborForceParticipationRate":
-			return CountryMap.mapByCountry(LaborForceParticipationRateService.selectAll());
+			return ChartInfo.mapByCountry(LaborForceParticipationRateService.selectAll());
 		case "LaborForce":
-			return CountryMap.mapByCountry(LaborForceService.selectAll());
+			return ChartInfo.mapByCountry(LaborForceService.selectAll());
 		case "UnemploymentRate":
-			return CountryMap.mapByCountry(UnemploymentRateService.selectAll());
+			return ChartInfo.mapByCountry(UnemploymentRateService.selectAll());
 		case "Unemployment":
-			return CountryMap.mapByCountry(UnemploymentService.selectAll());
+			return ChartInfo.mapByCountry(UnemploymentService.selectAll());
 		case "Wages":
-			return CountryMap.mapByCountry(WagesService.selectAll());
+			return ChartInfo.mapByCountry(WagesService.selectAll());
 		}
 		return null;
 	}
 
 	// 后台获取数据
-	@RequestMapping(value = "/getJson", method = RequestMethod.POST)
+	@RequestMapping(value = "/getJson", method = RequestMethod.GET)
 	@ResponseBody
 	public <E> Msg getJson(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model,
 			@RequestParam("info") String info) {
@@ -110,8 +111,54 @@ public class EmploymentController {
 		case "Wages":
 			pageInfo = WagesService.getPageInfo(pn);
 			break;
-		default:
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
+		}
+		return Msg.success().add("pageInfo", pageInfo);
+	}
+
+	// 后台按条件获取数据
+	@RequestMapping(value = "/getJsonByCondition/{info}", method = RequestMethod.GET)
+	@ResponseBody
+	public <E> Msg getJson(@PathVariable("info") String info,
+			@RequestParam(value = "pn", defaultValue = "1") Integer pn, @RequestParam("column") String column,
+			@RequestParam("condition") String condition) {
+		PageInfo<E> pageInfo = null;
+		switch (info) {
+		case "CompositionEmployment":
+			pageInfo = CompositionEmploymentService.getPageInfoByCondition(pn, column, condition);
 			break;
+		case "Educational":
+			pageInfo = EducationalService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "EducationalUnemployment":
+			pageInfo = EducationalUnemploymentService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "EmploymentGDP":
+			pageInfo = EmploymentGDPService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Employment":
+			pageInfo = EmploymentService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "LaborForceParticipationRate":
+			pageInfo = LaborForceParticipationRateService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "LaborForce":
+			pageInfo = LaborForceService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "UnemploymentRate":
+			pageInfo = UnemploymentRateService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Unemployment":
+			pageInfo = UnemploymentService.getPageInfoByCondition(pn, column, condition);
+			break;
+		case "Wages":
+			pageInfo = WagesService.getPageInfoByCondition(pn, column, condition);
+			break;
+		}
+		if (pageInfo.getList().isEmpty()) {
+			return Msg.fail();
 		}
 		return Msg.success().add("pageInfo", pageInfo);
 	}

@@ -23,16 +23,38 @@ public class ExchangeService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(Exchange.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<Exchange> list = mapper.selectAll();
+		List<Exchange> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<Exchange> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(Exchange.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<Exchange> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// Exchange¸üÐÂ
+	public int updateExchange(Exchange exchange) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(exchange);
+	}
+
+	// Exchange²åÈë
+	public int insertExchange(Exchange exchange) {
+		return mapper.insertSelective(exchange);
+	}
+
+	// ExchangeÉ¾³ý
+	public int deleteExchange(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }

@@ -26,16 +26,38 @@ public class UnemploymentService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public <E> PageInfo<E> getPageInfo(int pn){		
+	public <E> PageInfo<E> getPageInfo(int pn) {
+		Example example = new Example(Unemployment.class);
+		example.setOrderByClause("country,sort");
 		PageHelper.startPage(pn, 10);
-		List<Unemployment> list = mapper.selectAll();
+		List<Unemployment> list = CountryCode.replaceCountry(mapper.selectByExample(example));
 		return new PageInfo(list, 10);
 	}
-	
-	public List<Unemployment> selectByExample(String column,String condition){
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public <E> PageInfo<E> getPageInfoByCondition(Integer pn, String column, String condition) {
 		Example example = new Example(Unemployment.class);
+		example.setOrderByClause("country,sort");
 		Example.Criteria criteria = example.createCriteria();
-		criteria.andLike(column, "%"+condition+"%");
-		return CountryCode.replaceCountry(mapper.selectByExample(example));
+		criteria.andLike(column, "%" + condition + "%");
+		PageHelper.startPage(pn, 10);
+		List<Unemployment> list = CountryCode.replaceCountry(mapper.selectByExample(example));
+		return new PageInfo(list, 10);
+	}
+
+	// Unemployment¸üÐÂ
+	public int updateUnemployment(Unemployment unemployment) {
+		// TODO Auto-generated method stub
+		return mapper.updateByPrimaryKeySelective(unemployment);
+	}
+
+	// Unemployment²åÈë
+	public int insertUnemployment(Unemployment unemployment) {
+		return mapper.insertSelective(unemployment);
+	}
+
+	// UnemploymentÉ¾³ý
+	public int deleteUnemployment(Integer id) {
+		return mapper.deleteByPrimaryKey(id);
 	}
 }
