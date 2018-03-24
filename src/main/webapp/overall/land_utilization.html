@@ -45,71 +45,7 @@
 
             <div class="panel" style="margin-top: 1.5em;">
                 <div id="main" style="width: 100%;height:400px;">
-                  <script type="text/javascript">
-                      var dom = document.getElementById("main");
-                      var myChart = echarts.init(dom);
-                      var app = {};
-                      option = null;
-                      option = {
-                          title : {
-                              subtext: '数据来源',
-                              left: '6%'
-                          },
-                          tooltip : {
-                              trigger: 'item'
-                          },
-                          legend: {
-                              show:'true',
-                              data:['陆地面积','耕地面积','森林面积'],
 
-                          },
-
-                          calculable : true,
-                          xAxis : [
-                              {
-                                  type : 'category',
-                                  axisLabel: {
-                                      interval: 0
-                                  },
-                                  data : ['阿尔巴尼亚', '爱沙尼亚', '保加利亚', '波黑', '波兰', '黑山', '捷克', '克罗地亚', '拉脱维亚', '立陶宛', '罗马尼亚', '马其顿', '塞尔维亚',
-                                   '斯洛伐克', '斯洛文尼亚', '匈牙利']
-                              }
-                          ],
-                          yAxis : [
-                              {
-                                  type : 'value',
-                                  name: '万公顷'
-                              }
-                          ],
-                          series : [
-                              {
-                                  name:'陆地面积',
-                                  type:'bar',
-                                  data:[274,424,1086,3062,135,772,560,622,627,2300,252,875,481,201,905,512],
-
-
-                              },
-                              {
-                                  name:'耕地面积',
-                                  type:'bar',
-                                  data:[274,424,1086,3062,135,772,560,622,627,2300,252,875,481,201,905,512],
-
-
-                              },
-                              {
-                                  name:'森林面积',
-                                  type:'bar',
-                                  data:[274,424,1086,3062,135,772,560,622,627,2300,252,875,481,201,905,512],
-
-
-                              }
-                          ]
-                      };
-                      ;
-                      if (option && typeof option === "object") {
-                          myChart.setOption(option, true);
-                      }
-                  </script>
                 </div>
             </div>
         </div>
@@ -178,7 +114,104 @@
             ]
         });
 
+        var options={
+                bootstrapMajorVersion:1,    //版本
+                currentPage:1,    //当前页数
+                numberOfPages:5,    //最多显示Page页
+                totalPages:10,    //所有数据可以显示的页数
+                onPageClicked:function(e,originalEvent,type,page){
 
+
+                }
+            }
+            $("#page").bootstrapPaginator(options);
+
+            // 基于准备好的dom，初始化echarts实例
+            var myChart = echarts.init(document.getElementById('main'));
+
+            var dataS='["陆地面积","耕地面积","森林面积"]';
+            var dataNames='["ldA","gdA","slA"]';
+            var pageViews='[{"country":"阿尔巴尼亚","ldA":"274","gdA":"62","slA":"77","id":1,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"爱沙尼亚","ldA":"　/","gdA":"　/","slA":"　/","id":2,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"波黑","ldA":"　/","gdA":"　/","slA":"　/","id":2,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"保加利亚","ldA":"　/","gdA":"　/","slA":"　/","id":3,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"波兰","ldA":"　/","gdA":"　/","slA":"　/","id":4,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"黑山","ldA":"　/","gdA":"　/","slA":"　/","id":5,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"捷克","ldA":"　/","gdA":"　/","slA":"　/","id":6,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"克罗地亚","ldA":"　/","gdA":"　/","slA":"　/","id":7,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"罗马尼亚","ldA":"　/","gdA":"　/","slA":"　/","id":8,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"立陶宛","ldA":"　/","gdA":"　/","slA":"　/","id":9,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"拉脱维亚","ldA":"　/","gdA":"　/","slA":"　/","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"马其顿","ldA":"　/","gdA":"　/","slA":"　/","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"塞尔维亚","ldA":"　/","gdA":"　/","slA":"　/","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"斯洛伐克","ldA":"　/","gdA":"　/","slA":"　/","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"斯洛文尼亚","ldA":"　/","gdA":"　/","slA":"　/","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue"},{"country":"匈牙利","ldA":"　/","gdA":"　/","slA":"　/","id":10,"pojoName":"goodsandservicestaxaspercentageofrevenue"}]';
+
+            var datas = eval('(' + dataS + ')');
+            var dataName = eval('(' + dataNames + ')');
+            var pageView = eval('(' + pageViews + ')');
+
+            var contry=new Array();
+            var seriesData=new Array();
+            for(var i=0;i<datas.length;i++){
+                var obj=new Object();
+                obj.name=datas[i];
+                obj.type='bar';
+                obj.data=new Array();
+                seriesData.push(obj);
+            }
+            for(var i=0;i<pageView.length;i++){
+
+                // 		var d=transform(pageView[i]);
+                var contrys=pageView[i];
+                var c=contrys['country'];
+                contry.push(c);
+            }
+
+            var i=0;
+            for(var j=0;j<dataName.length;j++){
+                for(var k=0;k<pageView.length;k++){
+                    var b=pageView[k];
+                    var c=b[dataName[j]];
+                    seriesData[i].data.push(c);
+                }
+                i++;
+            }
+            function transform(obj){
+                var arr = [];
+                for(var item in obj){
+                    arr.push(obj[item]);
+                }
+                return arr;
+            }
+            // 	app.title = '堆叠柱状图';
+
+            option = {
+                tooltip : {
+                    trigger: 'axis',
+                    axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                        type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                    }
+                },
+                legend: {
+                    data:datas
+                },
+                title:{
+                    subtext:'数据来源'
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    containLabel: true
+                },
+                xAxis : [
+                    {
+                        type : 'category',
+                        axisLabel: {
+            							interval: 0
+            						},
+                        data : contry
+                    }
+                ],
+                yAxis : [
+                    {
+                        type : 'value',
+                        name : '万公顷'
+                    }
+                ],
+                series : seriesData
+            };
+
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart.setOption(option);
     </script>
 </body>
 </html>
