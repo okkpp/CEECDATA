@@ -82,208 +82,7 @@
 
             <div class="panel" style="margin-top: 1.5em;">
                 <div id="main" style="width: 100%;height:400px;">
-                  <script type="text/javascript">
-                      var dom = document.getElementById("main");
-                      var myChart = echarts.init(dom);
-                      var app = {};
-                      option = null;
 
-                      var colors = ['#5793f3', '#d14a61'];
-                      var dataMap = {};
-                      function dataFormatter(obj) {
-                          var pList = ['阿尔巴尼亚', '爱沙尼亚', '保加利亚', '波黑', '波兰', '黑山', '捷克', '克罗地亚', '拉脱维亚', '立陶宛', '罗马尼亚', '马其顿', '塞尔维亚',
-                           '斯洛伐克', '斯洛文尼亚', '匈牙利'];
-                          var temp;
-                          for (var year = 2011; year <= 2015; year++) {
-                              var max = 0;
-                              var sum = 0;
-                              temp = obj[year];
-                              for (var i = 0, l = temp.length; i < l; i++) {
-                                  obj[year][i] = {
-                                      name : pList[i],
-                                      value : temp[i]
-                                  }
-                              }
-                          }
-                          return obj;
-                      }
-                      dataMap.dataMD = dataFormatter({
-                          2011:[105.4,74.4,66.1,75.5,136.6,30.9,108.7,31.8,46.4,82.4,46.3,124.1,86.2,81.2,112.8,102.5],
-                          2012:[105.4,74.4,66.1,75.5,136.6,30.9,108.7,31.8,46.4,82.4,46.3,124.1,86.2,81.2,112.8,102.5],
-                          2013:[105.4,74.4,66.1,75.5,136.6,30.9,108.7,31.8,46.4,82.4,46.3,124.1,86.2,81.2,112.8,102.5],
-                          2014:[105.4,74.4,66.1,75.5,136.6,30.9,108.7,31.8,46.4,82.4,46.3,124.1,86.2,81.2,112.8,102.5],
-                          2015:[105.4,74.4,66.1,75.5,136.6,30.9,108.7,31.8,46.4,82.4,46.3,124.1,86.2,81.2,112.8,102.5],
-
-                      })
-                      dataMap.dataCZ = dataFormatter({
-                          2011:[1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584],
-                          2012:[1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584],
-                          2013:[1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584],
-                          2014:[1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584],
-                          2015:[1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584,1658584]
-
-                      })
-                      option = {
-                          baseOption:{
-                              timeline: {
-                                  // y: 0,
-                                  axisType: 'category',
-                                  // realtime: false,
-                                  // loop: false,
-                                  autoPlay: true,
-                                  // currentIndex: 2,
-                                  playInterval: 1000,
-                                  // controlStyle: {
-                                  //     position: 'left'
-                                  // },
-                                  data: [
-                                      '2011-01-01','2012-01-01','2013-01-01','2014-01-01','2015-01-01'
-                                  ],
-                                  label: {
-                                      formatter : function(s) {
-                                          return (new Date(s)).getFullYear();
-                                      }
-                                  },
-
-                              },
-                              title: {
-                                  subtext: '数据来源'
-                              },
-                              color: colors,
-                              tooltip: {
-                                  trigger: 'axis',
-                                  axisPointer: {
-                                      type: 'cross'
-                                  }
-                              },
-                              grid: {
-                                  top: 80,
-                                  bottom: 100,
-                                  tooltip: {
-                                      trigger: 'axis',
-                                      axisPointer: {
-                                          type: 'shadow',
-                                          label: {
-                                              show: true,
-                                              formatter: function (params) {
-                                                  return params.value.replace('\n', '');
-                                              }
-                                          }
-                                      }
-                                  }
-                              },
-                              legend: {
-                                  data:['城镇人口','人口密度']
-                              },
-                              xAxis: [
-                                  {
-                                      'type':'category',
-                                      'axisLabel':{'interval':0},
-                                      'data':[
-                                        '阿尔巴尼亚', '爱沙尼亚', '保加利亚', '波黑', '波兰', '黑山', '捷克', '克罗地亚', '拉脱维亚', '立陶宛', '罗马尼亚', '马其顿', '塞尔维亚',
-                                         '斯洛伐克', '斯洛文尼亚', '匈牙利'
-                                      ],
-                                      splitLine: {show: false}
-                                  }
-                              ],
-                              yAxis: [
-                                  {
-                                      type: 'value',
-                                      name: '城镇人口',
-                                      min: 0,
-
-                                      position: 'left',
-                                      axisLine: {
-                                          lineStyle: {
-                                              color: colors[0]
-                                          }
-                                      },
-                                      axisLabel: {
-                                          formatter: '{value} 人'
-                                      }
-                                  },
-                                  {
-                                      type: 'value',
-                                      name: '人口密度',
-                                      min: 0,
-
-                                      position: 'right',
-                                      axisLine: {
-                                          lineStyle: {
-                                              color: colors[1]
-                                          }
-                                      },
-                                      axisLabel: {
-                                          formatter: '{value} 人/k㎡'
-                                      }
-                                  }
-                              ],
-                              series: [
-                                  {name: '城镇人口', type: 'bar'},
-                                  {name: '人口密度', type: 'bar',yAxisIndex: 1}
-                              ]
-
-                          },
-
-                          options:[
-                              {
-                                  title: {text: '2011人口密度和城镇人口',textStyle: {
-                                    fontWeight: '400',
-                                    fontSize: '14'
-                                  }},
-                                  series: [
-                                      {data: dataMap.dataCZ['2011']},
-                                      {data: dataMap.dataMD['2011']},
-                                  ]
-                              },
-                              {
-                                  title: {text: '2012人口密度和城镇人口',textStyle: {
-                                    fontWeight: '400',
-                                    fontSize: '14'
-                                  }},
-                                  series: [
-                                      {data: dataMap.dataCZ['2012']},
-                                      {data: dataMap.dataMD['2012']},
-                                  ]
-                              },
-                              {
-                                  title: {text: '2013人口密度和城镇人口',textStyle: {
-                                    fontWeight: '400',
-                                    fontSize: '14'
-                                  }},
-                                  series: [
-                                      {data: dataMap.dataCZ['2013']},
-                                      {data: dataMap.dataMD['2013']},
-                                  ]
-                              },
-                              {
-                                  title: {text: '2014人口密度和城镇人口',textStyle: {
-                                    fontWeight: '400',
-                                    fontSize: '14'
-                                  }},
-                                  series: [
-                                      {data: dataMap.dataCZ['2014']},
-                                      {data: dataMap.dataMD['2014']},
-                                  ]
-                              },
-                              {
-                                  title: {text: '2015人口密度和城镇人口',textStyle: {
-                                    fontWeight: '400',
-                                    fontSize: '14'
-                                  }},
-                                  series: [
-                                      {data: dataMap.dataCZ['2015']},
-                                      {data: dataMap.dataMD['2015']},
-                                  ]
-                              },
-
-                          ]
-                      };
-                      ;
-                      if (option && typeof option === "object") {
-                          myChart.setOption(option, true);
-                      }
-                  </script>
                 </div>
             </div>
         </div>
@@ -314,7 +113,61 @@
             $('#tableTag').removeClass('active');
         }
 
+        data=getRemoteData('/population/json.do?info=Density');
 
+            //初始化图
+            function initPic(data) {
+                var option = {
+                    //timeline基本配置都写在baseoption 中
+                    baseOption: {
+                        timeline: {
+                            loop: true,
+                            axisType: 'category',
+                            show: true,
+                            autoPlay: true,
+                            playInterval: 1000,
+                            data: setYears(data)
+                        },
+                        legend: {
+                            data: setLegend(data)
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        title:{
+                            subtext:'数据来源'
+                        },
+                        calculable: true,
+                        grid: {
+                            y: 100,
+                            y2: 100
+                        },
+                        xAxis: [{
+                            type: 'category',
+                            data: setCountries(data)
+                        }],
+                        yAxis: [{
+                            type: 'value',
+                            name: '人'
+                        },{
+                            type: 'value',
+                            name: '人/km²',
+                            axisLine: {
+                                lineStyle: {
+                                    color: '#d14a61'
+                                }
+                            },
+                        }],
+                        series: setSeriesTitle(data)
+                    },
+                    options:setOptions(data)
+                };
+                var myChart = echarts.init(document.getElementById('main'));
+                myChart.setOption(option);
+            }
+
+            initPic(data)
+            setTableData(data,$('#tableData'));
 
 
     </script>

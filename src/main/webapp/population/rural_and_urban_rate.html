@@ -74,182 +74,7 @@
 
             <div class="panel" style="margin-top: 1.5em;">
                 <div id="main" style="width: 100%;height:400px;">
-                  <script type="text/javascript">
-                      var dom = document.getElementById("main");
-                      var myChart = echarts.init(dom);
-                      var app = {};
-                      option = null;
-                      var dataMap = {};
-                      function dataFormatter(obj) {
-                          var pList = ['阿尔巴尼亚', '爱沙尼亚', '保加利亚', '波黑', '波兰', '黑山', '捷克', '克罗地亚', '拉脱维亚', '立陶宛', '罗马尼亚', '马其顿', '塞尔维亚',
-                           '斯洛伐克', '斯洛文尼亚', '匈牙利'];
-                          var temp;
-                          for (var year = 1; year <= 3; year++) {
-                              var max = 0;
-                              var sum = 0;
-                              temp = obj[year];
-                              for (var i = 0, l = temp.length; i < l; i++) {
-                                  max = Math.max(max, temp[i]);
 
-                                  obj[year][i] = {
-                                      name : pList[i],
-                                      value : temp[i]
-                                  }
-                              }
-                              obj[year + 'max'] = Math.floor(max / 100) * 100;
-
-                          }
-                          return obj;
-                      }
-
-
-                      dataMap.dataNC = dataFormatter({
-                          //max : 4000,
-                          3:[42.6,32.5,26.1,39.5,36.0,27.0,41.0,32.6,33.5,45.4,42.9,44.4,46.4,50.4,28.8,60.2],
-                          2:[42.6,32.5,26.1,39.5,36.0,27.0,41.0,32.6,33.5,45.4,42.9,44.4,46.4,50.4,28.8,60.2],
-                          1:[42.6,32.5,26.1,39.5,36.0,27.0,41.0,32.6,33.5,45.4,42.9,44.4,46.4,50.4,28.8,60.2],
-
-                      });
-
-                      dataMap.dataCS = dataFormatter({
-                          //max : 26600,
-                          3:[57.4,67.5,73.9,60.5,64.0,73.0,59.0,67.4,66.5,54.6,57.1,55.6,53.6,49.7,71.2,39.8],
-                          2:[57.4,67.5,73.9,60.5,64.0,73.0,59.0,67.4,66.5,54.6,57.1,55.6,53.6,49.7,71.2,39.8],
-                          1:[57.4,67.5,73.9,60.5,64.0,73.0,59.0,67.4,66.5,54.6,57.1,55.6,53.6,49.7,71.2,39.8],
-
-                      });
-
-
-
-                      option = {
-                          baseOption: {
-                              timeline: {
-                                  // y: 0,
-                                  axisType: 'category',
-                                  // realtime: false,
-                                  // loop: false,
-                                  autoPlay: true,
-                                  // currentIndex: 2,
-                                  playInterval: 1000,
-                                  // controlStyle: {
-                                  //     position: 'left'
-                                  // },
-                                  data: [
-                                      '2005-01-01','2010-01-01','2015-01-01',
-
-                                  ],
-                                  label: {
-                                      formatter : function(s) {
-                                          return (new Date(s)).getFullYear();
-                                      }
-                                  }
-                              },
-                              title: {
-                                  subtext: '数据来源'
-                              },
-                              tooltip: {
-                              },
-                              legend: {
-                                  x: 'center',
-                                  data: ['农村人口比重', '城市人口比重'],
-
-                              },
-                              // toolbox: {
-                              //     show : true,
-                              //     feature : {
-                              //         magicType : {show: true, type: ['line', 'bar']},
-                              //         restore : {show: true},
-                              //         saveAsImage : {show: true}
-                              //     },
-                              //     top: '4%'
-                              // },
-                              calculable : true,
-                              grid: {
-                                  top: 80,
-                                  bottom: 100,
-                                  tooltip: {
-                                      trigger: 'axis',
-                                      axisPointer: {
-                                          type: 'shadow',
-                                          label: {
-                                              show: true,
-                                              formatter: function (params) {
-                                                  return params.value.replace('\n', '');
-                                              }
-                                          }
-                                      }
-                                  }
-                              },
-                              xAxis: [
-                                  {
-                                      'type':'category',
-                                      'axisLabel':{'interval':0},
-                                      'data':[
-                                        '阿尔巴尼亚', '爱沙尼亚', '保加利亚', '波黑', '波兰', '黑山', '捷克', '克罗地亚', '拉脱维亚', '立陶宛', '罗马尼亚', '马其顿', '塞尔维亚',
-                                         '斯洛伐克', '斯洛文尼亚', '匈牙利'
-                                      ],
-                                      splitLine: {show: false}
-                                  }
-                              ],
-                              yAxis: [
-                                  {
-                                      type: 'value',
-                                      name: '%'
-                                  }
-                              ],
-                              series: [
-                                  {name: '农村人口比重', type: 'bar'},
-                                  {name: '城市人口比重', type: 'bar'},
-
-
-                              ]
-                          },
-                          options: [
-                              {
-                                  title: {text: '2005全国宏观经济指标',textStyle: {
-                                    fontWeight: '400',
-                                    fontSize: '14'
-                                  }},
-                                  series: [
-                                      {data: dataMap.dataNC['1']},
-                                      {data: dataMap.dataCS['1']},
-
-
-                                  ]
-                              },
-                              {
-                                  title : {text: '2010全国宏观经济指标',textStyle: {
-                                    fontWeight: '400',
-                                    fontSize: '14'
-                                  }},
-                                  series : [
-
-                                      {data: dataMap.dataNC['2']},
-                                      {data: dataMap.dataCS['2']},
-
-
-                                  ]
-                              },
-                              {
-                                  title : {text: '2015全国宏观经济指标',textStyle: {
-                                    fontWeight: '400',
-                                    fontSize: '14'
-                                  }},
-                                  series : [
-
-                                      {data: dataMap.dataNC['3']},
-                                      {data: dataMap.dataCS['3']},
-
-
-                                  ]
-                              },
-
-                          ]
-                      };;
-                      if (option && typeof option === "object") {
-                          myChart.setOption(option, true);
-                      }
-                  </script>
                 </div>
             </div>
         </div>
@@ -280,7 +105,62 @@
             $('#tableTag').removeClass('active');
         }
 
+        var data=getRemoteData('/population/json.do?info=?');
 
+                //初始化图
+                function initPic(data) {
+                    var option = {
+                        //timeline基本配置都写在baseoption 中
+                        baseOption: {
+                            timeline: {
+                                loop: true,
+                                axisType: 'category',
+                                show: true,
+                                autoPlay: true,
+                                playInterval: 1000,
+                                data: setYears(data)
+                            },
+                            legend: {
+                                data: setLegend(data)
+                            },
+                            tooltip: {
+                                trigger: 'axis'
+                            },
+                            title:{
+                                subtext:'数据来源'
+                            },
+                            calculable: true,
+                            grid: {
+                                y: 100,
+                                y2: 100
+                            },
+                            xAxis: [{
+                                type: 'category',
+                                data: setCountries(data),
+                                axisLabel: {
+                    							interval: 0
+                    						},
+                            }],
+                            yAxis: {
+                                type: 'value',
+                                name: '%',
+                                axisLine: {
+                                    show: true,
+                                    lineStyle:{
+                                        color:'#0066CC'
+                                    }
+                                }
+                            },
+                            series: setSeriesTitle(data)
+                        },
+                        options:setOptions(data)
+                    };
+                    var myChart = echarts.init(document.getElementById('main'));
+                    myChart.setOption(option);
+                }
+
+                initPic(data);
+                setTableData(data,$('#tableData'));
 
 
     </script>
