@@ -82,196 +82,7 @@
 
             <div class="panel" style="margin-top: 1.5em;">
                 <div id="main" style="width: 100%;height:400px;">
-                  <script type="text/javascript">
-                      var dom = document.getElementById("main");
-                      var myChart = echarts.init(dom);
-                      var app = {};
-                      option = null;
-                      var dataMap = {};
-                      function dataFormatter(obj) {
-                          var pList = ['阿尔巴尼亚', '爱沙尼亚', '保加利亚', '波黑', '波兰', '黑山', '捷克', '克罗地亚', '拉脱维亚', '立陶宛', '罗马尼亚', '马其顿', '塞尔维亚',
-                           '斯洛伐克', '斯洛文尼亚', '匈牙利'];
-                          var temp=0;
-                          for (var year = 1; year <= 4; year++) {
-                              var max = 0;
-                              var sum = 0;
-                              temp = obj[year];
-                              for (var i = 0, l = temp.length; i < l; i++) {
-                                  max = Math.max(max, temp[i]);
-                                  sum += temp[i];
-                                  obj[year][i] = {
-                                      name : pList[i],
-                                      value : temp[i]
-                                  }
-                              }
-                              obj[year + 'max'] = Math.floor(max / 100) * 100;
-                              obj[year + 'sum'] = sum;
-                          }
-                          return obj;
-                      };
 
-
-                      dataMap.dataBR = dataFormatter({
-                          //max : 100,
-                          4:[13.4,10.3,9.4,9.9,11.6,10.4,9.3,10.9,10.4,9.2,11.3,9.3,10.2,10.3,9.5,8.9],
-                          3:[13.4,10.3,9.4,9.9,11.6,10.4,9.3,10.9,10.4,9.2,11.3,9.3,10.2,10.3,9.5,8.9],
-                          2:[13.4,10.3,9.4,9.9,11.6,10.4,9.3,10.9,10.4,9.2,11.3,9.3,10.2,10.3,9.5,8.9],
-                          1:[13.4,10.3,9.4,9.9,11.6,10.4,9.3,10.9,10.4,9.2,11.3,9.3,10.2,10.3,9.5,8.9],
-
-                      });
-
-                      dataMap.dataDR = dataFormatter({
-                          //max : 100,
-                          4:[13.4,11.8,15.1,9.9,9.9,10.0,12.0,14.3,13.7,12.7,9.4,14.2,9.5,9.2,12.8,10.5],
-                          3:[13.4,11.8,15.1,9.9,9.9,10.0,12.0,14.3,13.7,12.7,9.4,14.2,9.5,9.2,12.8,10.5],
-                          2:[13.4,11.8,15.1,9.9,9.9,10.0,12.0,14.3,13.7,12.7,9.4,14.2,9.5,9.2,12.8,10.5],
-                          1:[13.4,11.8,15.1,9.9,9.9,10.0,12.0,14.3,13.7,12.7,9.4,14.2,9.5,9.2,12.8,10.5],
-                      });
-
-
-
-                      option = {
-                          baseOption: {
-                              timeline: {
-                                  // y: 0,
-                                  axisType: 'category',
-                                  // realtime: false,
-                                  // loop: false,
-                                  autoPlay: true,
-                                  // currentIndex: 2,
-                                  playInterval: 1000,
-                                  // controlStyle: {
-                                  //     position: 'left'
-                                  // },
-                                  data: [
-                                      '2000-01-01','2005-01-01','2010-01-01',
-                                      '2014-01-01'
-                                  ],
-                                  label: {
-                                      formatter : function(s) {
-                                          return (new Date(s)).getFullYear();
-                                      }
-                                  }
-                              },
-                              title: {
-                                  subtext: '数据来源'
-                              },
-                              tooltip: {
-                              },
-                              legend: {
-                                  x: 'center',
-                                  data: ['出生率', '死亡率'],
-
-                              },
-                              // toolbox: {
-                              //     show : true,
-                              //     feature : {
-                              //         magicType : {show: true, type: ['line', 'bar']},
-                              //         restore : {show: true},
-                              //         saveAsImage : {show: true}
-                              //     },
-                              //     top: '4%'
-                              // },
-                              calculable : true,
-                              grid: {
-                                  top: 80,
-                                  bottom: 100,
-                                  tooltip: {
-                                      trigger: 'axis',
-                                      axisPointer: {
-                                          type: 'shadow',
-                                          label: {
-                                              show: true,
-                                              formatter: function (params) {
-                                                  return params.value.replace('\n', '');
-                                              }
-                                          }
-                                      }
-                                  }
-                              },
-                              xAxis: [
-                                  {
-                                      'type':'category',
-                                      'axisLabel':{'interval':0},
-                                      'data':[
-                                        '阿尔巴尼亚', '爱沙尼亚', '保加利亚', '波黑', '波兰', '黑山', '捷克', '克罗地亚', '拉脱维亚', '立陶宛', '罗马尼亚', '马其顿', '塞尔维亚',
-                                         '斯洛伐克', '斯洛文尼亚', '匈牙利'
-                                      ],
-                                      splitLine: {show: false}
-                                  }
-                              ],
-                              yAxis: [
-                                  {
-                                      type: 'value',
-                                      name: '%'
-                                  }
-                              ],
-                              series: [
-                                  {name: '出生率', type: 'bar'},
-                                  {name: '死亡率', type: 'bar'},
-
-
-                              ]
-                          },
-                          options: [
-                              {
-                                  title: {text: '2000各国人口出生率和死亡率',textStyle: {
-                                    fontWeight: '400',
-                                    fontSize: '14'
-                                  }},
-                                  series: [
-                                      {data: dataMap.dataBR['1']},
-                                      {data: dataMap.dataDR['1']},
-
-
-                                  ]
-                              },
-                              {
-                                  title : {text: '2005各国人口出生率和死亡率',textStyle: {
-                                    fontWeight: '400',
-                                    fontSize: '14'
-                                  }},
-                                  series : [
-
-                                      {data: dataMap.dataBR['2']},
-                                      {data: dataMap.dataDR['2']},
-
-
-                                  ]
-                              },
-                              {
-                                  title : {text: '2010各国人口出生率和死亡率',textStyle: {
-                                    fontWeight: '400',
-                                    fontSize: '14'
-                                  }},
-                                  series : [
-
-                                      {data: dataMap.dataBR['3']},
-                                      {data: dataMap.dataDR['3']},
-
-
-                                  ]
-                              },
-                              {
-                                  title : {text: '2014各国人口出生率和死亡率',textStyle: {
-                                    fontWeight: '400',
-                                    fontSize: '14'
-                                  }},
-                                  series : [
-
-                                      {data: dataMap.dataBR['4']},
-                                      {data: dataMap.dataDR['4']},
-
-
-                                  ]
-                              },
-
-                          ]
-                      };;
-                      if (option && typeof option === "object") {
-                          myChart.setOption(option, true);
-                      }
-                  </script>
                 </div>
             </div>
         </div>
@@ -302,7 +113,54 @@
             $('#tableTag').removeClass('active');
         }
 
+        data=getRemoteData('/population/json.do?info=ListedDomesticCompanies');
 
+            //初始化图
+            function initPic(data) {
+                var option = {
+                    //timeline基本配置都写在baseoption 中
+                    baseOption: {
+                        timeline: {
+                            loop: true,
+                            axisType: 'category',
+                            show: true,
+                            autoPlay: true,
+                            playInterval: 1000,
+                            data: setYears(data)
+                        },
+                        legend: {
+                            data: setLegend(data)
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        title:{
+                            subtext:'数据来源'
+                        },
+                        calculable: true,
+                        grid: {
+                            y: 100,
+                            y2: 100
+                        },
+                        xAxis: [{
+                            type: 'category',
+                            data: setCountries(data)
+                        }],
+                        yAxis: [{
+                            type: 'value',
+                            name: '%'
+
+                        }],
+                        series: setSeriesTitle(data)
+                    },
+                    options:setOptions(data)
+                };
+                var myChart = echarts.init(document.getElementById('main'));
+                myChart.setOption(option);
+            }
+
+            initPic(data)
+            setTableData(data,$('#tableData'));
 
 
     </script>
