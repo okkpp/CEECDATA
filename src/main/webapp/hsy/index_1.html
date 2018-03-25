@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>中东欧国家数据库</title>
+
+  <!-- 引入Jquery -->
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+  <!-- 引入Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- 引入bootstrap treeview -->
+  <link rel="stylesheet" href="assets/libs/bootstrap-treeview/dist/bootstrap-treeview.min.css">
+  <link rel="stylesheet" href="assets/libs/bootstrap-treeview/css/default.css">
+  <link rel="stylesheet" href="assets/libs/bootstrap-treeview/css/normalize.css">
+  <script src="assets/libs/bootstrap-treeview/dist/bootstrap-treeview.min.js"></script>
+
+
+</head>
+<style>
+html,body{
+  height: 100%;
+}
+.font-white{
+  color: #ffffff;
+}
+</style>
+<body>
+  <div style="height: 100%;">
+    <nav class="navbar is-transparent is-black">
+      <div class="navbar-brand">
+        <a class="navbar-item">
+          海上丝绸之路研究院
+        </a>
+        <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div id="navbarExampleTransparentExample" class="navbar-menu">
+        <div class="navbar-start">
+          <div class="navbar-item">
+            主页
+          </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="javascript:;">
+              类别
+            </a>
+            <div class="navbar-dropdown is-boxed">
+              <a class="navbar-item" href="/documentation/overview/start/">
+                Overview
+              </a>
+              <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
+                Modifiers
+              </a>
+              <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
+                Columns
+              </a>
+              <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
+                Layout
+              </a>
+              <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
+                Form
+              </a>
+              <hr class="navbar-divider">
+              <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
+                Elements
+              </a>
+              <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
+                Components
+              </a>
+            </div>
+          </div>
+
+          <div class="navbar-item">
+            <div class="field is-grouped">
+              <p class="control is-expanded">
+                <input class="input" type="text" placeholder="请输入搜索内容">
+              </p>
+              <p class="control">
+                <a class="button bd-tw-button">
+                  搜索
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="field is-grouped">
+              <p class="control">
+                <a class="bd-tw-button button" href="javascript:;">
+                  <span class="icon">
+                    <i class="fab fa-twitter"></i>
+                  </span>
+                  <span>
+                    登录
+                  </span>
+                </a>
+              </p>
+              <p class="control">
+                <a class="button is-primary" href="javascript:;">
+                  <span class="icon">
+                    <i class="fas fa-download"></i>
+                  </span>
+                  <span>下载</span>
+                </a>
+              </p>
+
+              <p class="control">
+                <a class="button is-primary" href="javascript:;">
+                  <span class="icon">
+                    <i class="fas fa-print"></i>
+                  </span>
+                  <span>打印</span>
+                </a>
+              </p>
+
+              <p class="control">
+                <a class="button is-primary" href="javascript:;">
+                  <span class="icon">
+                    <i class="fas fa-eject"></i>
+                  </span>
+                  <span>导出</span>
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="box" style="margin-top: 20px;">
+      <article class="media">
+        <div class="media-left">
+          <figure class="image is-300x64">
+            <img src="assets/img/LOGO4.png" alt="Image">
+          </figure>
+        </div>
+        <div class="media-content">
+          <div class="content">
+            <p>
+              <h1 style="margin-left: 100px;">打造国家前沿战略支撑平台</h1>
+              <br>
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="columns"  style="margin-top: 20px; height: 100%;">
+      <div class="column is-one-quarter" >
+        <div class="box" style="height: 100%">
+          <div id="tree">
+          </div>
+        </div>
+      </div>
+      <div class="column" style="height: 100%;">
+        <div class="box" style="height: 100%">
+
+          <iframe src="finance/finance_rate_of_money.html" style="width: 100%; height: 100%"></iframe>
+
+<!--           <section class="hero">
+            <div class="hero-body">
+              <div class="container">
+                <h1 class="title" style="text-align: center; font-size: 100px;">
+                  欢迎使用
+                </h1>
+                <h2 class="subtitle">
+                  
+                </h2>
+              </div>
+            </div>
+          </section> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  function getTree() {
+    var data = [
+    {
+      text: "综合",
+      nodes: [
+          {
+            text: "国土面积",
+          },
+        ]
+      },
+    ];
+    return data;
+  }
+  $('#tree').treeview({
+    data: getTree(),
+    // collapseIcon : "glyphicon glyphicon-menu-down",
+    expandIcon : "glyphicon glyphicon-folder-close",
+    collapseIcon: "glyphicon glyphicon-folder-open",
+    emptyIcon: "glyphicon glyphicon-folder-close",
+  });
+</script>
+</html>

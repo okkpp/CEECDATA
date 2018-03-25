@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+      @author DoubleH
+      @email 1120023921@qq.com
+      @Description: 银行资本充足率
+    -->
+    <meta charset="UTF-8">
+    <title>银行资本充足率</title>
+    <!-- 引入Jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script src="../assets/libs/echarts/echarts.min.js"></script>
+    <style>
+        .th-inner{
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div>
+            <ul class="nav nav-tabs">
+                <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+                <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+            </ul>
+        </div>
+
+        <div id="tableView">
+            <div class="page-header" style="text-align: center;">
+                <h3>银行资本充足率</h3>
+                <br>
+                <h4 style="margin-top: -20px;">Bank Capital to Assets Ratio</h4>
+            </div>
+
+            <div style="text-align: right;">单位:&nbsp;%</div>
+
+            <table id="tableData" style="text-align: center"></table>
+        </div>
+
+        <div id="imageView">
+            <div class="page-header" style="text-align: center;">
+                <h3>银行资本充足率柱状图</h3>
+                <br>
+                <h4 style="margin-top: -20px;">Bank Capital to Assets Ratio</h4>
+            </div>
+
+            <div class="panel" style="margin-top: 1.5em;">
+               <!-- <div style="text-align: right;">单位:&nbsp;%</div>-->
+                <div id="main" style="width: 100%;height:400px;"></div>
+            </div>
+        </div>
+
+        <div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+            <span class="glyphicon glyphicon-save"></span> 下载
+        </a></div>
+
+
+        <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+    </div>
+    <!-- 引入组装数据的Js -->
+    <script src="../assets/libs/utils/general-data.js"></script>
+    <script>
+        var remoteData = getRemoteData('/finance/json.do?info=BankCapital');
+        $(function(){
+            $('#imageView').hide();
+            $('#tableTag').attr('class','active');
+            generalTable(remoteData,'ratio',$('#tableData'));
+        })
+
+        function showTable() {
+            $('#tableView').show();
+            $('#imageView').hide();
+            $('#tableTag').attr('class','active');
+            $('#imageTag').removeClass('active');
+        }
+
+        function showImage() {
+            $('#imageView').show();
+            $('#tableView').hide();
+            $('#imageTag').attr('class','active');
+            $('#tableTag').removeClass('active');
+        }
+
+
+        //初始化图
+        function initPic(data) {
+            var option = {
+                //timeline基本配置都写在baseoption 中
+                baseOption: {
+                    timeline: {
+                        loop: true,
+                        axisType: 'category',
+                        show: true,
+                        autoPlay: true,
+                        playInterval: 1000,
+                        data: setYears(data)
+                    },
+                    legend: {
+                        data: setLegend(data)
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    title:{
+                        subtext:'数据来源'
+                    },
+                    calculable: true,
+                    grid: {
+                        y: 100,
+                        y2: 100
+                    },
+                    xAxis: [{
+                        type: 'category',
+                        data: setCountries(data)
+                    }],
+                    yAxis: {
+                        type: 'value',
+                        name: '单位:%'
+                        // axisLine: {
+                        //     show: true,
+                        //     lineStyle:{
+                        //         color:'#0066CC'
+                        //     }
+                        // }
+                    },
+                    series: setSeriesTitle(data)
+                },
+                options:setOptions(data)
+            };
+            var myChart = echarts.init(document.getElementById('main'));
+            myChart.setOption(option);
+        }
+
+        initPic(remoteData);
+    </script>
+</body>
+</html>
