@@ -101,7 +101,7 @@
             $('#tableTag').removeClass('active');
         }
 
-        data=getRemoteData('/employment/json.do?info=LaborForceParticipationRate');
+        var remoteData=getRemoteData('/employment/json.do?info=LaborForceParticipationRate');
 
             //初始化图
             function initPic(data) {
