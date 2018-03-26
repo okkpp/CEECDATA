@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<!-- 
+    @author: 林子捷
+    @title: 出口货物构成
+ -->
+
+	<head lang="zh-CN">
+		<title>出口货物构成</title>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<meta charset="utf-8">
+
+		<!-- 引入Jquery -->
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+		<!-- 引入Bootstrap -->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<!-- 引入BootStrap-table -->
+		<link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+		<script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+		<!-- 引入Bootstrap-paginator -->
+		<script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+		<!-- 引入Echarts -->
+		<script src="../assets/libs/echarts/echarts.min.js"></script>
+
+		<!-- 引入组装数据的Js -->
+		<script src="../assets/libs/utils/general-data.js"></script>
+
+		<style type="text/css">
+			.th-inner{
+				text-align: center;
+			} 
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+			<div>
+				<ul class="nav nav-tabs">
+					<li role="presentation" id="tableTag">
+						<a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a>
+					</li>
+					<li role="presentation" id="imageTag">
+						<a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a>
+					</li>
+				</ul>
+			</div>
+
+			<div id="tableView">
+				<div class="page-header" style="text-align: center;">
+					<h3>出口货物构成（2015年）</h3>
+					<br>
+					<h4 style="margin-top: -20px;">Exports by Commodity Groups（2015）</h4>
+				</div>
+
+				<div style="text-align: right;">单位:&nbsp;%</div>
+
+				<table id="tableData" class="table table-hover table-striped" style="text-align: center">
+					<tr>
+						<td>国家</td>
+						<td>年份</td>
+						<td>农业原材料</td>
+						<td>食品</td>
+						<td>燃料</td>
+						<td>矿物和金属</td>
+						<td>制成品</td>
+					</tr>
+
+				</table>
+			</div>
+
+			<div id="imageView">
+				<div class="page-header" style="text-align: center;">
+					<h3>出口货物构成（2015年）</h3>
+					<br>
+					<h4 style="margin-top: -20px;">Exports by Commodity Groups（2015）</h4>
+				</div>
+
+				<div class="panel" style="margin-top: 1.5em;">
+					<!--<div style="text-align: right;">单位:&nbsp;%</div>-->
+					<div id="main" style="width: 100%;height:400px;"></div>
+				</div>
+			</div>
+
+			<div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+        <span class="glyphicon glyphicon-save"></span> 下载
+    </a></div>
+
+
+			<!-- <div style="text-align: right;"><div id="page"></div></div> -->
+		</div>
+	</body>
+	<script>
+		$(function() {
+			$('#imageView').hide();
+			$('#tableTag').attr('class', 'active');
+		})
+
+		function showTable() {
+			$('#tableView').show();
+			$('#imageView').hide();
+			$('#tableTag').attr('class', 'active');
+			$('#imageTag').removeClass('active');
+		}
+
+		function showImage() {
+			$('#imageView').show();
+			$('#tableView').hide();
+			$('#imageTag').attr('class', 'active');
+			$('#tableTag').removeClass('active');
+		}
+
+
+
+		var remoteData=getRemoteData('/trade/json.do?info=ExportsByCommodityGroups');
+
+        //初始化图
+        function initPic(data) {
+            var option = {
+                //timeline基本配置都写在baseoption 中
+                baseOption: {
+                    timeline: {
+                        loop: true,
+                        axisType: 'category',
+                        show: false,
+                        autoPlay: true,
+                        playInterval: 1000,
+                        data: setYears(data)
+                    },
+                    legend: {
+                        data: setLegend(data)
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    title:{
+                        subtext:'数据来源'
+                    },
+                    calculable: true,
+                    grid: {
+                        y: 100,
+                        y2: 100
+                    },
+                    xAxis: [{
+                        type: 'category',
+                        axisLabel: {
+                            interval: 0,
+                            inside: false,
+                            rotate: 30,
+                        },
+                        data: setCountries(data)
+                    }],
+                    yAxis: {
+                        type: 'value',
+                        axisLine: {
+                            show: true,
+                            lineStyle:{
+                                color:'#0066CC'
+                            }
+                        }
+                    },
+                    series: setSeriesTitle(data)
+                },
+                options:setOptions(data)
+            };
+            var myChart = echarts.init(document.getElementById('main'));
+            myChart.setOption(option);
+        }
+
+        initPic(remoteData);
+        setTableData(remoteData,$('#tableData'));
+
+	</script>
+
+</html>
