@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+      @author 赵国杰
+      @Description: 服务贸易进口总额
+    -->
+    <meta charset="UTF-8">
+    <title>服务贸易进口总额</title>
+    <!-- 引入Jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+    <!-- 引入Echarts -->
+    <script src="../assets/libs/echarts/echarts.min.js"></script>
+    <style type="text/css">
+    	.th-inner{
+    		text-align: center;
+    	}
+    </style>
+</head>
+<body>
+<div class="container">
+    <div>
+        <ul class="nav nav-tabs">
+            <li role="presentation" id="tableTag"><a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a></li>
+            <li role="presentation" id="imageTag"><a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a></li>
+        </ul>
+    </div>
+
+    <div id="tableView">
+        <div class="page-header" style="text-align: center;">
+            <h3>服务贸易进口总额</h3>
+            <br>
+            <h4 style="margin-top: -20px;">Total import of trade in services</h4>
+        </div>
+
+        <table id="tableData" style="text-align: center;"></table>
+    </div>
+
+    <div id="imageView">
+        <div class="page-header" style="text-align: center;">
+            <h3>服务贸易进口总额柱状图</h3>
+            <br>
+            <h4 style="margin-top: -20px;">Total import of trade in services</h4>
+        </div>
+
+        <div class="panel" style="margin-top: 1.5em">
+            <div id="main" style="width: 100%;height:400px;"></div>
+        </div>
+    </div>
+
+   <div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+        <span class="glyphicon glyphicon-save"></span> 下载
+    </a></div>
+
+
+    <!-- <div style="text-align: right;"><div id="page"></div></div> -->
+</div>
+<script>
+    $(function(){
+        $('#imageView').hide();
+        $('#tableTag').attr('class','active');
+    })
+
+    function showTable() {
+        $('#tableView').show();
+        $('#imageView').hide();
+        $('#tableTag').attr('class','active');
+        $('#imageTag').removeClass('active');
+    }
+
+    function showImage() {
+        $('#imageView').show();
+        $('#tableView').hide();
+        $('#imageTag').attr('class','active');
+        $('#tableTag').removeClass('active');
+    }
+
+    $('#tableData').bootstrapTable({
+        striped: true,
+        columns: [
+            {
+                field: 'country',
+                title: '国家或地区'
+            },
+            {
+                field: 'year1',
+                title: '2010年'
+            },
+            {
+                field: 'year2',
+                title: '2011年'
+            },
+            {
+                field: 'year3',
+                title: '2012年'
+            },
+            {
+                field: 'year4',
+                title: '2013年'
+            },
+            {
+                field: 'year5',
+                title: '2014年'
+            },
+            {
+                field: 'year6',
+                title: '2015年'
+            },
+        ],
+        data: [
+            {
+                country: '阿尔巴尼亚',
+                year1: '102.53',
+                year2: '100',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+                year6: '102.63',
+            },
+            {
+                country: '波黑',
+                year1: '105.14',
+                year2: '100',
+                year3: '103.47',
+                year4: '104.01',
+                year5: '104.83',
+                year6: '103.77',
+            },
+            {
+                country: '保加利亚',
+                year1: '112.28',
+                year2: '100',
+                year3: '108.79',
+                year4: '110.95',
+                year5: '114.09',
+                year6: '109.45',
+            },
+            {
+                country: '克罗地亚',
+                year1: '110.54',
+                year2: '100',
+                year3: '109',
+                year4: '110.1',
+                year5: '109.72',
+                year6: '105.39',
+            },
+            {
+                country: '捷克',
+                year1: '111.27',
+                year2: '100',
+                year3: '107.29',
+                year4: '-',
+                year5: '106.87',
+                year6: '104.45',
+            },
+            {
+                country: '爱沙尼亚',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+                year6: '-',
+            },
+            {
+                country: '匈牙利',
+                year1: '103.76',
+                year2: '100',
+                year3: '97.24',
+                year4: '100.2',
+                year5: '104.75',
+                year6: '102.67',
+            },
+            {
+                country: '拉脱维亚',
+                year1: '113.36',
+                year2: '100',
+                year3: '112.75',
+                year4: '113.84',
+                year5: '111.64',
+                year6: '107.68',
+            },
+            {
+                country: '立陶宛',
+                year1: '115.88',
+                year2: '100',
+                year3: '100.97',
+                year4: '110.8',
+                year5: '119.48',
+                year6: '114.72',
+            },
+            {
+                country: '马其顿',
+                year1: '107.57',
+                year2: '100',
+                year3: '-',
+                year4: '-',
+                year5: '105.69',
+                year6: '103.66',
+            },
+            {
+                country: '黑山',
+                year1: '108.7',
+                year2: '100',
+                year3: '104.4',
+                year4: '107.88',
+                year5: '107.81',
+                year6: '105.57',
+            },
+            {
+                country: '波兰',
+                year1: '114.31',
+                year2: '100',
+                year3: '106.9',
+                year4: '111.21',
+                year5: '113.82',
+                year6: '106.35',
+            },
+            {
+                country: '罗马尼亚',
+                year1: '118.06',
+                year2: '100',
+                year3: '112.11',
+                year4: '116.68',
+                year5: '117.6',
+                year6: '112.45',
+            },
+            {
+                country: '塞尔维亚',
+                year1: '109.51',
+                year2: '100',
+                year3: '105.57',
+                year4: '107.92',
+                year5: '110.96',
+                year6: '107.49',
+            },
+            {
+                country: '斯洛伐克',
+                year1: '115.26',
+                year2: '100',
+                year3: '112.56',
+                year4: '115.12',
+                year5: '112.9',
+                year6: '107.1',
+            },
+            {
+                country: '斯洛文尼亚',
+                year1: '-',
+                year2: '-',
+                year3: '-',
+                year4: '-',
+                year5: '-',
+                year6: '-',
+            }
+        ]
+    });
+
+    var all = {
+        "data": [
+            [102.53,105.14,112.28,110.54,111.27,0,103.76,113.36,115.88,107.57,108.7,114.31,118.06,109.51,115.26,0],
+            [100,100,100,100,100,0,100,100,100,100,100,100,100,100,100,0],
+            [0,103.47,108.79,109,107.29,0,97.24,112.75,100.97,0,104.4,106.9,112.11,105.57,112.56,0],
+            [0,104.01,110.95,110.1,0,0,110.2,113.84,110.8,0,107.88,111.21,116.68,107.92,115.12,0],
+            [0,114.83,114.09,109.72,106.87,0,104.75,111.64,119.48,105.69,107.81,113.82,117.6,110.96,112.9,0],
+            [102.63,103.77,109.45,105.39,104.45,0,102.67,107.68,114.72,103.66,105.57,106.35,112.45,107.49,107.1,0]
+        ],
+        "countrys": ["阿尔巴尼亚","波黑","保加利亚","克罗地亚","捷克","爱沙尼亚","匈牙利","拉脱维亚","立陶宛","马其顿","黑山","波兰","罗马尼亚","塞尔维亚","斯洛伐克","斯洛文尼亚"],
+        "years": ["2010年", "2011年", "2012年", "2013年", "2014年", "2015年"]
+    };
+
+    var option = {
+        timeline: {
+            axisType: 'category',
+            autoPlay: true,
+            playInterval: 2000,
+            data: all.years
+        },
+        options: [{
+            tooltip: {
+                trigger: 'axis'
+            },
+            /*toolbox: {
+                show: true,
+                orient: 'vertical',
+                x: 'right',
+                y: 'center',
+                feature: {
+                    mark: {
+                        show: true
+                    },
+                    dataView: {
+                        show: true,
+                        readOnly: false
+                    },
+                    magicType: {
+                        show: true,
+                        type: ['line', 'bar']
+                    },
+                    restore: {
+                        show: true
+                    },
+                    saveAsImage: {
+                        show: true
+                    }
+                }
+            },*/
+           	title:{
+           		subtext:'数据来源'
+           	},
+            calculable: true,
+            grid: {
+                top:50,
+                bottom:100
+            },
+            xAxis: [{
+                type: 'category',
+                axisLabel: {
+                    interval: 0
+                },
+                data: all.countrys
+            }],
+            yAxis: [{
+                type: 'value',
+                name: '亿美元'
+            }],
+            series: [{
+                name: '服务贸易进口总额',
+                type: 'bar',
+                data: all.data[0]
+            }]
+        },
+            {
+                series: [{
+                    data: all.data[1]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[2]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[3]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[4]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[5]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[6]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[7]
+                }]
+            },
+            {
+                series: [{
+                    data: all.data[8]
+                }]
+            }
+        ]
+    };
+    var myChart = echarts.init(document.getElementById('main'));
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+</body>
+</html>

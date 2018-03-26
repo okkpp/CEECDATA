@@ -1,8 +1,13 @@
 package okkpp.base.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import okkpp.base.service.BaseService;
+import okkpp.model.Msg;
 
 /**
 * @author duck
@@ -11,44 +16,38 @@ import okkpp.base.service.BaseService;
 public abstract class BaseController<T> {
 
 	@Autowired
-	BaseService<T> service;
+	BaseService<T> baseService;
 	
-//	@RequestMapping(value = "/save")
-//	@ResponseBody
-//	public Result save(@ModelAttribute T t) {
-//		Result result = new Result();
-//		try {
-//			baseService.save(t);
-//		} catch (Exception e) {
-//			result.setSuccess(false);
-//			result.setMsg(e.getMessage());
-//		}
-//		return result;
-//	}
-//	
-//	@RequestMapping(value = "/update")
-//	@ResponseBody
-//	public Result update(@ModelAttribute T t) {
-//		Result result = new Result();
-//		try {
-//			baseService.update(t);
-//		} catch (Exception e) {
-//			result.setSuccess(false);
-//			result.setMsg(e.getMessage());
-//		}
-//		return result;
-//	}
-//	
-//	@RequestMapping(value = "/delete")
-//	@ResponseBody
-//	public Result deleteResource(@RequestParam int id) {
-//		Result result = new Result();
-//		try {
-//			baseService.delete(id);
-//		} catch (Exception e) {
-//			result.setSuccess(false);
-//			result.setMsg(e.getMessage());
-//		}
-//		return result;
-//	}
+	@RequestMapping(value = "/save")
+	@ResponseBody
+	public Msg save(@ModelAttribute T t) {
+		try {
+			baseService.save(t);
+		} catch (Exception e) {
+			return Msg.fail().add("msg", e.getMessage());
+		}
+		return Msg.success();
+	}
+	
+	@RequestMapping(value = "/update")
+	@ResponseBody
+	public Msg update(@ModelAttribute T t) {
+		try {
+			baseService.update(t);
+		} catch (Exception e) {
+			return Msg.fail().add("msg", e.getMessage());
+		}
+		return Msg.success();
+	}
+	
+	@RequestMapping(value = "/delete")
+	@ResponseBody
+	public Msg deleteResource(@RequestParam int id) {
+		try {
+			baseService.delete(id);
+		} catch (Exception e) {
+			return Msg.fail().add("msg", e.getMessage());
+		}
+		return Msg.success();
+	}
 }
