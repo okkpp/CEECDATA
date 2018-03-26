@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>企业经营环境排名——中东欧统计数据库</title>
+  <title>畜产品产量（2013年）——中东欧统计数据库</title>
   <link rel="stylesheet" href="../zdo_static/css/normalize.css">
-  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../zdo_static/css/bootstrap-3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
 
   <script type="text/javascript" src="../zdo_static/js/jquery-3.2.1.min.js"></script>
-  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="../zdo_static/js/bootstrap.min.js"></script>
   <script src="../zdo_static/js/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
   <script src="../zdo_static/js/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
   <script type="text/javascript" src="../zdo_static/js/echarts.js"></script>
@@ -26,26 +26,26 @@
 
         <div id="tableView">
             <div class="page-header" style="text-align: center;">
-                <h3>企业经营环境排名（2017年）</h3>
+                <h3>畜产品产量（2013年）</h3>
                 <br>
-                <h4 style="margin-top: -20px;">East of Doing Business Rank（2017）</h4>
+                <h4 style="margin-top: -20px;">Output of Livestock Products（2013）</h4>
             </div>
 
-            <div style="text-align: right;">单位:&nbsp;万公顷</div>
+            <div style="text-align: right;">单位:&nbsp;吨</div>
 
             <table id="tableData"></table>
         </div>
 
         <div id="imageView">
             <div class="page-header" style="text-align: center;">
-                <h3>企业经营环境排名（2017年）</h3>
+                <h3>畜产品产量（2013年）</h3>
                 <br>
-                <h4 style="margin-top: -20px;">East of Doing Business Rank（2017）</h4>
+                <h4 style="margin-top: -20px;">Output of Livestock Products（2013）</h4>
             </div>
 
             <div class="panel" style="margin-top: 1.5em;">
                 <div id="main" style="width: 100%;height:400px;">
-                  
+
                 </div>
             </div>
         </div>
@@ -78,43 +78,78 @@
                     title: '国家'
                 },
                 {
-                    field: 'landArea',
-                    title: '陆地面积'
+                    field: 'countryArea',
+                    title: '国土面积'
                 },
-                {
-                    field: 'arableArea',
-                    title: '耕地面积'
-                },
-                {
-                    field: 'forestArea',
-                    title: '森林面积'
-                },
-
 
             ],
             data: [
                 {
                     country: '阿尔巴尼亚',
-                    landArea: '274',
-                    arableArea: '62',
-                    forestArea: '77'
+                    countryArea: '666',
+
                 },
                 {
                     country: '波黑',
-                    landArea: '274',
-                    arableArea: '62',
-                    forestArea: '77'
+                    countryArea: '333',
                 },
                 {
                     country: '保加利亚',
-                    landArea: '274',
-                    arableArea: '62',
-                    forestArea: '77'
+                    countryArea: '444',
                 }
             ]
         });
 
-
+        var remoteData=getRemoteData('/agriculture/json.do?info=OutputOfLivestockProducts');
+            initPic(remoteData);
+            setTableData(remoteData,$('#tableData'));
+            //初始化图
+            function initPic(data) {
+                var option = {
+                    //timeline基本配置都写在baseoption 中
+                    baseOption: {
+                        timeline: {
+                            loop: true,
+                            axisType: 'category',
+                            show: false,
+                            autoPlay: true,
+                            playInterval: 1000,
+                            data: setYears(data)
+                        },
+                        legend: {
+                            data: setLegend(data)
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        title:{
+                            subtext:'数据来源'
+                        },
+                        calculable: true,
+                        grid: {
+                            y: 100,
+                            y2: 100
+                        },
+                        xAxis: [{
+                            type: 'category',
+                            axisLabel: {
+                							interval: 0
+                						},
+                            data: setCountries(data)
+                        }],
+                        yAxis : [
+                            {
+                                type : 'value',
+                                name: '吨'
+                            }
+                        ],
+                        series: setSeriesTitle(data)
+                    },
+                    options:setOptions(data)
+                };
+                var myChart = echarts.init(document.getElementById('main'));
+                myChart.setOption(option);
+            }
     </script>
 </body>
 </html>

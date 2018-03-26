@@ -40,258 +40,123 @@
                 <br>
                 <h4 style="margin-top: -20px;">Social Indicators of Poverty</h4>
             </div>
-            <div style="text-align: right;">单位:&nbsp;%</div>
-            <table id="tableData"></table>
+            <!-- <div style="text-align: right;">单位:&nbsp;%</div> -->
+            <table id="tableData" class="table table-hover table-striped">
+                <tr>
+                    <td style="text-align: center;">国家</td>
+                    <td>5岁以内儿童死亡率（‰）</td>
+                    <td>12-23个月儿童麻疹疫苗免疫接种率（%）</td>
+
+                </tr>
+            </table>
         </div>
 
         <div id="imageView">
             <div class="page-header" style="text-align: center;">
-                <h3>贫困人口社会指标柱状图</h3>
+                <h3>贫困人口社会指标</h3>
                 <br>
                 <h4 style="margin-top: -20px;">Social Indicators of Poverty</h4>
             </div>
 
-            <div class="panel" style="margin-top: 40px;">
+            <div class="panel" style="margin-top: 1.5em;">
                 <div id="main" style="width: 100%;height:400px;"></div>
             </div>
         </div>
 
-          <div style="color: #666666; margin-top: 2em;">*此数据仅展现最近五年，若需全部数据请点击<a href="#" class="btn btn-info btn-xs">
+          <div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
             <span class="glyphicon glyphicon-save"></span> 下载
         </a></div>
 
         <!-- <div style="text-align: right;"><div id="page"></div></div> -->
     </div>
     <script>
-        $(function(){
+        $(function() {
+            $('#all').hide()
             $('#imageView').hide();
-            $('#tableTag').attr('class','active');
+            $('#imageView2').hide();
+            $('#tableTag').attr('class', 'active');
         })
 
         function showTable() {
+            $('#all').hide()
             $('#tableView').show();
+            $('#tableView2').show();
             $('#imageView').hide();
-            $('#tableTag').attr('class','active');
+            $('#imageView2').hide()
+            $('#tableTag').attr('class', 'active');
             $('#imageTag').removeClass('active');
+            $('#first').show()
+            $('#second').show()
         }
 
         function showImage() {
+            $('#all').show()
             $('#imageView').show();
             $('#tableView').hide();
-            $('#imageTag').attr('class','active');
+            $('#tableView2').hide();
+            $('#imageView2').show();
+            $('#imageTag').attr('class', 'active');
             $('#tableTag').removeClass('active');
+            $('#first').hide()
+            $('#second').hide()
         }
 
-        $('#tableData').bootstrapTable({
-            striped: true,
-            columns: [
-                {
-                    field: 'country',
-                    title: '国家或地区'
-                },
-                {
-                    field: 'year1',
-                    title: '5岁以内儿童死亡率'
-                },
-                {
-                    field: 'year2',
-                    title: '12-23个月儿童麻疹疫苗免疫接种率'
-                },
-                {
-                    field: 'year3',
-                    title: '在熟练医护人员护理下的分娩率下的分娩率'
-                }
-            ],
-            data: [
-                {
-                    country: "阿尔巴尼亚",
-                    year1:"14",
-                    year2:"98",
-                    year3:"-",
-                },
-                {
-                    country: "爱沙尼亚",
-                    year1:"2.9",
-                    year2:"93",
-                    year3:"-",
-                },
-                {
-                    country: "波黑",
-                    year1:"10.4",
-                    year2:"93",
-                    year3:"99.7",
-                },
-                {
-                    country: "保加利亚",
-                    year1:"5.2",
-                    year2:"98",
-                    year3:"-",
-                },
-                {
-                    country: "波兰",
-                    year1:"4.3",
-                    year2:"88",
-                    year3:"99",
-                },
-                {
-                    country: "黑山",
-                    year1:"2.8",
-                    year2:"99",
-                    year3:"-",
-                },
-                {
-                    country: "捷克",
-                    year1:"3.6",
-                    year2:"94",
-                    year3:"-",
-                },
-                {
-                    country: "克罗地亚",
-                    year1:"7.9",
-                    year2:"95",
-                    year3:"-",
-                },
-                {
-                    country: "罗马尼亚",
-                    year1:"5.2",
-                    year2:"93",
-                    year3:"-",
-                },
-                {
-                    country: "立陶宛",
-                    year1:"11.1",
-                    year2:"89",
-                    year3:"-",
-                },
-                {
-                    country: "拉脱维亚",
-                    year1:"5.5",
-                    year2:"93",
-                    year3:"-",
-                },
-                {
-                    country: "马其顿",
-                    year1:"6.7",
-                    year2:"86",
-                    year3:"98.4",
-                },
-                {
-                    country: "塞尔维亚",
-                    year1:"7.3",
-                    year2:"97",
-                    year3:"-",
-                },
-                {
-                    country: "斯洛伐克",
-                    year1:"2.6",
-                    year2:"94",
-                    year3:"-",
-                },
-                {
-                    country: "斯洛文尼亚",
-                    year1:"5.9",
-                    year2:"99",
-                    year3:"-",
-                },
-                {
-                    country: "匈牙利",
-                    year1:"5.4",
-                    year2:"89",
-                    year3:"-",
-                }
-            ]
-        });
 
-        var options={
-            bootstrapMajorVersion:1,    //版本
-            currentPage:1,    //当前页数
-            numberOfPages:5,    //最多显示Page页
-            totalPages:10,    //所有数据可以显示的页数
-            onPageClicked:function(e,originalEvent,type,page){
+        var data=getRemoteData('/poverty/json.do?info=SocialIndicatorsOfPoverty');
 
-
-            }
-        }
-        $("#page").bootstrapPaginator(options);
-
-        // 基于准备好的dom，初始化echarts实例
-        var myChart = echarts.init(document.getElementById('main'));
-
-        var dataS='["2000年","2005年","2010年","2013年","2014年","2015年"]';
-        var dataNames='["zero","five","ten","thirteen","fourteen","fiveteen"]';
-        var pageViews='[{"country": "阿尔巴尼亚", "zero": "14", "five": "98", "ten": "-"}, {"country": "爱沙尼亚", "zero": "2.9", "five": "93", "ten": "-"}, {"country": "波黑", "zero": "10.4", "five": "93", "ten": "99.7"}, {"country": "保加利亚", "zero": "5.2", "five": "98", "ten": "-"}, {"country": "波兰", "zero": "4.3", "five": "88", "ten": "99"}, {"country": "黑山", "zero": "2.8", "five": "99", "ten": "-"}, {"country": "捷克", "zero": "3.6", "five": "94", "ten": "-"}, {"country": "克罗地亚", "zero": "7.9", "five": "95", "ten": "-"}, {"country": "罗马尼亚", "zero": "5.2", "five": "93", "ten": "-"}, {"country": "立陶宛", "zero": "11.1", "five": "89", "ten": "-"}, {"country": "拉脱维亚", "zero": "5.5", "five": "93", "ten": "-"}, {"country": "马其顿", "zero": "6.7", "five": "86", "ten": "98.4"}, {"country": "塞尔维亚", "zero": "7.3", "five": "97", "ten": "-"}, {"country": "斯洛伐克", "zero": "2.6", "five": "94", "ten": "-"}, {"country": "斯洛文尼亚", "zero": "5.9", "five": "99", "ten": "-"}, {"country": "匈牙利", "zero": "5.4", "five": "89", "ten": "-"}]';
-
-        var datas = eval('(' + dataS + ')');
-        var dataName = eval('(' + dataNames + ')');
-        var pageView = eval('(' + pageViews + ')');
-
-        var contry=new Array();
-        var seriesData=new Array();
-        for(var i=0;i<datas.length;i++){
-            var obj=new Object();
-            obj.name=datas[i];
-            obj.type='bar';
-            obj.data=new Array();
-            seriesData.push(obj);
-        }
-        for(var i=0;i<pageView.length;i++){
-
-            // 		var d=transform(pageView[i]);
-            var contrys=pageView[i];
-            var c=contrys['country'];
-            contry.push(c);
+        //初始化图
+        function initPic(data) {
+            var option = {
+                //timeline基本配置都写在baseoption 中
+                baseOption: {
+                    timeline: {
+                        loop: true,
+                        axisType: 'category',
+                        show: true,
+                        autoPlay: true,
+                        playInterval: 1000,
+                        data: setYears(data)
+                    },
+                    legend: {
+                        data: setLegend(data)
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    title:{
+                        subtext:'数据来源'
+                    },
+                    calculable: true,
+                    grid: {
+                        y: 100,
+                        y2: 100
+                    },
+                    xAxis: [{
+                        type: 'category',
+                        data: setCountries(data)
+                    }],
+                    yAxis: [{
+                        type: 'value',
+                        name: '‰'
+                    },{
+                        type: 'value',
+                        name: '%',
+                        axisLine: {
+                            lineStyle: {
+                                color: '#d14a61'
+                            }
+                        },
+                    }],
+                    series: setSeriesTitle(data)
+                },
+                options:setOptions(data)
+            };
+            var myChart = echarts.init(document.getElementById('main'));
+            myChart.setOption(option);
         }
 
-        var i=0;
-        for(var j=0;j<dataName.length;j++){
-            for(var k=0;k<pageView.length;k++){
-                var b=pageView[k];
-                var c=b[dataName[j]];
-                seriesData[i].data.push(c);
-            }
-            i++;
-        }
-        function transform(obj){
-            var arr = [];
-            for(var item in obj){
-                arr.push(obj[item]);
-            }
-            return arr;
-        }
-        // 	app.title = '堆叠柱状图';
-
-        option = {
-            tooltip : {
-                trigger: 'axis',
-                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                }
-            },
-            legend: {
-                data:datas
-            },
-            grid: {
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            xAxis : [
-                {
-                    type : 'category',
-                    data : contry
-                }
-            ],
-            yAxis : [
-                {
-                    type : 'value'
-                    name : '%'
-                }
-            ],
-            series : seriesData
-        };
-        // 使用刚指定的配置项和数据显示图表。
-        myChart.setOption(option);
+        initPic(data)
+        setTableData(data,$('#tableData'));
     </script>
 </body>
 </html>
