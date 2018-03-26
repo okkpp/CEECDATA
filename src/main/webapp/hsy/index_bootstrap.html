@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.css" rel="stylesheet">
+
+
+    <title>Title</title>
+</head>
+<body style="background-color: #f9f7f6;">
+    <header>
+        <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">海上丝绸之路研究院</a>
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link active" href="/"> 首页 </a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#"> 类别 </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Link 1</a>
+                                <a class="dropdown-item" href="#">Link 2</a>
+                                <a class="dropdown-item" href="#">Link 3</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- 这个 div 加上 justify-content-end 样式即可 -->
+                <div class="collapse navbar-collapse justify-content-end">
+                    <ul class="navbar-nav">
+                        <form class="form-inline">
+                            <input class="form-control" type="text" placeholder="Search">
+                            <button class="btn btn-success" type="submit">Search</button>
+                        </form>
+                        <li class="nav-item" style="margin-left: 10px;"><a class="nav-link active" href="/"> 注册 </a></li>
+                        <li class="nav-item"><a class="nav-link active" href="/tech"> 登录 </a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <article>
+        <!--<div class="container" style="margin-top: 20px;">-->
+            <!--<div class="row">-->
+                <!--<div class="col-md-12" style="box-shadow: 0.5px 0.5px 0.5px 0.5px #c7c7c7;border-radius: 5px;">-->
+                    <!--<img src="./static/img/LOGO4.png" style="width: 60%;">-->
+                <!--</div>-->
+            <!--</div>-->
+                <!--<div class="row" style="margin-top: 20px;">-->
+                    <!--<div class="col-md-4" style="box-shadow: 0.5px 0.5px 0.5px 0.5px #c7c7c7;border-radius: 5px;">-->
+                        <!--<div id="tree" style="padding-top: 20px;padding-bottom: 20px;"></div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-8">-->
+                        <!--<div class="text-center">-->
+                            <!--<p style="padding-top: 150px;font-size: 3em;">welcome</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+        <!--</div>-->
+        <div class="container">
+            <div class="row" style="margin-top: 3%;box-shadow: 0.5px 0.5px 0.5px 0.5px #c7c7c7;border-radius: 5px;background-color: #FFFFFF;">
+                <div class="col-md-8">
+                    <img src="./static/img/LOGO4.png" style="width: 100%;">
+                </div>
+                <div class="col-md-4">
+                    <p style="margin-top: 11%;margin-left: 5%;font-size: 1.3em;">打造国家前沿战略支撑平台</p>
+                </div>
+            </div>
+            <div class="row" style="margin-top: 2%;">
+                <div class="col-md-3" style="padding-left: 0px;">
+                    <div class="container" style="padding-left: 0px;">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu1">Menu 1</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu2">Menu 2</a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content" style="box-shadow: 0.5px 0.5px 0.5px 0.5px #c7c7c7;border-radius: 5px;padding-bottom: 6%;background-color: #FFFFFF;">
+                            <div id="home" class="container tab-pane active"><br>
+                                <div id="tree"></div>
+                            </div>
+                            <div id="menu1" class="container tab-pane fade"><br>
+                                <div id="tree2"></div>
+                            </div>
+                            <div id="menu2" class="container tab-pane fade"><br>
+                                <div id="tree3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9" style="padding-right: 0px;padding-top: 3.5%;">
+                    <div class="text-center" style="border-radius: 5px;height: 620px;padding-right: 0px;">
+                        <!--<p style="padding-top: 150px;font-size: 3em;">welcome</p>-->
+                        <!--<div class="embed-responsive embed-responsive-16by9">-->
+                            <!--<iframe class="embed-responsive-item" src="bank_capital_adequacy_ratio.html" style="width: 100%;height: 1200px;"></iframe>-->
+                        <!--</div>-->
+                        <iframe runat="server" src="bank_capital_adequacy_ratio.html" width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <footer style="background-color: #2b2f3b">
+        <div class="container-fluid">
+            <div class="row" style="margin-top: 5%;color: #ffffff">
+                <div class="col-md-3" style="margin-top: 3%;margin-left: 3%;">
+                    <p style="font-size: 1.5em;margin-bottom: 2%;">联系我们</p>
+                    <p style="margin-bottom: 5%;padding-top: 10%;">官方电话：0574-88222535</p>
+                    <p style="margin-bottom: 5%;">传真：0574-88222535</p>
+                    <p style="margin-bottom: 5%;">邮编：315100</p>
+                    <p style="margin-bottom: 5%;">地址：浙江省宁波市鄞州区钱湖南路8号</p>
+                </div>
+                <div class="col-md-8" style="margin-top: 3%;margin-left: 4%;margin-bottom: 3%;">
+                    <p style="font-size: 1.5em;padding-left: 0px;">友情链接</p>
+                    <div class="row">
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian1.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian2.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian3.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian4.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian5.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian6.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian7.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian8.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian9.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian10.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian11.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian12.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian13.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian14.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian15.jpg" style="width: 100%;">
+                        </div>
+                        <div style="width: 12.5%;padding-right: 10px;padding-bottom: 1%;">
+                            <img src="./static/img/youlian16.jpg" style="width: 100%;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
+
+    <script>
+        var data = [
+            {
+                text: 'Parent 1',
+                href: '#parent1',
+                tags: ['4'],
+                nodes: [
+                    {
+                        text: 'Child 1',
+                        href: '#child1',
+                        tags: ['2'],
+                        nodes: [
+                            {
+                                text: 'Grandchild 1',
+                                href: '#grandchild1',
+                                tags: ['0']
+                            },
+                            {
+                                text: 'Grandchild 2',
+                                href: '#grandchild2',
+                                tags: ['0']
+                            }
+                        ]
+                    },
+                    {
+                        text: 'Child 2',
+                        href: '#child2',
+                        tags: ['0']
+                    }
+                ]
+            },
+            {
+                text: 'Parent 2',
+                href: '#parent2',
+                tags: ['0']
+            },
+            {
+                text: 'Parent 3',
+                href: '#parent3',
+                tags: ['0'],
+                nodes: [
+                    {
+                        text: 'Child 1',
+                        href: '#child1',
+                        tags: ['2'],
+                        nodes: [
+                            {
+                                text: 'Grandchild 1',
+                                href: '#grandchild1',
+                                tags: ['0']
+                            },
+                            {
+                                text: 'Grandchild 2',
+                                href: '#grandchild2',
+                                tags: ['0']
+                            }
+                        ]
+                    },
+                    {
+                        text: 'Child 2',
+                        href: '#child2',
+                        tags: ['0']
+                    }
+                ]
+            },
+            {
+                text: 'Parent 4',
+                href: '#parent4',
+                tags: ['0']
+            },
+            {
+                text: 'Parent 5',
+                href: '#parent5'  ,
+                tags: ['0'],
+                nodes: [
+                    {
+                        text: 'Child 1',
+                        href: '#child1',
+                        tags: ['2'],
+                        nodes: [
+                            {
+                                text: 'Grandchild 1',
+                                href: '#grandchild1',
+                                tags: ['0']
+                            },
+                            {
+                                text: 'Grandchild 2',
+                                href: '#grandchild2',
+                                tags: ['0']
+                            }
+                        ]
+                    },
+                    {
+                        text: 'Child 2',
+                        href: '#child2',
+                        tags: ['0']
+                    }
+                ]
+            }
+        ];
+        function getTree() {
+            // Some logic to retrieve, or generate tree structure
+            return data;
+        }
+        $('#tree').treeview({
+            data: getTree(),
+            color: "#428bca",
+            enableLinks: true
+        });
+        $('#tree2').treeview({
+            data: getTree(),
+            color: "#428bca",
+            enableLinks: true
+        });
+        $('#tree3').treeview({
+            data: getTree(),
+            color: "#428bca",
+            enableLinks: true
+        });
+    </script>
+</body>
+</html>

@@ -113,7 +113,7 @@
             $('#tableTag').removeClass('active');
         }
 
-        data=getRemoteData('/population/json.do?info=ListedDomesticCompanies');
+        var remoteData=getRemoteData('/population/json.do?info=BirthRateDeathRate');
 
             //初始化图
             function initPic(data) {

@@ -27,7 +27,7 @@ public class PatentApplications implements Serializable {
     /**
      * 非居民专利申请数量
      */
-    @Column(name = "non-residents")
+    @Column(name = "non_residents")
     private Integer nonResidents;
 
     /**
@@ -113,7 +113,7 @@ public class PatentApplications implements Serializable {
     /**
      * 获取非居民专利申请数量
      *
-     * @return non-residents - 非居民专利申请数量
+     * @return non_residents - 非居民专利申请数量
      */
     public Integer getNonResidents() {
         return nonResidents;
