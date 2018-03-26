@@ -17,6 +17,7 @@ public class Producer implements Serializable {
     /**
      * Äê·Ý
      */
+
     private String year;
 
     /**
