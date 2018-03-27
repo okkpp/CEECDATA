@@ -281,10 +281,17 @@
 			if(item.id == id){
 				for(var i in item){
 					var pOrInput;
-					if(i == "id" || i == "updated"){
-						pOrInput = $("<p></p>").addClass("form-control-static").append(item[i]).attr("name",i);
+					if(i == "id" ){
+						pOrInput = $("<p></p>").addClass("form-control-static").append(item[i]);
+						$("#update_form").append($("<input></input>").attr("type","hidden").attr("value",item[i]).attr("name",i));
+					}else if(i == "updated"){
+						pOrInput = $("<p></p>").addClass("form-control-static").append(item[i]);				
+					}else if(i == "country"){
+						pOrInput = $("<p></p>").addClass("form-control-static").append(item[i]);
+						$("#update_form").append($("<input></input>").attr("type","hidden").attr("value",item[i]).attr("name",i));
 					}else{
 						pOrInput = $("<input></input>").addClass("form-control").attr("value",item[i]).attr("name",i);
+						
 					}
 					$("<div></div>").addClass("form-group").append(
 						$("<label></label>").addClass("col-sm-2 control-label").append(i))
@@ -302,11 +309,13 @@
 	});
 	
 	$("#update_btn").click(function(){
-		var str = "../"+$("#chapter_choose").val()+"/"+tranformStr("_"+$("#sheet_choose").val())+"/"+$(this).attr("edit-id")+".do";
+		var str = "../"+$("#chapter_choose").val()+"/update/"+tranformStr("_"+$("#sheet_choose").val())+"/"+$(this).attr("edit-id")+".do";
+		console.log(str);
+		var data = getForm();
 		$.ajax({
 			url : str,
 			type : "POST",
-			data : $("#update_form").serialize()+"&_method=put",
+			data : "json="+data+"&_method=put",
 			success : function(result){
 				result = eval('('+ result+ ')');
 				$("#updateModal").modal("hide");
@@ -315,6 +324,18 @@
 			}
 		})
 	});
+	
+	//获取更新表单数据
+	function getForm(){
+		var formObject = {};
+		var formArray =$("#update_form").serializeArray();
+		$.each(formArray,function(i,item){
+		formObject[item.name] = item.value;
+		});
+		var formJson = JSON.stringify(formObject);
+		console.log(formJson);
+		return formJson;	
+	}
 	
 	//为所有删除按钮绑定事件(单个删除)
 	$(document).on("click",".delete_btn",function(){
