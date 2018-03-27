@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+
+import okkpp.base.service.BaseService;
 import okkpp.dao.agriculture.HarvestAreasMapper;
 import okkpp.model.agriculture.HarvestAreas;
 import okkpp.utils.CountryCode;
@@ -17,7 +19,7 @@ import tk.mybatis.mapper.entity.Example;
 */
 @Service
 @Transactional
-public class HarvestAreasService {
+public class HarvestAreasService extends BaseService<HarvestAreas>{
 
 	@Autowired
 	HarvestAreasMapper mapper;
