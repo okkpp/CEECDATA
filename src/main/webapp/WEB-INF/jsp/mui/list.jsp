@@ -309,8 +309,7 @@
 	});
 	
 	$("#update_btn").click(function(){
-		var str = "../"+$("#chapter_choose").val()+"/update/"+tranformStr("_"+$("#sheet_choose").val())+"/"+$(this).attr("edit-id")+".do";
-		console.log(str);
+		var str = "../"+$("#chapter_choose").val()+"/update/"+tranformStr("_"+$("#sheet_choose").val())+".do";
 		var data = getForm();
 		$.ajax({
 			url : str,

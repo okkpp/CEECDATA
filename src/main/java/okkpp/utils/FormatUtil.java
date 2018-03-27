@@ -4,7 +4,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
 import okkpp.model.price.Consumer;
 
 public class FormatUtil {
@@ -18,8 +17,7 @@ public class FormatUtil {
 		List<String> list = null;
 		try {
 			list = getModelAttriButeType(object);
-			for (int i = 0; i < list.size(); i++) {
-					
+			for (int i = 0; i < list.size(); i++) {					
 				if (!list.get(i).equals("serialVersionUID"))
 					if (getFieldValueByName(list.get(i), object) == null) {
 						return true;
