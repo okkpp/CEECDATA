@@ -28,8 +28,8 @@
 			targetProject="src/main/java" />
 		<javaClientGenerator targetPackage="okkpp.dao.culture"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table tableName="t_culture_patent_applications"
-			domainObjectName="PatentApplications" enableCountByExample="false"
+		<table tableName="t_culture_reserch_spending_rate"
+			domainObjectName="ReserchSpendingRate" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" schema="${jdbc.username}" />
 
