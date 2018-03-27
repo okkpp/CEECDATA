@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
+import okkpp.base.controller.BaseController;
+import okkpp.model.Content;
 import okkpp.service.ContentService;
 
 /**
@@ -20,7 +22,7 @@ import okkpp.service.ContentService;
  * @version 1.0 
  */
 @Controller
-public class ContentController {
+public class ContentController extends BaseController<Content>{
 
 	@Autowired
 	private ContentService service;

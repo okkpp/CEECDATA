@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<!--
+      @author
+      @Description: 发电量
+    -->
+		<meta charset="UTF-8">
+		<title>发电量</title>
+		<!-- 引入Jquery -->
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+		<!-- 引入Bootstrap -->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<!-- 引入BootStrap-table -->
+		<link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+		<script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+
+		<!-- 引入Bootstrap-paginator -->
+		<script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+
+		<!-- 引入Echarts -->
+		<script src="../assets/libs/echarts/echarts.min.js"></script>
+
+		<!-- 引入组装数据的Js -->
+		<script src="../assets/libs/utils/general-data.js"></script>
+		<style>
+			.th-inner{
+				text-align:center;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="container">
+			<div>
+				<ul class="nav nav-tabs">
+					<li role="presentation" id="tableTag">
+						<a href="javascript:;" onclick="showTable()">&nbsp;<span class="glyphicon glyphicon-th-large"></span>&nbsp;</a>
+					</li>
+					<li role="presentation" id="imageTag">
+						<a href="javascript:;" onclick="showImage()">&nbsp;<span class="glyphicon glyphicon-tasks"></span>&nbsp;</a>
+					</li>
+				</ul>
+			</div>
+
+			<div id="tableView">
+				<div class="page-header" style="text-align: center;">
+					<h3>发电量</h3>
+					<br>
+					<h4 style="margin-top: -20px;">Index numbers of Industrial Production</h4>
+				</div>
+				<div class="panel" style="margin-top: 1.5em;">
+					<div style="text-align: right;">单位:&nbsp;百千万时</div>
+				</div>
+				<table id="tableData" class="table table-hover table-striped" style="text-align: center;">
+					<tr>
+						<td style="text-align: center;">国家</td>
+						<td>年份</td>
+						<td>总计</td>
+						<td>热电</td>
+						<td>水电</td>
+						<td>核电</td>
+						<td>风电</td>
+						<td>太阳能电</td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="imageView">
+				<div class="page-header" style="text-align: center;">
+					<h3>发电量</h3>
+					<br>
+					<h4 style="margin-top: -20px;">Index numbers of Industrial Production</h4>
+				</div>
+
+				<div class="panel" style="margin-top: 1.5em;">
+					<div id="main" style="width: 100%;height:400px;"></div>
+				</div>
+			</div>
+
+			<div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+				<span class="glyphicon glyphicon-save"></span> 下载
+			</a></div>
+
+
+			<!-- <div style="text-align: right;"><div id="page"></div></div> -->
+		</div>
+		<script>
+			$(function() {
+				$('#imageView').hide();
+				$('#tableTag').attr('class', 'active');
+			})
+
+			function showTable() {
+				$('#tableView').show();
+				$('#imageView').hide();
+				$('#tableTag').attr('class', 'active');
+				$('#imageTag').removeClass('active');
+			}
+
+			function showImage() {
+				$('#imageView').show();
+				$('#tableView').hide();
+				$('#imageTag').attr('class', 'active');
+				$('#tableTag').removeClass('active');
+			}
+
+            //组装options2
+            function tsetOptions2(data) {
+                var res="[";
+                //for(var tmp_year in data){
+                $.each(data,function (index,value) {
+                    res+="{series: [";
+                    $.each(value,function (index2,value2) {
+                        res+="{type: 'bar',stack:'total','data':["+value2+"]},";
+                    });
+                    res+="]},";
+                });
+                res+="]";
+                console.log(res);
+                return eval("("+res+")");
+            }
+
+            //组装options
+            function tsetOptions(data) {
+                var tmp = {};
+                var year = data.yearList;
+                $.each(year,function (index,value) {
+                    tmp[value]=[];
+                    for(var i=0;i<data.fieldName.length;i++) {
+                        tmp[value].push([]);
+                    }
+                });
+                for(var country in data.countries){
+                    $.each(data.countries[country],function (index,value) {
+                        $.each(data.fieldName,function (index1,value1) {
+                            if(typeof(value[value1])==undefined){
+                                tmp[value["year"]][index1].push(0);
+                            }else {
+                                tmp[value["year"]][index1].push(value[value1]);
+                            }
+                            //console.log(value[value1]);
+                        });
+                    });
+                }
+                // console.log(JSON.stringify(tmp));
+                return tsetOptions2(tmp);
+            }
+
+			remoteData={
+                "maxLength":6,
+                "yearList":[
+                    "2010",
+                    "2011",
+                    "2012",
+                    "2013",
+                    "2014",
+                    "2015"
+                ],
+                "existYear":true,
+                "countryCount":16,
+                "fieldCount":6,
+                "fieldName":[
+                    "total",
+                    "thermal",
+                    "hydro",
+                    "nuclear",
+                    "wind",
+                    "solar"
+                ],
+                "countries":{
+                    "立陶宛":[
+                        {
+                            "country":"立陶宛",
+                            "id":55,
+                            "sort":1,
+                            "total":4397,
+							"wind":1000,
+                            "thermal":3000,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"立陶宛",
+                            "id":56,
+                            "sort":2,
+                            "total":4397,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"立陶宛",
+                            "id":57,
+                            "sort":3,
+                            "total":73,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"立陶宛",
+                            "id":58,
+                            "sort":4,
+                            "total":639,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"立陶宛",
+                            "id":59,
+                            "sort":5,
+                            "total":1088,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"立陶宛",
+                            "id":60,
+                            "sort":6,
+                            "total":2597,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "波黑":[
+                        {
+                            "country":"波黑",
+                            "id":13,
+                            "sort":1,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"波黑",
+                            "id":14,
+                            "sort":2,
+                            "total":16160,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"波黑",
+                            "id":15,
+                            "sort":3,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"波黑",
+                            "id":16,
+                            "sort":4,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"波黑",
+                            "id":17,
+                            "sort":5,
+                            "total":5935,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"波黑",
+                            "id":18,
+                            "sort":6,
+                            "total":10225,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "克罗地亚":[
+                        {
+                            "country":"克罗地亚",
+                            "id":43,
+                            "sort":1,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"克罗地亚",
+                            "id":44,
+                            "sort":2,
+                            "total":13554,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"克罗地亚",
+                            "id":45,
+                            "sort":3,
+                            "total":35,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"克罗地亚",
+                            "id":46,
+                            "sort":4,
+                            "total":730,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"克罗地亚",
+                            "id":47,
+                            "sort":5,
+                            "total":9125,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"克罗地亚",
+                            "id":48,
+                            "sort":6,
+                            "total":3664,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "保加利亚":[
+                        {
+                            "country":"保加利亚",
+                            "id":19,
+                            "sort":1,
+                            "total":15867,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"保加利亚",
+                            "id":20,
+                            "sort":2,
+                            "total":47485,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"保加利亚",
+                            "id":21,
+                            "sort":3,
+                            "total":1252,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"保加利亚",
+                            "id":22,
+                            "sort":4,
+                            "total":1331,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"保加利亚",
+                            "id":23,
+                            "sort":5,
+                            "total":5163,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"保加利亚",
+                            "id":24,
+                            "sort":6,
+                            "total":23872,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "斯洛伐克":[
+                        {
+                            "country":"斯洛伐克",
+                            "id":79,
+                            "sort":1,
+                            "total":15499,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"斯洛伐克",
+                            "id":80,
+                            "sort":2,
+                            "total":27401,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"斯洛伐克",
+                            "id":81,
+                            "sort":3,
+                            "total":597,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"斯洛伐克",
+                            "id":82,
+                            "sort":4,
+                            "total":6,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"斯洛伐克",
+                            "id":83,
+                            "sort":5,
+                            "total":4462,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"斯洛伐克",
+                            "id":84,
+                            "sort":6,
+                            "total":6837,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "罗马尼亚":[
+                        {
+                            "country":"罗马尼亚",
+                            "id":49,
+                            "sort":1,
+                            "total":11676,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"罗马尼亚",
+                            "id":50,
+                            "sort":2,
+                            "total":65676,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"罗马尼亚",
+                            "id":51,
+                            "sort":3,
+                            "total":1616,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"罗马尼亚",
+                            "id":52,
+                            "sort":4,
+                            "total":6201,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"罗马尼亚",
+                            "id":53,
+                            "sort":5,
+                            "total":19280,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"罗马尼亚",
+                            "id":54,
+                            "sort":6,
+                            "total":26903,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "斯洛文尼亚":[
+                        {
+                            "country":"斯洛文尼亚",
+                            "id":85,
+                            "sort":1,
+                            "total":6370,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"斯洛文尼亚",
+                            "id":86,
+                            "sort":2,
+                            "total":17437,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"斯洛文尼亚",
+                            "id":87,
+                            "sort":3,
+                            "total":257,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"斯洛文尼亚",
+                            "id":88,
+                            "sort":4,
+                            "total":4,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"斯洛文尼亚",
+                            "id":89,
+                            "sort":5,
+                            "total":6366,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"斯洛文尼亚",
+                            "id":90,
+                            "sort":6,
+                            "total":4440,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "捷克":[
+                        {
+                            "country":"捷克",
+                            "id":37,
+                            "sort":1,
+                            "total":30325,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"捷克",
+                            "id":38,
+                            "sort":2,
+                            "total":86024,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"捷克",
+                            "id":39,
+                            "sort":3,
+                            "total":2123,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"捷克",
+                            "id":40,
+                            "sort":4,
+                            "total":477,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"捷克",
+                            "id":41,
+                            "sort":5,
+                            "total":2961,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"捷克",
+                            "id":42,
+                            "sort":6,
+                            "total":50138,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "马其顿":[
+                        {
+                            "country":"马其顿",
+                            "id":67,
+                            "sort":1,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"马其顿",
+                            "id":68,
+                            "sort":2,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"马其顿",
+                            "id":69,
+                            "sort":3,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"马其顿",
+                            "id":70,
+                            "sort":4,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"马其顿",
+                            "id":71,
+                            "sort":5,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"马其顿",
+                            "id":72,
+                            "sort":6,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "拉脱维亚":[
+                        {
+                            "country":"拉脱维亚",
+                            "id":61,
+                            "sort":1,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"拉脱维亚",
+                            "id":62,
+                            "sort":2,
+                            "total":5141,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"拉脱维亚",
+                            "id":63,
+                            "sort":3,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"拉脱维亚",
+                            "id":64,
+                            "sort":4,
+                            "total":141,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"拉脱维亚",
+                            "id":65,
+                            "sort":5,
+                            "total":1994,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"拉脱维亚",
+                            "id":66,
+                            "sort":6,
+                            "total":3006,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "匈牙利":[
+                        {
+                            "country":"匈牙利",
+                            "id":91,
+                            "sort":1,
+                            "total":15649,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"匈牙利",
+                            "id":92,
+                            "sort":2,
+                            "total":29371,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"匈牙利",
+                            "id":93,
+                            "sort":3,
+                            "total":56,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"匈牙利",
+                            "id":94,
+                            "sort":4,
+                            "total":657,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"匈牙利",
+                            "id":95,
+                            "sort":5,
+                            "total":302,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"匈牙利",
+                            "id":96,
+                            "sort":6,
+                            "total":12707,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "塞尔维亚":[
+                        {
+                            "country":"塞尔维亚",
+                            "id":73,
+                            "sort":1,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"塞尔维亚",
+                            "id":74,
+                            "sort":2,
+                            "total":34060,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"塞尔维亚",
+                            "id":75,
+                            "sort":3,
+                            "total":6,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"塞尔维亚",
+                            "id":76,
+                            "sort":4,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"塞尔维亚",
+                            "id":77,
+                            "sort":5,
+                            "total":11617,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"塞尔维亚",
+                            "id":78,
+                            "sort":6,
+                            "total":22437,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "阿尔巴尼亚":[
+                        {
+                            "country":"阿尔巴尼亚",
+                            "id":1,
+                            "sort":1,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"阿尔巴尼亚",
+                            "id":2,
+                            "sort":2,
+                            "total":4724,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"阿尔巴尼亚",
+                            "id":3,
+                            "sort":3,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"阿尔巴尼亚",
+                            "id":4,
+                            "sort":4,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"阿尔巴尼亚",
+                            "id":5,
+                            "sort":5,
+                            "total":4724,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"阿尔巴尼亚",
+                            "id":6,
+                            "sort":6,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "波兰":[
+                        {
+                            "country":"波兰",
+                            "id":25,
+                            "sort":1,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"波兰",
+                            "id":26,
+                            "sort":2,
+                            "total":159059,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"波兰",
+                            "id":27,
+                            "sort":3,
+                            "total":7,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"波兰",
+                            "id":28,
+                            "sort":4,
+                            "total":7676,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"波兰",
+                            "id":29,
+                            "sort":5,
+                            "total":2734,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"波兰",
+                            "id":30,
+                            "sort":6,
+                            "total":148642,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "爱沙尼亚":[
+                        {
+                            "country":"爱沙尼亚",
+                            "id":7,
+                            "sort":1,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"爱沙尼亚",
+                            "id":8,
+                            "sort":2,
+                            "total":12446,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"爱沙尼亚",
+                            "id":9,
+                            "sort":3,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"爱沙尼亚",
+                            "id":10,
+                            "sort":4,
+                            "total":604,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"爱沙尼亚",
+                            "id":11,
+                            "sort":5,
+                            "total":27,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"爱沙尼亚",
+                            "id":12,
+                            "sort":6,
+                            "total":11815,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ],
+                    "黑山":[
+                        {
+                            "country":"黑山",
+                            "id":31,
+                            "sort":1,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2010"
+                        },
+                        {
+                            "country":"黑山",
+                            "id":32,
+                            "sort":2,
+                            "total":3174,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2011"
+                        },
+                        {
+                            "country":"黑山",
+                            "id":33,
+                            "sort":3,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2012"
+                        },
+                        {
+                            "country":"黑山",
+                            "id":34,
+                            "sort":4,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2013"
+                        },
+                        {
+                            "country":"黑山",
+                            "id":35,
+                            "sort":5,
+                            "total":1752,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2014"
+                        },
+                        {
+                            "country":"黑山",
+                            "id":36,
+                            "sort":6,
+                            "total":1422,
+                            "updated":"2018-03-04 00:00:00",
+                            "year":"2015"
+                        }
+                    ]
+                }
+            };
+            //初始化图
+            function initPic(data) {
+                var option = {
+                    //timeline基本配置都写在baseoption 中
+                    baseOption: {
+                        timeline: {
+                            loop: true,
+                            axisType: 'category',
+                            show: true,
+                            autoPlay: true,
+                            playInterval: 1000,
+                            data: setYears(data)
+                        },
+                        legend: {
+                            data: setLegend(data)
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        title:{
+                            subtext:'数据来源'
+                        },
+                        calculable: true,
+                        grid: {
+                            y: 100,
+                            y2: 100
+                        },
+                        xAxis: [{
+                            type: 'category',
+                            axisLabel: {                        interval:0,                        rotate:40                    },                    data: setCountries(data)
+                        }],
+                        yAxis: {
+                            type: 'value',
+                            axisLine: {
+                                show: true,
+                                lineStyle:{
+                                    color:'#0066CC'
+                                }
+                            }
+                        },
+                        series: setSeriesTitle(data)
+                    },
+                    options:tsetOptions(data)
+                };
+                var myChart = echarts.init(document.getElementById('main'));
+                myChart.setOption(option);
+            }
+            initPic(remoteData);
+            setTableData(remoteData,$('#tableData'));
+			// var option = {
+			// 	timeline: {
+			// 		axisType: 'category',
+			// 		autoPlay: true,
+			// 		playInterval: 5000,
+			// 		data: all.years
+			// 	},
+			// 	options: [{
+			// 			tooltip: {
+			// 				trigger: 'axis'
+			// 			},
+			// 			title:{
+			// 				subtext:'数据来源'
+			// 			},
+			// 			calculable: true,
+			// 			grid: {
+			// 				y: 50,
+			// 				y2: 100
+			// 			},
+			// 			xAxis: [{
+			// 				type: 'category',
+			// 				axisLabel: {
+			// 					interval: 0
+			// 				},
+			// 				data: all.countrys
+			// 			}],
+			// 			yAxis: [{
+			// 				type: 'value',
+			// 				name: '%'
+			// 			}],
+			// 			series: [{
+			// 				name: '工业生产指数',
+			// 				type: 'bar',
+			// 				data: all.data[0],
+             //                markLine: {
+             //                    itemStyle: {
+             //                        normal: {
+             //                            lineStyle: {
+             //                                color: 'orange'
+             //                            },
+             //                            barBorderColor: 'orange',
+             //                            label: {
+             //                                position: 'end',
+             //                                formatter: function (params) {
+             //                                    return "100（2010年）";
+             //                                },
+             //                                textStyle: {
+             //                                    color: 'orange'
+             //                                }
+             //                            }
+             //                        }
+             //                    },
+             //                    data: [
+             //                        {
+             //                            name: '100（2010）',
+             //                            yAxis: 50
+             //                        }
+             //                    ]
+             //                }
+			// 			}]
+			// 		},
+			// 		{
+			// 			series: [{
+			// 				data: all.data[1]
+			// 			}]
+			// 		},
+			// 		{
+			// 			series: [{
+			// 				data: all.data[2]
+			// 			}]
+			// 		},
+			// 		{
+			// 			series: [{
+			// 				data: all.data[3]
+			// 			}]
+			// 		},
+			// 		{
+			// 			series: [{
+			// 				data: all.data[4]
+			// 			}]
+			// 		},
+			// 		{
+			// 			series: [{
+			// 				data: all.data[5]
+			// 			}]
+			// 		}
+			// 	]
+			// };
+			// var myChart = echarts.init(document.getElementById('main'));
+			// // 使用刚指定的配置项和数据显示图表。
+			// myChart.setOption(option);
+		</script>
+	</body>
+
+</html>

@@ -1,6 +1,7 @@
 package okkpp.service;
 
 import okkpp.model.Content;
+import okkpp.base.service.BaseService;
 import okkpp.dao.ContentMapper;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class ContentService {
+public class ContentService extends BaseService<Content>{
 
 	@Autowired
 	private ContentMapper mapper;
