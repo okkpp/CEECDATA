@@ -64,6 +64,8 @@ public class CultureController {
 			return ChartInfo.mapByCountry(PatentApplicationsService.selectAll());
 		case "ResearchersAndTechnicians":
 			return ChartInfo.mapByCountry(ResearchersAndTechniciansService.selectAll());
+		case "ReserchSpendingRate":
+			return ChartInfo.mapByCountry(ReserchSpendingRateService.selectAll());
 		case "SchoolEnrollmentRatio":
 			return ChartInfo.mapByCountry(SchoolEnrollmentRatioService.selectAll());
 		case "WaterPeopleRate":

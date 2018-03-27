@@ -110,7 +110,7 @@
         $('#second').hide();
     }
 
-    var remoteData=getRemoteData('');
+    var remoteData=getRemoteData('/culture/json.do?info=ReserchSpendingRate');
     initPic(remoteData);
     setTableData(remoteData,$('#tableData'));
     //初始化图
