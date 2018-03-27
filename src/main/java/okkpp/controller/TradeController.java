@@ -10,9 +10,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
+import com.google.gson.Gson;
+
 import okkpp.service.trade.*;
 import okkpp.utils.ChartInfo;
+import okkpp.utils.CountryCode;
+import okkpp.utils.TimeUtils;
 import okkpp.model.Msg;
+import okkpp.model.trade.*;
 
 @Controller
 @RequestMapping("/trade")
@@ -133,5 +138,162 @@ public class TradeController {
 			break;
 		}
 		return Msg.success().add("pageInfo", pageInfo);
+	}
+
+	// 更新方法
+	@RequestMapping(value = "update/{info}", method = RequestMethod.PUT)
+	@ResponseBody
+	public Msg update(@PathVariable("info") String info, @RequestParam("json") String json) {
+		int result = 0;
+		switch (info) {
+		case "CommercialServiceExport":
+			CommercialServiceExport commercialServiceExport = (CommercialServiceExport) CountryCode
+					.replaceCountrySingle(new Gson().fromJson(json, CommercialServiceExport.class));
+			commercialServiceExport.setUpdated(TimeUtils.getCurrentTime());
+			result = commercialServiceExportService.updateCommercialServiceExport(commercialServiceExport);
+			break;
+		case "CommercialServiceImport":
+			CommercialServiceImport commercialServiceImport = (CommercialServiceImport) CountryCode
+					.replaceCountrySingle(new Gson().fromJson(json, CommercialServiceImport.class));
+			commercialServiceImport.setUpdated(TimeUtils.getCurrentTime());
+			result = commercialServiceImportService.updateCommercialServiceImport(commercialServiceImport);
+			break;
+		case "ExportsByCommodityGroups":
+			ExportsByCommodityGroups exportsByCommodityGroups = (ExportsByCommodityGroups) CountryCode
+					.replaceCountrySingle(new Gson().fromJson(json, ExportsByCommodityGroups.class));
+			exportsByCommodityGroups.setUpdated(TimeUtils.getCurrentTime());
+			result = exportsByCommodityGroupsService.updateExportsByCommodityGroups(exportsByCommodityGroups);
+			break;
+		case "GoodsAndServices":
+			GoodsAndServices goodsAndServices = (GoodsAndServices) CountryCode
+					.replaceCountrySingle(new Gson().fromJson(json, GoodsAndServices.class));
+			goodsAndServices.setUpdated(TimeUtils.getCurrentTime());
+			result = goodsAndServicesService.updateGoodsAndServices(goodsAndServices);
+			break;
+		case "ImportsByCommodityGroups":
+			ImportsByCommodityGroups importsByCommodityGroups = (ImportsByCommodityGroups) CountryCode
+					.replaceCountrySingle(new Gson().fromJson(json, ImportsByCommodityGroups.class));
+			importsByCommodityGroups.setUpdated(TimeUtils.getCurrentTime());
+			result = importsByCommodityGroupsService.updateImportsByCommodityGroups(importsByCommodityGroups);
+			break;
+		case "MerchandiseExports":
+			MerchandiseExports merchandiseExports = (MerchandiseExports) CountryCode
+					.replaceCountrySingle(new Gson().fromJson(json, MerchandiseExports.class));
+			merchandiseExports.setUpdated(TimeUtils.getCurrentTime());
+			result = merchandiseExportsService.updateMerchandiseExports(merchandiseExports);
+			break;
+		case "MerchandiseImports":
+			MerchandiseImports merchandiseImports = (MerchandiseImports) CountryCode
+					.replaceCountrySingle(new Gson().fromJson(json, MerchandiseImports.class));
+			merchandiseImports.setUpdated(TimeUtils.getCurrentTime());
+			result = merchandiseImportsService.updateMerchandiseImports(merchandiseImports);
+			break;
+		case "MerchandiseImportsAndExports":
+			MerchandiseImportsAndExports merchandiseImportsAndExports = (MerchandiseImportsAndExports) CountryCode
+					.replaceCountrySingle(new Gson().fromJson(json, MerchandiseImportsAndExports.class));
+			merchandiseImportsAndExports.setUpdated(TimeUtils.getCurrentTime());
+			result = merchandiseImportsAndExportsService
+					.updateMerchandiseImportsAndExports(merchandiseImportsAndExports);
+			break;
+		}
+		if (result == 1) {
+			return Msg.success();
+		}
+		return Msg.fail();
+	}
+
+	// 添加方法
+	@RequestMapping(value = "add/{info}", method = RequestMethod.POST)
+	@ResponseBody
+	public Msg add(@PathVariable("info") String info, @PathVariable("id") Integer id,
+			@RequestParam("json") String json) {
+		int result = 0;
+		switch (info) {
+		case "CommercialServiceExport":
+			CommercialServiceExport commercialServiceExport = new Gson().fromJson(json, CommercialServiceExport.class);
+			commercialServiceExport.setUpdated(TimeUtils.getCurrentTime());
+			result = commercialServiceExportService.insertCommercialServiceExport(commercialServiceExport);
+			break;
+		case "CommercialServiceImport":
+			CommercialServiceImport commercialServiceImport = new Gson().fromJson(json, CommercialServiceImport.class);
+			commercialServiceImport.setUpdated(TimeUtils.getCurrentTime());
+			result = commercialServiceImportService.insertCommercialServiceImport(commercialServiceImport);
+			break;
+		case "ExportsByCommodityGroups":
+			ExportsByCommodityGroups exportsByCommodityGroups = new Gson().fromJson(json,
+					ExportsByCommodityGroups.class);
+			exportsByCommodityGroups.setUpdated(TimeUtils.getCurrentTime());
+			result = exportsByCommodityGroupsService.insertExportsByCommodityGroups(exportsByCommodityGroups);
+			break;
+		case "GoodsAndServices":
+			GoodsAndServices goodsAndServices = new Gson().fromJson(json, GoodsAndServices.class);
+			goodsAndServices.setUpdated(TimeUtils.getCurrentTime());
+			result = goodsAndServicesService.insertGoodsAndServices(goodsAndServices);
+			break;
+		case "ImportsByCommodityGroups":
+			ImportsByCommodityGroups importsByCommodityGroups = new Gson().fromJson(json,
+					ImportsByCommodityGroups.class);
+			importsByCommodityGroups.setUpdated(TimeUtils.getCurrentTime());
+			result = importsByCommodityGroupsService.insertImportsByCommodityGroups(importsByCommodityGroups);
+			break;
+		case "MerchandiseExports":
+			MerchandiseExports merchandiseExports = new Gson().fromJson(json, MerchandiseExports.class);
+			merchandiseExports.setUpdated(TimeUtils.getCurrentTime());
+			result = merchandiseExportsService.insertImportsByCommodityGroups(merchandiseExports);
+			break;
+		case "MerchandiseImports":
+			MerchandiseImports merchandiseImports = new Gson().fromJson(json, MerchandiseImports.class);
+			merchandiseImports.setUpdated(TimeUtils.getCurrentTime());
+			result = merchandiseImportsService.insertMerchandiseImports(merchandiseImports);
+			break;
+		case "MerchandiseImportsAndExports":
+			MerchandiseImportsAndExports merchandiseImportsAndExports = new Gson().fromJson(json,
+					MerchandiseImportsAndExports.class);
+			merchandiseImportsAndExports.setUpdated(TimeUtils.getCurrentTime());
+			result = merchandiseImportsAndExportsService
+					.insertMerchandiseImportsAndExports(merchandiseImportsAndExports);
+			break;
+		}
+		if (result == 1) {
+			return Msg.success();
+		}
+		return Msg.fail();
+	}
+
+	// 删除方法
+	@RequestMapping(value = "delete/{info}/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public Msg delete(@PathVariable("info") String info, @PathVariable("id") Integer id) {
+		int result = 0;
+		switch (info) {
+		case "CommercialServiceExport":
+			result = commercialServiceExportService.deleteCommercialServiceExport(id);
+			break;
+		case "CommercialServiceImport":
+			result = commercialServiceImportService.deleteCommercialServiceImport(id);
+			break;
+		case "ExportsByCommodityGroups":
+			result = exportsByCommodityGroupsService.deleteExportsByCommodityGroups(id);
+			break;
+		case "GoodsAndServices":
+			result = goodsAndServicesService.deleteGoodsAndServices(id);
+			break;
+		case "ImportsByCommodityGroups":
+			result = importsByCommodityGroupsService.deleteImportsByCommodityGroups(id);
+			break;
+		case "MerchandiseExports":
+			result = merchandiseExportsService.deleteMerchandiseExports(id);
+			break;
+		case "MerchandiseImports":
+			result = merchandiseImportsService.deleteMerchandiseImports(id);
+			break;
+		case "MerchandiseImportsAndExports":
+			result = merchandiseImportsAndExportsService.deleteMerchandiseImportsAndExports(id);
+			break;
+		}
+		if (result == 1) {
+			return Msg.success();
+		}
+		return Msg.fail();
 	}
 }
