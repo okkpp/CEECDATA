@@ -48,19 +48,13 @@
 
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
-<<<<<<< HEAD
-=======
 
->>>>>>> e61052c1ebf1998ad52f67751b391d06e2e3acfa
 		<property name="driverClassName" value="${jdbc.driver}" />
 		<property name="url"
 			value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
-<<<<<<< HEAD
-=======
 
->>>>>>> e61052c1ebf1998ad52f67751b391d06e2e3acfa
 
 		<property name="initialSize" value="1" />
 		<property name="maxActive" value="20" />
@@ -98,11 +92,7 @@
 		basePackage:指定sql映射文件/接口所在的包（自动扫描） -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="okkpp"></property>
-<<<<<<< HEAD
-		<!-- <property name="sqlSessionFactoryBeanName" ref="sqlSessionFactory"></property> -->
-=======
 		<!-- <property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->
->>>>>>> e61052c1ebf1998ad52f67751b391d06e2e3acfa
 	</bean>
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="okkpp" />
