@@ -1,6 +1,7 @@
 package okkpp.service;
 
 import okkpp.model.Content;
+import okkpp.model.Table;
 import okkpp.base.service.BaseService;
 import okkpp.dao.ContentMapper;
 import java.util.ArrayList;
@@ -66,6 +67,14 @@ public class ContentService extends BaseService<Content>{
 			}
 		}
 		return result;
+	}
+	
+	public List<String> showTotalTables(){
+		return mapper.showTables();
+	}
+	
+	public List<Table> showTablesWithComment(){
+		return mapper.showTablesWithComment();
 	}
 
 }
