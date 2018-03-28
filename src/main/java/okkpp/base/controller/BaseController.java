@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import okkpp.base.Msg;
 import okkpp.base.service.BaseService;
-import okkpp.model.Msg;
 
 /**
 * @author duck
