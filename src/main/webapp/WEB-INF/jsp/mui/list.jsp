@@ -260,8 +260,7 @@
 					if(y == json[i]){
 						newList += "\""+y+"\":"+"\""+item[y]+"\",";		
 					}
-				}
-				
+				}				
 			};
 			newList = newList.substring(0,newList.length - 1);
 			newList += "},";
