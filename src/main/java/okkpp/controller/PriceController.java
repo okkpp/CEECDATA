@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
 import com.google.gson.Gson;
-import okkpp.model.Msg;
+
+import okkpp.base.Msg;
 import okkpp.model.price.*;
 import okkpp.service.price.*;
 import okkpp.utils.ChartInfo;

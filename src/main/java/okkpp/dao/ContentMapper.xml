@@ -40,4 +40,7 @@
   <select id="showColumns" resultType="java.util.HashMap">
       show full columns from ${tab}
   </select>
+  <select id="showTablesWithComment" resultType="okkpp.model.Table">
+  	  select ref_table as refTable,CONCAT(parent,content) as tableComment from s_content;
+  </select>
 </mapper>

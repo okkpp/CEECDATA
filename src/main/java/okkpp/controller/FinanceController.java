@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
-import okkpp.model.Msg;
+import okkpp.base.Msg;
 import okkpp.model.finance.DepositRateAndLendingRate;
 import okkpp.service.finance.*;
 import okkpp.utils.ChartInfo;
