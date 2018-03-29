@@ -14,7 +14,9 @@ import com.google.gson.Gson;
 
 import okkpp.base.controller.BaseController;
 import okkpp.model.Content;
+import okkpp.model.Table;
 import okkpp.service.ContentService;
+import okkpp.utils.StaticVariable;
 
 /**
  * @author DUCK  E-mail: okkpp@qq.com
@@ -53,5 +55,10 @@ public class ContentController extends BaseController<Content>{
 		model.addAttribute("data",new Gson().toJson(service.showColumns(tab)));
 		return service.showColumns(tab);
 	}
-		
+	
+	@RequestMapping(value = "/showTablesWithComment",method = RequestMethod.GET)
+	@ResponseBody
+	public List<Table> showTablesWithComment(){
+		return service.showTablesWithComment();
+	}
 }
