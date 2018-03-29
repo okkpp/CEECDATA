@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 import okkpp.base.controller.BaseController;
 import okkpp.model.Content;
-import okkpp.model.Table;
+import okkpp.model.TableField;
 import okkpp.service.ContentService;
 
 /**
@@ -57,7 +57,7 @@ public class ContentController extends BaseController<Content>{
 	
 	@RequestMapping(value = "/showTablesWithComment",method = RequestMethod.GET)
 	@ResponseBody
-	public List<Table> showTablesWithComment(){
+	public List<TableField> showTablesWithComment(){
 		return service.showTablesWithComment();
 	}
 }

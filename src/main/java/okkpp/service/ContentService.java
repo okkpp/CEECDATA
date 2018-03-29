@@ -1,6 +1,6 @@
 package okkpp.service;
 
-import okkpp.model.Table;
+import okkpp.model.TableField;
 import okkpp.model.Content;
 import okkpp.base.service.BaseService;
 import okkpp.dao.ContentMapper;
@@ -73,14 +73,14 @@ public class ContentService extends BaseService<Content>{
 		return mapper.showTables();
 	}
 	
-	public List<Table> showTablesWithComment() {
-		List<Table> tablesWithComment = mapper.showTablesWithComment();
-		List<Table> tables = new ArrayList<>();
+	public List<TableField> showTablesWithComment() {
+		List<TableField> tablesWithComment = mapper.showTablesWithComment();
+		List<TableField> tables = new ArrayList<>();
 		// 获取指定表所有列
 		List<HashMap<String, String>> columns = null;
 		HashMap<String, String> comments = null;
 		String k = null, v = null;
-		for (Table table : tablesWithComment) {
+		for (TableField table : tablesWithComment) {
 			if (!table.getRefTable().isEmpty()) {
 				//
 				columns = mapper.showColumns(table.getRefTable());

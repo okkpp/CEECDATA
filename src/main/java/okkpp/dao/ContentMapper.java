@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import okkpp.model.Table;
+import okkpp.model.TableField;
 import okkpp.model.Content;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -15,5 +15,5 @@ public interface ContentMapper extends Mapper<Content> {
 	
 	public List<String> showTables();
 
-	public List<Table> showTablesWithComment();
+	public List<TableField> showTablesWithComment();
 }

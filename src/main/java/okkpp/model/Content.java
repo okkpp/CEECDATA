@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import okkpp.model.Table;
-
 @Table(name = "s_content")
 public class Content implements Serializable {
     @Id
