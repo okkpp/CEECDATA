@@ -13,6 +13,9 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/admin.css">
 <link href="${pageContext.request.contextPath}/MUI/css/bootstrap.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/MUI/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/MUI/js/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/jquery-ui.css" 
+     type="text/css"></link>
 <script src="${pageContext.request.contextPath}/MUI/js/pintuer.js"></script>
 <script src="${pageContext.request.contextPath}/MUI/js/bootstrap.min.js"></script>
 <%@ include file="/WEB-INF/jsp/mui/userModal.jsp"%>
@@ -117,19 +120,24 @@
 				});
 			}
 		});
-		
+		var list = new Array();
 		$.ajax({
 			url : "../showTablesWithComment.do",
 			type : "GET",
 			success : function(result) {
 				result = eval('('+ result+ ')');
 				$.each(result,function(index,item){
-					
+					list.push(item.tableComment + "|" + item.refTable);
+					for(var i in item.fieldComment){
+						list.push(item.fieldComment[i] + "|" + item.refTable + "|" + i);
+					}
 				})
-				console.log(result);
-				
+				$("#condition").autocomplete({ 
+				       source: list
+				});
+				console.log(list);			
 			}
-		})	
+		})			
 	})
 		
 	//构建导航条元素
@@ -344,7 +352,7 @@
 		formObject[item.name] = item.value;
 		});
 		var formJson = JSON.stringify(formObject);
-		console.log(formJson);
+
 		return formJson;	
 	}
 	
@@ -391,10 +399,6 @@
 		});
 		ids = ids.substring(0,ids.length-1);
 		if(confirm("确认删除【"+ids+"】吗?")){
-			//发送ajax请求删除
-			/* $.ajax({
-				
-			}); */
 		}
 	});
 </script>
