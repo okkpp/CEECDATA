@@ -65,6 +65,7 @@ public class UserController extends BaseController<User>{
 		try {
 			userRoleService.saveUserRoles(user);
 		} catch (Exception e) {
+			System.out.println("saveUserRoles : "+e);
 			result.setSuccess(false);
 			result.setMsg(e.getMessage());
 		}

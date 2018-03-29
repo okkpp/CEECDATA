@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import okkpp.base.Msg;
 import okkpp.base.service.BaseService;
+import okkpp.system.vo.Result;
 
 /**
 * @author duck
@@ -16,38 +16,44 @@ import okkpp.base.service.BaseService;
 public abstract class BaseController<T> {
 
 	@Autowired
-	BaseService<T> baseService;
+	protected BaseService<T> baseService;
 	
 	@RequestMapping(value = "/save")
 	@ResponseBody
-	public Msg save(@ModelAttribute T t) {
+	public Result save(@ModelAttribute T t) {
+		Result result = new Result();
 		try {
 			baseService.save(t);
 		} catch (Exception e) {
-			return Msg.fail().add("msg", e.getMessage());
+			result.setSuccess(false);
+			result.setMsg(e.getMessage());
 		}
-		return Msg.success();
+		return result;
 	}
 	
 	@RequestMapping(value = "/update")
 	@ResponseBody
-	public Msg update(@ModelAttribute T t) {
+	public Result update(@ModelAttribute T t) {
+		Result result = new Result();
 		try {
 			baseService.update(t);
 		} catch (Exception e) {
-			return Msg.fail().add("msg", e.getMessage());
+			result.setSuccess(false);
+			result.setMsg(e.getMessage());
 		}
-		return Msg.success();
+		return result;
 	}
 	
 	@RequestMapping(value = "/delete")
 	@ResponseBody
-	public Msg deleteResource(@RequestParam int id) {
+	public Result deleteResource(@RequestParam int id) {
+		Result result = new Result();
 		try {
 			baseService.delete(id);
 		} catch (Exception e) {
-			return Msg.fail().add("msg", e.getMessage());
+			result.setSuccess(false);
+			result.setMsg(e.getMessage());
 		}
-		return Msg.success();
+		return result;
 	}
 }

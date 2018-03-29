@@ -68,6 +68,7 @@ public class RoleController extends BaseController<Role>{
 		try {
 			userRoleService.saveRoleUsers(role);
 		} catch (Exception e) {
+			System.out.println("saveRoleUsers : "+e);
 			result.setSuccess(false);
 			result.setMsg(e.getMessage());
 		}
@@ -81,6 +82,7 @@ public class RoleController extends BaseController<Role>{
 		try {
 			resourceRoleService.saveRoleResources(role);
 		} catch (Exception e) {
+			System.out.println("saveRoleResources : "+e);
 			result.setSuccess(false);
 			result.setMsg(e.getMessage());
 		}

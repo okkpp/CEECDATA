@@ -33,6 +33,7 @@ Form.prototype.save=function(){
 		},
 		success : function(result) {
 			var result = eval("("+result+")");
+			console.log("save:"+result.success);
 			if (result.success) {
 				dlgObj.dialog('close'); // close the dialog
 				if(treeGrid){
@@ -76,6 +77,7 @@ Form.prototype.remove=function(){
 				$.post(deleteUrl, {
 					id : row.id
 				}, function(result) {
+					console.log("remove:"+result.success);
 					if (result.success) {
 						if(treeGrid){
 							dgObj.treegrid('reload');
