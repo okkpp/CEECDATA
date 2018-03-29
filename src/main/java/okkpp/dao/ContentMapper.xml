@@ -9,12 +9,13 @@
     <result column="parent" jdbcType="VARCHAR" property="parent" />
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="href" jdbcType="VARCHAR" property="href" />
+    <result column="ref_table" jdbcType="VARCHAR" property="refTable" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbggenerated
     -->
-    id, parent, content, href
+    id, parent, content, href, ref_table
   </sql>
   
   <select id="getAllContent" resultMap="BaseResultMap">
