@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
+import okkpp.base.controller.BaseController;
 import okkpp.system.model.Role;
 import okkpp.system.service.ResourceRoleService;
 import okkpp.system.service.RoleService;
 import okkpp.system.service.UserRoleService;
+import okkpp.system.vo.Result;
 
 /**
 * @author duck
@@ -23,7 +25,7 @@ import okkpp.system.service.UserRoleService;
 */
 @RequestMapping("/role")
 @Controller
-public class RoleController {
+public class RoleController extends BaseController<Role>{
 
 	@Autowired
 	private RoleService roleService;
@@ -59,29 +61,29 @@ public class RoleController {
 		return "select/roleSelect";
 	}
 	
-//	@RequestMapping(value = "/saveRoleUsers")
-//	@ResponseBody
-//	public Result saveRoleUsers(@ModelAttribute Role role){
-//		Result result = new Result();
-//		try {
-//			userRoleService.saveRoleUsers(role);
-//		} catch (Exception e) {
-//			result.setSuccess(false);
-//			result.setMsg(e.getMessage());
-//		}
-//		return result;
-//	}
-//	
-//	@RequestMapping(value = "/saveRoleResources")
-//	@ResponseBody
-//	public Result saveRoleResources(@ModelAttribute Role role){
-//		Result result = new Result();
-//		try {
-//			resourceRoleService.saveRoleResources(role);
-//		} catch (Exception e) {
-//			result.setSuccess(false);
-//			result.setMsg(e.getMessage());
-//		}
-//		return result;
-//	}
+	@RequestMapping(value = "/saveRoleUsers")
+	@ResponseBody
+	public Result saveRoleUsers(@ModelAttribute Role role){
+		Result result = new Result();
+		try {
+			userRoleService.saveRoleUsers(role);
+		} catch (Exception e) {
+			result.setSuccess(false);
+			result.setMsg(e.getMessage());
+		}
+		return result;
+	}
+	
+	@RequestMapping(value = "/saveRoleResources")
+	@ResponseBody
+	public Result saveRoleResources(@ModelAttribute Role role){
+		Result result = new Result();
+		try {
+			resourceRoleService.saveRoleResources(role);
+		} catch (Exception e) {
+			result.setSuccess(false);
+			result.setMsg(e.getMessage());
+		}
+		return result;
+	}
 }

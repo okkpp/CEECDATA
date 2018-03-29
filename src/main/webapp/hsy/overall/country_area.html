@@ -5,30 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>国土面积——中东欧统计数据库</title>
-		<!-- 引入Jquery -->
-		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <!-- 引入Jquery -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 
-		<!-- 引入Bootstrap -->
-		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- 引入Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 
-		<!-- 引入BootStrap-table -->
-		<link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
-		<script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+    <!-- 引入BootStrap-table -->
+    <link rel="stylesheet" href="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.css">
+    <script src="../assets/libs/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
 
-		<!-- 引入Bootstrap-paginator -->
-		<script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
+    <!-- 引入Bootstrap-paginator -->
+    <script src="../assets/libs/bootstrap-paginator-master/build/bootstrap-paginator.min.js"></script>
 
-		<!-- 引入Echarts -->
-		<script src="../assets/libs/echarts/echarts.min.js"></script>
+    <!-- 引入Echarts -->
+    <script src="../assets/libs/echarts/echarts.min.js"></script>
 
-		<!-- 引入组装数据的Js -->
-		<script src="../assets/libs/utils/general-data.js"></script>
-		<style>
-			.th-inner{
-				text-align:center;
-			}
-		</style>
+    <!-- 引入组装数据的Js -->
+    <script src="../assets/libs/utils/general-data.js"></script>
 </head>
 <body>
     <div class="container">
@@ -46,9 +44,9 @@
                 <h4 style="margin-top: -20px;">Country Area</h4>
             </div>
 
-            <div style="text-align: right;">单位:&nbsp;km²</div>
+            <!-- <div style="text-align: right;">单位:&nbsp;t</div> -->
 
-            <table id="tableData"></table>
+            <table id="tableData" class="table table-hover table-striped"></table>
         </div>
 
         <div id="imageView">
@@ -66,105 +64,76 @@
         </div>
     </div>
     <script>
-        $(function(){
-            $('#imageView').hide();
-            $('#tableTag').attr('class','active');
-        })
+    var remoteData = getRemoteData('/overall/json.do?info=Countryarea');
 
-        function showTable() {
-            $('#tableView').show();
-            $('#imageView').hide();
-            $('#tableTag').attr('class','active');
-            $('#imageTag').removeClass('active');
-        }
+      $(function() {
+        $('#imageView').hide();
+        $('#tableTag').attr('class', 'active');
+        generalTable(remoteData,'surface',$('#tableData'));
+      })
 
-        function showImage() {
-            $('#imageView').show();
-            $('#tableView').hide();
-            $('#imageTag').attr('class','active');
-            $('#tableTag').removeClass('active');
-        }
+      function showTable() {
+        $('#tableView').show();
+        $('#imageView').hide();
+        $('#tableTag').attr('class', 'active');
+        $('#imageTag').removeClass('active');
+      }
 
-        $('#tableData').bootstrapTable({
-            striped: true,
-            columns: [
-                {
-                    field: 'country',
-                    title: '国家'
+      function showImage() {
+        $('#imageView').show();
+        $('#tableView').hide();
+        $('#imageTag').attr('class', 'active');
+        $('#tableTag').removeClass('active');
+      }
+    //初始化图
+    function initPic(data) {
+        var option = {
+            //timeline基本配置都写在baseoption 中
+            baseOption: {
+                timeline: {
+                    loop: true,
+                    axisType: 'category',
+                    show: true,
+                    autoPlay: true,
+                    playInterval: 1000,
+                    data: setYears(data)
                 },
-                {
-                    field: 'countryArea',
-                    title: '国土面积'
+                legend: {
+                    data: setLegend(data)
                 },
-
-            ],
-            data: [
-                {
-                    country: '阿尔巴尼亚',
-                    countryArea: '666',
-
+                tooltip: {
+                    trigger: 'axis'
                 },
-                {
-                    country: '波黑',
-                    countryArea: '333',
+                title:{
+                    subtext:'数据来源'
                 },
-                {
-                    country: '保加利亚',
-                    countryArea: '444',
-                }
-            ]
-        });
+                calculable: true,
+                grid: {
+                    y: 100,
+                    y2: 100
+                },
+                xAxis: [{
+                    type: 'category',
+                    axisLabel: {                        interval:0,                        rotate:40                    },                    data: setCountries(data)
+                }],
+                yAxis: {
+                    type: 'value',
+                    axisLine: {
+                        show: true,
+                        lineStyle:{
+                            color:'#0066CC'
+                        }
+                    }
+                },
+                series: setSeriesTitle(data)
+            },
+            options:setOptions(data)
+        };
+        var myChart = echarts.init(document.getElementById('main'));
+        myChart.setOption(option);
+    }
 
-        var remoteData=getRemoteData('/overall/json.do?info=Countryarea');
-            initPic(remoteData);
-            setTableData(remoteData,$('#tableData'));
-            //初始化图
-            function initPic(data) {
-                var option = {
-                    //timeline基本配置都写在baseoption 中
-                    baseOption: {
-                        timeline: {
-                            loop: true,
-                            axisType: 'category',
-                            show: false,
-                            autoPlay: true,
-                            playInterval: 1000,
-                            data: setYears(data)
-                        },
-                        legend: {
-                            data: setLegend(data)
-                        },
-                        tooltip: {
-                            trigger: 'axis'
-                        },
-                        title:{
-                            subtext:'数据来源'
-                        },
-                        calculable: true,
-                        grid: {
-                            y: 100,
-                            y2: 100
-                        },
-                        xAxis: [{
-                            type: 'category',
-                            axisLabel: {
-                							interval: 0
-                						},
-                            data: setCountries(data)
-                        }],
-                        yAxis : [
-                            {
-                                type : 'value',
-                                name: 'km²'
-                            }
-                        ],
-                        series: setSeriesTitle(data)
-                    },
-                    options:setOptions(data)
-                };
-                var myChart = echarts.init(document.getElementById('main'));
-                myChart.setOption(option);
-            }
+    initPic(remoteData);
     </script>
 </body>
 </html>

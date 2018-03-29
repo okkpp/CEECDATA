@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import okkpp.base.service.BaseService;
 import okkpp.system.dao.UserMapper;
 import okkpp.system.model.User;
 import okkpp.utils.ExampleBuilder;
@@ -20,11 +21,17 @@ import okkpp.utils.ExampleBuilder;
 */
 @Service
 @Transactional
-public class UserService {
+public class UserService extends BaseService<User>{
 	
 	@Autowired
 	UserMapper mapper;
 
+	static int constNum = getNum();
+	public static int getNum() {
+		int i = 0;
+		
+		return i;
+	}
 	public List<User> listUsers() {
 		return mapper.selectAll();
 	}

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import okkpp.base.controller.BaseController;
 import okkpp.system.model.Resource;
 import okkpp.system.service.ResourceService;
 
@@ -20,7 +21,7 @@ import okkpp.system.service.ResourceService;
 */
 @RequestMapping("/resource")
 @Controller
-public class ResourceController {
+public class ResourceController extends BaseController<Resource>{
 
 	@Autowired
 	private ResourceService service;

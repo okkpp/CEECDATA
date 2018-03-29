@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import okkpp.base.service.BaseService;
 import okkpp.system.dao.RoleMapper;
 import okkpp.system.model.Role;
 import okkpp.utils.ExampleBuilder;
@@ -19,7 +20,7 @@ import okkpp.utils.ExampleBuilder;
 */
 @Service
 @Transactional
-public class RoleService {
+public class RoleService extends BaseService<Role>{
 
 	@Autowired
 	RoleMapper mapper;
