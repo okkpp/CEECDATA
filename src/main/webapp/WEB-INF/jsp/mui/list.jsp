@@ -117,6 +117,19 @@
 				});
 			}
 		});
+		
+		$.ajax({
+			url : "../showTablesWithComment.do",
+			type : "GET",
+			success : function(result) {
+				result = eval('('+ result+ ')');
+				$.each(result,function(index,item){
+					
+				})
+				console.log(result);
+				
+			}
+		})	
 	})
 		
 	//构建导航条元素

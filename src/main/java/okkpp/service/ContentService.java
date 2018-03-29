@@ -73,8 +73,34 @@ public class ContentService extends BaseService<Content>{
 		return mapper.showTables();
 	}
 	
-	public List<Table> showTablesWithComment(){
-		return mapper.showTablesWithComment();
-	}
+	public List<Table> showTablesWithComment() {
+		List<Table> tablesWithComment = mapper.showTablesWithComment();
+		List<Table> tables = new ArrayList<>();
+		// 获取指定表所有列
+		List<HashMap<String, String>> columns = null;
+		HashMap<String, String> comments = null;
+		String k = null, v = null;
+		for (Table table : tablesWithComment) {
+			if (!table.getRefTable().isEmpty()) {
+				//
+				columns = mapper.showColumns(table.getRefTable());
+				comments = new HashMap<>();
+				for (Map<String, String> column : columns) {
 
+					for (String key : column.keySet()) {
+						if (key.equals("Field")) {
+							k = column.get(key);
+						}
+						if (key.equals("Comment")) {
+							v = column.get(key);
+						}
+						comments.put(k, v);
+					}
+				}
+				table.setFieldComment(comments);
+				tables.add(table);
+			}
+		}
+		return tables;
+	}
 }
