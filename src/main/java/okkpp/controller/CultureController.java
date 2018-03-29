@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
-import okkpp.model.Msg;
+import okkpp.base.Msg;
 import okkpp.service.culture.*;
 import okkpp.utils.ChartInfo;
 

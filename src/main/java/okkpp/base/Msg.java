@@ -1,4 +1,4 @@
-package okkpp.model;
+package okkpp.base;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -3,7 +3,7 @@ package okkpp.controller;
 import java.util.List;
 import java.util.Map;
 
-import okkpp.model.Msg;
+import okkpp.base.Msg;
 import okkpp.model.overall.*;
 import okkpp.service.overall.*;
 import okkpp.utils.ChartInfo;

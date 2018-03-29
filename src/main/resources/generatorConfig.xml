@@ -22,16 +22,23 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.model.culture"
+		<javaModelGenerator targetPackage="okkpp.model.propagate"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.dao.culture"
+		<sqlMapGenerator targetPackage="okkpp.dao.propagate"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.dao.culture"
+		<javaClientGenerator targetPackage="okkpp.dao.propagate"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table tableName="t_culture_reserch_spending_rate"
-			domainObjectName="ReserchSpendingRate" enableCountByExample="false"
+		<table tableName="table_catalog"
+			domainObjectName="TableCatalog" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" schema="${jdbc.username}" />
-
+		<table tableName="table_catalog_data"
+			domainObjectName="TableCatalogData" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" schema="${jdbc.username}" />
+		<table tableName="table_data"
+			domainObjectName="TableData" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" schema="${jdbc.username}" />
 	</context>
 </generatorConfiguration>

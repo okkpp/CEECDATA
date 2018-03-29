@@ -16,7 +16,7 @@ import okkpp.service.trade.*;
 import okkpp.utils.ChartInfo;
 import okkpp.utils.CountryCode;
 import okkpp.utils.TimeUtils;
-import okkpp.model.Msg;
+import okkpp.base.Msg;
 import okkpp.model.trade.*;
 
 @Controller
