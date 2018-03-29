@@ -76,13 +76,12 @@ public class ContentService extends BaseService<Content>{
 	public List<TableField> showTablesWithComment() {
 		List<TableField> tablesWithComment = mapper.showTablesWithComment();
 		List<TableField> tables = new ArrayList<>();
-		// 获取指定表所有列
 		List<HashMap<String, String>> columns = null;
 		HashMap<String, String> comments = null;
 		String k = null, v = null;
 		for (TableField table : tablesWithComment) {
 			if (!table.getRefTable().isEmpty()) {
-				//
+				// 获取指定表所有列
 				columns = mapper.showColumns(table.getRefTable());
 				comments = new HashMap<>();
 				for (Map<String, String> column : columns) {
