@@ -17,4 +17,32 @@
     -->
     id, parent, content, href, ref_table
   </sql>
+  	<select id="getAllContent" resultMap="BaseResultMap">
+		select * from t_content
+	</select>
+	<select id="getContent" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select * from t_content where GJDM = #{GJDM}
+	</select>
+	<delete id="deleteExist" parameterType="okkpp.model.Content">
+		delete from t_content where GJDM = #{GJDM} and LB = #{LB} and LJ = #{LJ}
+	</delete>
+	<insert id="update" parameterType="okkpp.model.Content">
+		insert into t_content (GJ,GJDM,BT,LB,LJ) values(
+		(select GJ from ceeccode where GJDM = #{GJDM})
+		,#{GJDM},#{BT},#{LB},#{LJ})
+	</insert>
+	<select id="GJDM2GJ" resultType="java.lang.String">
+		select GJ from ceeccode where GJDM = #{GJDM}
+	</select>
+	<select id="showTables" resultType="java.lang.String">
+		show tables
+	</select>
+	<select id="showColumns" resultType="java.util.HashMap">
+		show full columns from ${tab}
+	</select>
+	<select id="showTablesWithComment" resultType="okkpp.model.TableField">
+		select ref_table as refTable,CONCAT(parent,content) as tableComment from
+		s_content;
+	</select>
 </mapper>
