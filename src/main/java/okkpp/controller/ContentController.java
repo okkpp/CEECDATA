@@ -16,7 +16,6 @@ import okkpp.base.controller.BaseController;
 import okkpp.model.Content;
 import okkpp.model.Table;
 import okkpp.service.ContentService;
-import okkpp.utils.StaticVariable;
 
 /**
  * @author DUCK  E-mail: okkpp@qq.com

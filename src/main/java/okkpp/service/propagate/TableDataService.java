@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import okkpp.dao.propagate.TableCatalogDataMapper;
 import okkpp.dao.propagate.TableCatalogMapper;
 import okkpp.dao.propagate.TableDataMapper;
 import okkpp.model.propagate.PropagateObject;
 import okkpp.model.propagate.TableCatalog;
+import okkpp.model.propagate.TableCatalogData;
 import okkpp.model.propagate.TableData;
 
 /**
@@ -22,13 +24,16 @@ public class TableDataService {
 	TableDataMapper dataMapper;
 	@Autowired
 	TableCatalogMapper catalogMapper;
-	public void saveData(int catalogId,PropagateObject data) {
-		TableCatalog example = new TableCatalog();
-		example.setId(catalogId);
-		if(catalogMapper.selectCount(example)>0) {
-			TableData record = new TableData();
-			record.setJson(data.toJson());
-			dataMapper.insert(record);
-		}
+	@Autowired
+	TableCatalogDataMapper CatalogDataMapper;
+	
+	public void saveData(TableCatalog tableCatalog,PropagateObject data) {
+		TableData tableData = new TableData();
+		tableData.setJson(data.toJson());
+		dataMapper.insertReturnId(tableData);
+		TableCatalogData tableCatalogData = new TableCatalogData();
+		tableCatalogData.setCatalogId(tableCatalog.getId());
+		tableCatalogData.setDataId(tableData.getId());
+		CatalogDataMapper.insert(tableCatalogData);
 	}
 }

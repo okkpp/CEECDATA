@@ -1,7 +1,10 @@
 package okkpp.model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import okkpp.model.Table;
 
 @Table(name = "s_content")
 public class Content implements Serializable {
@@ -22,6 +25,12 @@ public class Content implements Serializable {
      * 链接
      */
     private String href;
+
+    /**
+     * 对应表名
+     */
+    @Column(name = "ref_table")
+    private String refTable;
 
     private static final long serialVersionUID = 1L;
 
@@ -91,5 +100,23 @@ public class Content implements Serializable {
      */
     public void setHref(String href) {
         this.href = href;
+    }
+
+    /**
+     * 获取对应表名
+     *
+     * @return ref_table - 对应表名
+     */
+    public String getRefTable() {
+        return refTable;
+    }
+
+    /**
+     * 设置对应表名
+     *
+     * @param refTable 对应表名
+     */
+    public void setRefTable(String refTable) {
+        this.refTable = refTable;
     }
 }
