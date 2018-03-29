@@ -2,7 +2,7 @@ package okkpp.model;
 
 import java.util.HashMap;
 
-public class Table {
+public class TableField {
 
 	private String refTable;
 	private String tableComment;
