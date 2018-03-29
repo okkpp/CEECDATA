@@ -1,7 +1,6 @@
 package okkpp.model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 
 @Table(name = "s_content")
