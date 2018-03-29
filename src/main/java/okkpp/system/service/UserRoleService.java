@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import okkpp.base.service.BaseService;
 import okkpp.system.dao.UserRoleMapper;
 import okkpp.system.model.Role;
 import okkpp.system.model.User;
@@ -17,7 +18,7 @@ import okkpp.system.model.UserRole;
 */
 @Service
 @Transactional
-public class UserRoleService {
+public class UserRoleService extends BaseService<UserRole>{
 
 	@Autowired
 	UserRoleMapper mapper;

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import okkpp.base.service.BaseService;
 import okkpp.system.dao.ResourceMapper;
 import okkpp.system.model.Resource;
 import tk.mybatis.mapper.entity.Example;
@@ -16,7 +17,7 @@ import tk.mybatis.mapper.entity.Example;
 */
 @Service
 @Transactional
-public class ResourceService {
+public class ResourceService extends BaseService<Resource>{
 
 	@Autowired
 	ResourceMapper mapper;
