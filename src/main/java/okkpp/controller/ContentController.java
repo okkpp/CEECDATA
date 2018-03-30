@@ -66,4 +66,10 @@ public class ContentController extends BaseController<Content>{
 	public List<TableField> showTablesWithComment(){
 		return service.showTablesWithComment();
 	}
+	
+	@RequestMapping(value = "/showColumnsWithComment")
+	@ResponseBody
+	public List<HashMap<String, String>> showColumnsWithComment(@RequestParam("tab")String tab){
+		return service.showColumnsWithComment(tab);
+	}
 }

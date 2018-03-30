@@ -18,6 +18,7 @@
      type="text/css"></link>
 <script src="${pageContext.request.contextPath}/MUI/js/pintuer.js"></script>
 <script src="${pageContext.request.contextPath}/MUI/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/MUI/js/javautils.js"></script>
 <%@ include file="/WEB-INF/jsp/mui/userModal.jsp"%>
 
 </head>
@@ -64,11 +65,13 @@
 		</div>
 	</form>
 	<script type="text/javascript">	
+	//全局变量
 	var json = new Array();
 	var items;
 	var currentPage;
-	//显示数据库数据章节
+	var map = new HashMap();
 	
+	//显示数据库数据章节
 	$(function(){
 		$.ajax({
 			url : "../showTables.do",
@@ -127,15 +130,18 @@
 			success : function(result) {
 				result = eval('('+ result+ ')');
 				$.each(result,function(index,item){
-					list.push(item.tableComment + "|" + item.refTable);
-					for(var i in item.fieldComment){
-						list.push(item.fieldComment[i] + "|" + item.refTable + "|" + i);
+					//console.log(index);
+					 for(var i in item.fieldComment){
+						list.push(item.fieldComment[i]);
+						map.put(item.fieldComment[i],item.refTable + "&" + i);
 					}
+					list.push(item.tableComment);
+					map.put(item.tableComment,item.refTable)
 				})
 				$("#condition").autocomplete({ 
 				       source: list
 				});
-				console.log(list);			
+				console.log("finish");
 			}
 		})			
 	})
@@ -401,6 +407,23 @@
 		if(confirm("确认删除【"+ids+"】吗?")){
 		}
 	});
+	
+	//搜过框改变进行搜索
+	$("#condition").change(function(){
+		var val = map.get($(this).val());
+		if(val == null){
+			return;
+		}
+		var vals = val.split("&");
+		var chapter = vals[0].substring(vals[0].indexOf("_") + 1,vals[0].indexOf("_",2));
+		var info =tranformStr("_" + vals[0].substring(vals[0].indexOf("_",2) + 1));
+		var str = "../" + chapter + "/getJson.do?info=" + info;
+		/* if(vals[1] == null){
+			alert(vals[0]);
+		}else{
+			alert(vals[1]);
+		} */
+	})		
 </script>
 </body>
 </html>
