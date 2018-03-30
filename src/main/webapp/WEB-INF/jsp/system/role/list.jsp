@@ -26,7 +26,7 @@ $(function(){
 		<thead>
 			<tr>
 				<th field="roid" width="50">角色ID</th>
-				<th field="username" width="50">中文名</th>
+				<th field="name" width="50">中文名</th>
 				<th field="enabled" width="50" formatter="formatStatus">状态</th>
 			</tr>
 		</thead>

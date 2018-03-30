@@ -16,7 +16,7 @@ import okkpp.base.controller.BaseController;
 import okkpp.system.model.User;
 import okkpp.system.service.UserRoleService;
 import okkpp.system.service.UserService;
-import okkpp.system.vo.Result;
+import okkpp.base.vo.Result;
 
 /**
 * @author duck
@@ -65,7 +65,6 @@ public class UserController extends BaseController<User>{
 		try {
 			userRoleService.saveUserRoles(user);
 		} catch (Exception e) {
-			System.out.println("saveUserRoles : "+e);
 			result.setSuccess(false);
 			result.setMsg(e.getMessage());
 		}

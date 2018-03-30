@@ -1,7 +1,4 @@
-/**
- * 
- */
-package okkpp.system.vo;
+package okkpp.base.vo;
 
 import java.io.Serializable;
 

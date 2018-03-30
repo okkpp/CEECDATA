@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import okkpp.base.service.BaseService;
-import okkpp.system.vo.Result;
+import okkpp.base.vo.Result;
 
 /**
 * @author duck
@@ -36,7 +36,7 @@ public abstract class BaseController<T> {
 	public Result update(@ModelAttribute T t) {
 		Result result = new Result();
 		try {
-			baseService.update(t);
+			baseService.updateNotNull(t);
 		} catch (Exception e) {
 			result.setSuccess(false);
 			result.setMsg(e.getMessage());
