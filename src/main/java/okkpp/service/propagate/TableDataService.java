@@ -1,14 +1,16 @@
 package okkpp.service.propagate;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.gson.Gson;
+
 import okkpp.dao.propagate.TableCatalogDataMapper;
 import okkpp.dao.propagate.TableCatalogMapper;
 import okkpp.dao.propagate.TableDataMapper;
-import okkpp.model.propagate.PropagateObject;
-import okkpp.model.propagate.TableCatalog;
 import okkpp.model.propagate.TableCatalogData;
 import okkpp.model.propagate.TableData;
 
@@ -27,12 +29,12 @@ public class TableDataService {
 	@Autowired
 	TableCatalogDataMapper CatalogDataMapper;
 	
-	public void saveData(TableCatalog tableCatalog,PropagateObject data) {
+	public void saveData(int catalogId,Map<String, Object> data) {
 		TableData tableData = new TableData();
-		tableData.setJson(data.toJson());
+		tableData.setJson(new Gson().toJson(data));
 		dataMapper.insertReturnId(tableData);
 		TableCatalogData tableCatalogData = new TableCatalogData();
-		tableCatalogData.setCatalogId(tableCatalog.getId());
+		tableCatalogData.setCatalogId(catalogId);
 		tableCatalogData.setDataId(tableData.getId());
 		CatalogDataMapper.insert(tableCatalogData);
 	}
