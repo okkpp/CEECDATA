@@ -13,20 +13,15 @@ import okkpp.service.propagate.TableDataService;
 
 /**
 * @author duck
-* @date 创建时间：2018年3月30日 下午1:55:44
+* @date 创建时间：2018年3月30日 下午2:55:44
 */
-@RequestMapping("/propagate")
+@RequestMapping("/tableData")
 @Controller
-public class PropagateController {
+public class TableDataController {
 
 	@Autowired
-	TableDataService tableDataService;
+	TableDataService service;
 	
-	@RequestMapping("")
-	public String saveCatalog(@RequestParam Map<String, Object> data) {
-		
-		return "";
-	}
 	@RequestMapping("/saveData/{catalogId}")
 	@ResponseBody
 	public int saveData(@PathVariable(value="catalogId") int catalogId,@RequestParam Map<String, Object> data) {
@@ -36,5 +31,4 @@ public class PropagateController {
 		}
 		return catalogId;
 	}
-	
 }
