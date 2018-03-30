@@ -33,6 +33,12 @@ public class ContentController extends BaseController<Content>{
 		model.addAttribute("data", service.Content());
 		return "/zdoDB";
 	}
+	@RequestMapping("/getContent")
+	@ResponseBody
+	public Map<String, List<Content>> getContent() {
+		
+		return service.Content();
+	}
 	@RequestMapping("/content")
 	public String content(Model model,String GJDM){
 		return "/content";

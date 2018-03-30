@@ -24,16 +24,16 @@ public class JunitTest extends BaseTest{
 	
 	@Test
 	public void test() {
-		TableCatalog tableCatalog = new TableCatalog();
-		tableCatalog.setCatalog("[{id},{country},{yeay},{health_total}]");
-		tableCatalogService.saveCatalogReturnId(tableCatalog);
-		System.out.println("returned tableCatalogId : "+tableCatalog.getId());
-		PropagateObject propagateObject = new PropagateObject();
-		propagateObject.setCountry("asny");
-		propagateObject.setSort(1);
-		propagateObject.setUpdated(new Date());
-		propagateObject.setDataByKey("health_total", "6.24878186");
-		tableDataService.saveData(tableCatalog, propagateObject);
+//		TableCatalog tableCatalog = new TableCatalog();
+//		tableCatalog.setCatalog("[{id},{country},{yeay},{health_total}]");
+//		tableCatalogService.saveCatalogReturnId(tableCatalog);
+//		System.out.println("returned tableCatalogId : "+tableCatalog.getId());
+//		PropagateObject propagateObject = new PropagateObject();
+//		propagateObject.setCountry("asny");
+//		propagateObject.setSort(1);
+//		propagateObject.setUpdated(new Date());
+//		propagateObject.setDataByKey("health_total", "6.24878186");
+//		tableDataService.saveData(tableCatalog, propagateObject);
 		
 	}
 }
