@@ -40,7 +40,7 @@
 				required="true">
 		</div>
 		<div class="fitem">
-			<label>中文名:</label> <input name="username">
+			<label>中文名:</label> <input name="name">
 		</div>
 		<div class="fitem">
 			<label>状&nbsp;态:</label> <select name="enabled">
