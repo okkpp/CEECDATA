@@ -45,4 +45,7 @@
 		select ref_table as refTable,CONCAT(parent,content) as tableComment from
 		s_content;
 	</select>
+	<select id="showColumnsWithComment" resultType="java.util.HashMap">
+		select COLUMN_NAME Field,COLUMN_COMMENT Comment from information_schema.columns where table_name=#{tab}
+	</select>
 </mapper>

@@ -16,4 +16,6 @@ public interface ContentMapper extends Mapper<Content> {
 	public List<String> showTables();
 
 	public List<TableField> showTablesWithComment();
+	
+	public List<HashMap<String, String>> showColumnsWithComment(@Param("tab")String tab);
 }
