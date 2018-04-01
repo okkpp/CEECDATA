@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageInfo;
-import okkpp.model.Msg;
+import com.google.gson.Gson;
+
+import okkpp.base.Msg;
 import okkpp.model.price.*;
 import okkpp.service.price.*;
 import okkpp.utils.ChartInfo;
+import okkpp.utils.CountryCode;
 import okkpp.utils.TimeUtils;
 
 @Controller
@@ -78,72 +81,77 @@ public class PriceController {
 		return Msg.success().add("pageInfo", pageInfo);
 	}
 
-	// Consumer添加方法
-	@RequestMapping(value = "/Consumer", method = RequestMethod.POST)
+	// 更新方法
+	@RequestMapping(value = "update/{info}", method = RequestMethod.PUT)
 	@ResponseBody
-	public Msg insertConsumer(Consumer consumer) {
-		consumer.setUpdated(TimeUtils.getCurrentTime());
-		if (consumerService.insertConsumer(consumer) == 1) {
-			return Msg.success();
-		} else {
-			return Msg.fail();
+	public Msg update(@PathVariable("info") String info,
+			@RequestParam("json") String json) {
+		int result = 0;
+		switch (info) {
+		case "Consumer":
+			Consumer consumer = (Consumer) CountryCode.replaceCountrySingle(new Gson().fromJson(json, Consumer.class));
+			consumer.setUpdated(TimeUtils.getCurrentTime());
+			result = consumerService.updateConsumer(consumer);
+			break;
+		case "Producer":
+			Producer producer = (Producer) CountryCode.replaceCountrySingle(new Gson().fromJson(json, Producer.class));
+			producer.setUpdated(TimeUtils.getCurrentTime());
+			result = producerService.updateConsumer(producer);
+			break;
 		}
-	}
-
-	// Consumer删除方法
-	@RequestMapping(value = "/Consumer/{id}", method = RequestMethod.DELETE)
-	@ResponseBody
-	public Msg deleteConsumer(@PathVariable("id") Integer id) {
-		if (consumerService.deleteConsumer(id) == 1) {
-			return Msg.success();
-		}
-		return Msg.fail();
-	}
-
-	// Consume更新方法
-	@RequestMapping(value = "/Consumer/{id}", method = RequestMethod.PUT)
-	@ResponseBody
-	public Msg updateConsumer(@PathVariable("id") Integer id, Consumer consumer) {
-		consumer.setId(id);
-		consumer.setUpdated(TimeUtils.getCurrentTime());
-		if (consumerService.updateConsumer(consumer) == 1) {
+		if (result == 1) {
 			return Msg.success();
 		}
 		return Msg.fail();
 	}
 
-	// Producer添加方法
-	@RequestMapping(value = "/Producer", method = RequestMethod.POST)
+	// 添加方法
+	@RequestMapping(value = "add/{info}", method = RequestMethod.POST)
 	@ResponseBody
-	public Msg insertProducer(Producer producer) {
-		producer.setUpdated(TimeUtils.getCurrentTime());
-		if (producerService.insertProducer(producer) == 1) {
-			return Msg.success();
-		} else {
-			return Msg.fail();
+	public Msg add(@PathVariable("info") String info, @PathVariable("id") Integer id,
+			@RequestParam("json") String json) {
+		int result = 0;
+		switch (info) {
+		case "Consumer":
+			Consumer consumer = new Gson().fromJson(json, Consumer.class);
+			consumer.setUpdated(TimeUtils.getCurrentTime());
+			result = consumerService.insertConsumer(consumer);
+			break;
+		case "Producer":
+			Producer producer = new Gson().fromJson(json, Producer.class);
+			producer.setUpdated(TimeUtils.getCurrentTime());
+			result = producerService.insertProducer(producer);
+			break;
 		}
+		if (result == 1) {
+			return Msg.success();
+		}
+		return Msg.fail();
 	}
 
-	// Producer删除方法
-	@RequestMapping(value = "/Producer/{id}", method = RequestMethod.DELETE)
+	// 删除方法
+	@RequestMapping(value = "delete/{info}/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public Msg deleteProducer(@PathVariable("id") Integer id) {
-		if (producerService.deleteProducer(id) == 1) {
+	public Msg delete(@PathVariable("info") String info, @PathVariable("id") Integer id) {
+		int result = 0;
+		switch (info) {
+		case "Consumer":
+			result = consumerService.deleteConsumer(id);
+			break;
+		case "Producer":
+			result = producerService.deleteProducer(id);
+			break;
+		}
+		if (result == 1) {
 			return Msg.success();
 		}
 		return Msg.fail();
 	}
 
-	// Producer更新方法
-	@RequestMapping(value = "/Producer/{id}", method = RequestMethod.PUT)
-	@ResponseBody
-	public Msg updateProducer(@PathVariable("id") Integer id, Producer producer) {
-		producer.setId(id);
-		producer.setUpdated(TimeUtils.getCurrentTime());
-		if (producerService.updateConsumer(producer) == 1) {
-			return Msg.success();
-		}
-		return Msg.fail();
-	}
+	/*
+	 * Gson gson = new Gson(); ArrayList<Consumer> list = new ArrayList<Consumer>();
+	 * Type listType = new TypeToken<List<Consumer>>() {}.getType(); list =
+	 * gson.fromJson(json, listType); System.out.println(list.get(0));
+	 */
 
 }

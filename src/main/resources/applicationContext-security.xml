@@ -30,6 +30,9 @@
             	/system/logout* = anon
             	/system/index* = authc
                 /system/** = authc,urlPerms
+                /user/** = authc
+                /role/** = authc
+                /resource/** = authc
                 
                 /404* = anon
             	/zdo-static/** = anon

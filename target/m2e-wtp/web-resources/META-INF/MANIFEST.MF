@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: moqianyi
 Build-Jdk: 1.8.0_131
+=======
+Built-By: dell
+Build-Jdk: 1.8.0_161
+>>>>>>> 2551a44d3b17722c189ac308701da06f734d5c10
 Created-By: Maven Integration for Eclipse
 

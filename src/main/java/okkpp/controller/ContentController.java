@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
+import okkpp.base.controller.BaseController;
+import okkpp.model.Content;
+import okkpp.model.TableField;
 import okkpp.service.ContentService;
 
 /**
@@ -20,7 +23,7 @@ import okkpp.service.ContentService;
  * @version 1.0 
  */
 @Controller
-public class ContentController {
+public class ContentController extends BaseController<Content>{
 
 	@Autowired
 	private ContentService service;
@@ -29,6 +32,12 @@ public class ContentController {
 	public String map(Model model){
 		model.addAttribute("data", service.Content());
 		return "/zdoDB";
+	}
+	@RequestMapping("/getContent")
+	@ResponseBody
+	public Map<String, List<Content>> getContent() {
+		
+		return service.Content();
 	}
 	@RequestMapping("/content")
 	public String content(Model model,String GJDM){
@@ -51,5 +60,16 @@ public class ContentController {
 		model.addAttribute("data",new Gson().toJson(service.showColumns(tab)));
 		return service.showColumns(tab);
 	}
-		
+	
+	@RequestMapping(value = "/showTablesWithComment",method = RequestMethod.GET)
+	@ResponseBody
+	public List<TableField> showTablesWithComment(){
+		return service.showTablesWithComment();
+	}
+	
+	@RequestMapping(value = "/showColumnsWithComment")
+	@ResponseBody
+	public List<HashMap<String, String>> showColumnsWithComment(@RequestParam("tab")String tab){
+		return service.showColumnsWithComment(tab);
+	}
 }

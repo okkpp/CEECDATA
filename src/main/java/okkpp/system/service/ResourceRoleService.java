@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import okkpp.base.service.BaseService;
 import okkpp.system.dao.ResourceRoleMapper;
 import okkpp.system.model.Resource;
 import okkpp.system.model.ResourceRole;
@@ -17,7 +18,7 @@ import okkpp.system.model.Role;
 */
 @Service
 @Transactional
-public class ResourceRoleService {
+public class ResourceRoleService extends BaseService<ResourceRole>{
 
 	@Autowired
 	ResourceRoleMapper mapper;

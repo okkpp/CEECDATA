@@ -22,24 +22,15 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.model.employment"
+		<javaModelGenerator targetPackage="okkpp.model"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.dao.employment"
+		<sqlMapGenerator targetPackage="okkpp.dao"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.dao.employment"
+		<javaClientGenerator targetPackage="okkpp.dao"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table tableName="t_employment_composition_employment"
-			domainObjectName="CompositionEmployment" enableCountByExample="false"
+		<table tableName="s_content"
+			domainObjectName="Content" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_employment_educational"
-			domainObjectName="Educational" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" schema="${jdbc.username}" />
-		<table tableName="t_employment_educational_unemployment"
-			domainObjectName="EducationalUnemployment" enableCountByExample="false"
-			enableDeleteByExample="false" enableSelectByExample="false"
-			enableUpdateByExample="false" schema="${jdbc.username}" />
-
 	</context>
 </generatorConfiguration>

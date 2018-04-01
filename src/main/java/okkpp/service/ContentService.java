@@ -1,12 +1,16 @@
 package okkpp.service;
 
+import okkpp.model.TableField;
 import okkpp.model.Content;
+import okkpp.base.service.BaseService;
 import okkpp.dao.ContentMapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.shiro.crypto.hash.Hash;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class ContentService {
+public class ContentService extends BaseService<Content> {
 
 	@Autowired
 	private ContentMapper mapper;
@@ -65,6 +69,38 @@ public class ContentService {
 			}
 		}
 		return result;
+	}
+
+	public List<String> showTotalTables() {
+		return mapper.showTables();
+	}
+
+	public List<TableField> showTablesWithComment() {
+		List<TableField> tablesWithComment = mapper.showTablesWithComment();
+		List<TableField> tables = new ArrayList<>();
+		List<HashMap<String, String>> columns = null;
+		HashMap<String, String> comments = null;
+		String k = null;
+		for (TableField table : tablesWithComment) {
+			if (!table.getRefTable().isEmpty()) {
+				// 获取指定表所有列
+				columns = mapper.showColumnsWithComment(table.getRefTable());
+				comments = new HashMap<>();
+				for (Map<String, String> column : columns) {
+					k = column.get("Field");
+					if (!(k.equals("id") || k.equals("country") || k.equals("year") || k.equals("updated") || k.equals("sort")))
+						comments.put(k, column.get("Comment"));
+				}
+				table.setFieldComment(comments);
+				tables.add(table);
+			}
+		}
+		System.out.println(tables);
+		return tables;
+	}
+
+	public List<HashMap<String, String>> showColumnsWithComment(String tab) {
+		return mapper.showColumnsWithComment(tab);
 	}
 
 }

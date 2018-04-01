@@ -125,12 +125,11 @@
 			});
 		});
 		$("#add_btn").click(function(){
-			var str = "../"+$("#chapter_choose").val()+"/"+tranformStr("_"+$("#sheet_choose").val())+".do";
-			console.log(str);
+			var str = "../"+$("#chapter_choose").val()+"/add/"+tranformStr("_"+$("#sheet_choose").val())+".do";	
 			$.ajax({
 				url : str,
 				type : "POST",
-				data : $("#add_form").serialize(),
+				data : getForm(),
 				success : function(result){
 					result = eval('('+ result+ ')');
 					alert(result.msg);
@@ -139,6 +138,18 @@
 				}				
 			});
 		});
+		
+		//获取更新表单数据
+		function getForm(){
+			var formObject = {};
+			var formArray =$("#add_form").serializeArray();
+			$.each(formArray,function(i,item){
+			formObject[item.name] = item.value;
+			});
+			var formJson = JSON.stringify(formObject);
+			console.log(formJson);
+			return formJson;	
+		}
 		
 		//按驼峰命名法转成驼峰
 		function tranformStr(str){	

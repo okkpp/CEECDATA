@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageInfo;
 
+import okkpp.base.controller.BaseController;
 import okkpp.system.model.User;
 import okkpp.system.service.UserRoleService;
 import okkpp.system.service.UserService;
+import okkpp.base.vo.Result;
 
 /**
 * @author duck
@@ -22,7 +24,7 @@ import okkpp.system.service.UserService;
 */
 @RequestMapping("/user")
 @Controller
-public class UserController {
+public class UserController extends BaseController<User>{
 
 	@Autowired
 	private UserService userService;
@@ -37,10 +39,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/page")
-	public String render() {
+	public String page() {
 		return "/mui/user";
 	}
 	
+
 	@RequestMapping(value = "/list")
 	@ResponseBody
 	public PageInfo<User> listUsers(@RequestParam int page,
@@ -50,20 +53,24 @@ public class UserController {
 		return pageInfo;
 	}
 
-//	@RequestMapping(value = "/saveUserRoles")
-//	@ResponseBody
-//	public Result saveUserRoles(@ModelAttribute User user) {
-//		Result result = new Result();
-//		try {
-//			userRoleService.saveUserRoles(user);
-//		} catch (Exception e) {
-//			result.setSuccess(false);
-//			result.setMsg(e.getMessage());
-//		}
-//		return result;
-//	}
+	@RequestMapping(value = "/render")
+	public String render() {
+		return "system/user/list";
+	}
 
-	//获取该角色的用户集合
+	@RequestMapping(value = "/saveUserRoles")
+	@ResponseBody
+	public Result saveUserRoles(@ModelAttribute User user) {
+		Result result = new Result();
+		try {
+			userRoleService.saveUserRoles(user);
+		} catch (Exception e) {
+			result.setSuccess(false);
+			result.setMsg(e.getMessage());
+		}
+		return result;
+	}
+
 	@RequestMapping(value = "/getUsersByRoleId")
 	@ResponseBody
 	public List<User> getUsersByUserId(@RequestParam int roleId) {

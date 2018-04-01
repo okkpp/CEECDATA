@@ -13,8 +13,12 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/admin.css">
 <link href="${pageContext.request.contextPath}/MUI/css/bootstrap.min.css" rel="stylesheet">
 <script src="${pageContext.request.contextPath}/MUI/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/MUI/js/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/jquery-ui.css" 
+     type="text/css"></link>
 <script src="${pageContext.request.contextPath}/MUI/js/pintuer.js"></script>
 <script src="${pageContext.request.contextPath}/MUI/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/MUI/js/javautils.js"></script>
 <%@ include file="/WEB-INF/jsp/mui/userModal.jsp"%>
 
 </head>
@@ -61,11 +65,13 @@
 		</div>
 	</form>
 	<script type="text/javascript">	
+	//全局变量
 	var json = new Array();
 	var items;
 	var currentPage;
-	//显示数据库数据章节
+	var map = new HashMap();
 	
+	//显示数据库数据章节
 	$(function(){
 		$.ajax({
 			url : "../showTables.do",
@@ -117,6 +123,27 @@
 				});
 			}
 		});
+		var list = new Array();
+		$.ajax({
+			url : "../showTablesWithComment.do",
+			type : "GET",
+			success : function(result) {
+				result = eval('('+ result+ ')');
+				$.each(result,function(index,item){
+					//console.log(index);
+					 for(var i in item.fieldComment){
+						list.push(item.fieldComment[i]);
+						map.put(item.fieldComment[i],item.refTable + "&" + i);
+					}
+					list.push(item.tableComment);
+					map.put(item.tableComment,item.refTable)
+				})
+				$("#condition").autocomplete({ 
+				       source: list
+				});
+				console.log("finish");
+			}
+		})			
 	})
 		
 	//构建导航条元素
@@ -260,8 +287,7 @@
 					if(y == json[i]){
 						newList += "\""+y+"\":"+"\""+item[y]+"\",";		
 					}
-				}
-				
+				}				
 			};
 			newList = newList.substring(0,newList.length - 1);
 			newList += "},";
@@ -281,10 +307,17 @@
 			if(item.id == id){
 				for(var i in item){
 					var pOrInput;
-					if(i == "id" || i == "updated"){
-						pOrInput = $("<p></p>").addClass("form-control-static").append(item[i]).attr("name",i);
+					if(i == "id" ){
+						pOrInput = $("<p></p>").addClass("form-control-static").append(item[i]);
+						$("#update_form").append($("<input></input>").attr("type","hidden").attr("value",item[i]).attr("name",i));
+					}else if(i == "updated"){
+						pOrInput = $("<p></p>").addClass("form-control-static").append(item[i]);				
+					}else if(i == "country"){
+						pOrInput = $("<p></p>").addClass("form-control-static").append(item[i]);
+						$("#update_form").append($("<input></input>").attr("type","hidden").attr("value",item[i]).attr("name",i));
 					}else{
 						pOrInput = $("<input></input>").addClass("form-control").attr("value",item[i]).attr("name",i);
+						
 					}
 					$("<div></div>").addClass("form-group").append(
 						$("<label></label>").addClass("col-sm-2 control-label").append(i))
@@ -302,11 +335,12 @@
 	});
 	
 	$("#update_btn").click(function(){
-		var str = "../"+$("#chapter_choose").val()+"/"+tranformStr("_"+$("#sheet_choose").val())+"/"+$(this).attr("edit-id")+".do";
+		var str = "../"+$("#chapter_choose").val()+"/update/"+tranformStr("_"+$("#sheet_choose").val())+".do";
+		var data = getForm();
 		$.ajax({
 			url : str,
 			type : "POST",
-			data : $("#update_form").serialize()+"&_method=put",
+			data : "json="+data+"&_method=put",
 			success : function(result){
 				result = eval('('+ result+ ')');
 				$("#updateModal").modal("hide");
@@ -315,6 +349,18 @@
 			}
 		})
 	});
+	
+	//获取更新表单数据
+	function getForm(){
+		var formObject = {};
+		var formArray =$("#update_form").serializeArray();
+		$.each(formArray,function(i,item){
+		formObject[item.name] = item.value;
+		});
+		var formJson = JSON.stringify(formObject);
+
+		return formJson;	
+	}
 	
 	//为所有删除按钮绑定事件(单个删除)
 	$(document).on("click",".delete_btn",function(){
@@ -359,12 +405,25 @@
 		});
 		ids = ids.substring(0,ids.length-1);
 		if(confirm("确认删除【"+ids+"】吗?")){
-			//发送ajax请求删除
-			/* $.ajax({
-				
-			}); */
 		}
 	});
+	
+	//搜过框改变进行搜索
+	$("#condition").change(function(){
+		var val = map.get($(this).val());
+		if(val == null){
+			return;
+		}
+		var vals = val.split("&");
+		var chapter = vals[0].substring(vals[0].indexOf("_") + 1,vals[0].indexOf("_",2));
+		var info =tranformStr("_" + vals[0].substring(vals[0].indexOf("_",2) + 1));
+		var str = "../" + chapter + "/getJson.do?info=" + info;
+		/* if(vals[1] == null){
+			alert(vals[0]);
+		}else{
+			alert(vals[1]);
+		} */
+	})		
 </script>
 </body>
 </html>

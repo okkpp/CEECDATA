@@ -1,19 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="okkpp.dao.culture.ReserchSpendingRateMapper" >
-  <resultMap id="BaseResultMap" type="okkpp.model.culture.ReserchSpendingRate" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="okkpp.dao.culture.ReserchSpendingRateMapper">
+  <resultMap id="BaseResultMap" type="okkpp.model.culture.ReserchSpendingRate">
     <!--
       WARNING - @mbggenerated
     -->
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="country" property="country" jdbcType="VARCHAR" />
-    <result column="year" property="year" jdbcType="VARCHAR" />
-    <result column="research_rate" property="researchRate" jdbcType="DOUBLE" />
-    <result column="public_rate" property="publicRate" jdbcType="DOUBLE" />
-    <result column="sort" property="sort" jdbcType="INTEGER" />
-    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="country" jdbcType="VARCHAR" property="country" />
+    <result column="year" jdbcType="VARCHAR" property="year" />
+    <result column="research_rate" jdbcType="DOUBLE" property="researchRate" />
+    <result column="public_rate" jdbcType="DOUBLE" property="publicRate" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="updated" jdbcType="TIMESTAMP" property="updated" />
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     <!--
       WARNING - @mbggenerated
     -->
