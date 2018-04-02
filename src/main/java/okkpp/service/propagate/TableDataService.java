@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.gson.Gson;
 
+import okkpp.base.service.BaseService;
 import okkpp.dao.propagate.TableCatalogDataMapper;
 import okkpp.dao.propagate.TableCatalogMapper;
 import okkpp.dao.propagate.TableDataMapper;
@@ -20,7 +21,7 @@ import okkpp.model.propagate.TableData;
 */
 @Service
 @Transactional
-public class TableDataService {
+public class TableDataService extends BaseService<TableData>{
 
 	@Autowired
 	TableDataMapper dataMapper;
