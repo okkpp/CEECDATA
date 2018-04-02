@@ -12,6 +12,7 @@ import java.util.Map;
 import org.apache.shiro.crypto.hash.Hash;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -75,7 +76,9 @@ public class ContentService extends BaseService<Content> {
 		return mapper.showTables();
 	}
 
+	@Cacheable(value = "columns")
 	public List<TableField> showTablesWithComment() {
+		System.out.println("showTablesWithComment");
 		List<TableField> tablesWithComment = mapper.showTablesWithComment();
 		List<TableField> tables = new ArrayList<>();
 		List<HashMap<String, String>> columns = null;
@@ -95,7 +98,6 @@ public class ContentService extends BaseService<Content> {
 				tables.add(table);
 			}
 		}
-		System.out.println(tables);
 		return tables;
 	}
 
