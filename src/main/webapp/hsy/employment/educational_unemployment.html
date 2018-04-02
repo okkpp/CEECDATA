@@ -56,7 +56,7 @@
         </div>
 
         <div id="imageView">
-            <div class="page-header" style="text-align: center;">
+            <div class="page-header" style="text-align: center;visibility: hidden;" id="imageTitle">
                 <h3>失业人口教育程度构成</h3>
                 <br>
                 <h4 style="margin-top: -20px;">Educational Composition of Labor Force</h4>
@@ -79,24 +79,26 @@
         var remoteData = getRemoteData('/employment/json.do?info=EducationalUnemployment');
         initPic(remoteData);
         setTableData(remoteData,$('#tableData'));
-          $(function() {
+        $(function () {
             $('#imageView').hide();
             $('#tableTag').attr('class', 'active');
-          })
+        })
 
-          function showTable() {
+        function showTable() {
             $('#tableView').show();
             $('#imageView').hide();
+            $('#imageTitle').css('visibility','hidden');
             $('#tableTag').attr('class', 'active');
             $('#imageTag').removeClass('active');
-          }
+        }
 
-          function showImage() {
+        function showImage() {
             $('#imageView').show();
+            $('#imageTitle').css('visibility','visible');
             $('#tableView').hide();
             $('#imageTag').attr('class', 'active');
             $('#tableTag').removeClass('active');
-          }
+        }
 
 
         //初始化图

@@ -54,7 +54,7 @@
         </div>
 
         <div id="imageView">
-            <div class="page-header" style="text-align: center;">
+            <div class="page-header" style="text-align: center;visibility: hidden;" id="imageTitle">
                 <h3>年中人口</h3>
                 <br>
                 <h4 style="margin-top: -20px;">Mid-year Population</h4>
@@ -84,17 +84,19 @@
           })
 
           function showTable() {
-            $('#tableView').show();
-            $('#imageView').hide();
-            $('#tableTag').attr('class', 'active');
-            $('#imageTag').removeClass('active');
+              $('#tableView').show();
+              $('#imageView').hide();
+              $('#imageTitle').css('visibility','hidden');
+              $('#tableTag').attr('class', 'active');
+              $('#imageTag').removeClass('active');
           }
 
           function showImage() {
-            $('#imageView').show();
-            $('#tableView').hide();
-            $('#imageTag').attr('class', 'active');
-            $('#tableTag').removeClass('active');
+              $('#imageView').show();
+              $('#imageTitle').css('visibility','visible');
+              $('#tableView').hide();
+              $('#imageTag').attr('class', 'active');
+              $('#tableTag').removeClass('active');
           }
 
         //初始化图

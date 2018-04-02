@@ -56,7 +56,7 @@
         </div>
 
         <div id="imageView">
-            <div class="page-header" style="text-align: center;">
+            <div class="page-header" style="text-align: center;visibility: hidden;" id="imageTitle">
                 <h3>劳动参与率</h3>
                 <br>
                 <h4 style="margin-top: -20px;">Labor Force Participation Rate</h4>
@@ -76,36 +76,26 @@
         <!-- <div style="text-align: right;"><div id="page"></div></div> -->
     </div>
     <script>
-    		$(function() {
-    			$('#all').hide()
-    			$('#imageView').hide();
-    			$('#imageView2').hide();
-    			$('#tableTag').attr('class', 'active');
-    		})
+        $(function () {
+            $('#imageView').hide();
+            $('#tableTag').attr('class', 'active');
+        })
 
-    		function showTable() {
-    			$('#all').hide()
-    			$('#tableView').show();
-    			$('#tableView2').show();
-    			$('#imageView').hide();
-    			$('#imageView2').hide()
-    			$('#tableTag').attr('class', 'active');
-    			$('#imageTag').removeClass('active');
-    			$('#first').show()
-    			$('#second').show()
-    		}
+        function showTable() {
+            $('#tableView').show();
+            $('#imageView').hide();
+            $('#imageTitle').css('visibility','hidden');
+            $('#tableTag').attr('class', 'active');
+            $('#imageTag').removeClass('active');
+        }
 
-    		function showImage() {
-    			$('#all').show()
-    			$('#imageView').show();
-    			$('#tableView').hide();
-    			$('#tableView2').hide();
-    			$('#imageView2').show();
-    			$('#imageTag').attr('class', 'active');
-    			$('#tableTag').removeClass('active');
-    			$('#first').hide()
-    			$('#second').hide()
-    		}
+        function showImage() {
+            $('#imageView').show();
+            $('#imageTitle').css('visibility','visible');
+            $('#tableView').hide();
+            $('#imageTag').attr('class', 'active');
+            $('#tableTag').removeClass('active');
+        }
 
     		var remoteData=getRemoteData('/employment/json.do?info=LaborForceParticipationRate');
             initPic(remoteData);

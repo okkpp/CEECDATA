@@ -6,13 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.gson.Gson;
-
 import okkpp.base.service.BaseService;
-import okkpp.dao.propagate.TableCatalogDataMapper;
-import okkpp.dao.propagate.TableCatalogMapper;
 import okkpp.dao.propagate.TableDataMapper;
-import okkpp.model.propagate.TableCatalogData;
 import okkpp.model.propagate.TableData;
 
 /**
@@ -24,19 +19,11 @@ import okkpp.model.propagate.TableData;
 public class TableDataService extends BaseService<TableData>{
 
 	@Autowired
-	TableDataMapper dataMapper;
-	@Autowired
-	TableCatalogMapper catalogMapper;
-	@Autowired
-	TableCatalogDataMapper CatalogDataMapper;
+	TableDataMapper mapper;
 	
-	public void saveData(int catalogId,Map<String, Object> data) {
-		TableData tableData = new TableData();
-		tableData.setJson(new Gson().toJson(data));
-		dataMapper.insertReturnId(tableData);
-		TableCatalogData tableCatalogData = new TableCatalogData();
-		tableCatalogData.setCatalogId(catalogId);
-		tableCatalogData.setDataId(tableData.getId());
-		CatalogDataMapper.insert(tableCatalogData);
+	public int saveData(int tableId,Map<String, Object> data) {
+		TableData td = new TableData(tableId,data);
+		mapper.insertReturnId(td);
+		return td.getId();
 	}
 }

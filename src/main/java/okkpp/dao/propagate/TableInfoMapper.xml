@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="okkpp.dao.propagate.TableCatalogMapper" >
-  <resultMap id="BaseResultMap" type="okkpp.model.propagate.TableCatalog" >
+<mapper namespace="okkpp.dao.propagate.TableInfoMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.propagate.TableInfo" >
     <!--
       WARNING - @mbggenerated
     -->
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="table_name" property="tableName" jdbcType="VARCHAR" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="okkpp.model.propagate.TableCatalog" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="okkpp.model.propagate.TableInfo" extends="BaseResultMap" >
     <!--
       WARNING - @mbggenerated
     -->
-    <result column="catalog" property="catalog" jdbcType="LONGVARCHAR" />
+    <result column="fields" property="fields" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     <!--
       WARNING - @mbggenerated
     -->
-    id
+    id, table_name
   </sql>
   <sql id="Blob_Column_List" >
     <!--
       WARNING - @mbggenerated
     -->
-    catalog
+    fields
   </sql>
-  <insert id="insertReturnId" parameterType="okkpp.model.propagate.TableCatalog">
+    <insert id="insertReturnId" parameterType="okkpp.model.propagate.TableInfo">
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		insert into table_catalog values(#{id},#{catalog});
+		insert into table_info values(#{id},#{tableName},#{fields});
 	</insert>
 </mapper>

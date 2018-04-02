@@ -1,14 +1,15 @@
 package okkpp.service.propagate;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.base.service.BaseService;
-import okkpp.dao.propagate.TableCatalogMapper;
-import okkpp.model.propagate.TableCatalog;
+import okkpp.dao.propagate.TableInfoMapper;
+import okkpp.model.propagate.TableInfo;
 
 /**
 * @author duck
@@ -16,16 +17,18 @@ import okkpp.model.propagate.TableCatalog;
 */
 @Service
 @Transactional
-public class TableCatalogService extends BaseService<TableCatalog>{
+public class TableInfoService extends BaseService<TableInfo>{
 
 	@Autowired
-	TableCatalogMapper mapper;
+	TableInfoMapper mapper;
 	
-	public List<TableCatalog> list(){
+	public int saveInfo(String tableName,Map<String, Object> data) {
+		TableInfo ti = new TableInfo(tableName, data);
+		mapper.insertReturnId(ti);
+		return ti.getId();
+	}
+	public List<TableInfo> list(){
 		
 		return mapper.selectAll();
-	}
-	public int saveCatalogReturnId(TableCatalog tableCatalog) {
-		return mapper.insertReturnId(tableCatalog);
 	}
 }
