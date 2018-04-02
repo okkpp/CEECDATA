@@ -22,14 +22,18 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="okkpp.model"
+		<javaModelGenerator targetPackage="okkpp.model.propagate"
 			targetProject="src/main/java" />
-		<sqlMapGenerator targetPackage="okkpp.dao"
+		<sqlMapGenerator targetPackage="okkpp.dao.propagate"
 			targetProject="src/main/java" />
-		<javaClientGenerator targetPackage="okkpp.dao"
+		<javaClientGenerator targetPackage="okkpp.dao.propagate"
 			targetProject="src/main/java" type="XMLMAPPER" />
-		<table tableName="s_content"
-			domainObjectName="Content" enableCountByExample="false"
+		<table tableName="table_info"
+			domainObjectName="TableInfo" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" schema="${jdbc.username}" />
+		<table tableName="table_data"
+			domainObjectName="TableData" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" schema="${jdbc.username}" />
 	</context>

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import okkpp.service.propagate.TableDataService;
 
@@ -15,7 +14,7 @@ import okkpp.service.propagate.TableDataService;
 * @author duck
 * @date 创建时间：2018年3月30日 下午2:55:44
 */
-@RequestMapping("/tableData")
+@RequestMapping("/catalogData")
 @Controller
 public class TableDataController {
 
@@ -23,12 +22,8 @@ public class TableDataController {
 	TableDataService service;
 	
 	@RequestMapping("/saveData/{catalogId}")
-	@ResponseBody
-	public int saveData(@PathVariable(value="catalogId") int catalogId,@RequestParam Map<String, Object> data) {
-		System.out.println(catalogId);
-		for(String key : data.keySet()) {
-			System.out.println(data.get(key));
-		}
-		return catalogId;
+	public String saveData(@PathVariable(value="catalogId") int catalogId,@RequestParam Map<String, Object> data) {
+		service.saveData(catalogId, data);
+		return "redirect:/tableCatalog/render/"+catalogId+".do";
 	}
 }

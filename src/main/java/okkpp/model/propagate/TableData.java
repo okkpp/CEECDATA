@@ -1,14 +1,26 @@
 package okkpp.model.propagate;
 
 import java.io.Serializable;
+import java.util.Map;
+
 import javax.persistence.*;
+
+import com.google.gson.Gson;
 
 @Table(name = "table_data")
 public class TableData implements Serializable {
+	public TableData() {}
+	public TableData(Integer infoId,Map<String, Object> data) {
+		this.infoId = infoId;
+		this.data = new Gson().toJson(data);
+	}
     @Id
     private Integer id;
 
-    private String json;
+    @Column(name = "info_id")
+    private Integer infoId;
+
+    private String data;
 
     private static final long serialVersionUID = 1L;
 
@@ -27,16 +39,30 @@ public class TableData implements Serializable {
     }
 
     /**
-     * @return json
+     * @return info_id
      */
-    public String getJson() {
-        return json;
+    public Integer getInfoId() {
+        return infoId;
     }
 
     /**
-     * @param json
+     * @param infoId
      */
-    public void setJson(String json) {
-        this.json = json;
+    public void setInfoId(Integer infoId) {
+        this.infoId = infoId;
+    }
+
+    /**
+     * @return data
+     */
+    public String getData() {
+        return data;
+    }
+
+    /**
+     * @param data
+     */
+    public void setData(String data) {
+        this.data = data;
     }
 }

@@ -58,7 +58,7 @@
         </div>
 
         <div id="imageView">
-            <div class="page-header" style="text-align: center;">
+            <div class="page-header" style="text-align: center;visibility: hidden;" id="imageTitle">
                 <h3>能源平衡表（2014）</h3>
                 <br>
                 <h4 style="margin-top: -20px;">Energy Balance Sheet（2014）</h4>
@@ -76,22 +76,24 @@
     </div>
     <script>
         var remoteData = getRemoteData('/energy/json.do?info=BalanceSheet');
-        $(function(){
+        $(function () {
             $('#imageView').hide();
-            $('#tableTag').attr('class','active');
+            $('#tableTag').attr('class', 'active');
         })
 
         function showTable() {
             $('#tableView').show();
             $('#imageView').hide();
-            $('#tableTag').attr('class','active');
+            $('#imageTitle').css('visibility','hidden');
+            $('#tableTag').attr('class', 'active');
             $('#imageTag').removeClass('active');
         }
 
         function showImage() {
             $('#imageView').show();
+            $('#imageTitle').css('visibility','visible');
             $('#tableView').hide();
-            $('#imageTag').attr('class','active');
+            $('#imageTag').attr('class', 'active');
             $('#tableTag').removeClass('active');
         }
 

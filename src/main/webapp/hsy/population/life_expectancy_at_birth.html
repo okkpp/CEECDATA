@@ -43,13 +43,17 @@
 
             <div style="text-align: right;">单位:&nbsp;岁</div>
 
-            <table id="tableData"  class="table table-hover table-striped">
-
+            <table id="tableData" style="text-align: center;"  class="table table-hover table-striped">
+                <tr>
+                    <td>国家</td>
+                    <td>时间</td>
+                    <td>预期寿命</td>
+                </tr>
             </table>
         </div>
 
         <div id="imageView">
-            <div class="page-header" style="text-align: center;">
+            <div class="page-header" style="text-align: center;visibility: hidden;" id="imageTitle">
                 <h3>出生时预期寿命</h3>
                 <br>
                 <h4 style="margin-top: -20px;">Life Expectancy at Birth</h4>
@@ -78,17 +82,19 @@
           })
 
           function showTable() {
-            $('#tableView').show();
-            $('#imageView').hide();
-            $('#tableTag').attr('class', 'active');
-            $('#imageTag').removeClass('active');
+              $('#tableView').show();
+              $('#imageView').hide();
+              $('#imageTitle').css('visibility','hidden');
+              $('#tableTag').attr('class', 'active');
+              $('#imageTag').removeClass('active');
           }
 
           function showImage() {
-            $('#imageView').show();
-            $('#tableView').hide();
-            $('#imageTag').attr('class', 'active');
-            $('#tableTag').removeClass('active');
+              $('#imageView').show();
+              $('#imageTitle').css('visibility','visible');
+              $('#tableView').hide();
+              $('#imageTag').attr('class', 'active');
+              $('#tableTag').removeClass('active');
           }
 
         //初始化图
