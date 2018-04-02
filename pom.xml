@@ -49,6 +49,11 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-all -->
 		<dependency>
+			<artifactId>ehcache-core</artifactId>
+			<groupId>net.sf.ehcache</groupId>
+			<version>2.5.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-all</artifactId>
 			<version>1.4.0</version>

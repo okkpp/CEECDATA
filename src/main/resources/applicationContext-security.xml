@@ -47,7 +47,9 @@
 	<property name="realm" ref="sampleRealm" />  
 	<property name="cacheManager" ref="cacheManager" />  
 	</bean>
-	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager" />
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager" >
+		 <property name="cacheManagerConfigFile" value="classpath:ehcache.xml" /> 
+	</bean>
 	
 	<bean id="sampleRealm" class="okkpp.shiro.sampleRealm">
 		<!-- <property name="userMapper" ref="userMapper" />
