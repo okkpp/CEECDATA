@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>create a new table</title>
 </head>
 <body>
 
-	<form id="form" action="${pageContext.request.contextPath}/tableCatalog/save/newTable.do" method="post">
+	<form id="form" action="${pageContext.request.contextPath}/tableCatalog/create/newTable.do" method="post">
 		<input type="button" onclick="appendHTML()" value="添加"><input type="submit"/>
 		<table>
 		<thead><tr><th>字段名称</th></tr></thead>

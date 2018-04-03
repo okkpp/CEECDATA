@@ -4,30 +4,52 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>insert data</title>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/MUI/css/pintuer.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/MUI/css/admin.css">
+<script src="${pageContext.request.contextPath}/MUI/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/MUI/js/pintuer.js"></script>
 </head>
 <body>
-
-	<form id="form" action="${pageContext.request.contextPath}/catalogData/saveData/${catalog.id}.do" method="post">
+<button onclick="window.location.href='${pageContext.request.contextPath}/tableCatalog/add/${catalog.id}.do'">添加数据</button>
 		<table>
-		<thead><tr><th>字段名称</th></tr></thead>
+		<thead id="tabHead"></thead>
 		<tbody id="tabBody">
 		</tbody>
 		</table>
-		<input type="submit"/>
-	</form>
+
 	<script type="text/javascript">
 	var fields = ${catalog.fields};
-	for(index in fields){
-		console.log(fields[index]);
-		appendHTML(fields[index]);
-	}
-	function appendHTML(field){
+	function appendHead(){
 		var tr=document.createElement("TR");
-		var td=document.createElement("TD");td.innerHTML=field+":";
-		var input=document.createElement("INPUT");input.setAttribute("name",field);
-		td.appendChild(input);
-		tr.appendChild(td);
+		
+		for(index in fields){
+			var th=document.createElement("TH");th.innerHTML=fields[index];
+			tr.appendChild(th);
+		}
+		document.getElementById("tabHead").appendChild(tr);
+	}
+	appendHead();
+	$.ajax({
+		type:"POST",
+		data:{catalogId:${catalog.id}},
+		url:"${pageContext.request.contextPath}/catalogData/list.do",
+		success:function(data){
+			data = eval('(' + data + ')');
+			for(index in data){
+				appendData(data[index].data);
+			}
+		}
+	});
+	function appendData(data){
+		data = eval('(' + data + ')');
+		var tr=document.createElement("TR");
+		for(index in fields){
+			var td=document.createElement("TD");td.innerHTML=data[fields[index]];
+			tr.appendChild(td);
+		}
 		document.getElementById("tabBody").appendChild(tr);
 	}
 	</script>

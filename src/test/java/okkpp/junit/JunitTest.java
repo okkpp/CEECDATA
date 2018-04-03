@@ -1,14 +1,17 @@
 package okkpp.junit;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import okkpp.base.BaseTest;
+import okkpp.model.propagate.TableData;
 import okkpp.service.propagate.TableDataService;
-import okkpp.service.propagate.TableInfoService;
 
 /**
 * @author duck
@@ -16,14 +19,18 @@ import okkpp.service.propagate.TableInfoService;
 */
 public class JunitTest extends BaseTest{
 	
-	@Autowired
-	TableDataService service;
+//	@Autowired
+//	TableDataService service;
 	@Test
 	public void test() {
-		Map<String, Object> data = new HashMap<>();
-		data.put("1", "f1");
-		data.put("2", "f2");
+		String fileName = "file.xml";
+		String suffix = fileName.substring(fileName.lastIndexOf(".")+1);
+		File file = new File("/upload/"
+				+new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
+				+"."+suffix);
+		file.mkdirs();
 		
-		service.saveData(0, data);
+		System.out.println("file path :"+file.getPath());
+		System.out.println(suffix);
 	}
 }

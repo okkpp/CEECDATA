@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author DUCK  E-mail: okkpp@qq.com
- * @date ����ʱ�䣺2018��1��19�� ����9:02:37 
  * @version 1.0 
  */
 @Controller
@@ -22,15 +21,12 @@ public class UploadDataController {
 	
 	@RequestMapping("/page")
 	public String page(Model model){
-		model.addAttribute("msg", "�ȴ��ϴ��ļ�!");
 		return "/upload/page";
 	}
 	
 	@RequestMapping("/import")
 	public String importFile(@RequestParam(value="uploadFile")MultipartFile file,Model model){
 		
-		
-		//model.addAttribute("msg", service.importFile(file));
 		return "/upload/page";
 	}
 }
