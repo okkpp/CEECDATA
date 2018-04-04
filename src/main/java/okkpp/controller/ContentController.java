@@ -64,7 +64,7 @@ public class ContentController extends BaseController<Content>{
 	@RequestMapping(value = "/showTablesWithComment",method = RequestMethod.GET)
 	@ResponseBody
 	public List<TableField> showTablesWithComment(){
-		return service.showTablesWithComment();
+		return service.showTablesWithComment(1);
 	}
 	
 	@RequestMapping(value = "/showColumnsWithComment")

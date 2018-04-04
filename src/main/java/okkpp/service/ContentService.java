@@ -8,9 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.apache.shiro.crypto.hash.Hash;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -76,8 +73,8 @@ public class ContentService extends BaseService<Content> {
 		return mapper.showTables();
 	}
 
-	@Cacheable(value = "columns")
-	public List<TableField> showTablesWithComment() {
+	@Cacheable(value = "columnsCache")
+	public List<TableField> showTablesWithComment(Integer i) {
 		System.out.println("showTablesWithComment");
 		List<TableField> tablesWithComment = mapper.showTablesWithComment();
 		List<TableField> tables = new ArrayList<>();
@@ -91,7 +88,8 @@ public class ContentService extends BaseService<Content> {
 				comments = new HashMap<>();
 				for (Map<String, String> column : columns) {
 					k = column.get("Field");
-					if (!(k.equals("id") || k.equals("country") || k.equals("year") || k.equals("updated") || k.equals("sort")))
+					if (!(k.equals("id") || k.equals("country") || k.equals("year") || k.equals("updated")
+							|| k.equals("sort")))
 						comments.put(k, column.get("Comment"));
 				}
 				table.setFieldComment(comments);
