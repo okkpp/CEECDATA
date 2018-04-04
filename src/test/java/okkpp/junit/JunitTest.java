@@ -1,36 +1,38 @@
 package okkpp.junit;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import okkpp.base.BaseTest;
-import okkpp.model.propagate.TableData;
-import okkpp.service.propagate.TableDataService;
+import okkpp.utils.FTPUtil;
+
 
 /**
 * @author duck
-* @date ¥¥Ω® ±º‰£∫2018ƒÍ3‘¬28»’ …œŒÁ9:26:16
+* @date ÂàõÂª∫Êó∂Èó¥Ôºö2018Âπ¥3Êúà28Êó• ‰∏äÂçà9:26:16
 */
 public class JunitTest extends BaseTest{
-	
-//	@Autowired
-//	TableDataService service;
+
+	@Value(value = "${ftp.HOST}")
+	private String HOST;
+	@Value(value = "${ftp.PORT}")
+	private int PORT;
+	@Value(value = "${ftp.UserName}")
+	private String UserName;
+	@Value(value = "${ftp.PassWord}")
+	private String PassWord;
+	@Value(value = "${ftp.BASE_PATH}")
+	private String BASE_PATH;
 	@Test
-	public void test() {
-		String fileName = "file.xml";
-		String suffix = fileName.substring(fileName.lastIndexOf(".")+1);
-		File file = new File("/upload/"
-				+new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
-				+"."+suffix);
-		file.mkdirs();
-		
-		System.out.println("file path :"+file.getPath());
-		System.out.println(suffix);
+	public void test() throws FileNotFoundException {
+		File f = new File("B:\\duck.png");
+		FileInputStream file = new FileInputStream(f);
+		FTPUtil ftp = new FTPUtil();
+		ftp.SFTPUpload(HOST, PORT, UserName, PassWord, BASE_PATH, file, "duck.png");
 	}
+
 }
