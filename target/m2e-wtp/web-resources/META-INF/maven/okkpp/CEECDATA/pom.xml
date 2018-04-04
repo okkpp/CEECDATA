@@ -63,7 +63,11 @@
 		<dependency>
 			<artifactId>ehcache-core</artifactId>
 			<groupId>net.sf.ehcache</groupId>
+<<<<<<< HEAD
 			<version>2.4.5</version>
+=======
+			<version>2.5.0</version>
+>>>>>>> 8b36c76d126405a89f711bfaa7b657a9c985b568
 		</dependency>
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -170,6 +174,19 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<version>4.1.6.RELEASE</version>
+		</dependency>
+		<!-- ftp & sftp -->
+		<!-- https://mvnrepository.com/artifact/commons-net/commons-net -->
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.jcraft/jsch -->
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.53</version>
 		</dependency>
 
 	</dependencies>

@@ -1,29 +1,38 @@
 package okkpp.junit;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import okkpp.base.BaseTest;
-import okkpp.service.propagate.TableDataService;
-import okkpp.service.propagate.TableInfoService;
+import okkpp.utils.FTPUtil;
+
 
 /**
 * @author duck
-* @date ¥¥Ω® ±º‰£∫2018ƒÍ3‘¬28»’ …œŒÁ9:26:16
+* @date ÂàõÂª∫Êó∂Èó¥Ôºö2018Âπ¥3Êúà28Êó• ‰∏äÂçà9:26:16
 */
 public class JunitTest extends BaseTest{
-	
-	@Autowired
-	TableDataService service;
+
+	@Value(value = "${ftp.HOST}")
+	private String HOST;
+	@Value(value = "${ftp.PORT}")
+	private int PORT;
+	@Value(value = "${ftp.UserName}")
+	private String UserName;
+	@Value(value = "${ftp.PassWord}")
+	private String PassWord;
+	@Value(value = "${ftp.BASE_PATH}")
+	private String BASE_PATH;
 	@Test
-	public void test() {
-		Map<String, Object> data = new HashMap<>();
-		data.put("1", "f1");
-		data.put("2", "f2");
-		
-		service.saveData(0, data);
+	public void test() throws FileNotFoundException {
+		File f = new File("B:\\duck.png");
+		FileInputStream file = new FileInputStream(f);
+		FTPUtil ftp = new FTPUtil();
+		ftp.SFTPUpload(HOST, PORT, UserName, PassWord, BASE_PATH, file, "duck.png");
 	}
+
 }

@@ -25,16 +25,25 @@ public class TableInfoController {
 	@Autowired
 	TableInfoService service;
 	
+	@RequestMapping("/render")
+	public String render() {
+		return "/propagate/list";
+	}
 	@RequestMapping("/render/{catalogId}")
 	public String page(@PathVariable(value="catalogId")int catalogId,Model model) {
 		model.addAttribute("catalog", service.selectByKey(catalogId));
 		return "/propagate/data";
 	}
-	@RequestMapping("/catalog")
-	public String newForm() {
-		return "/propagate/catalog";
+	@RequestMapping("/add/{catalogId}")
+	public String add(@PathVariable(value="catalogId")int catalogId,Model model) {
+		model.addAttribute("catalog", service.selectByKey(catalogId));
+		return "/propagate/addData";
 	}
-	@RequestMapping("/save/{tableName}")
+	@RequestMapping("/createCatalog")
+	public String newForm() {
+		return "/propagate/createCatalog";
+	}
+	@RequestMapping("/create/{tableName}")
 	public String save(@PathVariable(value="tableName") String tableName,@RequestParam Map<String, Object> data) {
 		int catalogId = service.saveInfo(tableName, data);
 		
