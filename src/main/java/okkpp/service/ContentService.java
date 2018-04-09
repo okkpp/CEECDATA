@@ -74,7 +74,7 @@ public class ContentService extends BaseService<Content> {
 	}
 
 	@Cacheable(value = "columnsCache")
-	public List<TableField> showTablesWithComment(Integer i) {
+	public Map<String, List<TableField>> showTablesWithComment() {
 		System.out.println("showTablesWithComment");
 		List<TableField> tablesWithComment = mapper.showTablesWithComment();
 		List<TableField> tables = new ArrayList<>();
@@ -96,7 +96,25 @@ public class ContentService extends BaseService<Content> {
 				tables.add(table);
 			}
 		}
-		return tables;
+		System.out.println(tables);
+		return tableField(tables);
+	}
+
+	public Map<String, List<TableField>> tableField(List<TableField> list) {
+		Map<String, List<TableField>> map = new HashMap<String, List<TableField>>();
+		for (TableField c : list) {
+			String p = c.getParent();
+			if (map.containsKey(p)) {
+				List<TableField> l = map.get(p);
+				l.add(c);
+				map.put(p, l);
+			} else {
+				List<TableField> l = new ArrayList<TableField>();
+				l.add(c);
+				map.put(p, l);
+			}
+		}
+		return map;
 	}
 
 	public List<HashMap<String, String>> showColumnsWithComment(String tab) {
