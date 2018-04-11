@@ -27,7 +27,7 @@ public class JunitTest extends BaseTest{
 	private String PassWord;
 	@Value(value = "${ftp.BASE_PATH}")
 	private String BASE_PATH;
-	@Test
+
 	public void test() throws FileNotFoundException {
 		File f = new File("B:\\duck.png");
 		FileInputStream file = new FileInputStream(f);
@@ -35,4 +35,8 @@ public class JunitTest extends BaseTest{
 		ftp.SFTPUpload(HOST, PORT, UserName, PassWord, BASE_PATH, file, "duck.png");
 	}
 
+	@Test
+	public void resolveData() {
+		File f = new File("B:\\download_excel\\Cause of death, by injury (% of total).xls");
+	}
 }
