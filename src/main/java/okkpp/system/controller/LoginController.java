@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import okkpp.base.Msg;
 import okkpp.system.dao.UserMapper;
 import okkpp.system.model.User;
 
@@ -79,6 +81,26 @@ public class LoginController {
 	public String info(String str) {
 		str = "/mui/" + str;
 		return str;
+	}
+	
+	@RequestMapping(value = "loginApp", method = RequestMethod.POST)
+	@ResponseBody
+	public Msg loginApp(String username, String password) {
+		Subject currentUser = SecurityUtils.getSubject();
+		if (!currentUser.isAuthenticated()) {
+			UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+			token.setRememberMe(true);
+			try {
+				currentUser.login(token);
+			} catch (AuthenticationException e) {
+				System.out.println("µ«¬º ß∞‹:" + e.getMessage());
+				if(e.getMessage()==null||e.getMessage()=="")
+					return Msg.fail().add("msg", "«Î»∑»œ’À∫≈√‹¬Î°£");
+				else
+				return Msg.fail().add("msg", "√‹¬Î¥ÌŒÛ°£");	
+			}
+		}
+		return Msg.success().add("msg", "µ«¬º≥…π¶£°");
 	}
 
 }

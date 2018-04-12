@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
+import com.hazelcast.query.impl.Index;
 
 import okkpp.base.controller.BaseController;
 import okkpp.model.Content;
@@ -33,12 +34,25 @@ public class ContentController extends BaseController<Content>{
 		model.addAttribute("data", service.Content());
 		return "/zdoDB";
 	}
+	
+	@RequestMapping("index")
+	public String Index(Model model) {
+		model.addAttribute("data",service.Content());
+		return "index";
+	}
+	
 	@RequestMapping("/getContent")
 	@ResponseBody
 	public Map<String, List<Content>> getContent() {
-		
 		return service.Content();
 	}
+	
+	@RequestMapping("/getContentByCondition")
+	@ResponseBody
+	public Map<String, List<TableField>> getContentByCondition(@RequestParam("info")String info) {
+		return service.tableField(info);
+	}
+	
 	@RequestMapping("/content")
 	public String content(Model model,String GJDM){
 		return "/content";
@@ -64,7 +78,7 @@ public class ContentController extends BaseController<Content>{
 	@RequestMapping(value = "/showTablesWithComment",method = RequestMethod.GET)
 	@ResponseBody
 	public Map<String, List<TableField>> showTablesWithComment(){
-		return service.showTablesWithComment();
+		return service.tableField("ÈË¿Ú");
 	}
 	
 	@RequestMapping(value = "/showColumnsWithComment")
