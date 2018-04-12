@@ -20,12 +20,12 @@
 	var fields = ${catalog.fields};
 	for(index in fields){
 		console.log(fields[index]);
-		appendHTML(fields[index]);
+		appendHTML(index,fields[index]);
 	}
-	function appendHTML(field){
+	function appendHTML(index,field){
 		var tr=document.createElement("TR");
 		var td=document.createElement("TD");td.innerHTML=field+":";
-		var input=document.createElement("INPUT");input.setAttribute("name",field);
+		var input=document.createElement("INPUT");input.setAttribute("name",index);
 		td.appendChild(input);
 		tr.appendChild(td);
 		document.getElementById("tabBody").appendChild(tr);

@@ -34,10 +34,12 @@ public class TableInfoService extends BaseService<TableInfo>{
 	public List<TableInfo> list(){
 		return tableInfoMapper.selectAll();
 	}
-	public void createTabWithData(String tableName,Map<String, Object> info,Map<String, Object> data) {
+	public void createTabWithData(String tableName,Map<String, Object> info,List<Map<String, Object>> datalist) {
 		TableInfo ti = new TableInfo(tableName, info);
 		tableInfoMapper.insertReturnId(ti);
-		TableData td = new TableData(ti.getId(),data);
-		tableDataMapper.insertReturnId(td);
+		for(Map<String, Object> data : datalist) {
+			TableData td = new TableData(ti.getId(),data);
+			tableDataMapper.insertReturnId(td);
+		}
 	}
 }
