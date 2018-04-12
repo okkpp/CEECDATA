@@ -7,38 +7,52 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+
+import okkpp.service.propagate.TableInfoService;
 
 /**
 * @author duck
 * @date 创建时间：2018年4月3日 下午4:03:16
 */
+@Component
 public class SpiderUtil {
 
 	private String BASE_PATH = "https://data.worldbank.org.cn";
 	private String INDEX = "/indicator";
 	public static void main(String[] args) {
-		SpiderUtil su = new SpiderUtil();
-		try {
-			List<Catalog> list = su.getCatalog();
-			
-			Catalog c = list.get(0);
-			su.resolveCatalog(c);
+		String table = "Net lending (+) \\ net bo:rrow<>ing (-) (%* of G?DP).xls";
+		table = table.replace("\\", "")
+				.replace("/", "")
+				.replace(":", "")
+				.replace("*", "")
+				.replace("?", "")
+				.replace("\"", "")
+				.replace("<", "")
+				.replace(">", "")
+				.replace("|", "");
+		System.out.println(table);
+//		SpiderUtil su = new SpiderUtil();
+//		try {
+//			List<Catalog> list = su.getCatalog();
+//			
 //			for(Catalog c : list) {
-//				
+//				su.resolveCatalog(c);
 //			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 	public List<Catalog> getCatalog() throws IOException {
 		Connection conn = Jsoup.connect(BASE_PATH+INDEX);
@@ -83,12 +97,14 @@ public class SpiderUtil {
 		}
 	}
 	private String LOCAL_PATH = "B:\\download_excel\\";
+	@SuppressWarnings("resource")
 	public Runnable download(String spec,String name) throws IOException {
 		String path = LOCAL_PATH+name+".xls";
 		URL url = new URL(spec);
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 		File file = new File(path);
 		if(file.exists()) {
+			
 			System.out.println("文件已存在："+path);
 			return null;
 		}
@@ -102,22 +118,23 @@ public class SpiderUtil {
             for(int i=0;i<num;i++)
                fos.write(size[i]);
         }
+        resolveExcel(file,name);
 		return null;
 	}
-}
-class Catalog{
-	String catalog_cn;
-	String catalog_en;
-	//href - tableName
-	Map<String, String> map = new HashMap<>();
-	public int add(String href,String table) {
-		if(map.containsKey(href)) {
-			return 0;
+	@Autowired
+	TableInfoService service;
+	private void resolveExcel(File file,String tableName) {
+		System.out.println("下载完毕，解析Excel...");
+		ExcelUtil eu = new ExcelUtil();
+		try {
+			eu.xls(file);
+			service.createTabWithData(tableName, eu.info, eu.data);
+			System.out.println("建表结束！");
+			//System.out.println(new Gson().toJson(eu.data));
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		map.put(href, table);
-		return 1;
-	}
-	public String getName() {
-		return catalog_cn+"---"+catalog_en;
 	}
 }

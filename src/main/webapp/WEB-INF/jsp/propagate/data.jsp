@@ -47,7 +47,7 @@
 		data = eval('(' + data + ')');
 		var tr=document.createElement("TR");
 		for(index in fields){
-			var td=document.createElement("TD");td.innerHTML=data[fields[index]];
+			var td=document.createElement("TD");td.innerHTML=data[index];
 			tr.appendChild(td);
 		}
 		document.getElementById("tabBody").appendChild(tr);
