@@ -6,8 +6,12 @@ import okkpp.base.service.BaseService;
 import okkpp.dao.ContentMapper;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javax.validation.constraints.Pattern.Flag;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -74,7 +78,7 @@ public class ContentService extends BaseService<Content> {
 	}
 
 	@Cacheable(value = "columnsCache")
-	public Map<String, List<TableField>> showTablesWithComment() {
+	public List<TableField> showTablesWithComment() {
 		System.out.println("showTablesWithComment");
 		List<TableField> tablesWithComment = mapper.showTablesWithComment();
 		List<TableField> tables = new ArrayList<>();
@@ -96,23 +100,43 @@ public class ContentService extends BaseService<Content> {
 				tables.add(table);
 			}
 		}
-		System.out.println(tables);
-		return tableField(tables);
+		return tables;
 	}
 
-	public Map<String, List<TableField>> tableField(List<TableField> list) {
+	public Map<String, List<TableField>> tableField(String info) {
+		System.out.println("tableField : " + info);
+		Iterator<?> iterator;
+		HashMap<String, String> hashMap;
+		List<TableField> list = showTablesWithComment();
 		Map<String, List<TableField>> map = new HashMap<String, List<TableField>>();
+		boolean flag = false;
 		for (TableField c : list) {
-			String p = c.getParent();
-			if (map.containsKey(p)) {
-				List<TableField> l = map.get(p);
-				l.add(c);
-				map.put(p, l);
+
+			if (c.getContent().contains(info)) {
+				flag = true;
 			} else {
-				List<TableField> l = new ArrayList<TableField>();
-				l.add(c);
-				map.put(p, l);
+				hashMap = c.getFieldComment();
+				iterator = hashMap.keySet().iterator();
+				while (iterator.hasNext()) {
+					String key = (String) iterator.next();
+					if (hashMap.get(key).contains(info)) {
+						flag = true;
+					}
+				}
 			}
+			if (flag) {
+				String p = c.getParent();
+				if (map.containsKey(p)) {
+					List<TableField> l = map.get(p);
+					l.add(c);
+					map.put(p, l);
+				} else {
+					List<TableField> l = new ArrayList<TableField>();
+					l.add(c);
+					map.put(p, l);
+				}
+			}
+			flag = false;
 		}
 		return map;
 	}

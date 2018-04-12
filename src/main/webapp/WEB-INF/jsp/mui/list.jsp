@@ -9,13 +9,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
 <title></title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/pintuer.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/admin.css">
-<link href="${pageContext.request.contextPath}/MUI/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/pintuer.css"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/admin.css"/>
+<link href="${pageContext.request.contextPath}/MUI/css/bootstrap.min.css" rel="stylesheet"/>
 <script src="${pageContext.request.contextPath}/MUI/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/MUI/js/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/jquery-ui.css" 
-     type="text/css"></link>
+<link href="${pageContext.request.contextPath}/MUI/css/jquery-ui.min.css" rel="stylesheet" />
 <script src="${pageContext.request.contextPath}/MUI/js/pintuer.js"></script>
 <script src="${pageContext.request.contextPath}/MUI/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/MUI/js/javautils.js"></script>

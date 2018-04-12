@@ -27,10 +27,11 @@
 			</list>
 		</property>
 	</bean>
-
-	<!--定义solr的server -->
+	
+	<!-- solr server ↓ -->
+	
 	<bean id="httpSolrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
-		<constructor-arg index="0" value="http://localhost:8081/solr" />
+		<constructor-arg index="0" value="http://kcudk.top/solr/collection2" />
 		<!-- 设置响应解析器 -->
 		<property name="parser">
 			<bean class="org.apache.solr.client.solrj.impl.XMLResponseParser" />
@@ -40,6 +41,8 @@
 		<!-- 建立连接的最长时间 -->
 		<property name="connectionTimeout" value="500" />
 	</bean>
+	
+	<!-- solr server ↑ -->
 
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
