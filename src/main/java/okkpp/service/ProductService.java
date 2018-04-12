@@ -19,8 +19,8 @@ import okkpp.model.Products;
 @Service
 public class ProductService {
 	
-	@Autowired
-	HttpSolrServer httpSolrServer;
+	
+	HttpSolrServer httpSolrServer = new HttpSolrServer("http://kcudk.top/solr");
 	
 	private ResultModel resultModel = new ResultModel();
 

@@ -10,9 +10,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.validation.constraints.Pattern.Flag;
-
+import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +28,8 @@ public class ContentService extends BaseService<Content> {
 
 	@Autowired
 	private ContentMapper mapper;
+
+	
 
 	public Map<String, List<Content>> Content() {
 		List<Content> list = mapper.selectAll();
@@ -144,5 +146,7 @@ public class ContentService extends BaseService<Content> {
 	public List<HashMap<String, String>> showColumnsWithComment(String tab) {
 		return mapper.showColumnsWithComment(tab);
 	}
+
+
 
 }
