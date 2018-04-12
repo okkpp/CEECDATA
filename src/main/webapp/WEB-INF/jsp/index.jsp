@@ -355,8 +355,16 @@ function sendAjax(str){
             return str + '</ul>';
         }
 		$("#search_btn").click(function(){
-			var str = "getContentByCondition.do?info=" + $("#search_input").val();
-			sendAjax(str);
+			/* var str = "getContentByCondition.do?info=" + $("#search_input").val();
+			sendAjax(str); */
+			var str = "getContentByCondition2.do?info=" + $("#search_input").val();
+			$.ajax({
+				url : str,
+				type : "GET",
+				success : function(result){
+					console.log(result);
+				}
+			})
 		})
 
     </script>
