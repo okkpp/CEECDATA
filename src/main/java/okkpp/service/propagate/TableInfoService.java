@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import okkpp.base.service.BaseService;
+import okkpp.dao.propagate.TableDataMapper;
 import okkpp.dao.propagate.TableInfoMapper;
+import okkpp.model.propagate.TableData;
 import okkpp.model.propagate.TableInfo;
 
 /**
@@ -20,15 +22,22 @@ import okkpp.model.propagate.TableInfo;
 public class TableInfoService extends BaseService<TableInfo>{
 
 	@Autowired
-	TableInfoMapper mapper;
+	TableInfoMapper tableInfoMapper;
+	@Autowired
+	TableDataMapper tableDataMapper;
 	
 	public int saveInfo(String tableName,Map<String, Object> data) {
 		TableInfo ti = new TableInfo(tableName, data);
-		mapper.insertReturnId(ti);
+		tableInfoMapper.insertReturnId(ti);
 		return ti.getId();
 	}
 	public List<TableInfo> list(){
-		
-		return mapper.selectAll();
+		return tableInfoMapper.selectAll();
+	}
+	public void createTabWithData(String tableName,Map<String, Object> info,Map<String, Object> data) {
+		TableInfo ti = new TableInfo(tableName, info);
+		tableInfoMapper.insertReturnId(ti);
+		TableData td = new TableData(ti.getId(),data);
+		tableDataMapper.insertReturnId(td);
 	}
 }
