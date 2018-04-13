@@ -29,6 +29,8 @@
 	</bean>
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 	
 	<!-- solr server ↓ -->
 	
@@ -46,6 +48,7 @@
 	
 	<!-- solr server ↑ -->
 >>>>>>> 3210db29cbd51d2737ba4801771aa76bc2f5ea57
+>>>>>>> b21f5523d1fcffb55699d7f43b8eb8f8e70583f2
 
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
