@@ -27,6 +27,28 @@
 			</list>
 		</property>
 	</bean>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+	
+	<!-- solr server ↓ -->
+	
+	<bean id="httpSolrServer" class="org.apache.solr.client.solrj.impl.HttpSolrServer">
+		<constructor-arg index="0" value="http://kcudk.top/solr/collection2" />
+		<!-- 设置响应解析器 -->
+		<property name="parser">
+			<bean class="org.apache.solr.client.solrj.impl.XMLResponseParser" />
+		</property>
+		<!-- 设置重试次数 -->
+		<property name="maxRetries" value="1" />
+		<!-- 建立连接的最长时间 -->
+		<property name="connectionTimeout" value="500" />
+	</bean>
+	
+	<!-- solr server ↑ -->
+>>>>>>> 3210db29cbd51d2737ba4801771aa76bc2f5ea57
+>>>>>>> b21f5523d1fcffb55699d7f43b8eb8f8e70583f2
 
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />

@@ -182,15 +182,56 @@ ul li span {
 /*margin-left: 100px;*/
 /*}*/
 </style>
-<script type="text/javascript">
+
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="header"
+			style="margin: 0px; padding: 0px; width: 100%; height: 118px;">
+		</div>
+		<div style="width: 100%; height: 80px;">
+			<div style="float: left; width: 20%; height: 100%;">
+				<p
+					style="font-size: 20px; font-weight: bold; font-family: 微软雅黑; color: #0099CC; position: relative; top: 20px; left: 10%;">中&nbsp;&nbsp;东&nbsp;&nbsp;欧&nbsp;&nbsp;国&nbsp;&nbsp;家&nbsp;&nbsp;综&nbsp;&nbsp;合&nbsp;&nbsp;数&nbsp;&nbsp;据</p>
+				<p
+					style="font-size: 16px; color: #0099CC; position: relative; top: 10px; left: 10%;">CEEC Synthetic Data</p>
+			</div>
+			<div class="container-head"
+				style="float: left; width: 80%; height: 100%;"></div>
+		</div>
+		<div style="width: 100%; height: 80%;">
+			<div class="left"
+				style="float: left; margin: 0px; padding: 0px; min-height: 640px; height: 100%; width: 20%; overflow: auto;">
+				<div class="navMenubox">
+					<div id="slimtest1">
+						<!--<div class="navMenu-top">-->
+						<!--<div id="mini" style="">111<i class="fa fa-bars fa-2x"></i></div>-->
+						<!--</div>-->
+
+					</div>
+				</div>
+			</div>
+			<div style="float: right; width: 80%; height: 100%;">
+				<iframe name="right" id="ifID" src="right.html" width="100%"
+					frameborder="0" height="100%" style="padding-bottom: 60px;"></iframe>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
 var hrefAndName = null;
+$(function () {
+	
+	sendAjax("getContent.do");
+});
+
+function sendAjax(str){
 $.ajax({
-	type:"POST",
-	url:"getContent.do",
+	type:"GET",
+	url:str,
 	success:function(data){
 		var remoteData = eval('(' + data + ')');
 		hrefAndName = setTree(remoteData);
-        $(function () {
+        
             // <i class="fa fa-line-chart" aria-hidden="true" style="font-size: 16px;margin-left: 20px;margin-top: 5px;"></i>
             //获得数据
 //            alert(hrefAndName)
@@ -233,10 +274,10 @@ $.ajax({
                 }
 
             });
-        });
+        
 		console.log(remoteData);
 	}
-});
+});}
          function setTree(remoteData) {
 
             var data = [];
@@ -311,42 +352,11 @@ $.ajax({
             }
             return str + '</ul>';
         }
-
-
+		$("#search_btn").click(function(){
+			var str = "getContentByCondition.do?info=" + $("#search_input").val();
+			console.log(str);
+			sendAjax(str);
+		})
     </script>
-</head>
-<body>
-	<div class="container-fluid">
-		<div class="header"
-			style="margin: 0px; padding: 0px; width: 100%; height: 118px;">
-		</div>
-		<div style="width: 100%; height: 80px;">
-			<div style="float: left; width: 20%; height: 100%;">
-				<p
-					style="font-size: 20px; font-weight: bold; font-family: 微软雅黑; color: #0099CC; position: relative; top: 20px; left: 10%;">中&nbsp;&nbsp;东&nbsp;&nbsp;欧&nbsp;&nbsp;国&nbsp;&nbsp;家&nbsp;&nbsp;综&nbsp;&nbsp;合&nbsp;&nbsp;数&nbsp;&nbsp;据</p>
-				<p
-					style="font-size: 16px; color: #0099CC; position: relative; top: 10px; left: 10%;">CEEC Synthetic Data</p>
-			</div>
-			<div class="container-head"
-				style="float: left; width: 80%; height: 100%;"></div>
-		</div>
-		<div style="width: 100%; height: 80%;">
-			<div class="left"
-				style="float: left; margin: 0px; padding: 0px; min-height: 640px; height: 100%; width: 20%; overflow: auto;">
-				<div class="navMenubox">
-					<div id="slimtest1">
-						<!--<div class="navMenu-top">-->
-						<!--<div id="mini" style="">111<i class="fa fa-bars fa-2x"></i></div>-->
-						<!--</div>-->
-
-					</div>
-				</div>
-			</div>
-			<div style="float: right; width: 80%; height: 100%;">
-				<iframe name="right" id="ifID" src="right.html" width="100%"
-					frameborder="0" height="100%" style="padding-bottom: 60px;"></iframe>
-			</div>
-		</div>
-	</div>
 </body>
 </html>

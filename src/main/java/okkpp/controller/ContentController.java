@@ -37,7 +37,6 @@ public class ContentController extends BaseController<Content>{
 	
 	@RequestMapping("index")
 	public String Index(Model model) {
-		model.addAttribute("data",service.Content());
 		return "index";
 	}
 	
