@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import okkpp.model.DataModel;
+import okkpp.model.MusinInfo;
 import okkpp.service.SolrService;
 
 @Controller
@@ -28,6 +29,12 @@ public class SolrController {
 	@RequestMapping("/searchIndex")
 	public String searchIndex() {
 		return "search";
+	}
+	
+	@RequestMapping("/getMusic")
+	@ResponseBody
+	public List<MusinInfo> getMusic(@RequestParam("catalog")String catalog) {
+		return solrService.getMusics(catalog);
 	}
 	
 }

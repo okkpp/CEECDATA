@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
 import okkpp.model.DataModel;
+import okkpp.model.MusinInfo;
 
 @Service
 @Transactional
@@ -25,9 +26,41 @@ public class SolrService {
 
 	HttpSolrServer dataSolrServer = new HttpSolrServer("http://kcudk.top/solr/collection2");
 	HttpSolrServer infoSolrServer = new HttpSolrServer("http://kcudk.top/solr/collection3");
+	HttpSolrServer musicSolrServer = new HttpSolrServer("http://kcudk.top/solr/collection4");
 	// 创建SolrQuery对象
 	SolrQuery query;
 
+	public List<MusinInfo> getMusics(String catalog){
+		query = new SolrQuery();
+		query.setQuery("music_catalog_name:"+catalog);
+		
+		List<MusinInfo> musinInfos = new ArrayList<>();
+		MusinInfo musinInfo;
+		
+		try {
+			QueryResponse response = musicSolrServer.query(query);
+			response = musicSolrServer.query(query);
+			// 获取匹配
+			SolrDocumentList list = response.getResults();
+
+			System.out.println("匹配结果总数:" + list.getNumFound());
+			for (SolrDocument solrDocument : list) {
+				musinInfo = new MusinInfo();
+				musinInfo.setCatalog(solrDocument.get("music_catalog_name").toString());
+				musinInfo.setPricture(solrDocument.get("music_picture").toString());
+				musinInfo.setDescription(solrDocument.get("music_description").toString());
+				
+				musinInfos.add(musinInfo);
+			}
+		} catch (SolrServerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		return musinInfos;
+	}
+	
 	public List<DataModel> getContentByCondition(String info){
 		// TODO Auto-generated method stub
 		String[] str = info.split(" ");
@@ -88,10 +121,10 @@ public class SolrService {
 
 							dataModel = new DataModel();
 							dataModel.setCountry(jsonMap2.get("field0"));
-							dataModel.setTargetValue(jsonMap2.get(entry.getKey()));
+							//dataModel.setTargetValue(jsonMap2.get(entry.getKey()));
 							dataModel.setYear(year);
-							dataModel.setTarget(solrDocument.get("name_keywords").toString().substring(1,
-									solrDocument.get("name_keywords").toString().length() - 1));
+							//dataModel.setTarget(solrDocument.get("name_keywords").toString().substring(1,
+									//solrDocument.get("name_keywords").toString().length() - 1));
 							dataModels.add(dataModel);
 						}
 					} else {
@@ -111,6 +144,10 @@ public class SolrService {
 				new TypeReference<LinkedHashMap<String, String>>() {
 				});
 		return jsonMap;
+	}
+	
+	public void getMusic() {
+		
 	}
 	/*
 	 * @Test public void search02() throws Exception {
