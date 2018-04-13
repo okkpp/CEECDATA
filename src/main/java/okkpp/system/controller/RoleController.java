@@ -17,7 +17,7 @@ import okkpp.system.model.Role;
 import okkpp.system.service.ResourceRoleService;
 import okkpp.system.service.RoleService;
 import okkpp.system.service.UserRoleService;
-import okkpp.system.vo.Result;
+import okkpp.base.vo.Result;
 
 /**
 * @author duck

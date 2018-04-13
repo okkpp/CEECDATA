@@ -116,4 +116,12 @@ public class Content implements Serializable {
     public void setRefTable(String refTable) {
         this.refTable = refTable;
     }
+
+	@Override
+	public String toString() {
+		return "Content [id=" + id + ", parent=" + parent + ", content=" + content + ", href=" + href + ", refTable="
+				+ refTable + "]";
+	}
+    
+    
 }

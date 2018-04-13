@@ -6,10 +6,14 @@ import okkpp.base.service.BaseService;
 import okkpp.dao.ContentMapper;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,10 +24,12 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class ContentService extends BaseService<Content>{
+public class ContentService extends BaseService<Content> {
 
 	@Autowired
 	private ContentMapper mapper;
+
+	
 
 	public Map<String, List<Content>> Content() {
 		List<Content> list = mapper.selectAll();
@@ -68,33 +74,29 @@ public class ContentService extends BaseService<Content>{
 		}
 		return result;
 	}
-	
-	public List<String> showTotalTables(){
+
+	public List<String> showTotalTables() {
 		return mapper.showTables();
 	}
-	
+
+	@Cacheable(value = "columnsCache")
 	public List<TableField> showTablesWithComment() {
+		System.out.println("showTablesWithComment");
 		List<TableField> tablesWithComment = mapper.showTablesWithComment();
 		List<TableField> tables = new ArrayList<>();
 		List<HashMap<String, String>> columns = null;
 		HashMap<String, String> comments = null;
-		String k = null, v = null;
+		String k = null;
 		for (TableField table : tablesWithComment) {
 			if (!table.getRefTable().isEmpty()) {
 				// 获取指定表所有列
-				columns = mapper.showColumns(table.getRefTable());
+				columns = mapper.showColumnsWithComment(table.getRefTable());
 				comments = new HashMap<>();
 				for (Map<String, String> column : columns) {
-
-					for (String key : column.keySet()) {
-						if (key.equals("Field")) {
-							k = column.get(key);
-						}
-						if (key.equals("Comment")) {
-							v = column.get(key);
-						}
-						comments.put(k, v);
-					}
+					k = column.get("Field");
+					if (!(k.equals("id") || k.equals("country") || k.equals("year") || k.equals("updated")
+							|| k.equals("sort")))
+						comments.put(k, column.get("Comment"));
 				}
 				table.setFieldComment(comments);
 				tables.add(table);
@@ -102,4 +104,49 @@ public class ContentService extends BaseService<Content>{
 		}
 		return tables;
 	}
+
+	public Map<String, List<TableField>> tableField(String info) {
+		System.out.println("tableField : " + info);
+		Iterator<?> iterator;
+		HashMap<String, String> hashMap;
+		List<TableField> list = showTablesWithComment();
+		Map<String, List<TableField>> map = new HashMap<String, List<TableField>>();
+		boolean flag = false;
+		for (TableField c : list) {
+
+			if (c.getContent().contains(info)) {
+				flag = true;
+			} else {
+				hashMap = c.getFieldComment();
+				iterator = hashMap.keySet().iterator();
+				while (iterator.hasNext()) {
+					String key = (String) iterator.next();
+					if (hashMap.get(key).contains(info)) {
+						flag = true;
+					}
+				}
+			}
+			if (flag) {
+				String p = c.getParent();
+				if (map.containsKey(p)) {
+					List<TableField> l = map.get(p);
+					l.add(c);
+					map.put(p, l);
+				} else {
+					List<TableField> l = new ArrayList<TableField>();
+					l.add(c);
+					map.put(p, l);
+				}
+			}
+			flag = false;
+		}
+		return map;
+	}
+
+	public List<HashMap<String, String>> showColumnsWithComment(String tab) {
+		return mapper.showColumnsWithComment(tab);
+	}
+
+
+
 }

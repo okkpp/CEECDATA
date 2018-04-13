@@ -1,7 +1,4 @@
-/**
- * 
- */
-package okkpp.system.vo;
+package okkpp.base.vo;
 
 import java.io.Serializable;
 
@@ -12,6 +9,7 @@ public class Result implements Serializable{
 	
 	private String msg;
 
+	private Object data;
 	/**
 	 * @return the success
 	 */
@@ -38,6 +36,14 @@ public class Result implements Serializable{
 	 */
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+
+	public Object getData() {
+		return data;
+	}
+
+	public void setData(Object data) {
+		this.data = data;
 	}
 	
 	

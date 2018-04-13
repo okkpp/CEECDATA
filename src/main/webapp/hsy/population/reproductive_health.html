@@ -46,17 +46,17 @@
             <table id="tableData" class="table table-hover table-striped">
     					<tr>
     						<td style="text-align: center;">国家</td>
+                            <td>时间</td>
     						<td>总和人均生育率（人）</td>
     						<td>15-19岁少女生育率（%）</td>
     						<td>产妇死亡率（%）</td>
                             <td>比例（%）</td>
     					</tr>
-
-    				</table>
+            </table>
         </div>
 
         <div id="imageView">
-            <div class="page-header" style="text-align: center;">
+            <div class="page-header" style="text-align: center;visibility: hidden;" id="imageTitle">
                 <h3>生殖健康</h3>
                 <br>
                 <h4 style="margin-top: -20px;">Reproductive Health</h4>
@@ -77,88 +77,71 @@
     </div>
     <script>
     		$(function() {
-    			$('#all').hide()
     			$('#imageView').hide();
-    			$('#imageView2').hide();
     			$('#tableTag').attr('class', 'active');
     		})
 
-    		function showTable() {
-    			$('#all').hide()
-    			$('#tableView').show();
-    			$('#tableView2').show();
-    			$('#imageView').hide();
-    			$('#imageView2').hide()
-    			$('#tableTag').attr('class', 'active');
-    			$('#imageTag').removeClass('active');
-    			$('#first').show()
-    			$('#second').show()
-    		}
+            function showTable() {
+                $('#tableView').show();
+                $('#imageView').hide();
+                $('#imageTitle').css('visibility','hidden');
+                $('#tableTag').attr('class', 'active');
+                $('#imageTag').removeClass('active');
+            }
 
-    		function showImage() {
-    			$('#all').show()
-    			$('#imageView').show();
-    			$('#tableView').hide();
-    			$('#tableView2').hide();
-    			$('#imageView2').show();
-    			$('#imageTag').attr('class', 'active');
-    			$('#tableTag').removeClass('active');
-    			$('#first').hide()
-    			$('#second').hide()
-    		}
+            function showImage() {
+                $('#imageView').show();
+                $('#imageTitle').css('visibility','visible');
+                $('#tableView').hide();
+                $('#imageTag').attr('class', 'active');
+                $('#tableTag').removeClass('active');
+            }
 
     		var remoteData=getRemoteData('/population/json.do?info=ReproductiveHealth');
             initPic(remoteData);
             setTableData(remoteData,$('#tableData'));
             //初始化图
-              function initPic(data) {
-            var option = {
-                //timeline基本配置都写在baseoption 中
-                baseOption: {
-                    timeline: {
-                        loop: true,
-                        axisType: 'category',
-                        show: false,
-                        autoPlay: true,
-                        playInterval: 1000,
-                        data: setYears(data)
+            function initPic(data) {
+                var option = {
+                    //timeline基本配置都写在baseoption 中
+                    baseOption: {
+                        timeline: {
+                            loop: true,
+                            axisType: 'category',
+                            show: true,
+                            autoPlay: true,
+                            playInterval: 1000,
+                            data: setYears(data)
+                        },
+                        legend: {
+                            data: setLegend(data)
+                        },
+                        tooltip: {
+                            trigger: 'axis'
+                        },
+                        title:{
+                            subtext:'数据来源'
+                        },
+                        calculable: true,
+                        grid: {
+                            y: 100,
+                            y2: 100
+                        },
+                        xAxis: [{
+                            type: 'category',
+                            axisLabel: {                        interval:0,                        rotate:40                    },                    data: setCountries(data)
+                        }],
+                        yAxis: [{
+                            type: 'value',
+                            name: '%'
+                        }],
+                        series: setSeriesTitle(data)
                     },
-                    legend: {
-                        data: setLegend(data)
-                    },
-                    tooltip: {
-                        trigger: 'axis'
-                    },
-                    title:{
-                        subtext:'数据来源'
-                    },
-                    calculable: true,
-                    grid: {
-                        y: 100,
-                        y2: 100
-                    },
-                    xAxis: [{
-                        type: 'category',
-                        axisLabel: {                        interval:0,                        rotate:40                    },                    data: setCountries(data)
-                    }],
-                    yAxis: {
-                        type: 'value',
-                        name: '单位:%'
-                        // axisLine: {
-                        //     show: true,
-                        //     lineStyle:{
-                        //         color:'#0066CC'
-                        //     }
-                        // }
-                    },
-                    series: setSeriesTitle(data)
-                },
-                options:setOptions(data)
-            };
-            var myChart = echarts.init(document.getElementById('main'));
-            myChart.setOption(option);
-        }
-
+                    options:setOptions(data)
+                };
+                var myChart = echarts.init(document.getElementById('main'));
+                myChart.setOption(option);
+            }
         initPic(remoteData);
 	    </script>
 </body>

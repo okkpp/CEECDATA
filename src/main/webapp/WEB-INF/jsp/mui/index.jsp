@@ -44,10 +44,14 @@
 		<ul style="display: block">
 			<li><a href="mui.do?str=info" target="right"><span
 					class="icon-caret-right"></span>网站设置</a></li>
+			<li><a href="${pageContext.request.contextPath}/user/render.do" target="right"><span
+					class="icon-caret-right"></span>用户管理</a></li>
+			<li><a href="${pageContext.request.contextPath}/role/render.do" target="right"><span
+					class="icon-caret-right"></span>角色管理</a></li>
+			<li><a href="${pageContext.request.contextPath}/resource/render.do" target="right"><span
+					class="icon-caret-right"></span>资源管理</a></li>
 			<li><a href="mui.do?str=pass" target="right"><span
 					class="icon-caret-right"></span>修改密码</a></li>
-			<li><a href="user.do" target="right"><span
-					class="icon-caret-right"></span>用户管理</a></li>
 			<li><a href="mui.do?str=page" target="right"><span
 					class="icon-caret-right"></span>单页管理</a></li>
 			<li><a href="mui.do?str=adv" target="right"><span

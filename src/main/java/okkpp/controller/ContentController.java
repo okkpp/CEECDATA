@@ -3,6 +3,7 @@ package okkpp.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,24 @@ public class ContentController extends BaseController<Content>{
 		model.addAttribute("data", service.Content());
 		return "/zdoDB";
 	}
+	
+	@RequestMapping("index")
+	public String Index(Model model) {
+		return "index";
+	}
+	
+	@RequestMapping("/getContent")
+	@ResponseBody
+	public Map<String, List<Content>> getContent() {
+		return service.Content();
+	}
+	
+	@RequestMapping("/getContentByCondition")
+	@ResponseBody
+	public Map<String, List<TableField>> getContentByCondition(@RequestParam("info")String info) {
+		return service.tableField(info);
+	}
+	
 	@RequestMapping("/content")
 	public String content(Model model,String GJDM){
 		return "/content";
@@ -57,7 +76,13 @@ public class ContentController extends BaseController<Content>{
 	
 	@RequestMapping(value = "/showTablesWithComment",method = RequestMethod.GET)
 	@ResponseBody
-	public List<TableField> showTablesWithComment(){
-		return service.showTablesWithComment();
+	public Map<String, List<TableField>> showTablesWithComment(){
+		return service.tableField("ÈË¿Ú");
+	}
+	
+	@RequestMapping(value = "/showColumnsWithComment")
+	@ResponseBody
+	public List<HashMap<String, String>> showColumnsWithComment(@RequestParam("tab")String tab){
+		return service.showColumnsWithComment(tab);
 	}
 }

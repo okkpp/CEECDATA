@@ -32,7 +32,7 @@ function formatType(val, row) {
 		<thead>
 			<tr>
 				<th field="reid" width="50">资源ID</th>
-				<th field="username" width="50">中文名</th>
+				<th field="name" width="50">中文名</th>
 				<th field="type" width="50" formatter="formatType">类型</th>
 				<th field="value" width="50">值</th>
 				<th field="enabled" width="50" formatter="formatStatus">状态</th>

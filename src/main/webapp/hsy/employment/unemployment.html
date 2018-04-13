@@ -48,12 +48,17 @@
             <div style="text-align: right;">单位:&nbsp;万人</div>
 
             <table id="tableData" class="table table-hover table-striped">
-
+                <tr>
+                    <td>国家</td>
+                    <td>时间</td>
+                    <td>存款利率</td>
+                    <td>贷款利率</td>
+                </tr>
             </table>
         </div>
 
         <div id="imageView">
-            <div class="page-header" style="text-align: center;">
+            <div class="page-header" style="text-align: center;visibility: hidden;" id="imageTitle">
                 <h3>失业人数</h3>
                 <br>
                 <h4 style="margin-top: -20px;">Unemployment</h4>
@@ -76,25 +81,26 @@
         var remoteData = getRemoteData('/employment/json.do?info=Unemployment');
         initPic(remoteData);
        
-          $(function() {
+        $(function () {
             $('#imageView').hide();
             $('#tableTag').attr('class', 'active');
+        })
 
-          })
-
-          function showTable() {
+        function showTable() {
             $('#tableView').show();
             $('#imageView').hide();
+            $('#imageTitle').css('visibility','hidden');
             $('#tableTag').attr('class', 'active');
             $('#imageTag').removeClass('active');
-          }
+        }
 
-          function showImage() {
+        function showImage() {
             $('#imageView').show();
+            $('#imageTitle').css('visibility','visible');
             $('#tableView').hide();
             $('#imageTag').attr('class', 'active');
             $('#tableTag').removeClass('active');
-          }
+        }
 
         //初始化图
        function initPic(data) {

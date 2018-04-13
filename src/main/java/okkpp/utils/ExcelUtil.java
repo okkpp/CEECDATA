@@ -16,40 +16,72 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 /**
  * @author DUCK  E-mail: okkpp@qq.com
- * @date ´´½¨Ê±¼ä£º2018Äê1ÔÂ19ÈÕ ÉÏÎç11:33:38 
+ * @date åˆ›å»ºæ—¶é—´ï¼š2018å¹´1æœˆ19æ—¥ ä¸Šåˆ11:33:38 
  * @version 1.0 
  */
 public class ExcelUtil {
 
-	public String lb;
-	public List<Map<String,String>> data;
+	public static void main(String[] args) {
+		File file = new File("B:\\download_excel\\1.xls");
+		ExcelUtil eu = new ExcelUtil();
+		try {
+			eu.xls(file);
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	//è§£æç»“æœå­˜ä¸º list map data
+	public List<Map<String,Object>> data = new ArrayList<>();
+	public Map<String,Object> info = new HashMap<>();
 	public void xls(File file) throws InvalidFormatException, IOException{
 		Workbook workbook = WorkbookFactory.create(file);
+		//è·å–excelè¡¨æ ¼é¡µæ•°
 		int sheetCount = workbook.getNumberOfSheets();
 		if(sheetCount<2)return;
-		//µÚÈıÒ³¼ÇÂ¼µ¼ÈëÀàĞÍ
-		this.lb = parseCell(workbook.getSheetAt(2).getRow(0).getCell(0));
 		
 		Sheet sheet = workbook.getSheetAt(0);
+		sheet.removeColumnBreak(0);
 		int rows = sheet.getLastRowNum() + 1;
-		int cols = sheet.getRow(0).getPhysicalNumberOfCells();
-		List<String> keys = getKeys(workbook.getSheetAt(1));
-		if(keys.size()!=cols)return;
-		
-		List<Map<String,String>> data = new ArrayList<Map<String,String>>();
-		//±éÀú ËùÓĞĞĞ ´ÓµÚ¶şĞĞ¿ªÊ¼---Ìø¹ı±íÍ·
-		for (int row = 1; row < rows; row++){
-			Row r = sheet.getRow(row);
-			Map<String,String> map = new HashMap<String, String>();
-			for(int i=0;i<cols;i++){
-				map.put(keys.get(i), parseCell(r.getCell(i)));
-			}
-			data.add(map);
+		int cols = sheet.getRow(3).getPhysicalNumberOfCells();
+		List<String> keys = getKeys(workbook.getSheetAt(0),4);
+		if(keys.size()==0) {
+			System.out.println("æ²¡æœ‰æ‰¾åˆ°keyé›†åˆï¼");
+			return;
 		}
-		System.out.println("data size:"+data.size());
-		this.data = data;
+		this.data = new ArrayList<>();
+		getData(sheet, rows, cols, 4, keys);
 	}
-	
+	private int JUMP = 43;
+	private void getData(Sheet sheet,int rows,int cols,int startRowNum,List<String> keys) {
+		for (int row = startRowNum; row < rows; row++){
+			Row r = sheet.getRow(row);
+			Map<String,Object> map = new HashMap<>();
+			if(!isNeed(parseCell(r.getCell(1))))continue;
+			for(int i=0;i<cols-JUMP;i++){
+				//è¿™ä¸ªåœ°æ–¹éœ€è¦ä¿®æ”¹ ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼å…³äºdataçš„keyå€¼å®šä½
+				map.put(keys.get(i), parseCell(r.getCell(i==0?i:i+JUMP)));
+			}
+			//System.out.println(new Gson().toJson(map));
+			this.data.add(map);
+		}
+	}
+	private List<String> getKeys(Sheet sheet,int rowNum){
+		List<String> list = new ArrayList<>();
+		int cols = sheet.getRow(rowNum-1).getPhysicalNumberOfCells();
+		Row row = sheet.getRow(rowNum-1);
+		for(int i=0;i<cols-JUMP;i++){
+			list.add(this.parseCell(row.getCell(i==0?i:i+JUMP)));
+		}
+		int i=0;
+		for(String key : list) {
+			this.info.put("field"+i, key);
+			i++;
+		}
+		//System.out.println(new Gson().toJson(info));
+		return list;
+	}
 	private String parseCell(Cell cell){
 		String res = "";
 		if(cell!=null)
@@ -69,13 +101,52 @@ public class ExcelUtil {
 			}
 		return res;
 	}
-	private List<String> getKeys(Sheet sheet){
-		List<String> list = new ArrayList<String>();
-		int cols = sheet.getRow(0).getPhysicalNumberOfCells();
-		Row row = sheet.getRow(0);
-		for(int i=0;i<cols;i++){
-			list.add(this.parseCell(row.getCell(i)));
+	private boolean isNeed(String code) {
+		switch(code) {
+		case "ALB":
+		case "BGR":
+		case "BIH":
+		case "CZE":
+		case "EST":
+		case "HRV":
+		case "HUN":
+		case "LTU":
+		case "LVA":
+		case "MKD":
+		case "MNE":
+		case "POL":
+		case "ROU":
+		case "SRB":
+		case "SVK":
+		case "SVN": return true;
+			default : return false;
 		}
-		return list;
 	}
+	/**	public String parseFile(MultipartFile mfile,String path) {
+		String fileName = mfile.getOriginalFilename();
+		String suffix = fileName.substring(fileName.lastIndexOf(".")+1);
+		int size = 0;
+		try {
+			File file = new File(
+					path
+					+new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
+					+"."+suffix);
+			file.getParentFile().mkdirs();
+			
+			mfile.transferTo(file);
+			this.xls(file);
+			size = this.data.size();
+			if(size<1)return "æ²¡æœ‰æ•°æ®ã€‚";
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			return "æ–‡ä»¶é”™è¯¯ã€‚";
+		} catch (IOException e) {
+			e.printStackTrace();
+			return "è§£æé”™è¯¯ã€‚";
+		} catch (InvalidFormatException e) {
+			e.printStackTrace();
+			return "æ— æ•ˆæ–‡ä»¶ã€‚";
+		}
+		return "ä¸Šä¼ æˆåŠŸï¼ä¸€å…±"+size+"æ¡æ•°æ®ã€‚";
+	}**/
 }

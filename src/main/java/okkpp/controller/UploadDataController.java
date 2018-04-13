@@ -2,6 +2,11 @@ package okkpp.controller;
 
 import okkpp.service.UploadDataService;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author DUCK  E-mail: okkpp@qq.com
- * @date ����ʱ�䣺2018��1��19�� ����9:02:37 
  * @version 1.0 
  */
 @Controller
@@ -22,15 +26,24 @@ public class UploadDataController {
 	
 	@RequestMapping("/page")
 	public String page(Model model){
-		model.addAttribute("msg", "�ȴ��ϴ��ļ�!");
 		return "/upload/page";
 	}
-	
 	@RequestMapping("/import")
-	public String importFile(@RequestParam(value="uploadFile")MultipartFile file,Model model){
-		
-		
-		//model.addAttribute("msg", service.importFile(file));
-		return "/upload/page";
+	public String importFile(@RequestParam(value="uploadFile")MultipartFile mfile,Model model,HttpServletRequest request){
+		String path=request.getSession().getServletContext().getRealPath("images/");
+		String fileName = mfile.getOriginalFilename();
+		String suffix = fileName.substring(fileName.lastIndexOf("."));
+		try {
+			File file = new File(
+					path
+					+new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
+					+suffix);
+			file.mkdirs();
+			mfile.transferTo(file);
+			System.out.println(file.getPath());
+		}catch (Exception e) {
+			System.out.println("error");
+		}
+		return "redirect:/upload/page.do";
 	}
 }

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package okkpp.utils;
 
 import org.apache.ibatis.reflection.MetaObject;

@@ -1,16 +1,16 @@
 package okkpp.service.propagate;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import okkpp.dao.propagate.TableCatalogDataMapper;
-import okkpp.dao.propagate.TableCatalogMapper;
+import okkpp.base.service.BaseService;
 import okkpp.dao.propagate.TableDataMapper;
-import okkpp.model.propagate.PropagateObject;
-import okkpp.model.propagate.TableCatalog;
-import okkpp.model.propagate.TableCatalogData;
 import okkpp.model.propagate.TableData;
+import tk.mybatis.mapper.entity.Example;
 
 /**
 * @author duck
@@ -18,22 +18,20 @@ import okkpp.model.propagate.TableData;
 */
 @Service
 @Transactional
-public class TableDataService {
+public class TableDataService extends BaseService<TableData>{
 
 	@Autowired
-	TableDataMapper dataMapper;
-	@Autowired
-	TableCatalogMapper catalogMapper;
-	@Autowired
-	TableCatalogDataMapper CatalogDataMapper;
+	TableDataMapper mapper;
 	
-	public void saveData(TableCatalog tableCatalog,PropagateObject data) {
-		TableData tableData = new TableData();
-		tableData.setJson(data.toJson());
-		dataMapper.insertReturnId(tableData);
-		TableCatalogData tableCatalogData = new TableCatalogData();
-		tableCatalogData.setCatalogId(tableCatalog.getId());
-		tableCatalogData.setDataId(tableData.getId());
-		CatalogDataMapper.insert(tableCatalogData);
+	public int saveData(int tableId,Map<String, Object> data) {
+		TableData td = new TableData(tableId,data);
+		mapper.insertReturnId(td);
+		return td.getId();
+	}
+	public List<TableData> list(int catalogId) {
+		Example example = new Example(TableData.class);
+		Example.Criteria criteria = example.createCriteria();
+		criteria.andEqualTo("infoId", catalogId);
+		return selectByExample(example);
 	}
 }

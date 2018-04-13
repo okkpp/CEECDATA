@@ -50,7 +50,7 @@
         </div>
 
         <div id="imageView">
-            <div class="page-header" style="text-align: center;">
+            <div class="page-header" style="text-align: center;visibility: hidden;" id="imageTitle">
                 <h3>国土面积</h3>
                 <br>
                 <h4 style="margin-top: -20px;">Country Area</h4>
@@ -62,6 +62,10 @@
                 </div>
             </div>
         </div>
+
+        <div style="color: #959595; margin-top: 1.5em;">*此数据仅展现最近五年，若需全部数据请点击&nbsp;<a href="#" class="btn btn-info btn-xs">
+            <span class="glyphicon glyphicon-save"></span> 下载
+        </a></div>
     </div>
     <script>
     var remoteData = getRemoteData('/overall/json.do?info=Countryarea');
@@ -69,68 +73,119 @@
       $(function() {
         $('#imageView').hide();
         $('#tableTag').attr('class', 'active');
-        generalTable(remoteData,'surface',$('#tableData'));
+        generalNoYearTable(remoteData,$('#tableData'));
       })
 
       function showTable() {
-        $('#tableView').show();
-        $('#imageView').hide();
-        $('#tableTag').attr('class', 'active');
-        $('#imageTag').removeClass('active');
+          $('#tableView').show();
+          $('#imageView').hide();
+          $('#imageTitle').css('visibility','hidden');
+          $('#tableTag').attr('class', 'active');
+          $('#imageTag').removeClass('active');
       }
 
       function showImage() {
-        $('#imageView').show();
-        $('#tableView').hide();
-        $('#imageTag').attr('class', 'active');
-        $('#tableTag').removeClass('active');
+          $('#imageView').show();
+          $('#imageTitle').css('visibility','visible');
+          $('#tableView').hide();
+          $('#imageTag').attr('class', 'active');
+          $('#tableTag').removeClass('active');
       }
     //初始化图
     function initPic(data) {
-        var option = {
-            //timeline基本配置都写在baseoption 中
-            baseOption: {
-                timeline: {
-                    loop: true,
-                    axisType: 'category',
-                    show: true,
-                    autoPlay: true,
-                    playInterval: 1000,
-                    data: setYears(data)
-                },
-                legend: {
-                    data: setLegend(data)
-                },
-                tooltip: {
-                    trigger: 'axis'
-                },
-                title:{
-                    subtext:'数据来源'
-                },
-                calculable: true,
-                grid: {
-                    y: 100,
-                    y2: 100
-                },
-                xAxis: [{
-                    type: 'category',
-                    axisLabel: {                        interval:0,                        rotate:40                    },                    data: setCountries(data)
-                }],
-                yAxis: {
-                    type: 'value',
-                    axisLine: {
-                        show: true,
-                        lineStyle:{
-                            color:'#0066CC'
+        if (remoteData.existYear == false){
+            var option = {
+                //timeline基本配置都写在baseoption 中
+                baseOption: {
+                    legend: {
+                        data: setLegend(data)
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    title:{
+                        subtext:'数据来源'
+                    },
+                    calculable: true,
+                    grid: {
+                        y: 100,
+                        y2: 100
+                    },
+                    xAxis: [{
+                        type: 'category',
+                        axisLabel: {                        
+                            interval:0,                        
+                            rotate:40                    
+                        },                    
+                        data: setCountries(data)
+                    }],
+                    yAxis: {
+                        type: 'value',
+                        axisLine: {
+                            show: true,
+                            lineStyle:{
+                                color:'#0066CC'
+                            }
                         }
-                    }
+                    },
+                    series: setSeriesTitle(data)
                 },
-                series: setSeriesTitle(data)
-            },
-            options:setOptions(data)
-        };
-        var myChart = echarts.init(document.getElementById('main'));
-        myChart.setOption(option);
+                options:setOptions(data)
+            };
+            var myChart = echarts.init(document.getElementById('main'));
+            myChart.setOption(option);
+        }
+        else{
+            var option = {
+                //timeline基本配置都写在baseoption 中
+                baseOption: {
+                    timeline: {
+                        loop: true,
+                        axisType: 'category',
+                        show: true,
+                        autoPlay: true,
+                        playInterval: 1000,
+                        data: setYears(data)
+                    },
+                    legend: {
+                        data: setLegend(data)
+                    },
+                    tooltip: {
+                        trigger: 'axis'
+                    },
+                    title:{
+                        subtext:'数据来源'
+                    },
+                    calculable: true,
+                    grid: {
+                        y: 100,
+                        y2: 100
+                    },
+                    xAxis: [{
+                        type: 'category',
+                        axisLabel: {                        
+                            interval:0,                        
+                            rotate:40                    
+                        },                    
+                        data: setCountries(data)
+                    }],
+                    yAxis: {
+                        type: 'value',
+                        axisLine: {
+                            show: true,
+                            lineStyle:{
+                                color:'#0066CC'
+                            }
+                        }
+                    },
+                    series: setSeriesTitle(data)
+                },
+                options:setOptions(data)
+            };
+            var myChart = echarts.init(document.getElementById('main'));
+            myChart.setOption(option);
+        }
+
     }
 
     initPic(remoteData);
