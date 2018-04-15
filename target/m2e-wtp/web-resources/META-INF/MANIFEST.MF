@@ -1,21 +1,5 @@
 Manifest-Version: 1.0
-<<<<<<< HEAD
 Built-By: dell
-=======
-<<<<<<< HEAD
-Built-By: Administrator
-=======
-<<<<<<< HEAD
-Built-By: ASUS
-=======
-<<<<<<< HEAD
-Built-By: Administrator
-=======
-Built-By: dell
->>>>>>> 19d4f5895b9b591cf8d5715a2096699c90fde784
->>>>>>> 059ec35d395c82198efaa91a6213b2e92f59cc48
->>>>>>> f1e97a9e5e934c9ef7a751017596cf64cd604a7d
->>>>>>> 2f57a83d5af6c9d80acc4121d9fbbba0ea16a44f
 Build-Jdk: 1.8.0_161
 Created-By: Maven Integration for Eclipse
 
