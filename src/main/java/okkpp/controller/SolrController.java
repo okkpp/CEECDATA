@@ -26,6 +26,13 @@ public class SolrController {
 		return solrService.getContentByCondition(info);
 	}
 	
+	@RequestMapping("/getContentByCondition2")
+	@ResponseBody
+	public List<DataModel> getContentByCondition2(@RequestParam("info")String info){
+		System.out.println("info : " + info);
+		return solrService.getContentByCondition(info);
+	}
+	
 	@RequestMapping("/searchIndex")
 	public String searchIndex() {
 		return "search";

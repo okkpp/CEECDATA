@@ -39,7 +39,7 @@ public class ContentController extends BaseController<Content>{
 	public String Index(Model model) {
 		return "index";
 	}
-	
+
 	@RequestMapping("/getContent")
 	@ResponseBody
 	public Map<String, List<Content>> getContent() {

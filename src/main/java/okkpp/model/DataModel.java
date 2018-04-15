@@ -6,7 +6,7 @@ public class DataModel {
 	
 	private String country;
 	private String year;
-	private HashMap<String, String> map;
+	private HashMap<String, String> fields;
 	public String getCountry() {
 		return country;
 	}
@@ -20,14 +20,14 @@ public class DataModel {
 		this.year = year;
 	}
 	public HashMap<String, String> getMap() {
-		return map;
+		return fields;
 	}
-	public void setMap(HashMap<String, String> map) {
-		this.map = map;
+	public void setMap(HashMap<String, String> fields) {
+		this.fields = fields;
 	}
 	@Override
 	public String toString() {
-		return "DataModel [country=" + country + ", year=" + year + ", map=" + map + "]";
+		return "DataModel [country=" + country + ", year=" + year + ", fields=" + fields + "]";
 	}
 	
 }

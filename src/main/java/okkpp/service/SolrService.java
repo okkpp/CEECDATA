@@ -1,6 +1,7 @@
 package okkpp.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +25,9 @@ import okkpp.model.MusinInfo;
 @Transactional
 public class SolrService {
 
-	HttpSolrServer dataSolrServer = new HttpSolrServer("http://kcudk.top/solr/collection2");
-	HttpSolrServer infoSolrServer = new HttpSolrServer("http://kcudk.top/solr/collection3");
-	HttpSolrServer musicSolrServer = new HttpSolrServer("http://kcudk.top/solr/collection4");
+	HttpSolrServer dataSolrServer = new HttpSolrServer("http://120.77.159.125/solr/collection2");
+	HttpSolrServer infoSolrServer = new HttpSolrServer("http://120.77.159.125/solr/collection3");
+	HttpSolrServer musicSolrServer = new HttpSolrServer("http://120.77.159.125/solr/collection4");
 	// 创建SolrQuery对象
 	SolrQuery query;
 
@@ -100,6 +101,7 @@ public class SolrService {
 
 			System.out.println("匹配结果总数:" + list.getNumFound());
 			String str;
+			HashMap<String, String> map ;
 			for (SolrDocument solrDocument : list) {
 				str = solrDocument.get("fields_keywords").toString();
 				str = str.substring(1, str.length() - 1);
@@ -121,6 +123,10 @@ public class SolrService {
 
 							dataModel = new DataModel();
 							dataModel.setCountry(jsonMap2.get("field0"));
+							map = new HashMap<>();
+							map.put(solrDocument.get("name_keywords").toString().substring(1,
+									solrDocument.get("name_keywords").toString().length() - 1), jsonMap2.get(entry.getKey()));
+							dataModel.setMap(map);
 							//dataModel.setTargetValue(jsonMap2.get(entry.getKey()));
 							dataModel.setYear(year);
 							//dataModel.setTarget(solrDocument.get("name_keywords").toString().substring(1,
