@@ -17,21 +17,30 @@
 <body>
 	<input type="text" id="search_input" />
 	<input type="button" value="搜索" id="search_btn" />
-	<div id="search_result" style="height:200px;width:600px;background:#a1a1a1"/>
-
+	<div id="search_result" style="height: 200px; width: 600px;" />
 
 </body>
 
 <script>
 	$("#search_btn").click(function() {
-		var str = "getContentByCondition.do?info="+$("#search_input").val();
-		//document.getElementById("search_result").innerHTML = "asd";
-		 $.ajax({
+		var str = "getContentByCondition2.do?info=" + $("#search_input").val();
+		$.ajax({
 			url : str,
 			type : "GET",
-			success : function(result){
-				$("<p></p>").append(result).appendTo("#search_result");
-				//console.log(result);
+			success : function(result) {
+				$("#search_result").empty();
+				result = eval('(' + result + ')');
+				$.each(result, function(index, item) {
+					var fields = "";
+					for(var i in item.map){
+						if(item.map[i] == ""){
+							fields = fields + "" + i + " : 无数据";
+						}else{	
+							fields = fields + "" + i + " : " + item.map[i];
+						}
+					}	
+					$("<p></p>").append("国家 :" + item.country + " 年份  : " +item.year + " " + fields).appendTo("#search_result");
+				})
 			}
 		})
 	})

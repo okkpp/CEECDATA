@@ -144,7 +144,4 @@ public class ContentService extends BaseService<Content> {
 	public List<HashMap<String, String>> showColumnsWithComment(String tab) {
 		return mapper.showColumnsWithComment(tab);
 	}
-
-
-
 }

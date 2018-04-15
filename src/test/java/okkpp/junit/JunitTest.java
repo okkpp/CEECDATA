@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mysql.jdbc.Field;
 
 import okkpp.base.BaseTest;
 import okkpp.model.propagate.TableData;
@@ -76,12 +77,20 @@ public class JunitTest extends BaseTest{
 	private String PassWord;
 	@Value(value = "${ftp.BASE_PATH}")
 	private String BASE_PATH;
-
+	
+	@Test
 	public void test() throws FileNotFoundException {
+<<<<<<< HEAD
 //		File f = new File("B:\\duck.png");
 //		FileInputStream file = new FileInputStream(f);
 //		FTPUtil ftp = new FTPUtil();
 //		ftp.SFTPUpload(HOST, PORT, UserName, PassWord, BASE_PATH, file, "duck.png");
+=======
+		File f = new File("E:\\5.png");
+		FileInputStream file = new FileInputStream(f);
+		FTPUtil ftp = new FTPUtil();
+		ftp.SFTPUpload(HOST, PORT, UserName, PassWord, BASE_PATH, file, "5.png");
+>>>>>>> acf557c81ac1bacb9fb19c2a7cfba5e3c8229c7a
 	}
 
 	@Autowired
