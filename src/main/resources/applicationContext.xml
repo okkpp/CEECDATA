@@ -55,6 +55,7 @@
 	<!-- ehcahce ↑ -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="contentType"><value>text/html;charset=UTF-8</value></property>
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>

@@ -79,8 +79,9 @@ public class SpiderUtil {
 		System.out.println("目录获取完毕！");
 		return list;
 	}
-	public void resolveCatalog(Catalog c) throws IOException {
+	public int resolveCatalog(Catalog c) throws IOException {
 		System.out.println("正在解析："+c.getName());
+		int i = 0;
 		for(String key : c.map.keySet()) {
 			System.out.println("准备连接："+BASE_PATH+key);
 			Connection conn = Jsoup.connect(BASE_PATH+key);
@@ -91,10 +92,12 @@ public class SpiderUtil {
 				String href = e.attr("href");
 				Pattern pattern = Pattern.compile("\\w*downloadformat=excel");
 				if(pattern.matcher(href).find()) {
-					new Thread(download(href,c.map.get(key))).start();
+					//下载文件并解析到数据库
+					//new Thread(download(href,c.map.get(key))).start();
 				}
 			}
 		}
+		return i;
 	}
 	private String LOCAL_PATH = "B:\\download_excel\\";
 	@SuppressWarnings("resource")
@@ -128,7 +131,7 @@ public class SpiderUtil {
 		ExcelUtil eu = new ExcelUtil();
 		try {
 			eu.xls(file);
-			service.createTabWithData(tableName, eu.info, eu.data);
+//			service.createTabWithData(tableName, eu.info, eu.data);
 			System.out.println("建表结束！");
 			//System.out.println(new Gson().toJson(eu.data));
 		} catch (InvalidFormatException e) {

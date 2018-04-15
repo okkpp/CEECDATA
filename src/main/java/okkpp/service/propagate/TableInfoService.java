@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+
 import okkpp.base.service.BaseService;
 import okkpp.dao.propagate.TableDataMapper;
 import okkpp.dao.propagate.TableInfoMapper;
-import okkpp.model.propagate.TableData;
 import okkpp.model.propagate.TableInfo;
 
 /**
@@ -34,12 +36,23 @@ public class TableInfoService extends BaseService<TableInfo>{
 	public List<TableInfo> list(){
 		return tableInfoMapper.selectAll();
 	}
-	public void createTabWithData(String tableName,Map<String, Object> info,List<Map<String, Object>> datalist) {
-		TableInfo ti = new TableInfo(tableName, info);
-		tableInfoMapper.insertReturnId(ti);
-		for(Map<String, Object> data : datalist) {
-			TableData td = new TableData(ti.getId(),data);
-			tableDataMapper.insertReturnId(td);
-		}
+	public PageInfo<TableInfo> listPage(int page,int pageSize) {
+		PageHelper.startPage(page, pageSize);
+		List<TableInfo> list = tableInfoMapper.selectAll();
+		return new PageInfo<TableInfo>(list);
 	}
+//	public void createTabWithData(String tableName,Map<String, Object> info,List<Map<String, Object>> datalist) {
+//		TableInfo ti = new TableInfo(tableName, info);
+//		tableInfoMapper.insertReturnId(ti);
+//		for(Map<String, Object> data : datalist) {
+//			TableData td = new TableData(ti.getId(),data);
+//			tableDataMapper.insertReturnId(td);
+//		}
+//	}
+//	public void resolveData415(Integer id,List<Map<String, Object>> datalist) {
+//		for(Map<String, Object> data : datalist) {
+//			TableData td = new TableData(id,data);
+//			tableDataMapper.insertReturnId(td);
+//		}
+//	}
 }

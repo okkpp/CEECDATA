@@ -1,26 +1,26 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="okkpp.dao.propagate.TableDataMapper">
-  <resultMap id="BaseResultMap" type="okkpp.model.propagate.TableData">
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="okkpp.dao.propagate.TableDataMapper" >
+  <resultMap id="BaseResultMap" type="okkpp.model.propagate.TableData" >
     <!--
       WARNING - @mbggenerated
     -->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="info_id" jdbcType="INTEGER" property="infoId" />
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="info_id" property="infoId" jdbcType="INTEGER" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="okkpp.model.propagate.TableData">
+  <resultMap id="ResultMapWithBLOBs" type="okkpp.model.propagate.TableData" extends="BaseResultMap" >
     <!--
       WARNING - @mbggenerated
     -->
-    <result column="data" jdbcType="LONGVARCHAR" property="data" />
+    <result column="data" property="data" jdbcType="LONGVARCHAR" />
   </resultMap>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     <!--
       WARNING - @mbggenerated
     -->
     id, info_id
   </sql>
-  <sql id="Blob_Column_List">
+  <sql id="Blob_Column_List" >
     <!--
       WARNING - @mbggenerated
     -->
