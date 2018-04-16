@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -18,8 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
+import okkpp.base.Msg;
 import okkpp.model.DataModel;
+import okkpp.model.DataModel2;
 import okkpp.model.MusinInfo;
+import okkpp.utils.CountryCode;
+import okkpp.utils.Countrys;
 
 @Service
 @Transactional
@@ -28,29 +33,29 @@ public class SolrService {
 	HttpSolrServer dataSolrServer = new HttpSolrServer("http://120.77.159.125/solr/collection2");
 	HttpSolrServer infoSolrServer = new HttpSolrServer("http://120.77.159.125/solr/collection3");
 	HttpSolrServer musicSolrServer = new HttpSolrServer("http://120.77.159.125/solr/collection4");
+
 	// 创建SolrQuery对象
 	SolrQuery query;
 
-	public List<MusinInfo> getMusics(String catalog){
+	public List<MusinInfo> getMusics(String catalog) {
 		query = new SolrQuery();
-		query.setQuery("music_catalog_name:"+catalog);
-		
+		query.setQuery("music_catalog_name:" + catalog);
+
 		List<MusinInfo> musinInfos = new ArrayList<>();
 		MusinInfo musinInfo;
-		
+
 		try {
 			QueryResponse response = musicSolrServer.query(query);
 			response = musicSolrServer.query(query);
 			// 获取匹配
 			SolrDocumentList list = response.getResults();
 
-			System.out.println("匹配结果总数:" + list.getNumFound());
 			for (SolrDocument solrDocument : list) {
 				musinInfo = new MusinInfo();
 				musinInfo.setCatalog(solrDocument.get("music_catalog_name").toString());
 				musinInfo.setPricture(solrDocument.get("music_picture").toString());
 				musinInfo.setDescription(solrDocument.get("music_description").toString());
-				
+
 				musinInfos.add(musinInfo);
 			}
 		} catch (SolrServerException e) {
@@ -58,139 +63,184 @@ public class SolrService {
 			e.printStackTrace();
 			return null;
 		}
-		
+
 		return musinInfos;
 	}
-	
-	public List<DataModel> getContentByCondition(String info){
-		// TODO Auto-generated method stub
-		String[] str = info.split(" ");
-		String target = str[0];
-		String country = str[1];
-		String year = str[2];
-		System.out.println("target : " + target + "country : " + country  );
-		return getContent(target, country, year);
-		// return null;
+
+	public Msg getContentByCondition(String info) {
+		// 解析 info 填充数据
+		String countrys = "";
+		String targets = "";
+		String years = "";
+		boolean flag = false;
+		String[] infos = info.split(" ");
+		for (int i = 0; i < infos.length; i++) {
+			// 是否年份
+			if (Pattern.matches("^[1-2]{1}[0-9]{3}$", infos[i])) {
+				years += infos[i] + " ";
+			} else {
+				// 是否国家
+				for (int y = 0; y < Countrys.countryNames.length; y++) {
+					if (Countrys.countryNames[y].contains(infos[i]) && infos[i].length() >= 2)
+						flag = true;
+				}
+
+				if (flag) {
+					countrys += infos[i] + " ";
+				} else {
+					targets += infos[i] + " ";
+				}
+				flag = false;
+			}
+		}
+
+		if (!years.isEmpty() && !countrys.isEmpty() && !targets.isEmpty()) {
+			// 都不为空
+			try {
+				return Msg.success().add("dataType","type1").add("data", getContentByCondition(countrys, targets, years));
+			} catch (SolrServerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return Msg.fail().add("error", "");
+			}
+		} else if (years.isEmpty() && !targets.isEmpty() && !countrys.isEmpty()) {
+			try {
+				return Msg.success().add("dataType", "type2").add("data", getContentByCondition(countrys, targets));
+			} catch (SolrServerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return Msg.fail().add("error", "");
+			}
+		} else if (years.isEmpty() && targets.isEmpty() && !countrys.isEmpty()) {
+			// 国家不为空其他为空
+		}
+		return Msg.fail().add("error", "条件格式有误,请重新输入");
 	}
 
-	// getContentByCondition
-	public List<DataModel> getContent(String target, String country, String year) {
-		List<DataModel> dataModels = new ArrayList<>();
+	// 按条件查找
+	public List<DataModel> getContentByCondition(String countrys, String target, String year)
+			throws SolrServerException {
 		DataModel dataModel;
-		query = new SolrQuery();
-		query.setQuery("name_keywords:" + target);
+		List<DataModel> dataModels = new ArrayList<>();
+		String[] cs = countrys.split(" ");
+		for (int y = 0; y < cs.length; y++) {
+			String country = cs[y];
+			HashMap<String, String> map;
+			String[] targets = target.split(" ");
+			String[] years = year.split(" ");
+			String querySql = "";
+			for (int x = 0; x < years.length; x++) {
 
-		// 设置分页信息 (使用默认的)
-		query.setStart(0);
-		query.setRows(10);
+				dataModel = new DataModel();
+				dataModel.setCountry(country);
+				dataModel.setYear(years[x]);
+				map = new HashMap<>();
+				query = new SolrQuery();
+				for (int i = 0; i < targets.length; i++) {
+					querySql += " name_keywords:" + targets[i];
+				}
+				query.setQuery(querySql);
+				QueryResponse response = infoSolrServer.query(query);
+				SolrDocumentList list = response.getResults();
 
-		// 设置显示的Field的域集合
-		// query.setFields("id,name_keywords,fields_keywords");
-
-		// 设置默认域
-		query.set("df", "name_keywords");
-
-		// 执行查询并返回结果
-		QueryResponse response;
-
-		try {
-			response = infoSolrServer.query(query);
-
-			// 获取匹配
-			SolrDocumentList list = response.getResults();
-
-			System.out.println("匹配结果总数:" + list.getNumFound());
-			String str;
-			HashMap<String, String> map ;
-			for (SolrDocument solrDocument : list) {
-				str = solrDocument.get("fields_keywords").toString();
-				str = str.substring(1, str.length() - 1);
-				LinkedHashMap<String, String> jsonMap = toFastJson(str);
-				for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
-					if (entry.getValue().toString().equals(year)) {
-
-						query = new SolrQuery();
-						query.setQuery("info_id:" + solrDocument.get("id"));
-						query.set("fq", "data_keywords:" + country);
-
-						QueryResponse dataResponse = dataSolrServer.query(query);
-						// 获取匹配
-						SolrDocumentList documentList = dataResponse.getResults();
-						for (SolrDocument document : documentList) {
-							str = document.get("data_keywords").toString();
-							str = str.substring(1, str.length() - 1);
-							LinkedHashMap<String, String> jsonMap2 = toFastJson(str);
-
-							dataModel = new DataModel();
-							dataModel.setCountry(jsonMap2.get("field0"));
-							map = new HashMap<>();
-							map.put(solrDocument.get("name_keywords").toString().substring(1,
-									solrDocument.get("name_keywords").toString().length() - 1), jsonMap2.get(entry.getKey()));
-							dataModel.setMap(map);
-							//dataModel.setTargetValue(jsonMap2.get(entry.getKey()));
-							dataModel.setYear(year);
-							//dataModel.setTarget(solrDocument.get("name_keywords").toString().substring(1,
-									//solrDocument.get("name_keywords").toString().length() - 1));
-							dataModels.add(dataModel);
+				for (SolrDocument solrDocument : list) {
+					LinkedHashMap<String, String> jsonMap = toFastJson(solrDocument.get("fields_keywords").toString());
+					for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
+						if (entry.getValue().toString().equals(years[x])) {
+							query = new SolrQuery();
+							query.setQuery("info_id:" + solrDocument.get("id").toString());
+							query.set("fq", "data_keywords:" + country);
+							response = dataSolrServer.query(query);
+							SolrDocumentList dataList = response.getResults();
+							for (SolrDocument dataSolrDocument : dataList) {
+								LinkedHashMap<String, String> jsonMap2 = toFastJson(
+										dataSolrDocument.get("data_keywords").toString());
+								for (Map.Entry<String, String> entry2 : jsonMap2.entrySet()) {
+									if (entry2.getKey().equals(entry.getKey())) {
+										map.put(sub(solrDocument.get("name_keywords").toString()),
+												entry2.getValue().toString());
+									}
+								}
+							}
 						}
-					} else {
-						// System.out.println(entry.getValue().toString());
 					}
 				}
+				dataModel.setFields(map);
+				dataModels.add(dataModel);
 			}
-		} catch (SolrServerException e) {
-			// TODO Auto-generated catch block
-			return null;
 		}
 		return dataModels;
 	}
 
+	// 按条件查找
+	public List<DataModel2> getContentByCondition(String countrys, String target) throws SolrServerException {
+		DataModel2 dataModel = null;
+		List<DataModel2> dataModels = new ArrayList<>();
+		HashMap<String, String> map;
+		String[] cs = countrys.split(" ");
+		String[] targets = target.split(" ");
+
+		for (int y = 0; y < cs.length; y++) {
+			String country = cs[y];
+			map = new HashMap<>();
+
+			for (int i = 0; i < targets.length; i++) {
+				dataModel = new DataModel2();
+				dataModel.setCountry(country);
+				query = new SolrQuery();
+				query.setQuery("name_keywords:" + targets[i]);
+				QueryResponse response = infoSolrServer.query(query);
+				SolrDocumentList list = response.getResults();
+				for (SolrDocument solrDocument : list) {
+					dataModel.setTarget(sub(solrDocument.get("name_keywords").toString()));
+					List<String> keys = new ArrayList<>();
+					// System.out.println(solrDocument.get("fields_keywords"));
+					// 表头信息 Json
+					LinkedHashMap<String, String> jsonMap = toFastJson(solrDocument.get("fields_keywords").toString());
+
+					query = new SolrQuery();
+					query.setQuery("info_id:" + solrDocument.get("id").toString());
+					query.set("fq", "data_keywords:" + country);
+					QueryResponse queryResponse = dataSolrServer.query(query);
+					SolrDocumentList solrDocumentList = queryResponse.getResults();
+					for (SolrDocument document : solrDocumentList) {
+						// System.out.println(document.get("data_keywords").toString());
+						// 数据信息 Json
+						LinkedHashMap<String, String> jsonMap2 = toFastJson(document.get("data_keywords").toString());
+						map = new HashMap<>();
+						for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
+							if (!entry.getKey().toString().equals("field0")) {
+								for (Map.Entry<String, String> entry2 : jsonMap2.entrySet()) {
+									if (entry.getKey().equals(entry2.getKey())) {
+										map.put(entry.getValue(), entry2.getValue());
+									}
+								}
+
+							}
+						}
+						dataModel.setFields(map);
+						dataModels.add(dataModel);
+						System.out.println(dataModel);
+					}
+
+				}
+			}
+
+		}
+		return dataModels;
+	}
+
+	// 去除首尾 + JSON 转 HashMap
 	public LinkedHashMap<String, String> toFastJson(String str) {
-		LinkedHashMap<String, String> jsonMap = JSON.parseObject(str,
+		LinkedHashMap<String, String> jsonMap = JSON.parseObject(sub(str),
 				new TypeReference<LinkedHashMap<String, String>>() {
 				});
 		return jsonMap;
 	}
-	
-	public void getMusic() {
-		
+
+	// 去除首尾
+	public String sub(String str) {
+		return str.substring(1, str.length() - 1);
 	}
-	/*
-	 * @Test public void search02() throws Exception {
-	 * query.setQuery("product_name:小黄人"); // 设置过滤条件 // 如果设置多个过滤条件的话,需要使用add :
-	 * query.addFilterQuery(""); query.setFilterQueries("product_price:[1 TO 10]");
-	 * 
-	 * // 设置排序 query.setSort("product_name", ORDER.asc);
-	 * 
-	 * // 设置分页信息 (使用默认的) query.setStart(0); query.setRows(10);
-	 * 
-	 * // 设置显示的Field的域集合 query.setFields("id,product_name,product_price");
-	 * 
-	 * // 设置默认域 query.set("df", "product_keywords");
-	 * 
-	 * // 设置高亮信息 query.setHighlight(true); query.addHighlightField("product_name");
-	 * query.setHighlightSimplePre("<em>"); query.setHighlightSimplePost("</em>");
-	 * 
-	 * // 执行查询并返回结果 QueryResponse response = server.query(query);
-	 * 
-	 * // 获取匹配 SolrDocumentList list = response.getResults(); // 匹配结果总数 long count =
-	 * list.getNumFound();
-	 * 
-	 * System.out.println("匹配结果总数:" + count); // 获取高亮显示信息 Map<String, Map<String,
-	 * List<String>>> highlighting = response.getHighlighting();
-	 * 
-	 * for (SolrDocument solrDocument : list) { System.out.println("id : " +
-	 * solrDocument.get("id"));
-	 * 
-	 * List<String> list2 =
-	 * highlighting.get(solrDocument.get("id")).get("product_name"); if (list2 !=
-	 * null) { System.out.println("高亮显示的商品名称 : " + list2.get(0)); } else {
-	 * System.out.println(solrDocument.get("product_name")); }
-	 * 
-	 * System.out.println("catalog : " + solrDocument.get("product_catalog"));
-	 * System.out.println("price : " + solrDocument.get("product_price"));
-	 * System.out.println("picture : " + solrDocument.get("product_picture"));
-	 * System.out.println("====================================="); } }
-	 */
 
 }

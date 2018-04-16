@@ -23,14 +23,15 @@
 
 <script>
 	$("#search_btn").click(function() {
-		var str = "getContentByCondition2.do?info=" + $("#search_input").val();
+		var str = "getContentByConditiondo?info=" + $("#search_input").val();
 		$.ajax({
 			url : str,
 			type : "GET",
 			success : function(result) {
 				$("#search_result").empty();
 				result = eval('(' + result + ')');
-				$.each(result, function(index, item) {
+				console.log(result);
+				/* $.each(result, function(index, item) {
 					var fields = "";
 					for(var i in item.map){
 						if(item.map[i] == ""){
@@ -40,7 +41,7 @@
 						}
 					}	
 					$("<p></p>").append("国家 :" + item.country + " 年份  : " +item.year + " " + fields).appendTo("#search_result");
-				})
+				}) */
 			}
 		})
 	})

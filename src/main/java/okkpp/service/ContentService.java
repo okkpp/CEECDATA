@@ -80,7 +80,7 @@ public class ContentService extends BaseService<Content> {
 	}
 
 	@Cacheable(value = "columnsCache")
-	public List<TableField> showTablesWithComment() {
+	public List<TableField> showTablesWithComment(Integer i) {
 		System.out.println("showTablesWithComment");
 		List<TableField> tablesWithComment = mapper.showTablesWithComment();
 		List<TableField> tables = new ArrayList<>();
@@ -106,10 +106,9 @@ public class ContentService extends BaseService<Content> {
 	}
 
 	public Map<String, List<TableField>> tableField(String info) {
-		System.out.println("tableField : " + info);
 		Iterator<?> iterator;
 		HashMap<String, String> hashMap;
-		List<TableField> list = showTablesWithComment();
+		List<TableField> list = showTablesWithComment(1);
 		Map<String, List<TableField>> map = new HashMap<String, List<TableField>>();
 		boolean flag = false;
 		for (TableField c : list) {
