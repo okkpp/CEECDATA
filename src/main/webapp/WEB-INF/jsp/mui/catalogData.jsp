@@ -19,6 +19,7 @@
 		<div class="panel admin-panel">
 			<div class="panel-head">
 				<strong class="icon-reorder">表单管理</strong>
+				<a href="javascript:;" onClick="javascript:history.back(-1);">返回上一页</a>
 			</div>
 			<div class="padding border-bottom">
 				<ul class="search">
@@ -29,37 +30,16 @@
 						<button type="submit" class="button border-red">
 							<span class="icon-trash-o"></span> 批量删除
 						</button>
+						<strong id="title"></strong>
 					</li>
 				</ul>
 			</div>
 			<table class="table table-hover text-center">
-				<thead>
-					<tr>
-						<th width="120">ID</th>
-						<th>目录中文</th>
-						<th>目录英文</th>
-						<th>表单名称</th>
-						<th>数据源</th>
-						<th>操作</th>
-					</tr>
+				<thead id="thead">
 				</thead>
-				<tbody id="tabBody">
-				<!-- 
-					<tr>
-						<td><input type="checkbox" name="id[]" value="1" /> 1</td>
-						<td>健康</td>
-						<td>Health</td>
-						<td>Completeness of death registration with cause-of-death information (%)</td>
-						<td>https://data.worldbank.org.cn/</td>
-						<td><div class="button-group">
-								<a class="button border-red" href="javascript:void(0)"
-									onclick="return del(1)"><span class="icon-trash-o"></span>
-									删除</a>
-							</div></td>
-					</tr>
-				 -->
+				<tbody id="tbody">
 				</tbody>
-				<tfoot>
+				<!-- <tfoot>
 					<tr>
 						<td colspan="8">
 						<div id="pageFoot" class="pagelist">
@@ -70,12 +50,9 @@
 								<a onclick="loadData(2)">下一页</a>
 								<a onclick="loadData(pages)">尾页</a>
 						</div>
-						<div hidden="true">
-							<input value="查找" onchange="loadData(this.innerHTML)"/>
-						</div>
 						</td>
 					</tr>
-				</tfoot>
+				</tfoot> -->
 			</table>
 		</div>
 	</form>
@@ -84,63 +61,69 @@
 	var isFirstPage,isLastPage;
 	var pageSize = 10;
 	var pages;
-function loadData(page){
-	if(pageNum<1)page=1;
-	if(pageNum>pages)page=pages;
+loadInfo();
+function loadInfo(){
 	$.ajax({
 		type:'POST',
-		data:{page:page,pageSize:pageSize},
-		url:'http://localhost/CEECDATA/tableCatalog/listPage.do',
+		data:{id:${param.id}},
+		url:'${pageContext.request.contextPath}/tableCatalog/getInfo.do',
 		success:function(data){
 			data = eval('('+data+')');
-			//console.log(data);
-			pageNum = data.pageNum;
+			$("#title").html(data.tableName);
+			fields = eval('('+data.fields+')');
+			appendThead(fields);
+			loadData();
+		}
+	});
+}
+function appendThead(fields){
+	var thead = "";
+	thead += "<tr>";
+	var length = Object.keys(fields).length;
+	for(i=0;i<length;i++){
+		thead += "<th>"+fields["field"+i]+"</th>";
+	}
+	thead += "</tr>";
+	$("#thead").html("");
+	$("#thead").append(thead);
+}
+function loadData(){
+	$.ajax({
+		type:'POST',
+		data:{infoId:${param.id}},
+		url:'${pageContext.request.contextPath}/catalogData/list.do',
+		success:function(data){
+			data = eval('('+data+')');
+			appendData(data)
+			/* pageNum = data.pageNum;
 			isFirstPage = data.isFirstPage;
 			isLastPage = data.isLastPage;
 			pages = data.pages;
 			appendData(data.list);
-			refreshFoot();
+			refreshFoot(); */
 		}
-	})
+	});
 }
-loadData(1);
 function appendData(data){
-	$("#tabBody").html("");
-	for(obj in data){
-		$("#tabBody").append(resolve(data[obj]));
+	$("#tbody").html("");
+	for(index in data){
+		obj = eval('('+data[index].data+')');
+		$("#tbody").append(resolve(obj));
 	}
 }
-function resolve(obj){
-	var res = "<tr><td><input type=\"checkbox\" name=\"id[]\" value=\""+obj.id+"\" />"+obj.id+"</td>";
-	res += "<td>"+obj.catalogCn+"</td>";
-	res += "<td>"+obj.catalogEn+"</td>";
-	res += "<td>"+obj.tableName+"</td>";
-	res += "<td>"+obj.source+"</td>";
-	res += "<td><div class=\"button-group\"><a class=\"button border-red\" href=\"javascript:void(0)\"";
-	res += "onclick=\"return del("+obj.id+")\"><span class=\"icon-trash-o\"></span>删除</a></div></td></tr>";
+function resolve(data){
+	var res = "";
+	res += "<tr>";
+	var length = Object.keys(data).length;
+	for(i=0;i<length;i++){
+		var value = data["field"+i];
+		if(value.indexOf('.')!=-1){
+			value = parseFloat(value).toFixed(2);
+		}
+		res += "<th>"+value+"</th>";
+	}
+	res += "</tr>";
 	return res;
-}
-function refreshFoot(){
-	var foot = "";
-	foot += "<a onclick=\"loadData(1)\">首页</a>";
-	foot += "<a onclick=\"loadData(pageNum-1)\">上一页</a>";
-	if(isFirstPage){
-		foot += "<span class=\"current\">"+pageNum+"</span>";
-		foot += "<a onclick=\"loadData("+(pageNum+1)+")\">"+(pageNum+1)+"</a>";
-		foot += "<a onclick=\"loadData("+(pageNum+2)+")\">"+(pageNum+2)+"</a>";
-	}else if(isLastPage){
-		foot += "<a onclick=\"loadData("+(pageNum-2)+")\">"+(pageNum-2)+"</a>";
-		foot += "<a onclick=\"loadData("+(pageNum-1)+")\">"+(pageNum-1)+"</a>";
-		foot += "<span class=\"current\">"+pageNum+"</span>";
-	}else{
-		foot += "<a onclick=\"loadData("+(pageNum-1)+")\">"+(pageNum-1)+"</a>";
-		foot += "<span class=\"current\">"+pageNum+"</span>";
-		foot += "<a onclick=\"loadData("+(pageNum+1)+")\">"+(pageNum+1)+"</a>";
-	}
-	foot += "<a onclick=\"loadData(pageNum+1)\">下一页</a>";
-	foot += "<a onclick=\"loadData(pages)\">尾页</a>";
-	$("#pageFoot").html("");
-	$("#pageFoot").append(foot);
 }
 
 function del(id){
