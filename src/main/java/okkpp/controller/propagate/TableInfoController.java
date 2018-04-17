@@ -61,4 +61,9 @@ public class TableInfoController {
 	public PageInfo<TableInfo> listPage(int page,int pageSize) {
 		return service.listPage(page, pageSize);
 	}
+	@RequestMapping("/getInfo")
+	@ResponseBody
+	public TableInfo getInfo(Integer id) {
+		return service.selectByKey(id);
+	}
 }

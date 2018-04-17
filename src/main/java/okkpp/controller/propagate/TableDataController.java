@@ -31,7 +31,7 @@ public class TableDataController {
 	}
 	@RequestMapping("/list")
 	@ResponseBody
-	public List<TableData> list(Integer catalogId) {
-		return service.list(catalogId);
+	public List<TableData> list(Integer infoId) {
+		return service.list(infoId);
 	}
 }
