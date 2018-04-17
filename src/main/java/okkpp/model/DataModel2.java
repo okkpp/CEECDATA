@@ -2,10 +2,10 @@ package okkpp.model;
 
 import java.util.HashMap;
 
-public class DataModel {
+public class DataModel2 {
 
 	private String country;
-	private String year;
+	private String target;
 	private HashMap<String, String> fields;
 
 	public String getCountry() {
@@ -16,12 +16,12 @@ public class DataModel {
 		this.country = country;
 	}
 
-	public String getYear() {
-		return year;
+	public String getTarget() {
+		return target;
 	}
 
-	public void setYear(String year) {
-		this.year = year;
+	public void setTarget(String target) {
+		this.target = target;
 	}
 
 	public HashMap<String, String> getFields() {
@@ -34,7 +34,7 @@ public class DataModel {
 
 	@Override
 	public String toString() {
-		return "DataModel [country=" + country + ", year=" + year + ", fields=" + fields + "]";
+		return "DataModel2 [country=" + country + ", target=" + target + ", fields=" + fields + "]";
 	}
 
 }
