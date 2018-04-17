@@ -74,6 +74,7 @@ public class SolrService {
 		String years = "";
 		boolean flag = false;
 		String[] infos = info.split(" ");
+		// 填充数据
 		for (int i = 0; i < infos.length; i++) {
 			// 是否年份
 			if (Pattern.matches("^[1-2]{1}[0-9]{3}$", infos[i])) {
@@ -84,7 +85,6 @@ public class SolrService {
 					if (Countrys.countryNames[y].contains(infos[i]) && infos[i].length() >= 2)
 						flag = true;
 				}
-
 				if (flag) {
 					countrys += infos[i] + " ";
 				} else {
@@ -93,28 +93,40 @@ public class SolrService {
 				flag = false;
 			}
 		}
+		// 去除最后一个空格
+		if (!years.isEmpty()) {
+			years = years.substring(0, years.length() - 1);
+		}
+		if (!countrys.isEmpty()) {
+			countrys = countrys.substring(0, countrys.length() - 1);
+		}
+		if (!targets.isEmpty()) {
+			targets = targets.substring(0, targets.length() - 1);
+		}
 
+		try {
+			return getContent(years, countrys, targets);
+		} catch (SolrServerException e) {
+			// TODO Auto-generated catch block
+			return Msg.fail().add("error", "条件格式有误,请重新输入");
+		}
+
+	}
+
+	private Msg getContent(String years, String countrys, String targets) throws SolrServerException {
 		if (!years.isEmpty() && !countrys.isEmpty() && !targets.isEmpty()) {
 			// 都不为空
-			try {
-				return Msg.success().add("dataType","type1").add("data", getContentByCondition(countrys, targets, years));
-			} catch (SolrServerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return Msg.fail().add("error", "");
-			}
+			return Msg.success().add("dataType", "type1").add("data", getContentByCondition(countrys, targets, years));
 		} else if (years.isEmpty() && !targets.isEmpty() && !countrys.isEmpty()) {
-			try {
-				return Msg.success().add("dataType", "type2").add("data", getContentByCondition(countrys, targets));
-			} catch (SolrServerException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return Msg.fail().add("error", "");
-			}
-		} else if (years.isEmpty() && targets.isEmpty() && !countrys.isEmpty()) {
-			// 国家不为空其他为空
+			// 年份为空其他不为空
+			return Msg.success().add("dataType", "type2").add("data", getContentByCondition(countrys, targets, 0, 10));
+		} else if (years.isEmpty() && !targets.isEmpty() && countrys.isEmpty()) {
+			// 指标不为空其他为空
+			return Msg.success().add("dataType", "type3").add("data", getContentByCondition("*", targets, 0, 1));
+		} else {
+			// 其他情况
+			return Msg.success().add("dataType", "type4").add("data", getFields());
 		}
-		return Msg.fail().add("error", "条件格式有误,请重新输入");
 	}
 
 	// 按条件查找
@@ -173,7 +185,8 @@ public class SolrService {
 	}
 
 	// 按条件查找
-	public List<DataModel2> getContentByCondition(String countrys, String target) throws SolrServerException {
+	public List<DataModel2> getContentByCondition(String countrys, String target, Integer pn, Integer rows)
+			throws SolrServerException {
 		DataModel2 dataModel = null;
 		List<DataModel2> dataModels = new ArrayList<>();
 		HashMap<String, String> map;
@@ -185,14 +198,15 @@ public class SolrService {
 			map = new HashMap<>();
 
 			for (int i = 0; i < targets.length; i++) {
-				dataModel = new DataModel2();
-				dataModel.setCountry(country);
 				query = new SolrQuery();
+				query.setStart(pn);
+				query.setRows(rows);
+
 				query.setQuery("name_keywords:" + targets[i]);
 				QueryResponse response = infoSolrServer.query(query);
 				SolrDocumentList list = response.getResults();
 				for (SolrDocument solrDocument : list) {
-					dataModel.setTarget(sub(solrDocument.get("name_keywords").toString()));
+
 					List<String> keys = new ArrayList<>();
 					// System.out.println(solrDocument.get("fields_keywords"));
 					// 表头信息 Json
@@ -204,7 +218,8 @@ public class SolrService {
 					QueryResponse queryResponse = dataSolrServer.query(query);
 					SolrDocumentList solrDocumentList = queryResponse.getResults();
 					for (SolrDocument document : solrDocumentList) {
-						// System.out.println(document.get("data_keywords").toString());
+
+						dataModel = new DataModel2();
 						// 数据信息 Json
 						LinkedHashMap<String, String> jsonMap2 = toFastJson(document.get("data_keywords").toString());
 						map = new HashMap<>();
@@ -215,19 +230,35 @@ public class SolrService {
 										map.put(entry.getValue(), entry2.getValue());
 									}
 								}
-
+							} else {
+								dataModel.setCountry(jsonMap2.get("field0"));
 							}
 						}
+						dataModel.setTarget(sub(solrDocument.get("name_keywords").toString()));
 						dataModel.setFields(map);
 						dataModels.add(dataModel);
-						System.out.println(dataModel);
 					}
-
 				}
 			}
 
 		}
 		return dataModels;
+	}
+
+	// 查找可查询的
+	public List<String> getFields() throws SolrServerException {
+		List<String> list = new ArrayList<>();
+		query = new SolrQuery();
+		query.setQuery("*:*");
+		query.setStart(0);
+		query.setRows(20);
+		QueryResponse response = infoSolrServer.query(query);
+		SolrDocumentList solrDocumentList = response.getResults();
+
+		for (SolrDocument solrDocument : solrDocumentList) {
+			list.add(sub(solrDocument.get("name_keywords").toString()));
+		}
+		return list;
 	}
 
 	// 去除首尾 + JSON 转 HashMap

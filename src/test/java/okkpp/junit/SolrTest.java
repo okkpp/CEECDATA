@@ -34,23 +34,14 @@ public class SolrTest {
 
 	String[] countryNames = {};
 
-	public void testReg() {
-		for (int y = 0; y < Countrys.countryNames.length; y++) {
-			System.out.println(Countrys.countryNames[y].contains("尼亚"));
-
-		}
-	}
-
 	@Test
-	public void getContentByCondition() throws SolrServerException {
-		// TODO Auto-generated method stub
-		String countrys = "爱沙尼亚 波兰";
-		String target = "城镇人口 孕妇";
-		getContentByCondition(countrys, target);
+	public void getFields() throws SolrServerException {
+		getContentByCondition("*","城镇人口 孕妇",0,16);
 
 	}
-
-	public List<DataModel2> getContentByCondition(String countrys, String target) throws SolrServerException {
+	
+	public List<DataModel2> getContentByCondition(String countrys, String target, Integer pn, Integer rows)
+			throws SolrServerException {
 		DataModel2 dataModel = null;
 		List<DataModel2> dataModels = new ArrayList<>();
 		HashMap<String, String> map;
@@ -62,14 +53,15 @@ public class SolrTest {
 			map = new HashMap<>();
 
 			for (int i = 0; i < targets.length; i++) {
-				dataModel = new DataModel2();
-				dataModel.setCountry(country);
 				query = new SolrQuery();
+				query.setStart(pn);
+				query.setRows(rows);
+
 				query.setQuery("name_keywords:" + targets[i]);
 				QueryResponse response = infoSolrServer.query(query);
 				SolrDocumentList list = response.getResults();
 				for (SolrDocument solrDocument : list) {
-					dataModel.setTarget(sub(solrDocument.get("name_keywords").toString()));
+					
 					List<String> keys = new ArrayList<>();
 					// System.out.println(solrDocument.get("fields_keywords"));
 					// 表头信息 Json
@@ -81,7 +73,8 @@ public class SolrTest {
 					QueryResponse queryResponse = dataSolrServer.query(query);
 					SolrDocumentList solrDocumentList = queryResponse.getResults();
 					for (SolrDocument document : solrDocumentList) {
-						// System.out.println(document.get("data_keywords").toString());
+
+						dataModel = new DataModel2();
 						// 数据信息 Json
 						LinkedHashMap<String, String> jsonMap2 = toFastJson(document.get("data_keywords").toString());
 						map = new HashMap<>();
@@ -92,14 +85,16 @@ public class SolrTest {
 										map.put(entry.getValue(), entry2.getValue());
 									}
 								}
-
+							} else {
+								dataModel.setCountry(jsonMap2.get("field0"));
 							}
 						}
+
+						dataModel.setTarget(sub(solrDocument.get("name_keywords").toString()));
 						dataModel.setFields(map);
 						dataModels.add(dataModel);
 						System.out.println(dataModel);
 					}
-
 				}
 			}
 
