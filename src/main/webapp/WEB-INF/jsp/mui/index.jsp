@@ -73,6 +73,8 @@
 					class="icon-caret-right"></span>分类管理</a></li>
 			<li><a href="mui.do?str=catalogInfo" target="right"><span
 					class="icon-caret-right"></span>爬虫表单管理</a></li>
+			<li><a href="../im/page.do" target="right"><span
+					class="icon-caret-right"></span>socket</a></li>
 		</ul>
 	</div>
 	<script type="text/javascript">

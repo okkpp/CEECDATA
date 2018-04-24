@@ -9,13 +9,14 @@
 		http://www.springframework.org/schema/tx/spring-tx.xsd 
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+		http://www.springframework.org/schema/mvc
+		http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<!-- Shiro -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/system/login.do" />
 		<property name="successUrl" value="/system/index.do" />
-		<property name="unauthorizedUrl" value="/system/login.do" />
+		<property name="unauthorizedUrl" value="/system/unauthorized.do" />
 		<property name="filters">
 			<map>
 				<entry key="urlPerms">
@@ -25,14 +26,17 @@
 		</property>
 		<property name="filterChainDefinitions">
 			<value>
+			<!-- 1.anon:无需权限  2.authc:需登录  3.urlPerms:由自定义权限过滤器处理 -->
 				/assets/** = anon
 				/system/login* = anon
 				/system/logout* = anon
+				/system/unauthorized* = anon
 				/system/index* = authc
-				/system/** = authc,urlPerms
-				/user/** = authc
-				/role/** = authc
-				/resource/** = authc
+				/system/** = urlPerms
+				/user/** = urlPerms
+				/role/** = urlPerms
+				/resource/** = urlPerms
+				/im/** = authc
 				/404* = anon
 				/zdo-static/** = anon
 				/MUI/** = anon

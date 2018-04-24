@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import okkpp.base.Msg;
-import okkpp.model.DataModel;
 import okkpp.model.MusinInfo;
 import okkpp.service.SolrService;
 
