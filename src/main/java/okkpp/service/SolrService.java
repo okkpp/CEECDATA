@@ -108,7 +108,7 @@ public class SolrService {
 			return getContent(years, countrys, targets);
 		} catch (SolrServerException e) {
 			// TODO Auto-generated catch block
-			return Msg.fail().add("error", "条件格式有误,请重新输入");
+			return Msg.fail().add("error", e.getMessage().toString());
 		}
 	}
 
@@ -126,7 +126,7 @@ public class SolrService {
 			// 其他情况
 			return Msg.success().add("dataType", "type4").add("data", getFields());
 		} else {
-			return Msg.fail();
+			return Msg.fail().add("error", "条件格式有误,请重新输入");
 		}
 	}
 
