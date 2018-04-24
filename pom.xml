@@ -6,10 +6,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	
-	<properties>
-		<mysql.version>5.1.37</mysql.version>
-		<spring.version>4.2.2.RELEASE</spring.version>
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>

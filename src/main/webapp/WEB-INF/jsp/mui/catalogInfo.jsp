@@ -90,7 +90,7 @@ function loadData(page){
 		url:'${pageContext.request.contextPath}/tableCatalog/listPage.do',
 		success:function(data){
 			data = eval('('+data+')');
-			//console.log(data);
+			console.log(data);
 			pageNum = data.pageNum;
 			isFirstPage = data.isFirstPage;
 			isLastPage = data.isLastPage;

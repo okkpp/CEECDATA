@@ -56,6 +56,7 @@ public class MySorketHandle extends TextWebSocketHandler {
 	}
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) {
 		Message msg = new Message(message.getPayload().toString());
+		System.out.println("收到消息:"+message.getPayload().toString());
 		if(msg.getSendTo()==-1) {
 			sendToAll(msg.getSendFrom(),message);
 		}else {

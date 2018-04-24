@@ -12,8 +12,8 @@
 		http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/websocket
         http://www.springframework.org/schema/websocket/spring-websocket-4.2.xsd">
-
-	<mvc:annotation-driven/>
+        
+	
 	<!-- websocket配置 -->
 	<bean id="HelloHandler" class="okkpp.websocket.MySorketHandle" />
 	<websocket:handlers>
