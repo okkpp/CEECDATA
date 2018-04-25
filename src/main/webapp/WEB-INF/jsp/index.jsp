@@ -186,8 +186,8 @@ ul li span {
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="header"
-			style="margin: 0px; padding: 0px; width: 100%; height: 118px;">
+		<div
+			style="margin: 0px; padding: 0px; width: 100%; height: 180px;background:url(hsy/assets/img/dataLOGO.jpg) no-repeat top center;background-size:100% auto;">
 		</div>
 		<div style="width: 100%; height: 80px;">
 			<div style="float: left; width: 20%; height: 100%;">

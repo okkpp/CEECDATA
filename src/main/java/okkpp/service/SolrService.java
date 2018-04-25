@@ -108,9 +108,8 @@ public class SolrService {
 			return getContent(years, countrys, targets);
 		} catch (SolrServerException e) {
 			// TODO Auto-generated catch block
-			return Msg.fail().add("error", "条件格式有误,请重新输入");
+			return Msg.fail().add("error", e.getMessage().toString());
 		}
-
 	}
 
 	private Msg getContent(String years, String countrys, String targets) throws SolrServerException {
@@ -123,9 +122,11 @@ public class SolrService {
 		} else if (years.isEmpty() && !targets.isEmpty() && countrys.isEmpty()) {
 			// 指标不为空其他为空
 			return Msg.success().add("dataType", "type3").add("data", getContentByCondition("*", targets, 0, 1));
-		} else {
+		} else if (years.isEmpty() && targets.isEmpty() && !countrys.isEmpty()) {
 			// 其他情况
 			return Msg.success().add("dataType", "type4").add("data", getFields());
+		} else {
+			return Msg.fail().add("error", "条件格式有误,请重新输入");
 		}
 	}
 
@@ -149,6 +150,7 @@ public class SolrService {
 				map = new HashMap<>();
 				query = new SolrQuery();
 				for (int i = 0; i < targets.length; i++) {
+					// 拼接查询条件
 					querySql += " name_keywords:" + targets[i];
 				}
 				query.setQuery(querySql);
