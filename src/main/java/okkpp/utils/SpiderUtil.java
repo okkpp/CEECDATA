@@ -127,17 +127,17 @@ public class SpiderUtil {
 	@Autowired
 	TableInfoService service;
 	private void resolveExcel(File file,String tableName) {
-		System.out.println("下载完毕，解析Excel...");
-		ExcelUtil eu = new ExcelUtil();
-		try {
-			eu.xls(file);
-//			service.createTabWithData(tableName, eu.info, eu.data);
-			System.out.println("建表结束！");
-			//System.out.println(new Gson().toJson(eu.data));
-		} catch (InvalidFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//		System.out.println("下载完毕，解析Excel...");
+//		ExcelUtil eu = new ExcelUtil();
+//		try {
+//			eu.xls(file);
+////			service.createTabWithData(tableName, eu.info, eu.data);
+//			System.out.println("建表结束！");
+//			//System.out.println(new Gson().toJson(eu.data));
+//		} catch (InvalidFormatException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 }

@@ -29,7 +29,11 @@
 		<javaClientGenerator targetPackage="okkpp.dao.propagate"
 			targetProject="src/main/java" type="XMLMAPPER" />
 		<table tableName="table_info"
-			domainObjectName="TableInfo" enableCountByExample="false"
+			domainObjectName="TableInfoN" enableCountByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			enableUpdateByExample="false" schema="${jdbc.username}" />
+		<table tableName="table_data"
+			domainObjectName="TableDataN" enableCountByExample="false"
 			enableDeleteByExample="false" enableSelectByExample="false"
 			enableUpdateByExample="false" schema="${jdbc.username}" />
 	</context>

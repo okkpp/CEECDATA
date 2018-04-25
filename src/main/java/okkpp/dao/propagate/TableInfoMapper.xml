@@ -10,6 +10,7 @@
     <result column="catalog_en" jdbcType="VARCHAR" property="catalogEn" />
     <result column="table_name" jdbcType="VARCHAR" property="tableName" />
     <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="updated" property="updated" jdbcType="TIMESTAMP" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="okkpp.model.propagate.TableInfo">
     <!--
@@ -21,7 +22,7 @@
     <!--
       WARNING - @mbggenerated
     -->
-    id, catalog_cn, catalog_en, table_name, source
+    id, catalog_cn, catalog_en, table_name, source, updated
   </sql>
   <sql id="Blob_Column_List">
     <!--
@@ -33,6 +34,7 @@
 		<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
 			SELECT LAST_INSERT_ID()
 		</selectKey>
-		insert into table_info values(#{id},#{tableName},#{fields});
+		insert into table_info (id,catalog_cn,catalog_en,table_name,fields,source,updated) 
+		values(#{id},#{catalogCn},#{catalogEn},#{tableName},#{fields},#{source},#{updated});
 	</insert>
 </mapper>
