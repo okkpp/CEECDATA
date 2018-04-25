@@ -1,6 +1,7 @@
 package okkpp.model.propagate;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Map;
 
 import javax.persistence.*;
@@ -39,6 +40,11 @@ public class TableInfo implements Serializable {
      * 数据来源
      */
     private String source;
+    
+    /**
+     * 更新时间
+     */
+    private Date updated;
 
     /**
      * 字段列表-json
@@ -133,6 +139,24 @@ public class TableInfo implements Serializable {
         this.source = source;
     }
 
+    /**
+     * 获取更新时间
+     *
+     * @return updated - 更新时间
+     */
+    public Date getUpdated() {
+        return updated;
+    }
+
+    /**
+     * 设置更新时间
+     *
+     * @param updated 更新时间
+     */
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
+    
     /**
      * 获取字段列表-json
      *
