@@ -36,68 +36,65 @@ public class SolrTest {
 
 	@Test
 	public void getFields() throws SolrServerException {
-		getContentByCondition("*","城镇人口 孕妇",0,16);
-
+		System.out.println(getContentByCondition("爱沙尼亚", "孕妇", "2000"));
+		
 	}
-	
-	public List<DataModel2> getContentByCondition(String countrys, String target, Integer pn, Integer rows)
-			throws SolrServerException {
-		DataModel2 dataModel = null;
-		List<DataModel2> dataModels = new ArrayList<>();
-		HashMap<String, String> map;
-		String[] cs = countrys.split(" ");
-		String[] targets = target.split(" ");
 
+	// 按条件查找
+	public List<DataModel> getContentByCondition(String countrys, String target, String year)
+			throws SolrServerException {
+		DataModel dataModel;
+		List<DataModel> dataModels = new ArrayList<>();
+		String[] cs = countrys.split(" ");
 		for (int y = 0; y < cs.length; y++) {
 			String country = cs[y];
-			map = new HashMap<>();
+			HashMap<String, String> map;
+			String[] targets = target.split(" ");
+			String[] years = year.split(" ");
+			String querySql = "";
+			for (int x = 0; x < years.length; x++) {
 
-			for (int i = 0; i < targets.length; i++) {
+				dataModel = new DataModel();
+				dataModel.setCountry(country);
+				dataModel.setYear(years[x]);
+				map = new HashMap<>();
 				query = new SolrQuery();
-				query.setStart(pn);
-				query.setRows(rows);
-
-				query.setQuery("name_keywords:" + targets[i]);
+				for (int i = 0; i < targets.length; i++) {
+					// 拼接查询条件
+					querySql += " name_keywords:" + targets[i];
+				}
+				query.setQuery(querySql);
 				QueryResponse response = infoSolrServer.query(query);
 				SolrDocumentList list = response.getResults();
+
 				for (SolrDocument solrDocument : list) {
-					
-					List<String> keys = new ArrayList<>();
-					// System.out.println(solrDocument.get("fields_keywords"));
-					// 表头信息 Json
 					LinkedHashMap<String, String> jsonMap = toFastJson(solrDocument.get("fields_keywords").toString());
-
-					query = new SolrQuery();
-					query.setQuery("info_id:" + solrDocument.get("id").toString());
-					query.set("fq", "data_keywords:" + country);
-					QueryResponse queryResponse = dataSolrServer.query(query);
-					SolrDocumentList solrDocumentList = queryResponse.getResults();
-					for (SolrDocument document : solrDocumentList) {
-
-						dataModel = new DataModel2();
-						// 数据信息 Json
-						LinkedHashMap<String, String> jsonMap2 = toFastJson(document.get("data_keywords").toString());
-						map = new HashMap<>();
-						for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
-							if (!entry.getKey().toString().equals("field0")) {
+					System.out.println("solrDocument : " + solrDocument.toString());
+					for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
+						if (entry.getValue().toString().equals(years[x])) {
+							query = new SolrQuery();
+							query.setQuery("info_id:" + solrDocument.get("id").toString());
+							query.set("fq", "data_keywords:" + country);
+							response = dataSolrServer.query(query);
+							SolrDocumentList dataList = response.getResults();
+							for (SolrDocument dataSolrDocument : dataList) {
+								System.out.println(dataSolrDocument.toString());
+								LinkedHashMap<String, String> jsonMap2 = toFastJson(
+										dataSolrDocument.get("data_keywords").toString());
 								for (Map.Entry<String, String> entry2 : jsonMap2.entrySet()) {
-									if (entry.getKey().equals(entry2.getKey())) {
-										map.put(entry.getValue(), entry2.getValue());
+									if (entry2.getKey().equals(entry.getKey())) {
+										// 填充 fields
+										map.put(sub(solrDocument.get("name_keywords").toString()),
+												entry2.getValue().toString());
 									}
 								}
-							} else {
-								dataModel.setCountry(jsonMap2.get("field0"));
 							}
 						}
-
-						dataModel.setTarget(sub(solrDocument.get("name_keywords").toString()));
-						dataModel.setFields(map);
-						dataModels.add(dataModel);
-						System.out.println(dataModel);
 					}
 				}
+				dataModel.setFields(map);
+				dataModels.add(dataModel);
 			}
-
 		}
 		return dataModels;
 	}

@@ -15,25 +15,25 @@ import okkpp.service.SolrService;
 @Controller
 @RequestMapping("/solr")
 public class SolrController {
-	
+
 	@Autowired
 	private SolrService solrService;
-	
+
 	@RequestMapping("/getContentByCondition")
 	@ResponseBody
-	public Msg getContentByCondition(@RequestParam("info")String info){	
+	public Msg getContentByCondition(@RequestParam("info") String info) {
 		return solrService.getContentByCondition(info);
 	}
-	
+
 	@RequestMapping("/searchIndex")
 	public String searchIndex() {
 		return "search";
 	}
-	
+
 	@RequestMapping("/getMusic")
 	@ResponseBody
-	public List<MusinInfo> getMusic(@RequestParam("catalog")String catalog) {
+	public List<MusinInfo> getMusic(@RequestParam("catalog") String catalog) {
 		return solrService.getMusics(catalog);
 	}
-	
+
 }

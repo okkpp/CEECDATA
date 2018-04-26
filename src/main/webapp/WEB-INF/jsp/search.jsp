@@ -23,7 +23,7 @@
 
 <script>
 	$("#search_btn").click(function() {
-		var str = "getContentByConditiondo?info=" + $("#search_input").val();
+		var str = "getContentByCondition.do?info=" + $("#search_input").val();
 		$.ajax({
 			url : str,
 			type : "GET",
