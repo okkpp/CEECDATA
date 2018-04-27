@@ -21,7 +21,7 @@ import com.alibaba.fastjson.TypeReference;
 import okkpp.model.DataModel;
 import okkpp.model.DataModel2;
 import okkpp.model.MusinInfo;
-import okkpp.service.SolrService;
+import okkpp.service.agriculture.SolrService;
 import okkpp.utils.CountryCode;
 import okkpp.utils.Countrys;
 

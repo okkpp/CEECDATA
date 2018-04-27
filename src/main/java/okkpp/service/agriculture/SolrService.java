@@ -1,4 +1,4 @@
-package okkpp.service;
+package okkpp.service.agriculture;
 
 import java.util.ArrayList;
 import java.util.HashMap;

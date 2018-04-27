@@ -1,4 +1,4 @@
-package okkpp.controller;
+package okkpp.controller.propagate;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import okkpp.base.Msg;
 import okkpp.model.MusinInfo;
-import okkpp.service.SolrService;
+import okkpp.service.agriculture.SolrService;
 
 @Controller
 @RequestMapping("/solr")
@@ -27,7 +27,12 @@ public class SolrController {
 
 	@RequestMapping("/searchIndex")
 	public String searchIndex() {
-		return "search";
+		return "searchIndex";
+	}
+	
+	@RequestMapping("/searchResult")
+	public String searchResult() {
+		return "tables";
 	}
 
 	@RequestMapping("/getMusic")
