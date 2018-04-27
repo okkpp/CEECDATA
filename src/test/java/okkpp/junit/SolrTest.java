@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -18,12 +17,7 @@ import org.junit.Test;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
-import okkpp.model.DataModel;
 import okkpp.model.DataModel2;
-import okkpp.model.MusinInfo;
-import okkpp.service.SolrService;
-import okkpp.utils.CountryCode;
-import okkpp.utils.Countrys;
 
 public class SolrTest {
 
@@ -62,7 +56,7 @@ public class SolrTest {
 				SolrDocumentList list = response.getResults();
 				for (SolrDocument solrDocument : list) {
 					
-					List<String> keys = new ArrayList<>();
+					//List<String> keys = new ArrayList<>();
 					// System.out.println(solrDocument.get("fields_keywords"));
 					// 表头信息 Json
 					LinkedHashMap<String, String> jsonMap = toFastJson(solrDocument.get("fields_keywords").toString());

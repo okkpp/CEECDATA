@@ -27,7 +27,7 @@ public class JunitTest extends BaseTest{
 
 	@Test
 	public void loadData() {
-		String path = "B:\\feed";
+		String path = "B:\\11";
 		readFiles(path);
 		System.out.println("over");
 	}

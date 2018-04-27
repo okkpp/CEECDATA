@@ -2,7 +2,6 @@ package okkpp.utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
@@ -11,10 +10,8 @@ import okkpp.model.propagate.TableInfo;
 public class ReadFileSystemUtil {
 
 	public static void main(String[] args) {
-		Date d = new Date();
-		System.out.println(d);
-//		String path = "B:\\latest_data_3_3";
-//		readFiles(path);
+		String path = "B:\\11";
+		readFiles(path);
 	}
 
 	public static void readFiles(String path) {
@@ -24,7 +21,7 @@ public class ReadFileSystemUtil {
 				readFiles(f.getPath());
 			}else {
 				String tabName = f.getName().substring(0, f.getName().indexOf("."));
-				String cn = f.getParent().substring(f.getParent().lastIndexOf("\\"));
+				String cn = f.getParent().substring(f.getParent().lastIndexOf("\\")+1);
 				resolveFile(f,tabName,cn);
 			}
 		}

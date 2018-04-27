@@ -23,7 +23,6 @@ import okkpp.base.Msg;
 import okkpp.model.DataModel;
 import okkpp.model.DataModel2;
 import okkpp.model.MusinInfo;
-import okkpp.utils.CountryCode;
 import okkpp.utils.Countrys;
 
 @Service
@@ -209,7 +208,7 @@ public class SolrService {
 				SolrDocumentList list = response.getResults();
 				for (SolrDocument solrDocument : list) {
 
-					List<String> keys = new ArrayList<>();
+					//List<String> keys = new ArrayList<>();
 					// System.out.println(solrDocument.get("fields_keywords"));
 					// 表头信息 Json
 					LinkedHashMap<String, String> jsonMap = toFastJson(solrDocument.get("fields_keywords").toString());

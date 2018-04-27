@@ -1,40 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cache="http://www.springframework.org/schema/cache"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/tx 
-		http://www.springframework.org/schema/tx/spring-tx.xsd 
-		http://www.springframework.org/schema/context
-		http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/mvc 
-		http://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/cache
-        http://www.springframework.org/schema/cache/spring-cache-4.2.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
         
- 	<mvc:annotation-driven>
-		<mvc:message-converters register-defaults="false">
-			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
-                <property name="supportedMediaTypes">
-                    <list>
-                        <value>text/html;charset=UTF-8</value>
-                        <value>application/json</value>
-                    </list>
-                </property>
-                <property name="features">
-                    <list>
-                        <value>WriteMapNullValue</value>
-                        <value>QuoteFieldNames</value>
-                    </list>
-                </property>
-                <property name="dateFormat" value="yyyy-MM-dd HH:mm:ss"/>
-            </bean>
-		</mvc:message-converters>
-	</mvc:annotation-driven>
-
 	<context:component-scan base-package="okkpp" />
+
+	<context:property-placeholder location="classpath:application.properties" />
 
 	<!-- ehcache ↓ -->
 	<cache:annotation-driven cache-manager="ehcacheManager" />
@@ -48,14 +25,7 @@
 	</bean>
 
 	<!-- ehcahce ↑ -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/jsp/" />
-		<property name="suffix" value=".jsp" />
-	</bean>
-
-	<context:property-placeholder location="classpath:application.properties" />
-
+	
 	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
 		init-method="init" destroy-method="close">
 
@@ -98,11 +68,11 @@
 	</bean>
 
 	<!-- mybatis自动扫描加载Sql映射文件/接口 : MapperScannerConfigurer sqlSessionFactory 
-		basePackage:指定sql映射文件/接口所在的包（自动扫描） -->
+		basePackage:指定sql映射文件/接口所在的包（自动扫描）
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="okkpp"></property>
-		<!--<property name="sqlSessionFactory" ref="sqlSessionFactory"></property> -->
-	</bean>
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+	</bean> -->
 	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="okkpp" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
@@ -117,16 +87,8 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 
-	<!-- 使用声明式事务 transaction-manager：引用上面定义的事务管理器 <tx:annotation-driven transaction-manager="txManager" 
+	<!-- 使用声明式事务 transaction-manager：引用上面定义的事务管理器
+	 <tx:annotation-driven transaction-manager="txManager" 
 		proxy-target-class="true"/> -->
 
-	<!-- 定义文件上传解析器 -->
-	<bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<!-- 设定默认编码 -->
-		<property name="defaultEncoding" value="UTF-8"></property>
-		<!-- 设定文件上传的最大值5MB，50*1024*1024 -->
-		<property name="maxUploadSize" value="5242880"></property>
-	</bean>
-	
 </beans>

@@ -29,7 +29,7 @@ public class ExcelUtil {
 			e.printStackTrace();
 		}
 	}
-	//瑙ｆ瀽缁撴灉瀛樹负 list map data
+	
 	public List<Map<String,Object>> data = new ArrayList<>();
 	public Map<String,Object> info = new HashMap<>();
 	
