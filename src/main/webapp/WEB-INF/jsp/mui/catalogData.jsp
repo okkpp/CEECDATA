@@ -5,8 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <meta name="renderer" content="webkit">
 <title></title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/MUI/css/pintuer.css">
@@ -25,10 +24,12 @@
 				<ul class="search">
 					<li>
 						<button type="button" class="button border-green" id="checkall">
-							<span class="icon-check"></span> 全选
+							<span class="icon-check"></span>
+							全选
 						</button>
 						<button type="submit" class="button border-red">
-							<span class="icon-trash-o"></span> 批量删除
+							<span class="icon-trash-o"></span>
+							批量删除
 						</button>
 						<strong id="title"></strong>
 					</li>
@@ -61,6 +62,8 @@
 	var isFirstPage,isLastPage;
 	var pageSize = 10;
 	var pages;
+	
+	
 loadInfo();
 function loadInfo(){
 	$.ajax({
@@ -107,11 +110,14 @@ function loadData(){
 function appendData(data){
 	$("#tbody").html("");
 	for(index in data){
-		obj = eval('('+data[index].data+')');
-		$("#tbody").append(resolve(obj));
+
+		//obj = eval('('+data[index].data+')');
+		var result = data[index];
+		obj = eval('('+result.data+')');
+		$("#tbody").append(resolve(obj,result.id));
 	}
 }
-function resolve(data){
+function resolve(data,id){
 	var res = "";
 	res += "<tr>";
 	var length = Object.keys(data).length;
@@ -120,7 +126,8 @@ function resolve(data){
 		if(value.indexOf('.')!=-1){
 			value = parseFloat(value).toFixed(2);
 		}
-		res += "<th>"+value+"</th>";
+		//res += "<td ondblclick='showData("+"id"+","+i+","+value+")'>"+value+"</td>";
+		res += "<td ondblclick='showData("+id+","+i+","+value+")'>"+value+"</td>";
 	}
 	res += "</tr>";
 	return res;
@@ -132,32 +139,20 @@ function del(id){
 	}
 }
 
-$("#checkall").click(function(){ 
-  $("input[name='id[]']").each(function(){
-	  if (this.checked) {
-		  this.checked = false;
-	  }
-	  else {
-		  this.checked = true;
-	  }
-  });
-})
+function showData(id,field,value){
+	var newValue=prompt("修改值为",value);
+	if(!(newValue == null || newValue == value)){
+		$.ajax({
+			url :"${pageContext.request.contextPath}/catalogData/updataData.do",
+			data : "id="+id+"&field="+field+"&newValue="+newValue+"&_method=put",
+			type : "POST",
+			success:function(data){
+				console.log(data);
+			}
+		})
+		
+	} 
 
-function DelSelect(){
-	var Checkbox=false;
-	 $("input[name='id[]']").each(function(){
-	  if (this.checked==true) {		
-		Checkbox=true;	
-	  }
-	});
-	if (Checkbox){
-		var t=confirm("您确认要删除选中的内容吗？");
-		if (t==false) return false; 		
-	}
-	else{
-		alert("请选择您要删除的内容!");
-		return false;
-	}
 }
 
 </script>

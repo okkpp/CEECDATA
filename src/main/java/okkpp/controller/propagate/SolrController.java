@@ -1,4 +1,4 @@
-package okkpp.controller;
+package okkpp.controller.propagate;
 
 import java.util.List;
 
@@ -10,30 +10,35 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import okkpp.base.Msg;
 import okkpp.model.MusinInfo;
-import okkpp.service.SolrService;
+import okkpp.service.agriculture.SolrService;
 
 @Controller
 @RequestMapping("/solr")
 public class SolrController {
-	
+
 	@Autowired
 	private SolrService solrService;
-	
+
 	@RequestMapping("/getContentByCondition")
 	@ResponseBody
-	public Msg getContentByCondition(@RequestParam("info")String info){	
+	public Msg getContentByCondition(@RequestParam("info") String info) {
 		return solrService.getContentByCondition(info);
 	}
-	
+
 	@RequestMapping("/searchIndex")
 	public String searchIndex() {
-		return "search";
+		return "searchIndex";
 	}
 	
+	@RequestMapping("/searchResult")
+	public String searchResult() {
+		return "tables";
+	}
+
 	@RequestMapping("/getMusic")
 	@ResponseBody
-	public List<MusinInfo> getMusic(@RequestParam("catalog")String catalog) {
+	public List<MusinInfo> getMusic(@RequestParam("catalog") String catalog) {
 		return solrService.getMusics(catalog);
 	}
-	
+
 }

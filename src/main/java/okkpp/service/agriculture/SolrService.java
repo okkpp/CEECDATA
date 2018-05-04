@@ -1,4 +1,4 @@
-package okkpp.service;
+package okkpp.service.agriculture;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -166,10 +166,13 @@ public class SolrService {
 							response = dataSolrServer.query(query);
 							SolrDocumentList dataList = response.getResults();
 							for (SolrDocument dataSolrDocument : dataList) {
+								
+								
 								LinkedHashMap<String, String> jsonMap2 = toFastJson(
 										dataSolrDocument.get("data_keywords").toString());
 								for (Map.Entry<String, String> entry2 : jsonMap2.entrySet()) {
 									if (entry2.getKey().equals(entry.getKey())) {
+										// Моід fields
 										map.put(sub(solrDocument.get("name_keywords").toString()),
 												entry2.getValue().toString());
 									}

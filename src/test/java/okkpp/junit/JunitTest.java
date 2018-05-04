@@ -1,6 +1,7 @@
 package okkpp.junit;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
@@ -17,11 +18,12 @@ import okkpp.dao.propagate.TableInfoMapper;
 import okkpp.model.propagate.TableData;
 import okkpp.model.propagate.TableInfo;
 import okkpp.utils.ExcelUtil;
+import okkpp.utils.FTPUtil;
 
 
 /**
 * @author duck
-* @date 创建时间：2018年3月28日 上午9:26:16
+* @date 鍒涘缓鏃堕棿锛�2018骞�3鏈�28鏃� 涓婂崍9:26:16
 */
 public class JunitTest extends BaseTest{
 
@@ -55,11 +57,11 @@ public class JunitTest extends BaseTest{
 			TableInfo ti = new TableInfo(tabName, eu.info);
 			ti.setCatalogCn(cn);
 			ti.setCatalogEn("-");
-			ti.setSource("世界发展指标");
+			ti.setSource("涓栫晫鍙戝睍鎸囨爣");
 			ti.setUpdated(new Date());
 			timapper.insertReturnId(ti);
 			int infoid = ti.getId();
-			System.out.println("获得id="+infoid);
+			System.out.println("鑾峰緱id="+infoid);
 			int count = 0;
 			for(Map<String, Object> data : eu.data) {
 				TableData td = new TableData(infoid, data);
@@ -67,7 +69,7 @@ public class JunitTest extends BaseTest{
 				tdmapper.insertReturnId(td);
 				count++;
 			}
-			System.out.println("插入"+count+"条数据");
+			System.out.println("鎻掑叆"+count+"鏉℃暟鎹�");
 		} catch (InvalidFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -89,10 +91,10 @@ public class JunitTest extends BaseTest{
 	private String BASE_PATH;
 	
 	public void test() throws FileNotFoundException {
-//		File f = new File("B:\\duck.png");
-//		FileInputStream file = new FileInputStream(f);
-//		FTPUtil ftp = new FTPUtil();
-//		ftp.SFTPUpload(HOST, PORT, UserName, PassWord, BASE_PATH, file, "duck.png");
+		File f = new File("E:\\1.png");
+		FileInputStream file = new FileInputStream(f);
+		FTPUtil ftp = new FTPUtil();
+		ftp.SFTPUpload(HOST, PORT, UserName, PassWord, BASE_PATH, file, "test1.png");
 	}
 
 
