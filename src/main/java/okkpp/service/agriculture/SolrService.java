@@ -15,15 +15,11 @@ import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-
 import okkpp.base.Msg;
 import okkpp.model.DataModel;
 import okkpp.model.DataModel2;
-import okkpp.model.MusinInfo;
-import okkpp.utils.CountryCode;
 import okkpp.utils.Countrys;
 
 @Service
@@ -32,40 +28,9 @@ public class SolrService {
 
 	HttpSolrServer dataSolrServer = new HttpSolrServer("http://120.77.159.125/solr/collection2");
 	HttpSolrServer infoSolrServer = new HttpSolrServer("http://120.77.159.125/solr/collection3");
-	HttpSolrServer musicSolrServer = new HttpSolrServer("http://120.77.159.125/solr/collection4");
 
 	// 创建SolrQuery对象
 	SolrQuery query;
-
-	public List<MusinInfo> getMusics(String catalog) {
-		query = new SolrQuery();
-		query.setQuery("music_catalog_name:" + catalog);
-
-		List<MusinInfo> musinInfos = new ArrayList<>();
-		MusinInfo musinInfo;
-
-		try {
-			QueryResponse response = musicSolrServer.query(query);
-			response = musicSolrServer.query(query);
-			// 获取匹配
-			SolrDocumentList list = response.getResults();
-
-			for (SolrDocument solrDocument : list) {
-				musinInfo = new MusinInfo();
-				musinInfo.setCatalog(solrDocument.get("music_catalog_name").toString());
-				musinInfo.setPricture(solrDocument.get("music_picture").toString());
-				musinInfo.setDescription(solrDocument.get("music_description").toString());
-
-				musinInfos.add(musinInfo);
-			}
-		} catch (SolrServerException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-
-		return musinInfos;
-	}
 
 	public Msg getContentByCondition(String info) {
 		// 解析 info 填充数据
@@ -118,15 +83,13 @@ public class SolrService {
 			return Msg.success().add("dataType", "type1").add("data", getContentByCondition(countrys, targets, years));
 		} else if (years.isEmpty() && !targets.isEmpty() && !countrys.isEmpty()) {
 			// 年份为空其他不为空
-			return Msg.success().add("dataType", "type2").add("data", getContentByCondition(countrys, targets, 0, 10));
+			return Msg.success().add("dataType", "type2").add("data", getContentByCondition(countrys, targets, 0, 16));
 		} else if (years.isEmpty() && !targets.isEmpty() && countrys.isEmpty()) {
 			// 指标不为空其他为空
-			return Msg.success().add("dataType", "type3").add("data", getContentByCondition("*", targets, 0, 1));
-		} else if (years.isEmpty() && targets.isEmpty() && !countrys.isEmpty()) {
-			// 其他情况
-			return Msg.success().add("dataType", "type4").add("data", getFields());
+			return Msg.success().add("dataType", "type2").add("data", getContentByCondition("*", targets, 0, 100));
 		} else {
-			return Msg.fail().add("error", "条件格式有误,请重新输入");
+			// 其他情况
+			return Msg.success().add("dataType", "type3").add("data", getFields());
 		}
 	}
 
@@ -167,8 +130,7 @@ public class SolrService {
 							response = dataSolrServer.query(query);
 							SolrDocumentList dataList = response.getResults();
 							for (SolrDocument dataSolrDocument : dataList) {
-								
-								
+
 								LinkedHashMap<String, String> jsonMap2 = toFastJson(
 										dataSolrDocument.get("data_keywords").toString());
 								for (Map.Entry<String, String> entry2 : jsonMap2.entrySet()) {
@@ -204,21 +166,21 @@ public class SolrService {
 
 			for (int i = 0; i < targets.length; i++) {
 				query = new SolrQuery();
-				query.setStart(pn);
-				query.setRows(rows);
 
 				query.setQuery("name_keywords:" + targets[i]);
 				QueryResponse response = infoSolrServer.query(query);
 				SolrDocumentList list = response.getResults();
 				for (SolrDocument solrDocument : list) {
 
-					List<String> keys = new ArrayList<>();
+					// List<String> keys = new ArrayList<>();
 					// System.out.println(solrDocument.get("fields_keywords"));
 					// 表头信息 Json
 					LinkedHashMap<String, String> jsonMap = toFastJson(solrDocument.get("fields_keywords").toString());
 
 					query = new SolrQuery();
 					query.setQuery("info_id:" + solrDocument.get("id").toString());
+					query.setStart(pn * rows);
+					query.setRows(rows);
 					query.set("fq", "data_keywords:" + country);
 					QueryResponse queryResponse = dataSolrServer.query(query);
 					SolrDocumentList solrDocumentList = queryResponse.getResults();
@@ -256,7 +218,7 @@ public class SolrService {
 		query = new SolrQuery();
 		query.setQuery("*:*");
 		query.setStart(0);
-		query.setRows(20);
+		query.setRows(9999);
 		QueryResponse response = infoSolrServer.query(query);
 		SolrDocumentList solrDocumentList = response.getResults();
 

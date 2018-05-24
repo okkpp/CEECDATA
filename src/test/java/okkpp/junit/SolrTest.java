@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -19,11 +18,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
 import okkpp.model.DataModel;
-import okkpp.model.DataModel2;
-import okkpp.model.MusinInfo;
-import okkpp.service.agriculture.SolrService;
-import okkpp.utils.CountryCode;
-import okkpp.utils.Countrys;
 
 public class SolrTest {
 

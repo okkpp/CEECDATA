@@ -83,33 +83,55 @@
 					result = eval('(' + result + ')');
 					//console.log(result);
 					if (result.extend.dataType == "type1") {
-						var str = "[{'data':'国家'},";
-						for ( var i in result.extend.data[0].fields) {
-							str += "{'data':'" + i + "'},";
-						}
-
+						console.log(result);
+						var title = "[{'data':'国家'},";
+						setData(title,result);
+					} else if (result.extend.dataType == "type2") {
+						var title = "[{'data':'国家'},{'data':'指标'},";
+						setData(title,result)
+					}else if(result.extend.dataType == "type3"){
+						console.log(result);
+						 var str = "[{'data':'指标'}]";
+						 str = eval('(' + str + ')');
 						$.each(result.extend.data, function(index, item) {
-							//console.log(item);
 							var tr = $("<tr></tr>");
-							tr.append($("<td></td>").append(item.country));
-							for ( var i in item.fields) {
-								if (item.fields[i] == "") {
-									tr.append($("<td></td>").append("/"));
-								} else {
-									var value = parseFloat(item.fields[i])
-											.toFixed(2);
-									tr.append($("<td></td>").append(value));
-								}
-							}
+							console.log("item = " + item.split("（")[0]);
+							var a = "<a onclick=\"doSomething('"+item+"')\">"+item+"</a>";
+							console.log(a);
+							tr.append($("<td></td>").append(a));
 							tr.appendTo("#example tbody");
 						});
-						str = str.substring(0, str.length - 1);
-						str += "]";
-						str = eval('(' + str + ')');
 						showData(str);
 					}
 				}
 			})
+		}
+		
+		function setData(title,result){
+			var str = title;
+			 for ( var i in result.extend.data[1].fields) {
+				str += "{'data':'" + i + "'},";
+			}	
+			$.each(result.extend.data, function(index, item) {
+				var tr = $("<tr></tr>");
+				tr.append($("<td></td>").append(item.country));
+				tr.append($("<td></td>").append(item.target));
+				for ( var i in item.fields) {
+					if (item.fields[i] == "") {
+						tr.append($("<td></td>").append("/"));
+					} else {
+						var value = parseFloat(item.fields[i])
+								.toFixed(2);
+						tr.append($("<td></td>").append(value));
+					}
+				}
+				tr.appendTo("#example tbody");
+			});
+			//去除末尾逗号
+			str = str.substring(0, str.length - 1);
+			str += "]";
+			str = eval('(' + str + ')');
+			showData(str);
 		}
 
 		function showData(columName) {
@@ -122,25 +144,25 @@
 				searching : true,//搜索
 				language : {
 					lengthMenu : '显示 <select style="height: 35px;width: 100px">'
-						+ '<option value="5">5</option>'
-						+ '<option value="10">10</option>'
-						+ '<option value="20">20</option>'
-						+ '<option value="30">30</option>'
-						+ '<option value="40">40</option>'
-						+ '<option value="50">50</option>'
-						+ '<option value="-1">不限</option>'
-						+ '</select>',
+					+ '<option value="5">5</option>'
+					+ '<option value="10">10</option>'
+					+ '<option value="20">20</option>'
+					+ '<option value="30">30</option>'
+					+ '<option value="40">40</option>'
+					+ '<option value="50">50</option>'
+					+ '<option value="-1">不限</option>'
+					+ '</select>',
 					paginate : {//分页的样式内容。
 						previous : "上一页",
 						next : "下一页",
 						first : "首页",
 						last : "末页"
-						},
-					zeroRecords : "没有内容",//table tbody内容为空时，tbody的内容。
-					//下面三者构成了总体的左下角的内容。
-					info : "总共_PAGES_ 页，显示第_START_ 到第 _END_ ，筛选之后得到 _TOTAL_ 条，初始_MAX_ 条 ",//左下角的信息显示，大写的词为关键字。
-					infoEmpty : "0条记录",//筛选为空时左下角的显示。
-					infoFiltered : ""//筛选之后的左下角筛选提示，
+					},
+				zeroRecords : "没有内容",//table tbody内容为空时，tbody的内容。
+				//下面三者构成了总体的左下角的内容。
+				info : "总共_PAGES_ 页，显示第_START_ 到第 _END_ ，筛选之后得到 _TOTAL_ 条，初始_MAX_ 条 ",//左下角的信息显示，大写的词为关键字。
+				infoEmpty : "0条记录",//筛选为空时左下角的显示。
+				infoFiltered : ""//筛选之后的左下角筛选提示，
 				},
 				paging : true,
 				pagingType : "full_numbers",//分页样式的类型
@@ -153,6 +175,11 @@
 				$('td', row).css('font-weight', "bold").css("text-align", "center");
 				},
 			});
+		}
+		
+		function doSomething(item){
+			alert(item);
+			window.location.href="http://localhost:8080/CEECDATA/solr/searchResult.do?info=" + item;
 		}
 	</script>
 </body>
