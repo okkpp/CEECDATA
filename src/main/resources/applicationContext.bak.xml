@@ -14,6 +14,7 @@
 		http://www.springframework.org/schema/cache
         http://www.springframework.org/schema/cache/spring-cache-4.2.xsd">
         
+	<import resource=""/>
  	<mvc:annotation-driven>
 		<mvc:message-converters register-defaults="false">
 			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
@@ -34,7 +35,10 @@
 		</mvc:message-converters>
 	</mvc:annotation-driven>
 
-	<context:component-scan base-package="okkpp" />
+	<context:component-scan base-package="okkpp" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		<context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+	</context:component-scan>
 
 	<!-- ehcache ↓ -->
 	<cache:annotation-driven cache-manager="ehcacheManager" />

@@ -17,7 +17,18 @@ import org.junit.Test;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
+<<<<<<< HEAD
 import okkpp.model.DataModel;
+=======
+import okkpp.model.DataModel2;
+<<<<<<< HEAD
+=======
+import okkpp.model.MusinInfo;
+import okkpp.service.agriculture.SolrService;
+import okkpp.utils.CountryCode;
+import okkpp.utils.Countrys;
+>>>>>>> 98c8e39d33f035a42f0b077354a3b425fae1c6f5
+>>>>>>> 1a51002a74af2870af7c9e2de62728ad87a1cd1f
 
 public class SolrTest {
 
@@ -62,6 +73,13 @@ public class SolrTest {
 				SolrDocumentList list = response.getResults();
 
 				for (SolrDocument solrDocument : list) {
+<<<<<<< HEAD
+					
+					//List<String> keys = new ArrayList<>();
+					// System.out.println(solrDocument.get("fields_keywords"));
+					// 表头信息 Json
+=======
+>>>>>>> 98c8e39d33f035a42f0b077354a3b425fae1c6f5
 					LinkedHashMap<String, String> jsonMap = toFastJson(solrDocument.get("fields_keywords").toString());
 					System.out.println("solrDocument : " + solrDocument.toString());
 					for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
