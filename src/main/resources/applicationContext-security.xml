@@ -53,9 +53,13 @@
 	</bean>
 
 	<bean id="sampleRealm" class="okkpp.shiro.sampleRealm">
-		<!-- <property name="userMapper" ref="userMapper" /> <property name="roleMapper" 
-			ref="roleMapper" /> <property name="resourceMapper" ref="resourceMapper" 
-			/> -->
+		<property name="credentialsMatcher">
+			<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+				<property name="hashAlgorithmName" value="MD5"></property>
+				<property name="hashIterations" value="1023"></property>
+				<!-- <property name="hashSalted"></property> -->
+			</bean>
+		</property>
 	</bean>
 
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />

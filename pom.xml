@@ -5,7 +5,7 @@
 	<artifactId>CEECDATA</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -41,7 +41,7 @@
 			<artifactId>spring-test</artifactId>
 			<version>4.2.2.RELEASE</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -52,7 +52,7 @@
 			<artifactId>druid</artifactId>
 			<version>1.0.16</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
@@ -74,14 +74,14 @@
 			<artifactId>pagehelper</artifactId>
 			<version>5.0.0</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-all -->
 		<dependency>
 			<artifactId>ehcache-core</artifactId>
 			<groupId>net.sf.ehcache</groupId>
 			<version>2.4.5</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-all</artifactId>
@@ -104,7 +104,6 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.10.2</version>
 		</dependency>
-
 		<!-- excel : xls/xlsx -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>

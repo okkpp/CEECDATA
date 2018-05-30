@@ -15,6 +15,7 @@ import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import okkpp.system.dao.ResourceMapper;
@@ -36,32 +37,34 @@ public class sampleRealm extends AuthorizingRealm {
 	private UserMapper userMapper;
 	@Autowired
 	private ResourceMapper resourceMapper;
+
 	@Override
 	protected boolean isPermitted(Permission permission, AuthorizationInfo info) {
-        Collection<Permission> perms = getPermissions(info);
-        if(perms != null && !perms.isEmpty()) {
-            for(Permission perm : perms) {
-            	/** 支持通配符[/**] */
-            	if(perm.toString().endsWith("/**")) {
-            		if(permission.toString().matches("^"+perm.toString().replace("/**", ".*"))) {
-            			return true;
-            		}
-            	}
-                /** Permission的implies方法被调用到了 */
-                if (perm.implies(permission)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+		Collection<Permission> perms = getPermissions(info);
+		if (perms != null && !perms.isEmpty()) {
+			for (Permission perm : perms) {
+				/** 支持通配符[/**] */
+				if (perm.toString().endsWith("/**")) {
+					if (permission.toString().matches("^" + perm.toString().replace("/**", ".*"))) {
+						return true;
+					}
+				}
+				/** Permission的implies方法被调用到了 */
+				if (perm.implies(permission)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	// 这是授权方法
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
 		String uid = (String) getAvailablePrincipal(principals);
 		List<Role> roles = roleMapper.getRolesByUId(uid);
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		for(Role role : roles) {
+		for (Role role : roles) {
 			// 基于Role的权限信息
 			info.addRole(role.getRoid());
 			// 基于Permission的权限信息
@@ -79,28 +82,17 @@ public class sampleRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String uid = (String) token.getPrincipal();
 		User user = userMapper.getUserByUid(uid);
-		if(user == null) {
+		if (user == null) {
 			throw new UnknownAccountException();
 		}
-		if(Boolean.FALSE.equals(user.getEnabled())) {
+		if (Boolean.FALSE.equals(user.getEnabled())) {
 			throw new LockedAccountException();
 		}
-		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUid(), user.getPassword(), getName());
-		//将用户信息写入session
+		SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user.getUid(), user.getPassword()
+				, ByteSource.Util.bytes(uid), getName());
+		// 将用户信息写入session
 		SecurityUtils.getSubject().getSession().setAttribute("USER", user);
 		// throw new UnknownAccountException();
 		return info;
 	}
-
-//	public void setUserMapper(UserMapper userMapper) {
-//		this.userMapper = userMapper;
-//	}
-//
-//	public void setRoleMapper(RoleMapper roleMapper) {
-//		this.roleMapper = roleMapper;
-//	}
-//
-//	public void setResourceMapper(ResourceMapper resourceMapper) {
-//		this.resourceMapper = resourceMapper;
-//	}
 }
