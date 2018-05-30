@@ -20,10 +20,6 @@ import com.alibaba.fastjson.TypeReference;
 import okkpp.base.Msg;
 import okkpp.model.DataModel;
 import okkpp.model.DataModel2;
-<<<<<<< HEAD
-=======
-import okkpp.model.MusinInfo;
->>>>>>> 1a51002a74af2870af7c9e2de62728ad87a1cd1f
 import okkpp.utils.Countrys;
 
 @Service
@@ -176,11 +172,6 @@ public class SolrService {
 				SolrDocumentList list = response.getResults();
 				for (SolrDocument solrDocument : list) {
 
-<<<<<<< HEAD
-					// List<String> keys = new ArrayList<>();
-=======
-					//List<String> keys = new ArrayList<>();
->>>>>>> 1a51002a74af2870af7c9e2de62728ad87a1cd1f
 					// System.out.println(solrDocument.get("fields_keywords"));
 					// 表头信息 Json
 					LinkedHashMap<String, String> jsonMap = toFastJson(solrDocument.get("fields_keywords").toString());
