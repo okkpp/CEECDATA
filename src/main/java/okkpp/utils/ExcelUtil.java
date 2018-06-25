@@ -14,56 +14,58 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
-/**
- * @author DUCK  E-mail: okkpp@qq.com
- * @date 创建时间：2018年1月19日 上午11:33:38 
- * @version 1.0 
- */
 public class ExcelUtil {
 
 	public static void main(String[] args) {
-		File file = new File("B:\\download_excel\\1.xls");
+		File file = new File("B:\\GDP.xlsx");
 		ExcelUtil eu = new ExcelUtil();
 		try {
-			eu.xls(file);
+			eu.xls(file,0,3);
+//			for(Map<String,Object> map : eu.data)System.out.println(map.get("field0"));
+//			for(String k : eu.info.keySet())System.out.println(eu.info.get(k));
 		} catch (InvalidFormatException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	//解析结果存为 list map data
+	
 	public List<Map<String,Object>> data = new ArrayList<>();
 	public Map<String,Object> info = new HashMap<>();
-	public void xls(File file) throws InvalidFormatException, IOException{
+	
+	public void xls(File file,int sheetNum,int rowNum) throws InvalidFormatException, IOException{
 		Workbook workbook = WorkbookFactory.create(file);
-		//获取excel表格页数
+		//鑾峰彇excel琛ㄦ牸椤垫暟
 		int sheetCount = workbook.getNumberOfSheets();
-		if(sheetCount<2)return;
+		if(sheetCount<0)return;
 		
-		Sheet sheet = workbook.getSheetAt(0);
+		Sheet sheet = workbook.getSheetAt(sheetNum);
 		sheet.removeColumnBreak(0);
 		int rows = sheet.getLastRowNum() + 1;
-		int cols = sheet.getRow(3).getPhysicalNumberOfCells();
-		List<String> keys = getKeys(workbook.getSheetAt(0),4);
+		//System.out.println("rows:"+rows);
+		int cols = sheet.getRow(rowNum-1).getPhysicalNumberOfCells();
+		//System.out.println("cols:"+cols);
+		List<String> keys = getKeys(sheet,rowNum);
+		//for(String s : keys)System.out.print(s+" ");
 		if(keys.size()==0) {
 			System.out.println("没有找到key集合！");
 			return;
 		}
 		this.data = new ArrayList<>();
-		getData(sheet, rows, cols, 4, keys);
+		getData(sheet, rows, cols, rowNum, keys);
 	}
-	private int JUMP = 43;
+	private int JUMP = 0;
 	private void getData(Sheet sheet,int rows,int cols,int startRowNum,List<String> keys) {
 		for (int row = startRowNum; row < rows; row++){
 			Row r = sheet.getRow(row);
 			Map<String,Object> map = new HashMap<>();
-			if(!isNeed(parseCell(r.getCell(1))))continue;
+			//if(!isNeed(parseCell(r.getCell(1))))continue;
 			for(int i=0;i<cols-JUMP;i++){
-				//这个地方需要修改 ！！！！！！！！！！！！！！关于data的key值定位
-				map.put(keys.get(i), parseCell(r.getCell(i==0?i:i+JUMP)));
+				String c = parseCell(r.getCell(i==0?i:i+JUMP));
+				map.put("field"+i, c);
+				//System.out.print(c+" ");
 			}
-			//System.out.println(new Gson().toJson(map));
+			//System.out.println();
 			this.data.add(map);
 		}
 	}
@@ -79,7 +81,6 @@ public class ExcelUtil {
 			this.info.put("field"+i, key);
 			i++;
 		}
-		//System.out.println(new Gson().toJson(info));
 		return list;
 	}
 	private String parseCell(Cell cell){
@@ -101,7 +102,7 @@ public class ExcelUtil {
 			}
 		return res;
 	}
-	private boolean isNeed(String code) {
+	public boolean isNeed(String code) {
 		switch(code) {
 		case "ALB":
 		case "BGR":
@@ -122,31 +123,4 @@ public class ExcelUtil {
 			default : return false;
 		}
 	}
-	/**	public String parseFile(MultipartFile mfile,String path) {
-		String fileName = mfile.getOriginalFilename();
-		String suffix = fileName.substring(fileName.lastIndexOf(".")+1);
-		int size = 0;
-		try {
-			File file = new File(
-					path
-					+new SimpleDateFormat("yyyyMMddHHmmss").format(System.currentTimeMillis())
-					+"."+suffix);
-			file.getParentFile().mkdirs();
-			
-			mfile.transferTo(file);
-			this.xls(file);
-			size = this.data.size();
-			if(size<1)return "没有数据。";
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-			return "文件错误。";
-		} catch (IOException e) {
-			e.printStackTrace();
-			return "解析错误。";
-		} catch (InvalidFormatException e) {
-			e.printStackTrace();
-			return "无效文件。";
-		}
-		return "上传成功！一共"+size+"条数据。";
-	}**/
 }

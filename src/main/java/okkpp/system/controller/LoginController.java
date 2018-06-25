@@ -102,5 +102,8 @@ public class LoginController {
 		}
 		return Msg.success().add("msg", "µÇÂ¼³É¹¦£¡");
 	}
-
+	@RequestMapping("/unauthorized")
+	public String unauthorized() {
+		return "/mui/unauthorized";
+	}
 }

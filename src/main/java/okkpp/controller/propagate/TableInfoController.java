@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.github.pagehelper.PageInfo;
+
 import okkpp.model.propagate.TableInfo;
 import okkpp.service.propagate.TableInfoService;
 
@@ -53,5 +55,15 @@ public class TableInfoController {
 	@ResponseBody
 	public List<TableInfo> list() {
 		return service.list();
+	}
+	@RequestMapping("/listPage")
+	@ResponseBody
+	public PageInfo<TableInfo> listPage(int page,int pageSize) {
+		return service.listPage(page, pageSize);
+	}
+	@RequestMapping("/getInfo")
+	@ResponseBody
+	public TableInfo getInfo(Integer id) {
+		return service.selectByKey(id);
 	}
 }

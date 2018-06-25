@@ -1,11 +1,9 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=33d6005236b94e45886e406bddb717fedab6d28e
 eclipse.preferences.version=1
 encoding//src/main/java/okkpp/base/Msg.java=UTF-8
-<<<<<<< HEAD
 encoding//src/main/java/okkpp/utils/ExcelUtil.java=UTF-8
-=======
 encoding//src/main/webapp/WEB-INF/jsp/index.jsp=UTF-8
->>>>>>> 33d6005236b94e45886e406bddb717fedab6d28e
 encoding//src/main/webapp/WEB-INF/jsp/mui/add.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/jsp/search.jsp=UTF-8
-encoding//src/test/java/okkpp/junit/JTest.java=UTF-8
 encoding//src/test/java/okkpp/junit/JunitTest.java=UTF-8
